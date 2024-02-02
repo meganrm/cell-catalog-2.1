@@ -4,7 +4,7 @@ import { Link, graphql, StaticQuery } from 'gatsby'
 import PreviewCompatibleImage from './PreviewCompatibleImage'
 
 
-const BlogRollTemplate = (props) => {
+const CellLineTableTemplate = (props) => {
   
   const { edges: posts } = props.data.allMarkdownRemark;
 
@@ -14,7 +14,7 @@ const BlogRollTemplate = (props) => {
         posts.map(({ node: post }) => (
           <div className="is-parent column is-6" key={post.id}>
             <article
-              className={`blog-list-item tile is-child box notification ${
+              className={`cell-line-list-item tile is-child box notification ${
                 post.frontmatter.featuredpost ? 'is-featured' : ''
               }`}
             >
@@ -63,7 +63,7 @@ const BlogRollTemplate = (props) => {
   )
 }
 
-BlogRoll.propTypes = {
+CellLineTable.propTypes = {
   data: PropTypes.shape({
     allMarkdownRemark: PropTypes.shape({
       edges: PropTypes.array,
@@ -72,14 +72,14 @@ BlogRoll.propTypes = {
 }
 
 
-export default function BlogRoll() {
+export default function CellLineTable() {
   return (
     <StaticQuery
       query={graphql`
-        query BlogRollQuery {
+        query CellLineTableQuery {
           allMarkdownRemark(
             sort: { order: DESC, fields: [frontmatter___date] }
-            filter: { frontmatter: { templateKey: { eq: "blog-post" } } }
+            filter: { frontmatter: { templateKey: { eq: "cell-line" } } }
           ) {
             edges {
               node {
@@ -109,7 +109,7 @@ export default function BlogRoll() {
           }
         }
       `}
-      render={(data, count) => <BlogRollTemplate data={data} count={count} />}
+      render={(data, count) => <CellLineTableTemplate data={data} count={count} />}
     />
   );
 }

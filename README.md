@@ -10,9 +10,9 @@ It follows the [JAMstack architecture](https://jamstack.org) by using Git as a s
 
 ## Features
 
-- A simple landing page with blog functionality built with Decap CMS
-- Editable Pages: Landing, About, Product, Blog-Collection and Contact page with Netlify Form support
-- Create Blog posts from decap CMS
+- A simple landing page with cell-line functionality built with Decap CMS
+- Editable Pages: Landing, About, Product, Cell-line-Collection and Contact page with Netlify Form support
+- Create Cell-line posts from decap CMS
 - Tags: Separate page for posts under each tag
 - Basic directory organization
 - Uses Bulma for styling, but size is reduced by `gatsy-plugin-purgecss`
@@ -49,7 +49,7 @@ $ yarn
 $ netlify dev # or ntl dev
 ```
 
-This uses [Netlify Dev](https://www.netlify.com/products/dev/?utm_source=blog&utm_medium=netlifycms&utm_campaign=devex) CLI feature to serve any functions you have in the `netlify/functions` folder.
+This uses [Netlify Dev](https://www.netlify.com/products/dev/?utm_source=cell-line&utm_medium=netlifycms&utm_campaign=devex) CLI feature to serve any functions you have in the `netlify/functions` folder.
 
 To test the CMS locally, you'll need to run a production build of the site:
 
@@ -68,7 +68,7 @@ import CMS from "decap-cms-app";
 // import cloudinary from 'decap-cms-media-library-cloudinary'
 
 import AboutPagePreview from "./preview-templates/AboutPagePreview";
-import BlogPostPreview from "./preview-templates/BlogPostPreview";
+import CellLinePostPreview from "./preview-templates/CellLinePostPreview";
 import ProductPagePreview from "./preview-templates/ProductPagePreview";
 import IndexPagePreview from "./preview-templates/IndexPagePreview";
 
@@ -78,7 +78,7 @@ import IndexPagePreview from "./preview-templates/IndexPagePreview";
 CMS.registerPreviewTemplate("index", IndexPagePreview);
 CMS.registerPreviewTemplate("about", AboutPagePreview);
 CMS.registerPreviewTemplate("products", ProductPagePreview);
-CMS.registerPreviewTemplate("blog", BlogPostPreview);
+CMS.registerPreviewTemplate("cell-line", CellLinePostPreview);
 ```
 
 Note: Don't forget to also remove them from `package.json` and `yarn.lock` / `package-lock.json` using `yarn` or `npm`. During the build decap-cms-app will bundle the media libraries as well, having them removed will save you build time.
