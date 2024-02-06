@@ -110,6 +110,77 @@ collections:
                 widget: "string",
                 required: false,
             }
+    - name: "disease-cell-line"
+      label: "Disease Cell Line"
+      folder: "src/pages/disease-cell-line"
+      create: true
+      slug: "{{cell_line_id}}"
+      fields:
+          - {
+                label: "Template Key",
+                name: "templateKey",
+                widget: "hidden",
+                default: "disease-cell-line",
+            }
+          - {
+                label: "ID",
+                name: "cell_line_id",
+                widget: "string",
+                required: true,
+            }
+          - { label: "Publish Date", name: "date", widget: "datetime" }
+          - {
+                label: "Clone Number",
+                name: "clone_number",
+                widget: "number",
+                valueType: int,
+                required: true,
+            }
+          - {
+                label: "Parent line",
+                name: "parent_line",
+                widget: "relation",
+                collection: "cell-line",
+                search_fields: ["cell_line_id"],
+                value_field: "cell_line_id",
+            }
+          - {
+                label: "Gene",
+                name: "gene",
+                widget: "relation",
+                collection: "gene",
+                search_fields:
+                    ["gene_symbol", "gene_name", "protein", "structure"],
+                value_field: "gene_name",
+                display_fields: ["gene_symbol", "protein", "structure"],
+            }
+          - {
+                label: "Allele Count",
+                name: "alleleCount",
+                widget: "select",
+                options: ["mono", "bi"],
+                required: false,
+            }
+          - {
+                label: "Status",
+                name: "status",
+                widget: "select",
+                options: ["in progress", "done"],
+                default: "in progress",
+                required: true,
+            }
+          - {
+                label: "Linker",
+                name: "linker",
+                widget: "string",
+                required: false,
+            }
+          - {
+                label: "Order Link",
+                name: "order_link",
+                widget: "string",
+                required: false,
+            }
     - name: "gene"
       label: "Gene and structures names"
       folder: "src/pages/gene-names"

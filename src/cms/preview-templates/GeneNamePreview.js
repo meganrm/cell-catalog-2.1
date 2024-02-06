@@ -12,11 +12,11 @@ const GeneNamePreview = ({ entry, widgetFor }) => {
   );
 }
 
-CellLinePreview.propTypes = {
-  entry: PropTypes.shape({
-    getIn: PropTypes.func,
-  }),
-  widgetFor: PropTypes.func,
-}
+GeneNameTemplate.propTypes = {
+    entry: PropTypes.shape({
+        getIn: PropTypes.func,
+    }),
+    widgetFor: PropTypes.func,
+};
 
 export default GeneNamePreview;

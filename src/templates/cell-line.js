@@ -1,65 +1,54 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Helmet } from "react-helmet";
 import { graphql } from "gatsby";
 import Layout from "../components/Layout";
-import Content, { HTMLContent } from "../components/Content";
 
 // eslint-disable-next-line
 export const CellLineTemplate = ({
-  content,
-  contentComponent,
-  description,
-  title,
-  helmet,
+    cellLineId,
+    cloneNumber,
+    gene,
+    terminalTagged,
+    status,
 }) => {
-  const PostContent = contentComponent || Content;
-
-  return (
-    <section className="section">
-      {helmet || ""}
-      <div className="container content">
-        <div className="columns">
-          <div className="column is-10 is-offset-1">
-            <h1 className="title is-size-2 has-text-weight-bold is-bold-light">
-              {title}
-            </h1>
-            <p>{description}</p>
-            <PostContent content={content} />
-          </div>
-        </div>
-      </div>
-    </section>
-  );
+    return (
+        <section className="section">
+            <div className="container content">
+                <div className="columns">
+                    <div className="column is-10 is-offset-1">
+                        <h1 className="title is-size-2 has-text-weight-bold is-bold-light">
+                            AICS-{cellLineId}
+                        </h1>
+                        <p>Clone Number: {cloneNumber}</p>
+                        <p>Gene: {gene}</p>
+                        <p>Tag: {terminalTagged}</p>
+                        <p>Status: {status}</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    );
 };
 
 CellLineTemplate.propTypes = {
-  content: PropTypes.node.isRequired,
-  contentComponent: PropTypes.func,
-  description: PropTypes.string,
-  title: PropTypes.string,
-  helmet: PropTypes.object,
+    cellLineId: PropTypes.string,
+    cloneNumber: PropTypes.number,
+    gene: PropTypes.string,
+    terminalTagged: PropTypes.string,
+    status: PropTypes.string,
 };
 
 const CellLine = ({ data }) => {
-  const { markdownRemark: post } = data;
-
+  const { markdownRemark: cellLine } = data;
+  console.log(data)
   return (
     <Layout>
       <CellLineTemplate
-        content={post.html}
-        contentComponent={HTMLContent}
-        description={post.frontmatter.description}
-        helmet={
-          <Helmet titleTemplate="%s | Cell-line">
-            <title>{`${post.frontmatter.title}`}</title>
-            <meta
-              name="description"
-              content={`${post.frontmatter.description}`}
-            />
-          </Helmet>
-        }
-        title={post.frontmatter.title}
+        cellLineId={cellLine.frontmatter.cell_line_id}
+        cloneNumber={cellLine.frontmatter.clone_number}
+        gene={cellLine.frontmatter.gene}
+        terminalTagged={cellLine.frontmatter.terminal_tagged}
+        status={cellLine.frontmatter.status}
       />
     </Layout>
   );
@@ -77,7 +66,13 @@ export const pageQuery = graphql`
   query CellLinePostByID($id: String!) {
     markdownRemark(id: { eq: $id }) {
       id
-
+      frontmatter {
+        cell_line_id
+        clone_number
+        gene
+        terminal_tagged
+        status
+      }
     }
   }
 `;

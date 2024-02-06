@@ -5,8 +5,11 @@ import { CellLineTemplate } from '../../templates/cell-line'
 const CellLinePreview = ({ entry, widgetFor }) => {
   return (
       <CellLineTemplate
-          description={entry.getIn(["data", "description"])}
-          title={entry.getIn(["data", "title"])}
+          cellLineId={entry.getIn(["data", "cell_line_id"])}
+          cloneNumber={entry.getIn(["data", "clone_number"])}
+          gene={entry.getIn(["data", "gene"])}
+          terminalTagged={entry.getIn(["data", "terminal_tagged"])}
+          status={entry.getIn(["data", "status"])}
       />
   );
 }

@@ -22,7 +22,7 @@ export default class CellLineIndexPage extends React.Component {
                         padding: "1rem",
                     }}
                 >
-                    Latest Stories
+                    Cell Lines
                 </h1>
             </div>
             <section className="section">
