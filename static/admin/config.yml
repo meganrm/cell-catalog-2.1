@@ -56,6 +56,11 @@ collections:
                 display_fields: ["gene_symbol", "protein", "structure"],
             }
           - {
+                label: "Protein",
+                name: "protein",
+                widget: "hidden",
+            }
+          - {
                 label: "Allele Count",
                 name: "alleleCount",
                 widget: "select",

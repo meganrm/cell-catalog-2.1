@@ -1,9 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Helmet } from "react-helmet";
 import { graphql } from "gatsby";
 import Layout from "../components/Layout";
-import Content, { HTMLContent } from "../components/Content";
 
 // eslint-disable-next-line
 export const GeneNameTemplate = ({

@@ -4,7 +4,6 @@ import { Link, graphql, StaticQuery } from "gatsby";
 
 const CellLineTableTemplate = (props) => {
     const { edges: cellLines } = props.data.allMarkdownRemark;
-
     return (
         <table className="">
             <thead>
@@ -68,6 +67,7 @@ export default function CellLineTable() {
                                     cell_line_id
                                     clone_number
                                     terminal_tagged
+                                    gene
                                 }
                             }
                         }
