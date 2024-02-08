@@ -55,11 +55,6 @@ const Footer = () => {
                         Latest Stories
                       </Link>
                     </li>
-                    <li>
-                      <Link className="navbar-item" to="/contact">
-                        Contact
-                      </Link>
-                    </li>
                   </ul>
                 </section>
               </div>
