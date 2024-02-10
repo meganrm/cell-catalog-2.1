@@ -2,7 +2,6 @@
 templateKey: index-page
 title: Cell Catalog
 subtitle: The catalog below provides a listing of our completed disease cell lines
-image: /img/home-jumbotron.jpg
 main_pitch:
   title: Allen Cell Collection
   description: >-

@@ -4,13 +4,20 @@ import { Link, graphql, StaticQuery } from "gatsby";
 
 const CellLineTableTemplate = (props) => {
     const { edges: cellLines } = props.data.allMarkdownRemark;
+    console.log(cellLines);
     return (
         <table className="">
             <thead>
                 <tr>
                     <th>Cell Line ID</th>
-                    <th>Clone Number</th>
-                    <th>Terminal Tag</th>
+                    <th>Protein</th>
+                    <th>Clone ID</th>
+                    <th>Gene Name (gene symbol)</th>
+                    <th>Tagged alleles</th>
+                    <th>Structure</th>
+                    <th>Fluorescent Tag</th>
+                    <th>Tag Location</th>
+                    <th>Parental Line</th>
                 </tr>
             </thead>
             <tbody>
@@ -24,12 +31,17 @@ const CellLineTableTemplate = (props) => {
                                     </h4>
                                 </Link>
                             </td>
+                            <td>{cellLine.frontmatter.gene.protein}</td>
+                            <td>{cellLine.frontmatter.clone_number}</td>
                             <td>
-                                <p>{cellLine.frontmatter.clone_number}</p>
+                                {cellLine.frontmatter.gene.gene_name} (
+                                {cellLine.frontmatter.gene.gene_symbol})
                             </td>
-                            <td>
-                                <p>{cellLine.frontmatter.terminal_tagged}</p>
-                            </td>
+                            <td>{cellLine.frontmatter.allele_count}</td>
+                            <td>{cellLine.frontmatter.gene.structure}</td>
+                            <td>{cellLine.frontmatter.fluorescent_tag}</td>
+                            <td>{cellLine.frontmatter.tag_location}</td>
+                            <td>{cellLine.frontmatter.parental_line}</td>
                         </tr>
                     ))}
             </tbody>
@@ -66,8 +78,16 @@ export default function CellLineTable() {
                                     templateKey
                                     cell_line_id
                                     clone_number
-                                    terminal_tagged
-                                    gene
+                                    tag_location
+                                    parental_line
+                                    fluorescent_tag
+                                    allele_count
+                                    gene {
+                                        protein
+                                        gene_name
+                                        gene_symbol
+                                        structure
+                                    }
                                 }
                             }
                         }

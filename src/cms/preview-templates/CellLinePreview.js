@@ -8,7 +8,7 @@ const CellLinePreview = ({ entry, widgetFor }) => {
           cellLineId={entry.getIn(["data", "cell_line_id"])}
           cloneNumber={entry.getIn(["data", "clone_number"])}
           gene={entry.getIn(["data", "gene"])}
-          terminalTagged={entry.getIn(["data", "terminal_tagged"])}
+          tagLocation={entry.getIn(["data", "tag_location"])}
           status={entry.getIn(["data", "status"])}
       />
   );

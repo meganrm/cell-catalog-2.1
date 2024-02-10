@@ -41,7 +41,7 @@ collections:
             }
           - {
                 label: "Parent line",
-                name: "parent_line",
+                name: "parental_line",
                 widget: "string",
                 default: "WTC",
             }
@@ -49,11 +49,11 @@ collections:
                 label: "Gene",
                 name: "gene",
                 widget: "relation",
-                collection: "gene",
+                collection: "gene-name",
                 search_fields:
                     ["gene_symbol", "gene_name", "protein", "structure"],
-                value_field: "gene_name",
-                display_fields: ["gene_symbol", "protein", "structure"],
+                value_field: "gene_symbol",
+                display_fields: ["gene_symbol"],
             }
           - {
                 label: "Protein",
@@ -62,7 +62,7 @@ collections:
             }
           - {
                 label: "Allele Count",
-                name: "alleleCount",
+                name: "allele_count",
                 widget: "select",
                 options: ["mono", "bi"],
                 required: false,
@@ -76,32 +76,31 @@ collections:
                 required: true,
             }
           - {
-                label: "Terminal Tagged",
-                name: "terminal_tagged",
+                label: "Tag Location",
+                name: "tag_location",
                 widget: "select",
+                multiple: true,
                 options:
                     [
                         "C-terminus",
                         "N-terminus",
-                        "C-terminus / N-terminus",
-                        "C-terminus / C-terminus / N-terminus",
                     ],
-                required: false,
+                required: true,
             }
           - {
                 label: "Fluorescent Tag",
                 name: "fluorescent_tag",
                 widget: "select",
+                multiple: true,
                 options:
                     [
                         "mEGFP",
                         "EGFP",
                         "mTagRFP-T",
-                        "mEGFP / mTagRFP-T",
                         "TagBFP",
-                        "mEGFP / mTagRFP-T / HaloTag",
+                        "HaloTag",
                     ],
-                required: false,
+                required: true,
             }
           - {
                 label: "Linker",
@@ -133,17 +132,22 @@ collections:
                 widget: "string",
                 required: true,
             }
+          - {
+            label: "Disease",
+            name: "disease",
+            widget: "select",
+            options: ["Cardiomyopathy", "Cardiomyopathy (Skeletal), Laminopathy"],
+
+          }
           - { label: "Publish Date", name: "date", widget: "datetime" }
           - {
-                label: "Clone Number",
-                name: "clone_number",
-                widget: "number",
-                valueType: int,
-                required: true,
-            }
+                label: "SNP",
+                name: "snp",
+                widget: string,
+          }
           - {
                 label: "Parent line",
-                name: "parent_line",
+                name: "parental_line",
                 widget: "relation",
                 collection: "cell-line",
                 search_fields: ["cell_line_id"],
@@ -156,15 +160,8 @@ collections:
                 collection: "gene",
                 search_fields:
                     ["gene_symbol", "gene_name", "protein", "structure"],
-                value_field: "gene_name",
+                value_field: "gene_symbol",
                 display_fields: ["gene_symbol", "protein", "structure"],
-            }
-          - {
-                label: "Allele Count",
-                name: "alleleCount",
-                widget: "select",
-                options: ["mono", "bi"],
-                required: false,
             }
           - {
                 label: "Status",
@@ -175,21 +172,20 @@ collections:
                 required: true,
             }
           - {
-                label: "Linker",
-                name: "linker",
-                widget: "string",
-                required: false,
-            }
+                label: "Clones",
+                name: "clones",
+                widget: string,
+          }
           - {
                 label: "Order Link",
                 name: "order_link",
                 widget: "string",
                 required: false,
             }
-    - name: "gene"
+    - name: "gene-name"
       label: "Gene and structures names"
       folder: "src/pages/gene-names"
-      slug: "{{gene_id}}"
+      slug: "{{gene_symbol}}"
       create: true # Allow users to create new documents in this collection
       fields: # The fields each document in this collection have
           - {
@@ -201,19 +197,13 @@ collections:
           - {
                 label: "Gene Symbol",
                 name: "gene_symbol",
-                widget: "list",
+                widget: "string",
                 required: true,
             }
           - {
                 label: "Gene Name",
                 name: "gene_name",
                 widget: "string",
-                required: true,
-            }
-          - {
-                label: "Gene id",
-                name: "gene_id",
-                widget: "list",
                 required: true,
             }
           - {

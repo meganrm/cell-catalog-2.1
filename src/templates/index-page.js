@@ -6,26 +6,17 @@ import { getImage } from "gatsby-plugin-image";
 import Layout from "../components/Layout";
 import Features from "../components/Features";
 import CellLineTable from "../components/CellLineTable";
-import FullWidthImage from "../components/FullWidthImage";
 
 // eslint-disable-next-line
 export const IndexPageTemplate = ({
     title,
     subtitle,
-    image,
     mainPitch,
     products
  
 }) => {
-    const heroImage = getImage(image) || image;
-    console.log()
     return (
         <div>
-            <FullWidthImage
-                img={heroImage}
-                title={title}
-                subheading={subtitle}
-            />
             <section className="section section--gradient">
                 <div className="container">
                     <div className="section">
@@ -71,7 +62,6 @@ export const IndexPageTemplate = ({
 };
 
 IndexPageTemplate.propTypes = {
-    image: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
     title: PropTypes.string,
     subtitle: PropTypes.string,
     mainPitch: PropTypes.object,
@@ -84,7 +74,6 @@ const IndexPage = ({ data }) => {
     return (
         <Layout>
             <IndexPageTemplate
-                image={frontmatter.image}
                 title={frontmatter.title}
                 subtitle={frontmatter.subtitle}
                 mainPitch={frontmatter.main_pitch}
@@ -110,11 +99,6 @@ export const pageQuery = graphql`
             frontmatter {
                 title
                 subtitle
-                image {
-                    childImageSharp {
-                        gatsbyImageData(quality: 100, layout: FULL_WIDTH)
-                    }
-                }
                 main_pitch {
                     title
                     description

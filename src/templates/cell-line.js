@@ -8,7 +8,7 @@ export const CellLineTemplate = ({
     cellLineId,
     cloneNumber,
     gene,
-    terminalTagged,
+    tagLocation,
     status,
 }) => {
     return (
@@ -21,7 +21,7 @@ export const CellLineTemplate = ({
                         </h1>
                         <p>Clone Number: {cloneNumber}</p>
                         <p>Gene: {gene}</p>
-                        <p>Tag: {terminalTagged}</p>
+                        <p>Tag: {tagLocation}</p>
                         <p>Status: {status}</p>
                     </div>
                 </div>
@@ -34,7 +34,7 @@ CellLineTemplate.propTypes = {
     cellLineId: PropTypes.string,
     cloneNumber: PropTypes.number,
     gene: PropTypes.string,
-    terminalTagged: PropTypes.string,
+    tagLocation: PropTypes.string,
     status: PropTypes.string,
 };
 
@@ -42,15 +42,15 @@ const CellLine = ({ data }) => {
   const { markdownRemark: cellLine } = data;
   console.log(data)
   return (
-    <Layout>
-      <CellLineTemplate
-        cellLineId={cellLine.frontmatter.cell_line_id}
-        cloneNumber={cellLine.frontmatter.clone_number}
-        gene={cellLine.frontmatter.gene}
-        terminalTagged={cellLine.frontmatter.terminal_tagged}
-        status={cellLine.frontmatter.status}
-      />
-    </Layout>
+      <Layout>
+          <CellLineTemplate
+              cellLineId={cellLine.frontmatter.cell_line_id}
+              cloneNumber={cellLine.frontmatter.clone_number}
+              gene={cellLine.frontmatter.gene}
+              tagLocation={cellLine.frontmatter.tag_location}
+              status={cellLine.frontmatter.status}
+          />
+      </Layout>
   );
 };
 
@@ -63,16 +63,15 @@ CellLine.propTypes = {
 export default CellLine;
 
 export const pageQuery = graphql`
-  query CellLinePostByID($id: String!) {
-    markdownRemark(id: { eq: $id }) {
-      id
-      frontmatter {
-        cell_line_id
-        clone_number
-        gene
-        terminal_tagged
-        status
-      }
+    query CellLinePostByID($id: String!) {
+        markdownRemark(id: { eq: $id }) {
+            id
+            frontmatter {
+                cell_line_id
+                clone_number
+                tag_location
+                status
+            }
+        }
     }
-  }
 `;
