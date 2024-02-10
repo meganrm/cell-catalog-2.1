@@ -62,8 +62,8 @@ export const pageQuery = graphql`
         markdownRemark(id: { eq: $id }) {
             id
             frontmatter {
-                gene_name
-                gene_symbol
+                name
+                symbol
                 protein
             }
 

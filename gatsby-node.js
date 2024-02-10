@@ -18,15 +18,15 @@ exports.createSchemaCustomization = ({ actions, schema }) => {
                                 query: {
                                     filter: {
                                         frontmatter: {
-                                            gene_symbol: { eq: source.gene },
+                                            symbol: { eq: source.gene },
                                         },
                                     },
                                 },
                             })
                             .then((data) => {
                                 return {
-                                    gene_symbol: data.frontmatter.gene_symbol,
-                                    gene_name: data.frontmatter.gene_name,
+                                    symbol: data.frontmatter.symbol,
+                                    name: data.frontmatter.name,
                                     protein: data.frontmatter.protein,
                                     structure: data.frontmatter.structure,
                                 };
@@ -38,8 +38,8 @@ exports.createSchemaCustomization = ({ actions, schema }) => {
         schema.buildObjectType({
             name: "GeneData",
             fields: {
-                gene_name: "String!",
-                gene_symbol: "String!",
+                name: "String!",
+                symbol: "String!",
                 protein: "String!",
                 structure: "String!",
             },
@@ -74,9 +74,8 @@ exports.createPages = ({ actions, graphql }) => {
             return Promise.reject(result.errors);
         }
 
-        const cellLines = result.data.allMarkdownRemark.edges;
-        cellLines.forEach((edge) => {
-            console.log("CELLLINE", edge.node.frontmatter);
+        const edges = result.data.allMarkdownRemark.edges;
+        edges.forEach((edge) => {
             const id = edge.node.id;
             createPage({
                 path: edge.node.fields.slug,

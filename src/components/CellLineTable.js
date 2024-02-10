@@ -34,8 +34,8 @@ const CellLineTableTemplate = (props) => {
                             <td>{cellLine.frontmatter.gene.protein}</td>
                             <td>{cellLine.frontmatter.clone_number}</td>
                             <td>
-                                {cellLine.frontmatter.gene.gene_name} (
-                                {cellLine.frontmatter.gene.gene_symbol})
+                                {cellLine.frontmatter.gene.name} (
+                                {cellLine.frontmatter.gene.symbol})
                             </td>
                             <td>{cellLine.frontmatter.allele_count}</td>
                             <td>{cellLine.frontmatter.gene.structure}</td>
@@ -84,8 +84,8 @@ export default function CellLineTable() {
                                     allele_count
                                     gene {
                                         protein
-                                        gene_name
-                                        gene_symbol
+                                        name
+                                        symbol
                                         structure
                                     }
                                 }

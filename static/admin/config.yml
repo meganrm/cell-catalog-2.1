@@ -51,9 +51,9 @@ collections:
                 widget: "relation",
                 collection: "gene-name",
                 search_fields:
-                    ["gene_symbol", "gene_name", "protein", "structure"],
-                value_field: "gene_symbol",
-                display_fields: ["gene_symbol"],
+                    ["symbol", "name", "protein", "structure"],
+                value_field: "symbol",
+                display_fields: ["symbol"],
             }
           - {
                 label: "Protein",
@@ -159,9 +159,9 @@ collections:
                 widget: "relation",
                 collection: "gene",
                 search_fields:
-                    ["gene_symbol", "gene_name", "protein", "structure"],
-                value_field: "gene_symbol",
-                display_fields: ["gene_symbol", "protein", "structure"],
+                    ["symbol", "name", "protein", "structure"],
+                value_field: "symbol",
+                display_fields: ["symbol", "protein", "structure"],
             }
           - {
                 label: "Status",
@@ -185,7 +185,7 @@ collections:
     - name: "gene-name"
       label: "Gene and structures names"
       folder: "src/pages/gene-names"
-      slug: "{{gene_symbol}}"
+      slug: "{{symbol}}"
       create: true # Allow users to create new documents in this collection
       fields: # The fields each document in this collection have
           - {
@@ -196,13 +196,13 @@ collections:
             }
           - {
                 label: "Gene Symbol",
-                name: "gene_symbol",
+                name: "symbol",
                 widget: "string",
                 required: true,
             }
           - {
                 label: "Gene Name",
-                name: "gene_name",
+                name: "name",
                 widget: "string",
                 required: true,
             }
@@ -223,7 +223,7 @@ collections:
             widget: "list"
             required: true
             fields:
-                - { label: "Gene name", name: "gene_name", widget: "string" }
+                - { label: "Gene name", name: "name", widget: "string" }
                 - { label: "Isoforms", name: "isoforms", widget: "list" }
 
     - name: "pages"
