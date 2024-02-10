@@ -136,7 +136,7 @@ collections:
             label: "Disease",
             name: "disease",
             widget: "select",
-            options: ["Cardiomyopathy", "Cardiomyopathy (Skeletal), Laminopathy"],
+            options: ["Cardiomyopathy", "Cardiomyopathy (Skeletal)", "Laminopathy"],
 
           }
           - { label: "Publish Date", name: "date", widget: "datetime" }
@@ -157,7 +157,7 @@ collections:
                 label: "Gene",
                 name: "gene",
                 widget: "relation",
-                collection: "gene",
+                collection: "gene-name",
                 search_fields:
                     ["symbol", "name", "protein", "structure"],
                 value_field: "symbol",
