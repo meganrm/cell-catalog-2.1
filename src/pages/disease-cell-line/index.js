@@ -28,7 +28,7 @@ export default class CellLineIndexPage extends React.Component {
             <section className="section">
                 <div className="container">
                     <div className="content">
-                        <DiseaseCellLineTable />
+                        {/* <DiseaseCellLineTable /> */}
                     </div>
                 </div>
             </section>

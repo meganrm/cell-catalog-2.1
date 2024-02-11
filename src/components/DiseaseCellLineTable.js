@@ -7,49 +7,11 @@ const DiseaseCellLineTableTemplate = (props) => {
     console.log(cellLines);
     return (
         <table className="">
-            <thead>
-                <tr>
-                    <th>Cell Line ID</th>
-                    <th>Protein</th>
-                    <th>Clone ID</th>
-                    <th>Gene Name (gene symbol)</th>
-                    <th>Tagged alleles</th>
-                    <th>Structure</th>
-                    <th>Fluorescent Tag</th>
-                    <th>Tag Location</th>
-                    <th>Parental Line</th>
-                </tr>
-            </thead>
-            <tbody>
-                {cellLines &&
-                    cellLines.map(({ node: cellLine }) => (
-                        <tr className="" key={cellLine.id}>
-                            <td className="is-child">
-                                <Link to={cellLine.fields.slug}>
-                                    <h4>
-                                        AICS-{cellLine.frontmatter.cell_line_id}
-                                    </h4>
-                                </Link>
-                            </td>
-                            {/* <td>{cellLine.frontmatter.gene.protein}</td> */}
-                            <td>{cellLine.frontmatter.clone_number}</td>
-                            <td>
-                                {/* {cellLine.frontmatter.gene.name} (
-                                {cellLine.frontmatter.gene.symbol}) */}
-                            </td>
-                            <td>{cellLine.frontmatter.allele_count}</td>
-                            {/* <td>{cellLine.frontmatter.gene.structure}</td> */}
-                            <td>{cellLine.frontmatter.fluorescent_tag}</td>
-                            <td>{cellLine.frontmatter.tag_location}</td>
-                            <td>{cellLine.frontmatter.parental_line}</td>
-                        </tr>
-                    ))}
-            </tbody>
         </table>
     );
 };
 
-CellLineTable.propTypes = {
+DiseaseCellLineTable.propTypes = {
     data: PropTypes.shape({
         allMarkdownRemark: PropTypes.shape({
             edges: PropTypes.array,
@@ -57,7 +19,7 @@ CellLineTable.propTypes = {
     }),
 };
 
-export default function CellLineTable() {
+export default function DiseaseCellLineTable() {
     return (
         <StaticQuery
             query={graphql`
@@ -65,7 +27,7 @@ export default function CellLineTable() {
                     allMarkdownRemark(
                         filter: {
                             frontmatter: {
-                                templateKey: { eq: "disease" }
+                                templateKey: { eq: "disease-cell-line" }
                             }
                         }
                     ) {
@@ -77,6 +39,7 @@ export default function CellLineTable() {
                                 }
                                 frontmatter {
                                     templateKey
+                                    cell_line_id
                                 }
                             }
                         }

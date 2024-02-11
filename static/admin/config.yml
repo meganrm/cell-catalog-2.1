@@ -200,9 +200,9 @@ collections:
           - label: "Isoforms"
             name: "isoforms"
             widget: "list"
-            required: true
+            required: false
             fields:
-                - { label: "Gene name", name: "name", widget: "string" }
+                - { label: "Gene name", name: "gene_name", widget: "string" }
                 - { label: "Isoforms", name: "isoforms", widget: "list" }
     - name: "disease"
       label: "Disease"
