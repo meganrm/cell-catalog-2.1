@@ -65,7 +65,7 @@ export default function CellLineTable() {
                     allMarkdownRemark(
                         filter: {
                             frontmatter: {
-                                templateKey: { eq: "disease-cell-line" }
+                                templateKey: { eq: "disease" }
                             }
                         }
                     ) {
@@ -77,7 +77,6 @@ export default function CellLineTable() {
                                 }
                                 frontmatter {
                                     templateKey
-                                    cell_line_id
                                 }
                             }
                         }

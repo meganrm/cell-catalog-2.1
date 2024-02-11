@@ -50,16 +50,11 @@ collections:
                 name: "gene",
                 widget: "relation",
                 collection: "gene-name",
-                search_fields:
-                    ["symbol", "name", "protein", "structure"],
+                search_fields: ["symbol", "name", "protein", "structure"],
                 value_field: "symbol",
                 display_fields: ["symbol"],
             }
-          - {
-                label: "Protein",
-                name: "protein",
-                widget: "hidden",
-            }
+          - { label: "Protein", name: "protein", widget: "hidden" }
           - {
                 label: "Allele Count",
                 name: "allele_count",
@@ -80,11 +75,7 @@ collections:
                 name: "tag_location",
                 widget: "select",
                 multiple: true,
-                options:
-                    [
-                        "C-terminus",
-                        "N-terminus",
-                    ],
+                options: ["C-terminus", "N-terminus"],
                 required: true,
             }
           - {
@@ -92,14 +83,7 @@ collections:
                 name: "fluorescent_tag",
                 widget: "select",
                 multiple: true,
-                options:
-                    [
-                        "mEGFP",
-                        "EGFP",
-                        "mTagRFP-T",
-                        "TagBFP",
-                        "HaloTag",
-                    ],
+                options: ["mEGFP", "EGFP", "mTagRFP-T", "TagBFP", "HaloTag"],
                 required: true,
             }
           - {
@@ -133,18 +117,18 @@ collections:
                 required: true,
             }
           - {
-            label: "Disease",
-            name: "disease",
-            widget: "select",
-            options: ["Cardiomyopathy", "Cardiomyopathy (Skeletal)", "Laminopathy"],
-
-          }
+                label: "Disease",
+                name: "disease",
+                widget: "select",
+                options:
+                    [
+                        "Cardiomyopathy",
+                        "Cardiomyopathy (Skeletal)",
+                        "Laminopathy",
+                    ],
+            }
           - { label: "Publish Date", name: "date", widget: "datetime" }
-          - {
-                label: "SNP",
-                name: "snp",
-                widget: string,
-          }
+          - { label: "SNP", name: "snp", widget: string }
           - {
                 label: "Parent line",
                 name: "parental_line",
@@ -158,8 +142,7 @@ collections:
                 name: "gene",
                 widget: "relation",
                 collection: "gene-name",
-                search_fields:
-                    ["symbol", "name", "protein", "structure"],
+                search_fields: ["symbol", "name", "protein", "structure"],
                 value_field: "symbol",
                 display_fields: ["symbol", "protein", "structure"],
             }
@@ -171,11 +154,7 @@ collections:
                 default: "in progress",
                 required: true,
             }
-          - {
-                label: "Clones",
-                name: "clones",
-                widget: string,
-          }
+          - { label: "Clones", name: "clones", widget: string }
           - {
                 label: "Order Link",
                 name: "order_link",
@@ -225,7 +204,28 @@ collections:
             fields:
                 - { label: "Gene name", name: "name", widget: "string" }
                 - { label: "Isoforms", name: "isoforms", widget: "list" }
-
+    - name: "disease"
+      label: "Disease"
+      folder: "src/pages/diseases"
+      slug: "{{name}}"
+      create: true # Allow users to create new documents in this collection
+      fields: # The fields each document in this collection have
+          - {
+                label: "Template Key",
+                name: "templateKey",
+                widget: "hidden",
+                default: "disease",
+            }
+          - { label: "Name", name: "name", widget: string }
+          - {
+                label: "Base cell line",
+                name: "base_cell_line",
+                widget: "relation",
+                collection: "cell-line",
+                search_fields: ["gene", "cell_line_id"],
+                value_field: "cell_line_id",
+                display_fields: ["cell_line_id", "gene"],
+            }
     - name: "pages"
       label: "Pages"
       files:
