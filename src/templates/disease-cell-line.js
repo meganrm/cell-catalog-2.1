@@ -59,7 +59,7 @@ CellLine.propTypes = {
 export default CellLine;
 
 export const pageQuery = graphql`
-    query CellLinePostByID($id: String!) {
+    query DiseaseCellLineByID($id: String!) {
         markdownRemark(id: { eq: $id }) {
             id
             frontmatter {

@@ -40,7 +40,6 @@ CellLineTemplate.propTypes = {
 
 const CellLine = ({ data }) => {
   const { markdownRemark: cellLine } = data;
-  console.log(data)
   return (
       <Layout>
           <CellLineTemplate
@@ -63,7 +62,7 @@ CellLine.propTypes = {
 export default CellLine;
 
 export const pageQuery = graphql`
-    query CellLinePostByID($id: String!) {
+    query CellLineByID($id: String!) {
         markdownRemark(id: { eq: $id }) {
             id
             frontmatter {

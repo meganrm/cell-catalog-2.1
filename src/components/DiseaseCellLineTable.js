@@ -23,7 +23,7 @@ export default function DiseaseCellLineTable() {
     return (
         <StaticQuery
             query={graphql`
-                query CellLineTableQuery {
+                query DiseaseCellLineTableQuery {
                     allMarkdownRemark(
                         filter: {
                             frontmatter: {
