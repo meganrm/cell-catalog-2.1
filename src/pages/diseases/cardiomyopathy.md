@@ -1,5 +1,5 @@
 ---
 templateKey: disease
 name: Cardiomyopathy
-base_cell_line: "75"
+gene: MYH7
 ---

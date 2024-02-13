@@ -189,13 +189,13 @@ collections:
                 label: "Protein",
                 name: "protein",
                 widget: "string",
-                required: true,
+                required: false,
             }
           - {
                 label: "Structure",
                 name: "structure",
                 widget: "string",
-                required: true,
+                required: false,
             }
           - label: "Isoforms"
             name: "isoforms"
@@ -218,13 +218,13 @@ collections:
             }
           - { label: "Name", name: "name", widget: string }
           - {
-                label: "Base cell line",
-                name: "base_cell_line",
+                label: "Gene",
+                name: "gene",
                 widget: "relation",
-                collection: "cell-line",
-                search_fields: ["gene", "cell_line_id"],
-                value_field: "cell_line_id",
-                display_fields: ["cell_line_id", "gene"],
+                collection: "gene-name",
+                search_fields: ["symbol", "name", "protein", "structure"],
+                value_field: "symbol",
+                display_fields: ["symbol", "protein", "structure"],
             }
     - name: "pages"
       label: "Pages"
