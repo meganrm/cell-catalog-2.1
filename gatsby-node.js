@@ -27,8 +27,8 @@ exports.createSchemaCustomization = ({ actions, schema }) => {
                                 return {
                                     symbol: data.frontmatter.symbol,
                                     name: data.frontmatter.name,
-                                    protein: data.frontmatter.protein,
-                                    structure: data.frontmatter.structure,
+                                    protein: data.frontmatter.protein || "",
+                                    structure: data.frontmatter.structure || "",
                                 };
                             });
                     },
