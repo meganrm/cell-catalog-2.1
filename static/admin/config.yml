@@ -138,15 +138,6 @@ collections:
                 value_field: "cell_line_id",
             }
           - {
-                label: "Gene",
-                name: "gene",
-                widget: "relation",
-                collection: "gene-name",
-                search_fields: ["symbol", "name", "protein", "structure"],
-                value_field: "symbol",
-                display_fields: ["symbol", "protein", "structure"],
-            }
-          - {
                 label: "Status",
                 name: "status",
                 widget: "select",

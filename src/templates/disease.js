@@ -6,7 +6,7 @@ import Layout from "../components/Layout";
 // eslint-disable-next-line
 export const DiseaseTemplate = ({
     name,
-    baseCellLine
+    gene
 }) => {
     return (
         <section className="section">
@@ -14,7 +14,7 @@ export const DiseaseTemplate = ({
                 <div className="columns">
                     <div className="column is-10 is-offset-1">
                         <p>Name: {name}</p>
-                        <p>Base cell line: AICS-{baseCellLine}</p>
+                        <p>Gene: {gene}</p>
                     </div>
                 </div>
             </div>
@@ -24,7 +24,7 @@ export const DiseaseTemplate = ({
 
 DiseaseTemplate.propTypes = {
     name: PropTypes.string,
-    baseCellLine: PropTypes.number,
+    gene: PropTypes.string,
 };
 
 const Disease = ({ data }) => {
@@ -33,7 +33,7 @@ const Disease = ({ data }) => {
       <Layout>
           <DiseaseTemplate
               name={cellLine.frontmatter.name}
-              baseCellLine={cellLine.frontmatter.base_cell_line}
+              gene={`${cellLine.frontmatter.gene.symbol} - ${cellLine.frontmatter.gene.name}`}
           />
       </Layout>
   );
@@ -53,7 +53,10 @@ export const pageQuery = graphql`
             id
             frontmatter {
                 name
-                base_cell_line
+                gene {
+                    name
+                    symbol
+                }
             }
         }
     }
