@@ -1,17 +1,22 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Link, graphql, StaticQuery } from "gatsby";
+import DiseaseCellLineTable from "./DiseaseCellLines";
 
-const DiseaseCellLineTableTemplate = (props) => {
-    const { edges: cellLines } = props.data.allMarkdownRemark;
-    console.log(cellLines);
-    return (
-        <table className="">
-        </table>
-    );
+const DiseaseTemplate = (props) => {
+    const { edges: diseases } = props.data.allMarkdownRemark;
+    console.log("diseases", diseases);
+    const unpackedDiseases = diseases.map(({ node: disease }) => {
+        return {
+            name: disease.frontmatter.name,
+            gene: `${disease.frontmatter.gene.symbol} - ${disease.frontmatter.gene.name}`,
+        };
+    })
+    return <DiseaseCellLineTable diseases={unpackedDiseases} />;
+
 };
 
-DiseaseCellLineTable.propTypes = {
+Diseases.propTypes = {
     data: PropTypes.shape({
         allMarkdownRemark: PropTypes.shape({
             edges: PropTypes.array,
@@ -19,16 +24,14 @@ DiseaseCellLineTable.propTypes = {
     }),
 };
 
-export default function DiseaseCellLineTable() {
+export default function Diseases() {
     return (
         <StaticQuery
             query={graphql`
-                query DiseaseCellLineTableQuery {
+                query DiseasesQuery {
                     allMarkdownRemark(
                         filter: {
-                            frontmatter: {
-                                templateKey: { eq: "disease-cell-line" }
-                            }
+                            frontmatter: { templateKey: { in: "disease" } }
                         }
                     ) {
                         edges {
@@ -39,7 +42,11 @@ export default function DiseaseCellLineTable() {
                                 }
                                 frontmatter {
                                     templateKey
-                                    cell_line_id
+                                    name
+                                    gene {
+                                        name
+                                        symbol
+                                    }
                                 }
                             }
                         }
@@ -47,7 +54,7 @@ export default function DiseaseCellLineTable() {
                 }
             `}
             render={(data, count) => (
-                <DiseaseCellLineTableTemplate data={data} count={count} />
+                <DiseaseTemplate data={data} />
             )}
         />
     );

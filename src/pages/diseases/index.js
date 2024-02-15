@@ -1,7 +1,7 @@
 import * as React from "react";
 
 import Layout from "../../components/Layout";
-import DiseaseCellLineTable from "../../components/DiseaseCellLines";
+import Diseases from "../../components/Diseases";
 
 export default class CellLineIndexPage extends React.Component {
   render() {
@@ -22,13 +22,13 @@ export default class CellLineIndexPage extends React.Component {
                         padding: "1rem",
                     }}
                 >
-                    Cell Lines
+                    Disease
                 </h1>
             </div>
             <section className="section">
                 <div className="container">
                     <div className="content">
-                        <DiseaseCellLineTable />
+                        <Diseases />
                     </div>
                 </div>
             </section>
