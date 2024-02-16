@@ -1,18 +1,19 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Link, graphql, StaticQuery } from "gatsby";
-import DiseaseCellLineTable from "./DiseaseCellLines";
+import { graphql, StaticQuery } from "gatsby";
+import DiseaseCellLineQuery from "./DiseaseCellLines";
 
 const DiseaseTemplate = (props) => {
     const { edges: diseases } = props.data.allMarkdownRemark;
-    console.log("diseases", diseases);
+
     const unpackedDiseases = diseases.map(({ node: disease }) => {
         return {
             name: disease.frontmatter.name,
-            gene: `${disease.frontmatter.gene.symbol} - ${disease.frontmatter.gene.name}`,
+            geneSymbol: disease.frontmatter.gene.symbol,
+            geneName: disease.frontmatter.gene.name,
         };
     })
-    return <DiseaseCellLineTable diseases={unpackedDiseases} />;
+    return <DiseaseCellLineQuery diseases={unpackedDiseases} />;
 
 };
 

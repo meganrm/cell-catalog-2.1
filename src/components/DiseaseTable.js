@@ -1,30 +1,22 @@
 import React from "react";
-import { map } from "lodash";
+import Table from "./Table";
 
-const renderRows = (cellLines) => {
-    return cellLines.map((cellLine) => {
-        return <div key={cellLine.cell_line_id}>{cellLine.cell_line_id}</div>;
-    });
-};
-
-const renderTable = (groupedCellLines) => {
-    return map(groupedCellLines, (cellLines, parentLine) => {
-        return (
-            <>
-                <div>
-                    <h4 key={parentLine}>{parentLine}</h4>
-                </div>
-                {renderRows(cellLines)}
-            </>
-        );
-    });
-};
-
-const DiseaseTable = ({ diseaseName, groupedCellLines }) => {
+const DiseaseTable = ({ diseaseName, diseaseCellLines }) => {
+    console.log("DiseaseTable", diseaseName, diseaseCellLines)
     return (
         <>
             <h4>{diseaseName}</h4>
-            {renderTable(groupedCellLines)}
+
+            <Table
+                columns={[
+                    { displayName: "Cell Line ID", key: "cell_line_id" },
+                    { displayName: "SNP", key: "snp" },
+                    // { displayName: "Gene symbol & name", key: "geneName" },
+                    // { displayName: "Parental Line", key: "parental_line" },
+                    { displayName: "Clones", key: "clones" },
+                ]}
+                data={diseaseCellLines}
+            />
         </>
     );
 };

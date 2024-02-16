@@ -4,7 +4,6 @@ import { Link, graphql, StaticQuery } from "gatsby";
 
 const CellLineTableTemplate = (props) => {
     const { edges: cellLines } = props.data.allMarkdownRemark;
-    console.log(cellLines);
     return (
         <table className="">
             <thead>
@@ -41,7 +40,7 @@ const CellLineTableTemplate = (props) => {
                             <td>{cellLine.frontmatter.gene.structure}</td>
                             <td>{cellLine.frontmatter.fluorescent_tag}</td>
                             <td>{cellLine.frontmatter.tag_location}</td>
-                            <td>{cellLine.frontmatter.parental_line}</td>
+                            <td>{cellLine.frontmatter.parental_line.cel_line_id}</td>
                         </tr>
                     ))}
             </tbody>
@@ -79,7 +78,9 @@ export default function CellLineTable() {
                                     cell_line_id
                                     clone_number
                                     tag_location
-                                    parental_line
+                                    parental_line {
+                                        cell_line_id
+                                    }
                                     fluorescent_tag
                                     allele_count
                                     gene {

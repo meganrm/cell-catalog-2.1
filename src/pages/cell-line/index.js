@@ -1,7 +1,7 @@
 import * as React from "react";
 
 import Layout from "../../components/Layout";
-import CellLineTable from "../../components/CellLineTable";
+import CellLineTable from "../../component-queries/NormalCellLines";
 
 export default class CellLineIndexPage extends React.Component {
   render() {

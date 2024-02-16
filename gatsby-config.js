@@ -80,5 +80,6 @@ module.exports = {
     ],
     mapping: {
         "MarkdownRemark.frontmatter.gene": `MarkdownRemark.frontmatter.symbol`,
+        "MarkdownRemark.frontmatter.parental_line": `MarkdownRemark.frontmatter.cell_line_id`,
     },
 };

@@ -1,34 +1,35 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { graphql, StaticQuery } from "gatsby";
-import DiseaseTable from "./DiseaseTable";
+import DiseaseTable from "../components/DiseaseTable";
 
 const groupLines = (diseases, cellLines) => {
     const initObject = diseases.reduce((acc, cur) => {
-        acc[cur.name] = {};
+        acc[cur.name] = [];
         return acc
     }, {});
     return cellLines.reduce((acc, cellLine) => {
-        const { disease, parental_line } = cellLine.node.frontmatter;
-        if (!acc[disease][parental_line]) {
-            acc[disease][parental_line] = [];
-        }
-        acc[disease][parental_line].push(cellLine.node.frontmatter);
+        const { disease } = cellLine.node.frontmatter;
+        acc[disease].push(cellLine.node.frontmatter);
         return acc
     }, initObject)
 }
 
-const DiseaseCellLineTableTemplate = (props) => {
+const DiseaseCellLineTemplate = (props) => {
     const { edges: cellLines } = props.data.allMarkdownRemark;
     const { diseases } = props;
     const groupedCellLines = groupLines(diseases, cellLines)
     return diseases.map((disease) => {
+        if (!groupedCellLines[disease.name].length) {
+            return null;
+        }
         return (
             <div key={disease.name}>
                 <DiseaseTable
                     diseaseName={disease.name}
-                    diseaseGene={disease.gene}
-                    groupedCellLines={groupedCellLines[disease.name]}
+                    diseaseGeneSymbol={disease.geneSymbol}
+                    diseaseGeneName={disease.geneName}
+                    diseaseCellLines={groupedCellLines[disease.name]}
                 />
             </div>
         );
@@ -36,7 +37,7 @@ const DiseaseCellLineTableTemplate = (props) => {
 
 };
 
-DiseaseCellLineTable.propTypes = {
+DiseaseCellLineQuery.propTypes = {
     data: PropTypes.shape({
         allMarkdownRemark: PropTypes.shape({
             edges: PropTypes.array,
@@ -44,15 +45,15 @@ DiseaseCellLineTable.propTypes = {
     }),
 };
 
-export default function DiseaseCellLineTable(props) {
+export default function DiseaseCellLineQuery(props) {
     return (
         <StaticQuery
             query={graphql`
-                query DiseaseCellLineTableQuery {
+                query DiseaseCellLineQuery {
                     allMarkdownRemark(
                         filter: {
                             frontmatter: {
-                                templateKey: { eq: "disease-cell-line" },
+                                templateKey: { eq: "disease-cell-line" }
                             }
                         }
                     ) {
@@ -65,8 +66,12 @@ export default function DiseaseCellLineTable(props) {
                                 frontmatter {
                                     templateKey
                                     cell_line_id
-                                    parental_line
+                                    parental_line {
+                                        cell_line_id
+                                    }
                                     disease
+                                    snp
+                                    clones
                                 }
                             }
                         }
@@ -74,7 +79,10 @@ export default function DiseaseCellLineTable(props) {
                 }
             `}
             render={(data, count) => (
-                <DiseaseCellLineTableTemplate data={data} diseases={props.diseases} />
+                <DiseaseCellLineTemplate
+                    data={data}
+                    diseases={props.diseases}
+                />
             )}
         />
     );

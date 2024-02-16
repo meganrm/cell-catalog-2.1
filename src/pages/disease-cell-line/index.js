@@ -1,7 +1,7 @@
 import * as React from "react";
 
 import Layout from "../../components/Layout";
-import DiseaseCellLineTable from "../../components/DiseaseCellLines";
+import DiseaseCellLineQuery from "../../component-queries/DiseaseCellLines";
 
 export default class CellLineIndexPage extends React.Component {
   render() {
@@ -28,7 +28,7 @@ export default class CellLineIndexPage extends React.Component {
             <section className="section">
                 <div className="container">
                     <div className="content">
-                        <DiseaseCellLineTable />
+                        <DiseaseCellLineQuery />
                     </div>
                 </div>
             </section>

@@ -1,11 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Link, graphql } from "gatsby";
-import { getImage } from "gatsby-plugin-image";
 
 import Layout from "../components/Layout";
 import Features from "../components/Features";
-import CellLineTable from "../components/CellLineTable";
 
 // eslint-disable-next-line
 export const IndexPageTemplate = ({
@@ -41,7 +39,6 @@ export const IndexPageTemplate = ({
                                         <h3 className="has-text-weight-semibold is-size-2">
                                             Cell Lines
                                         </h3>
-                                        <CellLineTable />
                                         <div className="column is-12 has-text-centered">
                                             <Link
                                                 className="btn"

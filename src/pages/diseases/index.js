@@ -1,9 +1,9 @@
 import * as React from "react";
 
 import Layout from "../../components/Layout";
-import Diseases from "../../components/Diseases";
+import Diseases from "../../component-queries/Diseases";
 
-export default class CellLineIndexPage extends React.Component {
+export default class DiseasesIndexPage extends React.Component {
   render() {
     return (
         <Layout>
