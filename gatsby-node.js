@@ -47,19 +47,20 @@ exports.createSchemaCustomization = ({ actions, schema }) => {
                                 query: {
                                     filter: {
                                         frontmatter: {
+                                            templateKey: { eq: "cell-line" },
                                             cell_line_id: { eq: source.parental_line },
                                         },
                                     },
                                 },
                             })
                             .then((data) => {
-                                console.log("DATA", data)
+                                console.log("DATA", data, source.parental_line);
                                 return {
                                     gene: data.frontmatter.gene || "",
-                                    cell_line_id: data.frontmatter.cell_line_i || "WTC",
-                                    clone_number: data.frontmatter.clone_numbe || "",
-                                    structure: data.frontmatter.structur || "",
-                                    tag_location: data.frontmatter.tag_locatio || "",
+                                    cell_line_id: data.frontmatter.cell_line_id || "WTC",
+                                    clone_number: data.frontmatter.clone_number || "",
+                                    structure: data.frontmatter.structure || "",
+                                    tag_location: data.frontmatter.tag_location || "",
                                     fluorescent_tag:
                                         data.frontmatter.fluorescent_tag || "",
                                 };
