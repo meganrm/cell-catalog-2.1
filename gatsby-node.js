@@ -9,6 +9,71 @@ exports.createSchemaCustomization = ({ actions, schema }) => {
         schema.buildObjectType({
             name: "Frontmatter",
             fields: {
+                parental_line: {
+                    type: "ParentLine",
+                    resolve: (source, args, context, info) => {
+                        return context.nodeModel
+                            .findOne({
+                                type: "MarkdownRemark",
+                                query: {
+                                    filter: {
+                                        frontmatter: {
+                                            cell_line_id: {
+                                                eq: source.parental_line,
+                                            },
+                                        },
+                                    },
+                                },
+                            })
+                            .then(async (data) => {
+                                const parentalGene = data.frontmatter.gene;
+                                const parentalGeneData =
+                                    await context.nodeModel.findOne({
+                                        type: "MarkdownRemark",
+                                        query: {
+                                            filter: {
+                                                frontmatter: {
+                                                    symbol: {
+                                                        eq: parentalGene,
+                                                    },
+                                                },
+                                            },
+                                        },
+                                    });
+                                    console.log(
+                                        "Parental DATA",
+                                        source.parental_line,
+                                        parentalGeneData.frontmatter
+                                    );
+                                    return {
+                                        gene: {
+                                            symbol: parentalGeneData.frontmatter.symbol,
+                                            name: parentalGeneData.frontmatter.name,
+                                            protein: parentalGeneData.frontmatter.protein || "",
+                                            structure: parentalGeneData.frontmatter.structure || "",
+                                        },
+                                        cell_line_id:
+                                            data.frontmatter.cell_line_id ||
+                                            "WTC",
+                                        clone_number:
+                                            data.frontmatter.clone_number || "",
+                                        structure:
+                                            data.frontmatter.structure || "",
+                                        tag_location:
+                                            data.frontmatter.tag_location || [],
+                                        fluorescent_tag:
+                                            data.frontmatter.fluorescent_tag ||
+                                            [],
+                                    };
+                                });
+                            
+                    },
+                },
+            },
+        }),
+        schema.buildObjectType({
+            name: "Frontmatter",
+            fields: {
                 gene: {
                     type: "GeneData",
                     resolve: (source, args, context, info) => {
@@ -24,6 +89,7 @@ exports.createSchemaCustomization = ({ actions, schema }) => {
                                 },
                             })
                             .then((data) => {
+                                console.log("GENE DATA", source.gene);
                                 return {
                                     symbol: data.frontmatter.symbol,
                                     name: data.frontmatter.name,
@@ -35,51 +101,7 @@ exports.createSchemaCustomization = ({ actions, schema }) => {
                 },
             },
         }),
-        schema.buildObjectType({
-            name: "Frontmatter",
-            fields: {
-                parental_line: {
-                    type: "ParentLine",
-                    resolve: (source, args, context, info) => {
-                        return context.nodeModel
-                            .findOne({
-                                type: "MarkdownRemark",
-                                query: {
-                                    filter: {
-                                        frontmatter: {
-                                            templateKey: { eq: "cell-line" },
-                                            cell_line_id: { eq: source.parental_line },
-                                        },
-                                    },
-                                },
-                            })
-                            .then((data) => {
-                                console.log("DATA", data, source.parental_line);
-                                return {
-                                    gene: data.frontmatter.gene || "",
-                                    cell_line_id: data.frontmatter.cell_line_id || "WTC",
-                                    clone_number: data.frontmatter.clone_number || "",
-                                    structure: data.frontmatter.structure || "",
-                                    tag_location: data.frontmatter.tag_location || "",
-                                    fluorescent_tag:
-                                        data.frontmatter.fluorescent_tag || "",
-                                };
-                            });
-                    },
-                },
-            },
-        }),
-        schema.buildObjectType({
-            name: "ParentLine",
-            fields: {
-                gene: "GeneData!",
-                cell_line_id: "String!",
-                clone_number: "Int!",
-                tag_location: "String!",
-                fluorescent_tag: "String!",
-            },
-            interfaces: ["Node"],
-        }),
+
         schema.buildObjectType({
             name: "GeneData",
             fields: {
@@ -87,6 +109,17 @@ exports.createSchemaCustomization = ({ actions, schema }) => {
                 symbol: "String!",
                 protein: "String!",
                 structure: "String!",
+            },
+            interfaces: ["Node"],
+        }),
+        schema.buildObjectType({
+            name: "ParentLine",
+            fields: {
+                gene: "GeneData",
+                cell_line_id: "String",
+                clone_number: "Int",
+                tag_location: ["String"],
+                fluorescent_tag: ["String"],
             },
             interfaces: ["Node"],
         }),

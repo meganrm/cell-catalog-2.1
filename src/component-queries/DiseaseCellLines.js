@@ -10,6 +10,15 @@ const groupLines = (diseases, cellLines) => {
     }, {});
     return cellLines.reduce((acc, cellLine) => {
         const { disease } = cellLine.node.frontmatter;
+        const cellLineData = cellLine.node.frontmatter;
+        const diseaseData = diseases.find((d) => d.name === disease);
+        cellLineData.diseaseGene = (
+            <>
+                <div>{diseaseData.geneSymbol}</div>
+                <div>{diseaseData.geneName}</div>
+            </>
+        );
+        console.log("parental line", cellLineData.parental_line);
         acc[disease].push(cellLine.node.frontmatter);
         return acc
     }, initObject)
@@ -27,8 +36,6 @@ const DiseaseCellLineTemplate = (props) => {
             <div key={disease.name}>
                 <DiseaseTable
                     diseaseName={disease.name}
-                    diseaseGeneSymbol={disease.geneSymbol}
-                    diseaseGeneName={disease.geneName}
                     diseaseCellLines={groupedCellLines[disease.name]}
                 />
             </div>
@@ -68,6 +75,13 @@ export default function DiseaseCellLineQuery(props) {
                                     cell_line_id
                                     parental_line {
                                         cell_line_id
+                                        clone_number
+                                        tag_location
+                                        fluorescent_tag
+                                        gene {
+                                            name
+                                            symbol
+                                        }
                                     }
                                     disease
                                     snp

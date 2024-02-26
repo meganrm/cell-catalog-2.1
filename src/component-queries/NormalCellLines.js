@@ -78,9 +78,6 @@ export default function CellLineTable() {
                                     cell_line_id
                                     clone_number
                                     tag_location
-                                    parental_line {
-                                        cell_line_id
-                                    }
                                     fluorescent_tag
                                     allele_count
                                     gene {
