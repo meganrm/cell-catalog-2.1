@@ -90,6 +90,8 @@ export default function DiseaseCellLineQuery(props) {
                                     disease
                                     snp
                                     clones
+                                    certificate_of_analysis
+                                    order_link
                                 }
                             }
                         }

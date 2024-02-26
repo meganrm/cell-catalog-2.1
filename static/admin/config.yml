@@ -152,6 +152,12 @@ collections:
                 widget: "string",
                 required: false,
             }
+          - {
+                label: "Certificate of Analysis",
+                name: "certificate_of_analysis",
+                widget: "string",
+                required: false,
+            }
     - name: "gene-name"
       label: "Gene and structures names"
       folder: "src/pages/gene-names"
