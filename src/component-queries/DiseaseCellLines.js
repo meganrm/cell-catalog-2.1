@@ -18,6 +18,10 @@ const groupLines = (diseases, cellLines) => {
                 <div>{diseaseData.geneName}</div>
             </>
         );
+        const parentalLine = cellLineData.parental_line;
+        cellLineData.parentalLine = (
+            <button>AICS-{cellLineData.parental_line.cell_line_id}</button>
+        );
         console.log("parental line", cellLineData.parental_line);
         acc[disease].push(cellLine.node.frontmatter);
         return acc

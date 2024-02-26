@@ -15,8 +15,10 @@ const DiseaseTable = ({ diseaseName, diseaseCellLines }) => {
                         displayName: "Gene symbol & name",
                         key: "diseaseGene",
                     },
-                    // { displayName: "Parental Line", key: "parental_line" },
+                    { displayName: "Parental Line", key: "parentalLine" },
                     { displayName: "Clones", key: "clones" },
+                    // {displayName: "", key: "purchase_link"},
+                    // {displayName: "", key: "certificate_of_analysis"},
                 ]}
                 data={diseaseCellLines}
             />
