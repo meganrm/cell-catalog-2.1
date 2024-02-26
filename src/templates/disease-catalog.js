@@ -2,10 +2,16 @@ import React from "react";
 import PropTypes from "prop-types";
 import { graphql } from "gatsby";
 import Layout from "../components/Layout";
+import Diseases from "../component-queries/Diseases";
 import Content, { HTMLContent } from "../components/Content";
 
 // eslint-disable-next-line
-export const DiseaseCatalogTemplate = ({ title, content, contentComponent }) => {
+export const DiseaseCatalogTemplate = ({
+    title,
+    content,
+    contentComponent,
+    footerText,
+}) => {
     const PageContent = contentComponent || Content;
 
     return (
@@ -21,6 +27,8 @@ export const DiseaseCatalogTemplate = ({ title, content, contentComponent }) => 
                                 className="content"
                                 content={content}
                             />
+                            <Diseases />
+                            <div>{footerText}</div>
                         </div>
                     </div>
                 </div>
@@ -44,6 +52,7 @@ const DiseaseCatalog = ({ data }) => {
                 contentComponent={HTMLContent}
                 title={post.frontmatter.title}
                 content={post.html}
+                footerText={post.frontmatter.footer_text}
             />
         </Layout>
     );
@@ -61,6 +70,12 @@ export const aboutPageQuery = graphql`
             html
             frontmatter {
                 title
+                footer_text
+                main {
+                    heading
+                    description
+                    
+                }
             }
         }
     }

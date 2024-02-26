@@ -14,9 +14,6 @@ const Navbar = () => {
     >
       <div className="container">
         <div className="navbar-brand">
-          <Link to="/" className="navbar-item" title="Logo">
-            <img src={logo} alt="Kaldi" style={{ width: "88px" }} />
-          </Link>
           {/* Hamburger menu */}
           <button
             className={`navbar-burger burger ${isActive && "is-active"}`}
@@ -39,26 +36,14 @@ const Navbar = () => {
                 re-write that makes this unneccesary.
              */}
           <li className="navbar-item" style={{ padding: "0px" }}>
-            <Link className="navbar-item" to="/about">
-              About
+            <Link className="navbar-item" to="/disease-catalog">
+              Disease Catalog
             </Link>
           </li>
           <li className="navbar-item" style={{ padding: "0px" }}>
             <Link className="navbar-item" to="/cell-line">
               Cell-line
             </Link>
-          </li>
-          <li className="navbar-end has-text-centered">
-            <a
-              className="navbar-item"
-              href="https://github.com/decaporg/gatsby-plugin-decap-cms"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <span className="icon">
-                <img src={github} alt="Github" />
-              </span>
-            </a>
           </li>
         </ul>
       </div>

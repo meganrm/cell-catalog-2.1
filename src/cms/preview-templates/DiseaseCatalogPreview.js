@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { DiseaseCatalogTemplate } from '../../templates/disease-catalog'
 
 const DiseaseCatalogPreview = ({ entry, widgetFor }) => (
-    <AboutPageTemplate
+    <DiseaseCatalogTemplate
         title={entry.getIn(["data", "title"])}
         content={widgetFor("body")}
     />
