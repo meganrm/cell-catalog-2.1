@@ -40,11 +40,6 @@ exports.createSchemaCustomization = ({ actions, schema }) => {
                                             },
                                         },
                                     });
-                                    console.log(
-                                        "Parental DATA",
-                                        source.parental_line,
-                                        parentalGeneData.frontmatter
-                                    );
                                     return {
                                         gene: {
                                             symbol: parentalGeneData.frontmatter.symbol,
@@ -89,7 +84,6 @@ exports.createSchemaCustomization = ({ actions, schema }) => {
                                 },
                             })
                             .then((data) => {
-                                console.log("GENE DATA", source.gene);
                                 return {
                                     symbol: data.frontmatter.symbol,
                                     name: data.frontmatter.name,

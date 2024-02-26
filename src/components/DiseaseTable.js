@@ -2,7 +2,6 @@ import React from "react";
 import Table from "./Table";
 
 const DiseaseTable = ({ diseaseName, diseaseCellLines }) => {
-    console.log("DiseaseTable", diseaseName, diseaseCellLines)
     return (
         <>
             <h4>{diseaseName}</h4>

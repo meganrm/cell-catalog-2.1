@@ -223,6 +223,19 @@ collections:
                 value_field: "symbol",
                 display_fields: ["symbol", "protein", "structure"],
             }
+          - {
+                label: "Status",
+                name: "status",
+                widget: "enum",
+                options: ["Coming soon", "Available"],
+                default: "Coming soon",
+                required: true,
+            }
+          - {
+                label: "Acknowledgements",
+                name: "acknowledgements",
+                widget: "markdown",
+            }
     - name: "pages"
       label: "Pages"
       files:
@@ -264,15 +277,15 @@ collections:
                           ],
                   }
 
-          - file: "src/pages/about/index.md"
-            label: "About"
-            name: "about"
+          - file: "src/pages/disease-catalog/index.md"
+            label: "Disease Cell Line Catalog"
+            name: "index"
             fields:
                 - {
                       label: "Template Key",
                       name: "templateKey",
                       widget: "hidden",
-                      default: "about-page",
+                      default: "disease-catalog",
                   }
                 - { label: "Title", name: "title", widget: "string" }
                 - { label: "Body", name: "body", widget: "markdown" }
@@ -290,46 +303,18 @@ collections:
                               },
                           ],
                   }
-                - { label: Full_image, name: full_image, widget: image }
                 - {
-                      label: Pricing,
-                      name: pricing,
-                      widget: object,
-                      fields:
-                          [
-                              { label: Heading, name: heading, widget: string },
-                              {
-                                  label: Description,
-                                  name: description,
-                                  widget: string,
-                              },
-                              {
-                                  label: Plans,
-                                  name: plans,
-                                  widget: list,
-                                  fields:
-                                      [
-                                          {
-                                              label: Plan,
-                                              name: plan,
-                                              widget: string,
-                                          },
-                                          {
-                                              label: Price,
-                                              name: price,
-                                              widget: string,
-                                          },
-                                          {
-                                              label: Description,
-                                              name: description,
-                                              widget: string,
-                                          },
-                                          {
-                                              label: Items,
-                                              name: items,
-                                              widget: list,
-                                          },
-                                      ],
-                              },
-                          ],
+                      label: "Coriell Image",
+                      name: "coriell_image",
+                      widget: "image",
+                  }
+                - {
+                      label: "Coriell Link",
+                      name: "coriell_link",
+                      widget: "string",
+                  }
+                - {
+                      label: "Footer text",
+                      name: "footer_text",
+                      widget: "string",
                   }
