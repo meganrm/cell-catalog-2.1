@@ -39,7 +39,7 @@ const CellLineTableTemplate = (props: QueryResult) => {
                             <td>{cellLine.frontmatter.gene.frontmatter.structure}</td>
                             <td>{cellLine.frontmatter.fluorescent_tag}</td>
                             <td>{cellLine.frontmatter.tag_location}</td>
-                            <td>{cellLine.frontmatter.parental_line.frontmatter.name}</td>
+                            {/* <td>{cellLine.frontmatter.parental_line.frontmatter.name}</td> */}
                         </tr>
                     ))}
             </tbody>
