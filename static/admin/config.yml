@@ -15,14 +15,15 @@ public_folder: /img
 collections:
     - name: "cell-line"
       label: "Cell Lines"
+      label_singular: "Cell Line"
       folder: "src/pages/cell-line"
       create: true
       slug: "AICS-{{cell_line_id}}"
-      path: '{{slug}}/index'
+      path: "{{slug}}/index"
       identifier_field: "cell_line_id"
       summary: "AICS-{{cell_line_id}} - {{gene}}"
-      media_folder: ''
-      public_folder: ''
+      media_folder: ""
+      public_folder: ""
       fields:
           - {
                 label: "Template Key",
@@ -37,6 +38,12 @@ collections:
                 required: true,
             }
           - {
+                label: "name",
+                name: "name",
+                widget: "string",
+                required: false,
+            }
+          - {
                 label: "Status",
                 name: "status",
                 widget: "select",
@@ -46,23 +53,24 @@ collections:
             }
           - { label: "Publish Date", name: "date", widget: "datetime" }
           - {
-            label: "Thumbnail Image",
-            name: "thumbnail_image",
-            widget: "image",
-            required: false,
-          }
+                label: "Thumbnail Image",
+                name: "thumbnail_image",
+                widget: "image",
+                required: false,
+            }
           - {
                 label: "Clone Number",
                 name: "clone_number",
                 widget: "number",
                 valueType: int,
-                required: true,
+                required: false,
             }
           - {
-                label: "Parent line",
+                label: "Parent line ID (leave as 0 for 'WTC')",
                 name: "parental_line",
-                widget: "string",
-                default: "WTC",
+                widget: "number",
+                default: 0,
+                required: true
             }
           - {
                 label: "Gene",
@@ -72,8 +80,8 @@ collections:
                 search_fields: ["symbol", "name", "protein", "structure"],
                 value_field: "symbol",
                 display_fields: ["symbol"],
+                required: false
             }
-          - { label: "Protein", name: "protein", widget: "hidden" }
           - {
                 label: "Allele Count",
                 name: "allele_count",
@@ -88,7 +96,7 @@ collections:
                 widget: "select",
                 multiple: true,
                 options: ["C-terminus", "N-terminus"],
-                required: true,
+                required: false,
             }
           - {
                 label: "Fluorescent Tag",
@@ -96,7 +104,7 @@ collections:
                 widget: "select",
                 multiple: true,
                 options: ["mEGFP", "EGFP", "mTagRFP-T", "TagBFP", "HaloTag"],
-                required: true,
+                required: false,
             }
           - {
                 label: "Linker",
