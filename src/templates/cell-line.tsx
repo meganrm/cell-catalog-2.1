@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { graphql } from "gatsby";
 import Layout from "../components/Layout";
-import { GatsbyImage } from "gatsby-plugin-image";
+import { GatsbyImage, getImage } from "gatsby-plugin-image";
 
 interface QueryResult {
     data: {
@@ -35,9 +35,9 @@ export const CellLineTemplate = ({
     gene,
     tagLocation,
     status,
-    thumbnail
+    thumbnail,
 }: CellLineProps) => {
-    console.log(thumbnail)
+    const image = getImage(thumbnail);
     return (
         <section className="section">
             <div className="container content">
@@ -50,18 +50,18 @@ export const CellLineTemplate = ({
                         <p>Gene: {gene}</p>
                         <p>Tag: {tagLocation}</p>
                         <p>Status: {status}</p>
-                        <GatsbyImage
-                            image={thumbnail.childImageSharp.gatsbyImageData}
-                            alt="Cell Line Thumbnail"
-                        />
+                        {image && (
+                            <GatsbyImage
+                                image={image}
+                                alt="Cell Line Thumbnail"
+                            />
+                        )}
                     </div>
                 </div>
             </div>
         </section>
     );
 };
-
-
 
 const CellLine = ({ data }: QueryResult) => {
     const { markdownRemark: cellLine } = data;
@@ -79,7 +79,6 @@ const CellLine = ({ data }: QueryResult) => {
     );
 };
 
-
 export default CellLine;
 
 export const pageQuery = graphql`
@@ -93,10 +92,7 @@ export const pageQuery = graphql`
                 status
                 thumbnail_image {
                     childImageSharp {
-                        gatsbyImageData(
-                            width: 200
-                            placeholder: BLURRED
-                        )
+                        gatsbyImageData(width: 200, placeholder: BLURRED)
                     }
                 }
             }
