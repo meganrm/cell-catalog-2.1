@@ -1,38 +1,48 @@
 import React from "react";
 import { graphql, StaticQuery } from "gatsby";
-import { Tag } from "antd";
+import { DescriptionsProps, Tag } from "antd";
 
 import DiseaseTable from "../components/DiseaseTable";
 import { UnpackedDisease } from "./Diseases";
-import ParentalLineModal, {
-    ParentalLineData,
-} from "../components/ParentalLineModal";
-
-interface DiseaseCellLineEdge {
-    node: {
-        id: string;
-        fields: {
-            slug: string;
-        };
-        frontmatter: DiseaseCellLineFrontmatter;
-    };
-}
-
-interface DiseaseCellLineFrontmatter {
-    templateKey: string;
-    cell_line_id: string;
-    parental_line: {frontmatter: ParentalLineData};
-    disease: string;
-    snp: string;
-    clones: string;
-    certificate_of_analysis: string;
-    order_link: string;
-}
+import {
+    DiseaseCellLineEdge,
+    DiseaseCellLineFrontmatter,
+    ParentalLineFrontmatter,
+} from "./types";
+import ParentalLineModal from "../components/ParentalLineModal";
+import { formatCellLineId } from "../utils";
 
 export interface UnpackedDiseaseCellLine extends DiseaseCellLineFrontmatter {
     diseaseGene: JSX.Element | null;
     parentalLine: JSX.Element | null;
 }
+
+const getParentalLineItems = (parentalLine: ParentalLineFrontmatter) => {
+    const { symbol, name } = parentalLine.gene.frontmatter;
+    const { fluorescent_tag, tag_location } = parentalLine;
+    return [
+        {
+            key: "1",
+            label: "Gene Symbol",
+            children: symbol,
+        },
+        {
+            key: "2",
+            label: "Gene Name",
+            children: name,
+        },
+        {
+            key: "3",
+            label: "Fluorescent Tag",
+            children: fluorescent_tag,
+        },
+        {
+            key: "4",
+            label: "Tag Location",
+            children: tag_location,
+        },
+    ];
+};
 
 const groupLines = (
     diseases: UnpackedDisease[],
@@ -66,8 +76,16 @@ const groupLines = (
             </>
         );
         const parentalLine = cellLineData.parental_line.frontmatter;
-        console.log("Parental line data", parentalLine)
-        cellLineData.parentalLine = <ParentalLineModal {...parentalLine} />;
+        const parentalLineItems = getParentalLineItems(parentalLine);
+        cellLineData.parentalLine = (
+            <ParentalLineModal
+                key={parentalLine.cell_line_id}
+                cellLineId={formatCellLineId(parentalLine.cell_line_id)}
+                cloneNumber={parentalLine.clone_number}
+                displayItems={parentalLineItems}
+                image={parentalLine.thumbnail_image}
+            />
+        );
         acc[disease].push(cellLineData);
         return acc;
     }, diseaseObj);
@@ -138,8 +156,9 @@ export default function DiseaseCellLineQuery(props: {
                                             thumbnail_image {
                                                 childImageSharp {
                                                     gatsbyImageData(
-                                                        width: 200
                                                         placeholder: BLURRED
+                                                        layout: FIXED
+                                                        width: 192
                                                     )
                                                 }
                                             }
@@ -150,7 +169,6 @@ export default function DiseaseCellLineQuery(props: {
                                                 }
                                             }
                                         }
-                                        
                                     }
                                     disease
                                     snp

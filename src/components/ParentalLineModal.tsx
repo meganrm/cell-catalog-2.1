@@ -1,61 +1,78 @@
 import React, { useState } from "react";
-import { Button, Modal } from "antd";
+import { Button, Descriptions, Flex, Modal } from "antd";
 import { GatsbyImage, getImage } from "gatsby-plugin-image";
 
-import { formatCellLineId } from "../utils";
+import { FileNode } from "gatsby-plugin-image/dist/src/components/hooks";
+import { DescriptionsItemType } from "antd/es/descriptions";
+import { modal } from "./modal.module.css";
 
-export interface ParentalLineData {
-    cell_line_id: string;
-    clone_number: string;
-    tag_location: string;
-    fluorescent_tag: string;
-    thumbnail_image: any;
-    gene: {
-        frontmatter: {
-            name: string;
-            symbol: string;
-        };
-    };
+interface ParentalLineModalProps {
+    displayItems: DescriptionsItemType[];
+    image: FileNode;
+    cellLineId: string;
+    cloneNumber: number;
 }
-
-const ParentalLineModal = (parentalLineData: ParentalLineData) => {
+const ParentalLineModal = (props: ParentalLineModalProps) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const showModal = () => {
         setIsModalOpen(true);
     };
 
-    const handleOk = () => {
-        setIsModalOpen(false);
-    };
 
     const handleCancel = () => {
         setIsModalOpen(false);
     };
-    const image = getImage(parentalLineData.thumbnail_image);
-    console.log(parentalLineData.thumbnail_image);
+    const image = getImage(props.image);
     return (
         <>
-            <Button onClick={showModal}>
-                {formatCellLineId(parentalLineData.cell_line_id)}
-            </Button>
+            <Button onClick={showModal}>{props.cellLineId}</Button>
             <Modal
-                title={`Parental Line ${formatCellLineId(
-                    parentalLineData.cell_line_id
-                )} cl. ${parentalLineData.clone_number} `}
+                title={`Parental Line ${props.cellLineId} cl. ${props.cloneNumber} `}
                 open={isModalOpen}
-                onOk={handleOk}
                 onCancel={handleCancel}
+                width={544}
+                centered={true}
+                className={modal}
+                footer={
+                    <div style={{ textAlign: "center" }}>
+                        <Button
+                            style={{ width: 480 }}
+                            href="https://www.allencell.org/cell-catalog.html"
+                            target="_blank"
+                        >
+                            More information
+                        </Button>
+                    </div>
+                }
             >
-                {image && (
-                    <GatsbyImage
-                        alt={`${parentalLineData.cell_line_id} thumbnail image`}
-                        image={image}
+                <Flex justify="space-between" gap={16}>
+                    <div style={{ width: "192px", display: "block" }}>
+                        {image && (
+                            <GatsbyImage
+                                alt={`${props.cellLineId} thumbnail image`}
+                                image={image}
+                            />
+                        )}
+                    </div>
+                    <Descriptions
+                        column={1}
+                        items={props.displayItems}
+                        layout="horizontal"
+                        style={{
+                            margin: "auto",
+                        }}
+                        colon={false}
+                        labelStyle={{
+                            height: "48px",
+                            alignItems: "center",
+                            width: "142px",
+                        }}
+                        contentStyle={{
+                            height: "48px",
+                            alignItems: "center",
+                        }}
                     />
-                )}
-                <p>Gene Symbol: {parentalLineData.gene.frontmatter.symbol}</p>
-                <p>Gene Name: {parentalLineData.gene.frontmatter.name}</p>
-                <p>Fluorescent Tag: {parentalLineData.fluorescent_tag}</p>
-                <p>Tag Location: {parentalLineData.tag_location}</p>
+                </Flex>
             </Modal>
         </>
     );

@@ -12,7 +12,6 @@ const GRAY = "#F2F2F2";
 const DARK_BLUE = "#00215F";
 const WHITE = "#FFFFFF";
 const LIGHT_BLUE= "#E5E9F1";
-const BORDER_STYLE = "solid";
 const DARK_GRAY = "#CBCBCC"
 
 
@@ -47,6 +46,9 @@ const TemplateWrapper = ({ children }: React.PropsWithChildren) => {
                         // headerColor: DARK_BLUE,
                         borderColor: DARK_GRAY,
                     },
+                    Descriptions : {
+                        itemPaddingBottom: 0,
+                    }
                 },
             }}
         >

@@ -52,7 +52,9 @@
     "@types/react": "^18.2.59",
     "@types/react-dom": "^18.2.19",
     "@types/react-helmet": "^6.1.11",
+    "gatsby-plugin-postcss": "^6.13.1",
     "netlify-cli": "^17.15.7",
+    "postcss": "^8.4.35",
     "prettier": "^2.0.5",
     "typescript": "^5.3.3"
   },

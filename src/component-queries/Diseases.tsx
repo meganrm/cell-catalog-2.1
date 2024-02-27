@@ -1,19 +1,9 @@
 import React from "react";
 import { graphql, StaticQuery } from "gatsby";
 import DiseaseCellLineQuery from "./DiseaseCellLines";
+import { DiseaseFrontmatter } from "./types";
 
-interface DiseaseFrontmatter {
-    name: string;
-    gene: {
-        frontmatter: {
-            name: string;
-            symbol: string;
-        };
-    };
-    acknowledgements: string;
-}
-
-interface QueryResult {
+export interface QueryResult {
     data: {
         allMarkdownRemark: {
             edges: {
