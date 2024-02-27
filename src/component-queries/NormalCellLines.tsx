@@ -1,8 +1,7 @@
 import React from "react";
-import PropTypes from "prop-types";
 import { Link, graphql, StaticQuery } from "gatsby";
 
-const CellLineTableTemplate = (props) => {
+const CellLineTableTemplate = (props: QueryResult) => {
     const { edges: cellLines } = props.data.allMarkdownRemark;
     return (
         <table className="">
@@ -48,14 +47,37 @@ const CellLineTableTemplate = (props) => {
     );
 };
 
-CellLineTable.propTypes = {
-    data: PropTypes.shape({
-        allMarkdownRemark: PropTypes.shape({
-            edges: PropTypes.array,
-        }),
-    }),
-};
-
+interface QueryResult {
+    data: {
+        allMarkdownRemark: {
+            edges: {
+                node: {
+                    id: string;
+                    fields: {
+                        slug: string;
+                    };
+                    frontmatter: {
+                        templateKey: string;
+                        cell_line_id: string;
+                        clone_number: string;
+                        tag_location: string;
+                        fluorescent_tag: string;
+                        allele_count: string;
+                        parental_line: {
+                            name: string;
+                        };
+                        gene: {
+                            protein: string;
+                            name: string;
+                            symbol: string;
+                            structure: string;
+                        };
+                    };
+                };
+            }[];
+        };
+    };
+}
 export default function CellLineTable() {
     return (
         <StaticQuery
@@ -95,8 +117,8 @@ export default function CellLineTable() {
                     }
                 }
             `}
-            render={(data, count) => (
-                <CellLineTableTemplate data={data} count={count} />
+            render={(data: any) => (
+                <CellLineTableTemplate data={data} />
             )}
         />
     );

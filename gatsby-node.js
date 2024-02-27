@@ -158,7 +158,7 @@ exports.createPages = ({ actions, graphql }) => {
                 component: path.resolve(
                     `src/templates/${String(
                         edge.node.frontmatter.templateKey
-                    )}.js`
+                    )}.tsx`
                 ),
                 // additional data can be passed via context
                 context: {

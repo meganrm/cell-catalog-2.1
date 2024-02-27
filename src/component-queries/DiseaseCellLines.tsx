@@ -1,20 +1,64 @@
 import React from "react";
-import PropTypes from "prop-types";
 import { graphql, StaticQuery } from "gatsby";
 import DiseaseTable from "../components/DiseaseTable";
+import { UnpackedDisease } from "./Diseases";
 
-const groupLines = (diseases, cellLines) => {
+interface DiseaseCellLineEdge {
+    node: {
+        id: string;
+        fields: {
+            slug: string;
+        };
+        frontmatter: DiseaseCellLineFrontmatter;
+    };
+}
+
+interface DiseaseCellLineFrontmatter {
+    templateKey: string;
+    cell_line_id: string;
+    parental_line: {
+        cell_line_id: string;
+        clone_number: string;
+        tag_location: string;
+        fluorescent_tag: string;
+        gene: {
+            name: string;
+            symbol: string;
+        };
+    };
+    disease: string;
+    snp: string;
+    clones: string;
+    certificate_of_analysis: string;
+    order_link: string;
+}
+
+export interface UnpackedDiseaseCellLine extends DiseaseCellLineFrontmatter {
+    diseaseGene: JSX.Element | null;
+    parentalLine: JSX.Element | null;
+}
+
+const groupLines = (
+    diseases: UnpackedDisease[],
+    cellLines: DiseaseCellLineEdge[]
+) => {
     if (!diseases) {
-        return {}
+        return {};
     }
 
-    const initObject = diseases.reduce((acc, cur) => {
+    const initObject: { [key: string]: UnpackedDiseaseCellLine[] } = {};
+
+    const diseaseObj = diseases.reduce((acc, cur) => {
         acc[cur.name] = [];
         return acc;
-    }, {});
+    }, initObject);
     return cellLines.reduce((acc, cellLine) => {
         const { disease } = cellLine.node.frontmatter;
-        const cellLineData = cellLine.node.frontmatter;
+        const cellLineData: UnpackedDiseaseCellLine = {
+            ...cellLine.node.frontmatter,
+            diseaseGene: null,
+            parentalLine: null,
+        };
         const diseaseData = diseases.find((d) => d.name === disease);
         if (!diseaseData) {
             return acc;
@@ -29,12 +73,26 @@ const groupLines = (diseases, cellLines) => {
         cellLineData.parentalLine = (
             <button>AICS-{parentalLine.cell_line_id}</button>
         );
-        acc[disease].push(cellLine.node.frontmatter);
+        acc[disease].push(cellLineData);
         return acc;
-    }, initObject);
+    }, diseaseObj);
 };
 
-const DiseaseCellLineTemplate = (props) => {
+
+
+interface QueryResult {
+    data: {
+        allMarkdownRemark: {
+            edges: DiseaseCellLineEdge[];
+        };
+    };
+}
+
+interface DiseaseCellLineTemplateProps extends QueryResult {
+    diseases: UnpackedDisease[];
+}
+
+const DiseaseCellLineTemplate = (props: DiseaseCellLineTemplateProps) => {
     const { edges: cellLines } = props.data.allMarkdownRemark;
     const { diseases } = props;
     const groupedCellLines = groupLines(diseases, cellLines);
@@ -54,15 +112,9 @@ const DiseaseCellLineTemplate = (props) => {
     });
 };
 
-DiseaseCellLineQuery.propTypes = {
-    data: PropTypes.shape({
-        allMarkdownRemark: PropTypes.shape({
-            edges: PropTypes.array,
-        }),
-    }),
-};
-
-export default function DiseaseCellLineQuery(props) {
+export default function DiseaseCellLineQuery(props: {
+    diseases: UnpackedDisease[];
+}) {
     return (
         <StaticQuery
             query={graphql`
@@ -105,7 +157,7 @@ export default function DiseaseCellLineQuery(props) {
                     }
                 }
             `}
-            render={(data, count) => (
+            render={(data) => (
                 <DiseaseCellLineTemplate
                     data={data}
                     diseases={props.diseases}

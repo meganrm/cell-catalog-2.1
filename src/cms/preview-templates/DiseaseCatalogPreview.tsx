@@ -1,19 +1,14 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import { DiseaseCatalogTemplate } from '../../templates/disease-catalog'
+import { TemplateProps } from './types';
 
-const DiseaseCatalogPreview = ({ entry, widgetFor }) => (
+const DiseaseCatalogPreview = ({ entry, widgetFor }: TemplateProps) => (
     <DiseaseCatalogTemplate
         title={entry.getIn(["data", "title"])}
         content={widgetFor("body")}
+        footerText={entry.getIn(["data", "footer_text"])}
     />
 );
 
-DiseaseCatalogPreview.propTypes = {
-    entry: PropTypes.shape({
-        getIn: PropTypes.func,
-    }),
-    widgetFor: PropTypes.func,
-};
 
 export default DiseaseCatalogPreview;
