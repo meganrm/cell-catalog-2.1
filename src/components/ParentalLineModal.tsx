@@ -1,10 +1,11 @@
 import React, { useState } from "react";
-import { Button, Descriptions, Flex, Modal } from "antd";
+import { Button, Descriptions, Divider, Flex, Modal } from "antd";
+import { InfoCircleOutlined } from "@ant-design/icons";
 import { GatsbyImage, getImage } from "gatsby-plugin-image";
 
 import { FileNode } from "gatsby-plugin-image/dist/src/components/hooks";
 import { DescriptionsItemType } from "antd/es/descriptions";
-import { modal } from "./modal.module.css";
+import { modal, title, header, subTitle, clone } from "./modal.module.css";
 
 interface ParentalLineModalProps {
     displayItems: DescriptionsItemType[];
@@ -18,16 +19,23 @@ const ParentalLineModal = (props: ParentalLineModalProps) => {
         setIsModalOpen(true);
     };
 
-
     const handleCancel = () => {
         setIsModalOpen(false);
     };
     const image = getImage(props.image);
+    const headerElement = (
+        <div className={header}>
+            <div className={title}>Parental Line </div>
+            <Divider type="vertical" />
+            <div className={subTitle}>{props.cellLineId} </div>
+            <div className={clone}> cl. {props.cloneNumber}</div>
+        </div>
+    );
     return (
         <>
             <Button onClick={showModal}>{props.cellLineId}</Button>
             <Modal
-                title={`Parental Line ${props.cellLineId} cl. ${props.cloneNumber} `}
+                title={headerElement}
                 open={isModalOpen}
                 onCancel={handleCancel}
                 width={544}
@@ -36,9 +44,11 @@ const ParentalLineModal = (props: ParentalLineModalProps) => {
                 footer={
                     <div style={{ textAlign: "center" }}>
                         <Button
-                            style={{ width: 480 }}
+                            type="primary"
+                            style={{ width: 480, border: "2px solid #003075" }}
                             href="https://www.allencell.org/cell-catalog.html"
                             target="_blank"
+                            icon={(<InfoCircleOutlined />)}
                         >
                             More information
                         </Button>
