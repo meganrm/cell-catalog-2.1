@@ -3,6 +3,8 @@ import { Link, graphql, StaticQuery } from "gatsby";
 
 const CellLineTableTemplate = (props: QueryResult) => {
     const { edges: cellLines } = props.data.allMarkdownRemark;
+    console.log("parental line", cellLines)
+
     return (
         <table className="">
             <thead>
@@ -20,28 +22,57 @@ const CellLineTableTemplate = (props: QueryResult) => {
             </thead>
             <tbody>
                 {cellLines &&
-                    cellLines.map(({ node: cellLine }) => (
-                        <tr className="" key={cellLine.id}>
-                            <td className="is-child">
-                                <Link to={cellLine.fields.slug}>
-                                    <h4>
-                                        AICS-{cellLine.frontmatter.cell_line_id}
-                                    </h4>
-                                </Link>
-                            </td>
-                            <td>{cellLine.frontmatter.gene.frontmatter.protein}</td>
-                            <td>{cellLine.frontmatter.clone_number}</td>
-                            <td>
-                                {cellLine.frontmatter.gene.frontmatter.name} (
-                                {cellLine.frontmatter.gene.frontmatter.symbol})
-                            </td>
-                            <td>{cellLine.frontmatter.allele_count}</td>
-                            <td>{cellLine.frontmatter.gene.frontmatter.structure}</td>
-                            <td>{cellLine.frontmatter.fluorescent_tag}</td>
-                            <td>{cellLine.frontmatter.tag_location}</td>
-                            {/* <td>{cellLine.frontmatter.parental_line.frontmatter.name}</td> */}
-                        </tr>
-                    ))}
+                    cellLines.map(({ node: cellLine }) => {
+                        if (cellLine.frontmatter.cell_line_id === 0) {
+                            return null;
+                        }
+                            return (
+                                <tr className="" key={cellLine.id}>
+                                    <td className="is-child">
+                                        <Link to={cellLine.fields.slug}>
+                                            <h4>
+                                                AICS-
+                                                {
+                                                    cellLine.frontmatter
+                                                        .cell_line_id
+                                                }
+                                            </h4>
+                                        </Link>
+                                    </td>
+                                    <td>
+                                        {
+                                            cellLine.frontmatter.gene
+                                                .frontmatter.protein
+                                        }
+                                    </td>
+                                    <td>{cellLine.frontmatter.clone_number}</td>
+                                    <td>
+                                        {
+                                            cellLine.frontmatter.gene
+                                                .frontmatter.name
+                                        }{" "}
+                                        (
+                                        {
+                                            cellLine.frontmatter.gene
+                                                .frontmatter.symbol
+                                        }
+                                        )
+                                    </td>
+                                    <td>{cellLine.frontmatter.allele_count}</td>
+                                    <td>
+                                        {
+                                            cellLine.frontmatter.gene
+                                                .frontmatter.structure
+                                        }
+                                    </td>
+                                    <td>
+                                        {cellLine.frontmatter.fluorescent_tag}
+                                    </td>
+                                    <td>{cellLine.frontmatter.tag_location}</td>
+                                    <td>{cellLine.frontmatter.parental_line.frontmatter.name}</td>
+                                </tr>
+                            );}
+                    )}
             </tbody>
         </table>
     );
@@ -58,7 +89,7 @@ interface QueryResult {
                     };
                     frontmatter: {
                         templateKey: string;
-                        cell_line_id: string;
+                        cell_line_id: number;
                         clone_number: string;
                         tag_location: string;
                         fluorescent_tag: string;

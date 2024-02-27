@@ -5,7 +5,7 @@ status: done
 date: 2024-02-06T04:38:23.506Z
 thumbnail_image: 20181023_m02_001_s13_cl85_cropped_scalebar20_withinset_rgb.jpg
 clone_number: 85
-parental_line: WTC
+parental_line: 0
 gene: ACTN2
 allele_count: mono
 tag_location:
