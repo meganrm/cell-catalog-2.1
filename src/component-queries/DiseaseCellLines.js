@@ -6,12 +6,15 @@ import DiseaseTable from "../components/DiseaseTable";
 const groupLines = (diseases, cellLines) => {
     const initObject = diseases.reduce((acc, cur) => {
         acc[cur.name] = [];
-        return acc
+        return acc;
     }, {});
     return cellLines.reduce((acc, cellLine) => {
         const { disease } = cellLine.node.frontmatter;
         const cellLineData = cellLine.node.frontmatter;
         const diseaseData = diseases.find((d) => d.name === disease);
+        if (!diseaseData) {
+            return acc;
+        }
         cellLineData.diseaseGene = (
             <>
                 <div>{diseaseData.geneSymbol}</div>
@@ -20,18 +23,17 @@ const groupLines = (diseases, cellLines) => {
         );
         const parentalLine = cellLineData.parental_line;
         cellLineData.parentalLine = (
-            <button>AICS-{cellLineData.parental_line.cell_line_id}</button>
+            <button>AICS-{parentalLine.cell_line_id}</button>
         );
-        console.log("parental line", cellLineData.parental_line);
         acc[disease].push(cellLine.node.frontmatter);
-        return acc
-    }, initObject)
-}
+        return acc;
+    }, initObject);
+};
 
 const DiseaseCellLineTemplate = (props) => {
     const { edges: cellLines } = props.data.allMarkdownRemark;
     const { diseases } = props;
-    const groupedCellLines = groupLines(diseases, cellLines)
+    const groupedCellLines = groupLines(diseases, cellLines);
     return diseases.map((disease) => {
         if (!groupedCellLines[disease.name].length) {
             return null;
@@ -41,11 +43,11 @@ const DiseaseCellLineTemplate = (props) => {
                 <DiseaseTable
                     diseaseName={disease.name}
                     diseaseCellLines={groupedCellLines[disease.name]}
+                    acknowledgements={disease.acknowledgements}
                 />
             </div>
         );
-    })
-
+    });
 };
 
 DiseaseCellLineQuery.propTypes = {
@@ -62,6 +64,7 @@ export default function DiseaseCellLineQuery(props) {
             query={graphql`
                 query DiseaseCellLineQuery {
                     allMarkdownRemark(
+                        sort: { frontmatter: { cell_line_id: ASC } }
                         filter: {
                             frontmatter: {
                                 templateKey: { eq: "disease-cell-line" }

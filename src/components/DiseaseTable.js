@@ -1,7 +1,7 @@
 import React from "react";
 import Table from "./Table";
 
-const DiseaseTable = ({ diseaseName, diseaseCellLines }) => {
+const DiseaseTable = ({ diseaseName, diseaseCellLines, acknowledgements }) => {
     return (
         <>
             <h4>{diseaseName}</h4>
@@ -16,11 +16,14 @@ const DiseaseTable = ({ diseaseName, diseaseCellLines }) => {
                     },
                     { displayName: "Parental Line", key: "parentalLine" },
                     { displayName: "Clones", key: "clones" },
-                    {displayName: "", key: "order_link"},
-                    {displayName: "", key: "certificate_of_analysis"},
+                    { displayName: "", key: "order_link" },
+                    { displayName: "", key: "certificate_of_analysis" },
                 ]}
                 data={diseaseCellLines}
             />
+            <div>
+                <div dangerouslySetInnerHTML={{ __html: acknowledgements }} />
+            </div>
         </>
     );
 };

@@ -17,7 +17,10 @@ collections:
       label: "Cell Line"
       folder: "src/pages/cell-line"
       create: true
-      slug: "{{cell_line_id}}"
+      slug: "AICS-{{cell_line_id}}"
+      path: '{{slug}}/index'
+      media_folder: ''
+      public_folder: ''
       fields:
           - {
                 label: "Template Key",
@@ -28,10 +31,24 @@ collections:
           - {
                 label: "ID",
                 name: "cell_line_id",
-                widget: "string",
+                widget: "number",
+                required: true,
+            }
+          - {
+                label: "Status",
+                name: "status",
+                widget: "select",
+                options: ["in progress", "done"],
+                default: "in progress",
                 required: true,
             }
           - { label: "Publish Date", name: "date", widget: "datetime" }
+          - {
+            label: "Thumbnail Image",
+            name: "thumbnail_image",
+            widget: "image",
+            required: false,
+          }
           - {
                 label: "Clone Number",
                 name: "clone_number",
@@ -62,14 +79,7 @@ collections:
                 options: ["mono", "bi"],
                 required: false,
             }
-          - {
-                label: "Status",
-                name: "status",
-                widget: "select",
-                options: ["in progress", "done"],
-                default: "in progress",
-                required: true,
-            }
+
           - {
                 label: "Tag Location",
                 name: "tag_location",
@@ -113,7 +123,7 @@ collections:
           - {
                 label: "ID",
                 name: "cell_line_id",
-                widget: "string",
+                widget: "number",
                 required: true,
             }
           - {
@@ -226,7 +236,7 @@ collections:
           - {
                 label: "Status",
                 name: "status",
-                widget: "enum",
+                widget: "select",
                 options: ["Coming soon", "Available"],
                 default: "Coming soon",
                 required: true,
@@ -279,7 +289,7 @@ collections:
 
           - file: "src/pages/disease-catalog/index.md"
             label: "Disease Cell Line Catalog"
-            name: "index"
+            name: "disease-catalog"
             fields:
                 - {
                       label: "Template Key",

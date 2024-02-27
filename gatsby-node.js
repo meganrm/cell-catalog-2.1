@@ -26,6 +26,9 @@ exports.createSchemaCustomization = ({ actions, schema }) => {
                                 },
                             })
                             .then(async (data) => {
+                                if (!data) {
+                                    return {name: source.parental_line};
+                                }
                                 const parentalGene = data.frontmatter.gene;
                                 const parentalGeneData =
                                     await context.nodeModel.findOne({
@@ -109,8 +112,9 @@ exports.createSchemaCustomization = ({ actions, schema }) => {
         schema.buildObjectType({
             name: "ParentLine",
             fields: {
+                name: "String",
                 gene: "GeneData",
-                cell_line_id: "String",
+                cell_line_id: "Int",
                 clone_number: "Int",
                 tag_location: ["String"],
                 fluorescent_tag: ["String"],

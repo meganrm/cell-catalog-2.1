@@ -1,7 +1,6 @@
 import React from 'react';
 
 const Table = ({ columns, data }) => {
-    console.log("COLUMNS", columns, "DATA", data)
   return (
     <table>
       <thead>

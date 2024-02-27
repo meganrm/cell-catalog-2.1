@@ -40,7 +40,7 @@ const CellLineTableTemplate = (props) => {
                             <td>{cellLine.frontmatter.gene.structure}</td>
                             <td>{cellLine.frontmatter.fluorescent_tag}</td>
                             <td>{cellLine.frontmatter.tag_location}</td>
-                            <td>{cellLine.frontmatter.parental_line.cel_line_id}</td>
+                            <td>{cellLine.frontmatter.parental_line.name}</td>
                         </tr>
                     ))}
             </tbody>
@@ -80,6 +80,9 @@ export default function CellLineTable() {
                                     tag_location
                                     fluorescent_tag
                                     allele_count
+                                    parental_line {
+                                        name
+                                    }
                                     gene {
                                         protein
                                         name

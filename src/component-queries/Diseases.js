@@ -11,10 +11,10 @@ const DiseaseTemplate = (props) => {
             name: disease.frontmatter.name,
             geneSymbol: disease.frontmatter.gene.symbol,
             geneName: disease.frontmatter.gene.name,
+            acknowledgements: disease.frontmatter.acknowledgements,
         };
     })
     return <DiseaseCellLineQuery diseases={unpackedDiseases} />;
-
 };
 
 Diseases.propTypes = {
@@ -48,15 +48,14 @@ export default function Diseases() {
                                         name
                                         symbol
                                     }
+                                    acknowledgements
                                 }
                             }
                         }
                     }
                 }
             `}
-            render={(data, count) => (
-                <DiseaseTemplate data={data} />
-            )}
+            render={(data, count) => <DiseaseTemplate data={data} />}
         />
     );
 }
