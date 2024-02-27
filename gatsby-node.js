@@ -11,60 +11,56 @@ exports.createSchemaCustomization = ({ actions, schema }) => {
             fields: {
                 parental_line: {
                     type: "ParentLine",
-                    resolve: (source, args, context, info) => {
-                        return context.nodeModel
-                            .findOne({
+                    resolve: async (source, args, context, info) => {
+                        const data = await context.nodeModel.findOne({
+                            type: "MarkdownRemark",
+                            query: {
+                                filter: {
+                                    frontmatter: {
+                                        cell_line_id: {
+                                            eq: source.parental_line,
+                                        },
+                                    },
+                                },
+                            },
+                        });
+                        if (!data) {
+                            return { name: source.parental_line };
+                        }
+                        console.log("PARENT", data.parent)
+                        const parentalGene = data.frontmatter.gene;
+
+                        const parentalGeneData =
+                            await context.nodeModel.findOne({
                                 type: "MarkdownRemark",
                                 query: {
                                     filter: {
                                         frontmatter: {
-                                            cell_line_id: {
-                                                eq: source.parental_line,
+                                            symbol: {
+                                                eq: parentalGene,
                                             },
                                         },
                                     },
                                 },
-                            })
-                            .then(async (data) => {
-                                if (!data) {
-                                    return {name: source.parental_line};
-                                }
-                                const parentalGene = data.frontmatter.gene;
-                                const parentalGeneData =
-                                    await context.nodeModel.findOne({
-                                        type: "MarkdownRemark",
-                                        query: {
-                                            filter: {
-                                                frontmatter: {
-                                                    symbol: {
-                                                        eq: parentalGene,
-                                                    },
-                                                },
-                                            },
-                                        },
-                                    });
-                                    return {
-                                        gene: {
-                                            symbol: parentalGeneData.frontmatter.symbol,
-                                            name: parentalGeneData.frontmatter.name,
-                                            protein: parentalGeneData.frontmatter.protein || "",
-                                            structure: parentalGeneData.frontmatter.structure || "",
-                                        },
-                                        cell_line_id:
-                                            data.frontmatter.cell_line_id ||
-                                            "WTC",
-                                        clone_number:
-                                            data.frontmatter.clone_number || "",
-                                        structure:
-                                            data.frontmatter.structure || "",
-                                        tag_location:
-                                            data.frontmatter.tag_location || [],
-                                        fluorescent_tag:
-                                            data.frontmatter.fluorescent_tag ||
-                                            [],
-                                    };
-                                });
-                            
+                            });
+                        const parentData = data.frontmatter;
+                        return {
+                            gene: {
+                                symbol: parentalGeneData.frontmatter.symbol,
+                                name: parentalGeneData.frontmatter.name,
+                                protein:
+                                    parentalGeneData.frontmatter.protein || "",
+                                structure:
+                                    parentalGeneData.frontmatter.structure ||
+                                    "",
+                            },
+                            cell_line_id: parentData.cell_line_id || "WTC",
+                            clone_number: parentData.clone_number || "",
+                            structure: parentData.structure || "",
+                            tag_location: parentData.tag_location || [],
+                            fluorescent_tag: parentData.fluorescent_tag || [],
+                            thumbnail_image: `../cell-line/AICS-${parentData.cell_line_id}/${parentData.thumbnail_image}`,
+                        };
                     },
                 },
             },
@@ -116,6 +112,7 @@ exports.createSchemaCustomization = ({ actions, schema }) => {
                 gene: "GeneData",
                 cell_line_id: "Int",
                 clone_number: "Int",
+                thumbnail_image: "File",
                 tag_location: ["String"],
                 fluorescent_tag: ["String"],
             },

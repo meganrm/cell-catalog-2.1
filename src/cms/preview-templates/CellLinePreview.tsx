@@ -10,6 +10,7 @@ const CellLinePreview = ({ entry }: TemplateProps) => {
             gene={entry.getIn(["data", "gene"])}
             tagLocation={entry.getIn(["data", "tag_location"])}
             status={entry.getIn(["data", "status"])}
+            thumbnail={entry.getIn(["data", "thumbnail_image"])}
         />
     );
 };

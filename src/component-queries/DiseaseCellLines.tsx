@@ -1,7 +1,12 @@
 import React from "react";
 import { graphql, StaticQuery } from "gatsby";
+import { Tag } from "antd";
+
 import DiseaseTable from "../components/DiseaseTable";
 import { UnpackedDisease } from "./Diseases";
+import ParentalLineModal, {
+    ParentalLineData,
+} from "../components/ParentalLineModal";
 
 interface DiseaseCellLineEdge {
     node: {
@@ -16,16 +21,7 @@ interface DiseaseCellLineEdge {
 interface DiseaseCellLineFrontmatter {
     templateKey: string;
     cell_line_id: string;
-    parental_line: {
-        cell_line_id: string;
-        clone_number: string;
-        tag_location: string;
-        fluorescent_tag: string;
-        gene: {
-            name: string;
-            symbol: string;
-        };
-    };
+    parental_line: ParentalLineData;
     disease: string;
     snp: string;
     clones: string;
@@ -65,20 +61,16 @@ const groupLines = (
         }
         cellLineData.diseaseGene = (
             <>
-                <div>{diseaseData.geneSymbol}</div>
+                <Tag>{diseaseData.geneSymbol}</Tag>
                 <div>{diseaseData.geneName}</div>
             </>
         );
         const parentalLine = cellLineData.parental_line;
-        cellLineData.parentalLine = (
-            <button>AICS-{parentalLine.cell_line_id}</button>
-        );
+        cellLineData.parentalLine = <ParentalLineModal {...parentalLine} />;
         acc[disease].push(cellLineData);
         return acc;
     }, diseaseObj);
 };
-
-
 
 interface QueryResult {
     data: {
@@ -141,6 +133,14 @@ export default function DiseaseCellLineQuery(props: {
                                         clone_number
                                         tag_location
                                         fluorescent_tag
+                                        thumbnail_image {
+                                            childImageSharp {
+                                                gatsbyImageData(
+                                                    width: 200
+                                                    placeholder: BLURRED
+                                                )
+                                            }
+                                        }
                                         gene {
                                             name
                                             symbol

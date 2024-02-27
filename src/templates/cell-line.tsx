@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { graphql } from "gatsby";
 import Layout from "../components/Layout";
+import { GatsbyImage } from "gatsby-plugin-image";
 
 interface QueryResult {
     data: {
@@ -12,6 +13,7 @@ interface QueryResult {
                 gene: string;
                 tag_location: string;
                 status: string;
+                thumbnail_image: any;
             };
         };
     };
@@ -23,6 +25,7 @@ interface CellLineProps {
     gene: string;
     tagLocation: string;
     status: string;
+    thumbnail: any;
 }
 
 // eslint-disable-next-line
@@ -32,7 +35,9 @@ export const CellLineTemplate = ({
     gene,
     tagLocation,
     status,
+    thumbnail
 }: CellLineProps) => {
+    console.log(thumbnail)
     return (
         <section className="section">
             <div className="container content">
@@ -45,6 +50,10 @@ export const CellLineTemplate = ({
                         <p>Gene: {gene}</p>
                         <p>Tag: {tagLocation}</p>
                         <p>Status: {status}</p>
+                        <GatsbyImage
+                            image={thumbnail.childImageSharp.gatsbyImageData}
+                            alt="Cell Line Thumbnail"
+                        />
                     </div>
                 </div>
             </div>
@@ -64,6 +73,7 @@ const CellLine = ({ data }: QueryResult) => {
                 gene={cellLine.frontmatter.gene}
                 tagLocation={cellLine.frontmatter.tag_location}
                 status={cellLine.frontmatter.status}
+                thumbnail={cellLine.frontmatter.thumbnail_image}
             />
         </Layout>
     );
@@ -81,6 +91,14 @@ export const pageQuery = graphql`
                 clone_number
                 tag_location
                 status
+                thumbnail_image {
+                    childImageSharp {
+                        gatsbyImageData(
+                            width: 200
+                            placeholder: BLURRED
+                        )
+                    }
+                }
             }
         }
     }
