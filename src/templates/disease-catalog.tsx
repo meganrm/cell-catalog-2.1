@@ -5,13 +5,19 @@ import Layout from "../components/Layout";
 import Diseases from "../component-queries/Diseases";
 import Content, { HTMLContent } from "../components/Content";
 
+interface DiseaseCatalogTemplateProps {
+    title: string;
+    content: string;
+    contentComponent?: JSX.ElementType;
+    footerText: string;
+}
 // eslint-disable-next-line
 export const DiseaseCatalogTemplate = ({
     title,
     content,
     contentComponent,
     footerText,
-}) => {
+}: DiseaseCatalogTemplateProps) => {
     const PageContent = contentComponent || Content;
 
     return (
@@ -37,19 +43,29 @@ export const DiseaseCatalogTemplate = ({
     );
 };
 
-DiseaseCatalogTemplate.propTypes = {
-    title: PropTypes.string.isRequired,
-    content: PropTypes.string,
-    contentComponent: PropTypes.func,
-};
+interface QueryResult {
+    data: {
+        markdownRemark: {
+            html: string;
+            frontmatter: {
+                title: string;
+                footer_text: string;
+                main: {
+                    heading: string;
+                    description: string;
+                };
+            };
+        };
+    };
+}
 
-const DiseaseCatalog = ({ data }) => {
+const DiseaseCatalog = ({ data }: QueryResult) => {
     const { markdownRemark: post } = data;
 
     return (
         <Layout>
             <DiseaseCatalogTemplate
-                contentComponent={HTMLContent}
+                contentComponent={HTMLContent} 
                 title={post.frontmatter.title}
                 content={post.html}
                 footerText={post.frontmatter.footer_text}
@@ -74,7 +90,6 @@ export const aboutPageQuery = graphql`
                 main {
                     heading
                     description
-                    
                 }
             }
         }

@@ -1,8 +1,8 @@
 module.exports = {
     siteMetadata: {
-        title: "Gatsby + Netlify CMS Starter",
+        title: "Disease Cell Line Catalog",
         description:
-            "This repo contains an example business website that is built with Gatsby, and Netlify CMS.It follows the JAMstack architecture by using Git as a single source of truth, and Netlify for continuous deployment, and CDN distribution.",
+            "The Disease Collection Cell Catalog is a growing compilation of cell lines that carry mutations in genes known to cause disease. These cell lines were created by introducing a point mutation in one of the fluorescently tagged WTC-11 clonal lines from the Allen Cell Collection.",
     },
     plugins: [
         "gatsby-plugin-react-helmet",
@@ -65,7 +65,7 @@ module.exports = {
         {
             resolve: "gatsby-plugin-decap-cms",
             options: {
-                modulePath: `${__dirname}/src/cms/cms.js`,
+                modulePath: `${__dirname}/src/cms/cms.tsx`,
             },
         },
         {

@@ -1,18 +1,24 @@
 import React from "react";
-import PropTypes from "prop-types";
 import { Link, graphql } from "gatsby";
 
 import Layout from "../components/Layout";
 import Features from "../components/Features";
 
-// eslint-disable-next-line
+interface IndexPageTemplateProps {
+    mainPitch: {
+        title: string;
+        description: string;
+    };
+    products: {
+        text: string;
+        image: string;
+    }[];
+}
+
 export const IndexPageTemplate = ({
-    title,
-    subtitle,
     mainPitch,
-    products
- 
-}) => {
+    products,
+}: IndexPageTemplateProps) => {
     return (
         <div>
             <section className="section section--gradient">
@@ -33,7 +39,7 @@ export const IndexPageTemplate = ({
                                             </h3>
                                         </div>
                                     </div>
-                      
+
                                     <Features gridItems={products} />
                                     <div className="column is-12">
                                         <h3 className="has-text-weight-semibold is-size-2">
@@ -58,21 +64,12 @@ export const IndexPageTemplate = ({
     );
 };
 
-IndexPageTemplate.propTypes = {
-    title: PropTypes.string,
-    subtitle: PropTypes.string,
-    mainPitch: PropTypes.object,
-    products: PropTypes.array,
-};
-
-const IndexPage = ({ data }) => {
+const IndexPage = ({ data }: QueryResult) => {
     const { frontmatter } = data.markdownRemark;
 
     return (
         <Layout>
             <IndexPageTemplate
-                title={frontmatter.title}
-                subtitle={frontmatter.subtitle}
                 mainPitch={frontmatter.main_pitch}
                 products={frontmatter.products}
             />
@@ -80,15 +77,26 @@ const IndexPage = ({ data }) => {
     );
 };
 
-IndexPage.propTypes = {
-    data: PropTypes.shape({
-        markdownRemark: PropTypes.shape({
-            frontmatter: PropTypes.object,
-        }),
-    }),
-};
-
 export default IndexPage;
+
+interface QueryResult {
+    data: {
+        markdownRemark: {
+            frontmatter: {
+                title: string;
+                subtitle: string;
+                main_pitch: {
+                    title: string;
+                    description: string;
+                };
+                products: {
+                    text: string;
+                    image: string;
+                }[];
+            };
+        };
+    };
+}
 
 export const pageQuery = graphql`
     query IndexPageTemplate {

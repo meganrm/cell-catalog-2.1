@@ -1,7 +1,19 @@
 import React from "react";
 import Table from "./Table";
+import Content from "./Content";
+import { UnpackedDiseaseCellLine } from "../component-queries/DiseaseCellLines";
 
-const DiseaseTable = ({ diseaseName, diseaseCellLines, acknowledgements }) => {
+interface DiseaseTableProps {
+    diseaseName: string;
+    diseaseCellLines: UnpackedDiseaseCellLine[];
+    acknowledgements: string;
+}
+
+const DiseaseTable = ({
+    diseaseName,
+    diseaseCellLines,
+    acknowledgements,
+}: DiseaseTableProps) => {
     return (
         <>
             <h4>{diseaseName}</h4>
@@ -22,7 +34,7 @@ const DiseaseTable = ({ diseaseName, diseaseCellLines, acknowledgements }) => {
                 data={diseaseCellLines}
             />
             <div>
-                <div dangerouslySetInnerHTML={{ __html: acknowledgements }} />
+                <Content content={acknowledgements} />
             </div>
         </>
     );

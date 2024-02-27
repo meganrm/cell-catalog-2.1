@@ -1,12 +1,12 @@
 import * as React from "react";
 import { Helmet } from "react-helmet";
-import Navbar from "../components/Navbar";
+import Navbar from "./Navbar";
 import "../style/bulma-style.sass";
 import "../style/custom-style.sass";
 import useSiteMetadata from "./SiteMetadata";
 import { withPrefix } from "gatsby";
 
-const TemplateWrapper = ({ children }) => {
+const TemplateWrapper = ({ children }: any) => {
   const { title, description } = useSiteMetadata();
   return (
     <div>
