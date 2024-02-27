@@ -15,6 +15,7 @@ public_folder: /img
 collections:
     - name: "cell-line"
       label: "Cell Lines"
+      label_singular: "Cell Line"
       folder: "src/pages/cell-line"
       create: true
       slug: "AICS-{{cell_line_id}}"
@@ -65,11 +66,11 @@ collections:
                 required: false,
             }
           - {
-                label: "Parent line",
+                label: "Parent line ID (leave as 0 for 'WTC')",
                 name: "parental_line",
                 widget: "number",
                 default: 0,
-                required: false
+                required: true
             }
           - {
                 label: "Gene",
