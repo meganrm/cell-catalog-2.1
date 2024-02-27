@@ -14,11 +14,13 @@ public_folder: /img
 
 collections:
     - name: "cell-line"
-      label: "Cell Line"
+      label: "Cell Lines"
       folder: "src/pages/cell-line"
       create: true
       slug: "AICS-{{cell_line_id}}"
       path: '{{slug}}/index'
+      identifier_field: "cell_line_id"
+      summary: "AICS-{{cell_line_id}} - {{gene}}"
       media_folder: ''
       public_folder: ''
       fields:
@@ -109,10 +111,12 @@ collections:
                 required: false,
             }
     - name: "disease-cell-line"
-      label: "Disease Cell Line"
+      label: "Disease Cell Lines"
       folder: "src/pages/disease-cell-line"
       create: true
       slug: "{{cell_line_id}}"
+      identifier_field: "cell_line_id"
+      summary: "AICS-{{cell_line_id}} - {{disease}}"
       fields:
           - {
                 label: "Template Key",
@@ -212,7 +216,7 @@ collections:
                 - { label: "Gene name", name: "gene_name", widget: "string" }
                 - { label: "Isoforms", name: "isoforms", widget: "list" }
     - name: "disease"
-      label: "Disease"
+      label: "Modeled diseases"
       folder: "src/pages/diseases"
       slug: "{{name}}"
       create: true # Allow users to create new documents in this collection
