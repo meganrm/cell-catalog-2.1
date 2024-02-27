@@ -27,6 +27,9 @@ const TemplateWrapper = ({ children }: React.PropsWithChildren) => {
                     colorBgContainer: WHITE,
                 },
                 components: {
+                    Layout: {
+                    bodyBg: GRAY,
+                    },
                     Modal: {
                         contentBg: LIGHT_BLUE,
                         headerBg: LIGHT_BLUE,
