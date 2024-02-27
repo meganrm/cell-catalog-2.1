@@ -11,8 +11,10 @@ export interface ParentalLineData {
     fluorescent_tag: string;
     thumbnail_image: any;
     gene: {
-        name: string;
-        symbol: string;
+        frontmatter: {
+            name: string;
+            symbol: string;
+        };
     };
 }
 
@@ -29,7 +31,7 @@ const ParentalLineModal = (parentalLineData: ParentalLineData) => {
     const handleCancel = () => {
         setIsModalOpen(false);
     };
-    const image = getImage(parentalLineData.thumbnail_image)
+    const image = getImage(parentalLineData.thumbnail_image);
     console.log(parentalLineData.thumbnail_image);
     return (
         <>
@@ -44,12 +46,14 @@ const ParentalLineModal = (parentalLineData: ParentalLineData) => {
                 onOk={handleOk}
                 onCancel={handleCancel}
             >
-                {image && <GatsbyImage
-                    alt={`${parentalLineData.cell_line_id} thumbnail image`}
-                    image={image}
-                />}
-                <p>Gene Symbol: {parentalLineData.gene.symbol}</p>
-                <p>Gene Name: {parentalLineData.gene.name}</p>
+                {image && (
+                    <GatsbyImage
+                        alt={`${parentalLineData.cell_line_id} thumbnail image`}
+                        image={image}
+                    />
+                )}
+                <p>Gene Symbol: {parentalLineData.gene.frontmatter.symbol}</p>
+                <p>Gene Name: {parentalLineData.gene.frontmatter.name}</p>
                 <p>Fluorescent Tag: {parentalLineData.fluorescent_tag}</p>
                 <p>Tag Location: {parentalLineData.tag_location}</p>
             </Modal>

@@ -21,7 +21,7 @@ interface DiseaseCellLineEdge {
 interface DiseaseCellLineFrontmatter {
     templateKey: string;
     cell_line_id: string;
-    parental_line: ParentalLineData;
+    parental_line: {frontmatter: ParentalLineData};
     disease: string;
     snp: string;
     clones: string;
@@ -65,7 +65,8 @@ const groupLines = (
                 <div>{diseaseData.geneName}</div>
             </>
         );
-        const parentalLine = cellLineData.parental_line;
+        const parentalLine = cellLineData.parental_line.frontmatter;
+        console.log("Parental line data", parentalLine)
         cellLineData.parentalLine = <ParentalLineModal {...parentalLine} />;
         acc[disease].push(cellLineData);
         return acc;
@@ -129,22 +130,27 @@ export default function DiseaseCellLineQuery(props: {
                                     templateKey
                                     cell_line_id
                                     parental_line {
-                                        cell_line_id
-                                        clone_number
-                                        tag_location
-                                        fluorescent_tag
-                                        thumbnail_image {
-                                            childImageSharp {
-                                                gatsbyImageData(
-                                                    width: 200
-                                                    placeholder: BLURRED
-                                                )
+                                        frontmatter {
+                                            cell_line_id
+                                            clone_number
+                                            tag_location
+                                            fluorescent_tag
+                                            thumbnail_image {
+                                                childImageSharp {
+                                                    gatsbyImageData(
+                                                        width: 200
+                                                        placeholder: BLURRED
+                                                    )
+                                                }
+                                            }
+                                            gene {
+                                                frontmatter {
+                                                    symbol
+                                                    name
+                                                }
                                             }
                                         }
-                                        gene {
-                                            name
-                                            symbol
-                                        }
+                                        
                                     }
                                     disease
                                     snp

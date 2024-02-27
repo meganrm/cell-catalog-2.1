@@ -29,17 +29,17 @@ const CellLineTableTemplate = (props: QueryResult) => {
                                     </h4>
                                 </Link>
                             </td>
-                            <td>{cellLine.frontmatter.gene.protein}</td>
+                            <td>{cellLine.frontmatter.gene.frontmatter.protein}</td>
                             <td>{cellLine.frontmatter.clone_number}</td>
                             <td>
-                                {cellLine.frontmatter.gene.name} (
-                                {cellLine.frontmatter.gene.symbol})
+                                {cellLine.frontmatter.gene.frontmatter.name} (
+                                {cellLine.frontmatter.gene.frontmatter.symbol})
                             </td>
                             <td>{cellLine.frontmatter.allele_count}</td>
-                            <td>{cellLine.frontmatter.gene.structure}</td>
+                            <td>{cellLine.frontmatter.gene.frontmatter.structure}</td>
                             <td>{cellLine.frontmatter.fluorescent_tag}</td>
                             <td>{cellLine.frontmatter.tag_location}</td>
-                            <td>{cellLine.frontmatter.parental_line.name}</td>
+                            <td>{cellLine.frontmatter.parental_line.frontmatter.name}</td>
                         </tr>
                     ))}
             </tbody>
@@ -64,13 +64,18 @@ interface QueryResult {
                         fluorescent_tag: string;
                         allele_count: string;
                         parental_line: {
-                            name: string;
+                            frontmatter: {
+
+                                name: string;
+                            };
                         };
                         gene: {
-                            protein: string;
-                            name: string;
-                            symbol: string;
-                            structure: string;
+                            frontmatter: {
+                                protein: string;
+                                name: string;
+                                symbol: string;
+                                structure: string;
+                            };
                         };
                     };
                 };
@@ -102,15 +107,20 @@ export default function CellLineTable() {
                                     tag_location
                                     fluorescent_tag
                                     allele_count
-                                    parental_line {
-                                        name
-                                    }
                                     gene {
-                                        protein
-                                        name
-                                        symbol
-                                        structure
+                                        frontmatter {
+                                            protein
+                                            structure
+                                            name
+                                            symbol
+                                        }
                                     }
+                                    parental_line {
+                                        frontmatter {
+                                            name
+                                        }
+                                    }
+                                    
                                 }
                             }
                         }
