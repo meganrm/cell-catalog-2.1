@@ -4,6 +4,10 @@ import { graphql, StaticQuery } from "gatsby";
 import DiseaseTable from "../components/DiseaseTable";
 
 const groupLines = (diseases, cellLines) => {
+    if (!diseases) {
+        return {}
+    }
+
     const initObject = diseases.reduce((acc, cur) => {
         acc[cur.name] = [];
         return acc;
