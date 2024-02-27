@@ -1,57 +1,88 @@
 import React, { useState } from "react";
-import { Button, Modal } from "antd";
+import { Button, Descriptions, Divider, Flex, Modal } from "antd";
+import { InfoCircleOutlined } from "@ant-design/icons";
 import { GatsbyImage, getImage } from "gatsby-plugin-image";
 
-import { formatCellLineId } from "../utils";
+import { FileNode } from "gatsby-plugin-image/dist/src/components/hooks";
+import { DescriptionsItemType } from "antd/es/descriptions";
+import { modal, title, header, subTitle, clone } from "./modal.module.css";
 
-export interface ParentalLineData {
-    cell_line_id: string;
-    clone_number: string;
-    tag_location: string;
-    fluorescent_tag: string;
-    thumbnail_image: any;
-    gene: {
-        name: string;
-        symbol: string;
-    };
+interface ParentalLineModalProps {
+    displayItems: DescriptionsItemType[];
+    image: FileNode;
+    cellLineId: string;
+    cloneNumber: number;
 }
-
-const ParentalLineModal = (parentalLineData: ParentalLineData) => {
+const ParentalLineModal = (props: ParentalLineModalProps) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const showModal = () => {
         setIsModalOpen(true);
     };
 
-    const handleOk = () => {
-        setIsModalOpen(false);
-    };
-
     const handleCancel = () => {
         setIsModalOpen(false);
     };
-    const image = getImage(parentalLineData.thumbnail_image)
-    console.log(parentalLineData.thumbnail_image);
+    const image = getImage(props.image);
+    const headerElement = (
+        <div className={header}>
+            <div className={title}>Parental Line </div>
+            <Divider type="vertical" />
+            <div className={subTitle}>{props.cellLineId} </div>
+            <div className={clone}> cl. {props.cloneNumber}</div>
+        </div>
+    );
     return (
         <>
-            <Button onClick={showModal}>
-                {formatCellLineId(parentalLineData.cell_line_id)}
-            </Button>
+            <Button onClick={showModal}>{props.cellLineId}</Button>
             <Modal
-                title={`Parental Line ${formatCellLineId(
-                    parentalLineData.cell_line_id
-                )} cl. ${parentalLineData.clone_number} `}
+                title={headerElement}
                 open={isModalOpen}
-                onOk={handleOk}
                 onCancel={handleCancel}
+                width={544}
+                centered={true}
+                className={modal}
+                footer={
+                    <div style={{ textAlign: "center" }}>
+                        <Button
+                            type="primary"
+                            style={{ width: 480, border: "2px solid #003075" }}
+                            href="https://www.allencell.org/cell-catalog.html"
+                            target="_blank"
+                            icon={(<InfoCircleOutlined />)}
+                        >
+                            More information
+                        </Button>
+                    </div>
+                }
             >
-                {image && <GatsbyImage
-                    alt={`${parentalLineData.cell_line_id} thumbnail image`}
-                    image={image}
-                />}
-                <p>Gene Symbol: {parentalLineData.gene.symbol}</p>
-                <p>Gene Name: {parentalLineData.gene.name}</p>
-                <p>Fluorescent Tag: {parentalLineData.fluorescent_tag}</p>
-                <p>Tag Location: {parentalLineData.tag_location}</p>
+                <Flex justify="space-between" gap={16}>
+                    <div style={{ width: "192px", display: "block" }}>
+                        {image && (
+                            <GatsbyImage
+                                alt={`${props.cellLineId} thumbnail image`}
+                                image={image}
+                            />
+                        )}
+                    </div>
+                    <Descriptions
+                        column={1}
+                        items={props.displayItems}
+                        layout="horizontal"
+                        style={{
+                            margin: "auto",
+                        }}
+                        colon={false}
+                        labelStyle={{
+                            height: "48px",
+                            alignItems: "center",
+                            width: "142px",
+                        }}
+                        contentStyle={{
+                            height: "48px",
+                            alignItems: "center",
+                        }}
+                    />
+                </Flex>
             </Modal>
         </>
     );

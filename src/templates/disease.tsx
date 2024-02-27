@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
 import { graphql } from "gatsby";
 import Layout from "../components/Layout";
 
@@ -22,10 +21,6 @@ export const DiseaseTemplate = ({
     );
 };
 
-DiseaseTemplate.propTypes = {
-    name: PropTypes.string,
-    gene: PropTypes.string,
-};
 
 const Disease = ({ data }) => {
   const { markdownRemark: cellLine } = data;
@@ -33,17 +28,12 @@ const Disease = ({ data }) => {
       <Layout>
           <DiseaseTemplate
               name={cellLine.frontmatter.name}
-              gene={`${cellLine.frontmatter.gene.symbol} - ${cellLine.frontmatter.gene.name}`}
+              gene={`${cellLine.frontmatter.gene.frontmatter.symbol} - ${cellLine.frontmatter.gene.frontmatter.name}`}
           />
       </Layout>
   );
 };
 
-Disease.propTypes = {
-  data: PropTypes.shape({
-    markdownRemark: PropTypes.object,
-  }),
-};
 
 export default Disease;
 
@@ -54,8 +44,10 @@ export const pageQuery = graphql`
             frontmatter {
                 name
                 gene {
-                    name
-                    symbol
+                    frontmatter {
+                        symbol
+                        name
+                    }
                 }
             }
         }

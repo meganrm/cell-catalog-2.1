@@ -12,7 +12,6 @@ const GRAY = "#F2F2F2";
 const DARK_BLUE = "#00215F";
 const WHITE = "#FFFFFF";
 const LIGHT_BLUE= "#E5E9F1";
-const BORDER_STYLE = "solid";
 const DARK_GRAY = "#CBCBCC"
 
 
@@ -38,15 +37,22 @@ const TemplateWrapper = ({ children }: React.PropsWithChildren) => {
                     },
                     Button: {
                         defaultColor: DARK_BLUE,
+                        defaultBg: DARK_GRAY,
+                        defaultBorderColor: DARK_BLUE,
+                        defaultHoverBg:DARK_GRAY,
                         colorPrimary: GRAY,
                         colorPrimaryBgHover: GRAY,
                         primaryColor: DARK_BLUE,
+                        colorPrimaryBorder: DARK_BLUE,
                         primaryShadow: "none",
                     },
                     Table: {
                         // headerColor: DARK_BLUE,
                         borderColor: DARK_GRAY,
                     },
+                    Descriptions : {
+                        itemPaddingBottom: 0,
+                    }
                 },
             }}
         >

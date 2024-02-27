@@ -1,17 +1,9 @@
 import React from "react";
 import { graphql, StaticQuery } from "gatsby";
 import DiseaseCellLineQuery from "./DiseaseCellLines";
+import { DiseaseFrontmatter } from "./types";
 
-interface DiseaseFrontmatter {
-    name: string;
-    gene: {
-        name: string;
-        symbol: string;
-    };
-    acknowledgements: string;
-}
-
-interface QueryResult {
+export interface QueryResult {
     data: {
         allMarkdownRemark: {
             edges: {
@@ -34,16 +26,16 @@ export interface UnpackedDisease {
     acknowledgements: string;
 }
 
-
 const DiseaseTemplate = (props: QueryResult) => {
     const { edges: diseases } = props.data.allMarkdownRemark;
 
     const unpackedDiseases = diseases.map(({ node: disease }) => {
+        const { name, gene, acknowledgements } = disease.frontmatter;
         return {
-            name: disease.frontmatter.name,
-            geneSymbol: disease.frontmatter.gene.symbol,
-            geneName: disease.frontmatter.gene.name,
-            acknowledgements: disease.frontmatter.acknowledgements,
+            name,
+            geneSymbol: gene.frontmatter.symbol,
+            geneName: gene.frontmatter.name,
+            acknowledgements,
         };
     });
     return (
@@ -52,8 +44,6 @@ const DiseaseTemplate = (props: QueryResult) => {
         />
     );
 };
-
-
 
 export default function Diseases() {
     return (
@@ -74,11 +64,14 @@ export default function Diseases() {
                                 frontmatter {
                                     templateKey
                                     name
-                                    gene {
-                                        name
-                                        symbol
-                                    }
+
                                     acknowledgements
+                                    gene {
+                                        frontmatter {
+                                            symbol
+                                            name
+                                        }
+                                    }
                                 }
                             }
                         }
