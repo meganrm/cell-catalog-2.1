@@ -5350,7 +5350,7 @@ callsites@^3.0.0:
   resolved "https://registry.yarnpkg.com/callsites/-/callsites-3.1.0.tgz#b3630abd8943432f54b3f0519238e33cd7df2f73"
   integrity sha512-P8BjAsXvZS+VIDUI11hHCQEv74YT67YUi5JJFNWIqL235sBmjX4+qx9Muvls5ivyNENctx46xQLQ3aTuE7ssaQ==
 
-camel-case@^4.1.2:
+camel-case@^4, camel-case@^4.1.2:
   version "4.1.2"
   resolved "https://registry.yarnpkg.com/camel-case/-/camel-case-4.1.2.tgz#9728072a954f805228225a6deea6b38461e1bd5a"
   integrity sha512-gxGWBrTT1JuMx6R+o5PTXMmUnhnVzLQ9SNutD4YqKtI6ap897t3tKECYla6gCWEkplXnlNybEkZg9GEGxKFCgw==
@@ -9102,6 +9102,13 @@ gatsby-plugin-decap-cms@^4.0.3:
     lodash "^4.17.21"
     mini-css-extract-plugin "1.6.2"
     netlify-identity-widget "^1.9.2"
+
+gatsby-plugin-fix-fouc@^1.0.5:
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/gatsby-plugin-fix-fouc/-/gatsby-plugin-fix-fouc-1.0.5.tgz#30db3e4cecd68a4c4469b195ea639bdabff5cab7"
+  integrity sha512-cs1JBMWZ5St3XimEHJMyeHd66lMHQDYTJzm/zn9omBI4tliBbNh3aF0bob/xVxykPLfWJZ5H6t38QidiKTb9Vw==
+  dependencies:
+    camel-case "^4"
 
 gatsby-plugin-image@^3.13.1:
   version "3.13.1"
