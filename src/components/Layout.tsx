@@ -1,19 +1,20 @@
 import * as React from "react";
 import { Helmet } from "react-helmet";
-import { Button, ConfigProvider, Space } from "antd";
+import { ConfigProvider, Layout as AntLayout } from "antd";
+import { withPrefix } from "gatsby";
+const { Content } = AntLayout;
 
 import Navbar from "./Navbar";
 import "../style/bulma-style.sass";
-import "../style/custom-style.sass";
 import useSiteMetadata from "./SiteMetadata";
-import { withPrefix } from "gatsby";
+import { body } from "./layout.module.css";
 
 const GRAY = "#F2F2F2";
 const DARK_BLUE = "#00215F";
 const WHITE = "#FFFFFF";
-const LIGHT_BLUE= "#E5E9F1";
-const DARK_GRAY = "#CBCBCC"
-
+const LIGHT_BLUE = "#E5E9F1";
+const DARK_GRAY = "#CBCBCC";
+const LIGHT_GRAY = "#323233";
 
 
 const TemplateWrapper = ({ children }: React.PropsWithChildren) => {
@@ -27,7 +28,7 @@ const TemplateWrapper = ({ children }: React.PropsWithChildren) => {
                 },
                 components: {
                     Layout: {
-                    bodyBg: GRAY,
+                        bodyBg: GRAY,
                     },
                     Modal: {
                         contentBg: LIGHT_BLUE,
@@ -39,7 +40,7 @@ const TemplateWrapper = ({ children }: React.PropsWithChildren) => {
                         defaultColor: DARK_BLUE,
                         defaultBg: DARK_GRAY,
                         defaultBorderColor: DARK_BLUE,
-                        defaultHoverBg:DARK_GRAY,
+                        defaultHoverBg: DARK_GRAY,
                         colorPrimary: GRAY,
                         colorPrimaryBgHover: GRAY,
                         primaryColor: DARK_BLUE,
@@ -47,12 +48,13 @@ const TemplateWrapper = ({ children }: React.PropsWithChildren) => {
                         primaryShadow: "none",
                     },
                     Table: {
-                        // headerColor: DARK_BLUE,
+                        headerColor: LIGHT_GRAY,
                         borderColor: DARK_GRAY,
+                        headerBg: WHITE,
                     },
-                    Descriptions : {
+                    Descriptions: {
                         itemPaddingBottom: 0,
-                    }
+                    },
                 },
             }}
         >
@@ -94,8 +96,10 @@ const TemplateWrapper = ({ children }: React.PropsWithChildren) => {
                     content={`${withPrefix("/")}img/og-image.jpg`}
                 />
             </Helmet>
-            <Navbar />
-            <div>{children}</div>
+            <AntLayout className={body}>
+                <Navbar />
+                <Content>{children}</Content>
+            </AntLayout>
         </ConfigProvider>
     );
 };

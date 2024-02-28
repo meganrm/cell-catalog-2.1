@@ -1,9 +1,17 @@
 import React from "react";
-import { Table } from "antd";
+import { Table, Typography } from "antd";
+
+const { Title } = Typography;
 
 import Content from "./Content";
 import { UnpackedDiseaseCellLine } from "../component-queries/DiseaseCellLines";
 import { formatCellLineId } from "../utils";
+
+import {
+    tableTitle,
+    container,
+    footerContainer,
+} from "./disease-table.module.css";
 
 interface DiseaseTableProps {
     diseaseName: string;
@@ -19,19 +27,23 @@ const DiseaseTable = ({
     return (
         <Table
             key={diseaseName}
-            title={() => diseaseName}
+            className={container}
+            title={() => <h3 className={tableTitle}>{diseaseName}</h3>}
             pagination={false}
             columns={[
                 {
                     title: "Cell Line ID",
                     key: "cell_line_id",
+                    width: 180,
                     dataIndex: "cell_line_id",
-                    render: (cell_line_id: string) =>
-                        formatCellLineId(cell_line_id),
+                    render: (cell_line_id: string) => (
+                        <h4>{formatCellLineId(cell_line_id)}</h4>
+                    ),
                 },
                 { title: "SNP", key: "snp", dataIndex: "snp" },
                 {
                     title: "Gene symbol & name",
+                    width: 280,
                     key: "diseaseGene",
                     dataIndex: "diseaseGene",
                 },
@@ -49,7 +61,11 @@ const DiseaseTable = ({
                 },
             ]}
             dataSource={diseaseCellLines}
-            footer={() => <Content content={acknowledgements} />}
+            footer={() => (
+                <div className={footerContainer}>
+                    <Content content={acknowledgements} />
+                </div>
+            )}
         />
     );
 };

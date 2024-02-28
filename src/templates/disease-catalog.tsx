@@ -22,23 +22,10 @@ export const DiseaseCatalogTemplate = ({
 
     return (
         <section className="section section--gradient">
-            <div className="container">
-                <div className="columns">
-                    <div className="column is-10 is-offset-1">
-                        <div className="section">
-                            <h2 className="title is-size-3 has-text-weight-bold is-bold-light">
-                                {title}
-                            </h2>
-                            <PageContent
-                                className="content"
-                                content={content}
-                            />
-                            <Diseases />
-                            <div>{footerText}</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <h2 className="">{title}</h2>
+            <PageContent className="content" content={content} />
+            <Diseases />
+            <div>{footerText}</div>
         </section>
     );
 };
@@ -65,7 +52,7 @@ const DiseaseCatalog = ({ data }: QueryResult) => {
     return (
         <Layout>
             <DiseaseCatalogTemplate
-                contentComponent={HTMLContent} 
+                contentComponent={HTMLContent}
                 title={post.frontmatter.title}
                 content={post.html}
                 footerText={post.frontmatter.footer_text}

@@ -33,7 +33,9 @@ const ParentalLineModal = (props: ParentalLineModalProps) => {
     );
     return (
         <>
-            <Button onClick={showModal}>{props.cellLineId}</Button>
+            <Button onClick={showModal} >
+                {props.cellLineId} {<InfoCircleOutlined />}
+            </Button>
             <Modal
                 title={headerElement}
                 open={isModalOpen}
@@ -48,7 +50,6 @@ const ParentalLineModal = (props: ParentalLineModalProps) => {
                             style={{ width: 480, border: "2px solid #003075" }}
                             href="https://www.allencell.org/cell-catalog.html"
                             target="_blank"
-                            icon={(<InfoCircleOutlined />)}
                         >
                             More information
                         </Button>
