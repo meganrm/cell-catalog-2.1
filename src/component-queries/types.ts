@@ -26,6 +26,7 @@ export interface DiseaseCellLineFrontmatter {
     clones: string;
     certificate_of_analysis: string;
     order_link: string;
+    status: string;
 }
 
 export interface DiseaseCellLineEdge {
@@ -43,5 +44,6 @@ export interface DiseaseFrontmatter {
     gene: {
         frontmatter: GeneFrontMatter;
     };
+    status: string;
     acknowledgements: string;
 }

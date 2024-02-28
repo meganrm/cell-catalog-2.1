@@ -1,7 +1,15 @@
+.body {
+  font-family: "Open Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
+
 .body p {
     font-size: 20px;
     font-weight: 400;
     line-height: 32px;
+    color: #00215F;
 }
 
 .body h2 {
@@ -16,3 +24,4 @@
     color: #00215f;
     font-size: 24px;
 }
+

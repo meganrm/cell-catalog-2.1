@@ -16,7 +16,6 @@ const LIGHT_BLUE = "#E5E9F1";
 const DARK_GRAY = "#CBCBCC";
 const LIGHT_GRAY = "#323233";
 
-
 const TemplateWrapper = ({ children }: React.PropsWithChildren) => {
     const { title, description } = useSiteMetadata();
     return (
@@ -46,14 +45,20 @@ const TemplateWrapper = ({ children }: React.PropsWithChildren) => {
                         primaryColor: DARK_BLUE,
                         colorPrimaryBorder: DARK_BLUE,
                         primaryShadow: "none",
+                        defaultGhostColor: DARK_BLUE,
+                        defaultHoverBorderColor: DARK_BLUE,
                     },
                     Table: {
                         headerColor: LIGHT_GRAY,
                         borderColor: DARK_GRAY,
                         headerBg: WHITE,
+                        cellFontSize: 16,
                     },
                     Descriptions: {
                         itemPaddingBottom: 0,
+                    },
+                    Tag: {
+                        defaultColor: DARK_BLUE,
                     },
                 },
             }}
@@ -86,6 +91,15 @@ const TemplateWrapper = ({ children }: React.PropsWithChildren) => {
                     href={`${withPrefix("/")}img/safari-pinned-tab.svg`}
                     color="#ff4400"
                 />
+                <link
+                    rel="preconnect"
+                    href="https://fonts.googleapis.com"
+                ></link>
+                <link rel="preconnect" href="https://fonts.gstatic.com"></link>
+                <link
+                    href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
+                    rel="stylesheet"
+                ></link>
                 <meta name="theme-color" content="#fff" />
 
                 <meta property="og:type" content="business.business" />

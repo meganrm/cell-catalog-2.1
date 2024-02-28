@@ -1,7 +1,6 @@
 import React from "react";
-import { Table, Typography } from "antd";
+import { Table, Tag, Flex, Button } from "antd";
 
-const { Title } = Typography;
 
 import Content from "./Content";
 import { UnpackedDiseaseCellLine } from "../component-queries/DiseaseCellLines";
@@ -11,24 +10,34 @@ import {
     tableTitle,
     container,
     footerContainer,
+    snpColumn,
 } from "./disease-table.module.css";
 
 interface DiseaseTableProps {
     diseaseName: string;
     diseaseCellLines: UnpackedDiseaseCellLine[];
     acknowledgements: string;
+    status: string;
 }
 
 const DiseaseTable = ({
     diseaseName,
     diseaseCellLines,
     acknowledgements,
+    status
 }: DiseaseTableProps) => {
     return (
         <Table
             key={diseaseName}
             className={container}
-            title={() => <h3 className={tableTitle}>{diseaseName}</h3>}
+            title={() => (
+                <Flex>
+                    <h3 className={tableTitle}>{diseaseName}</h3>
+                    {status === "Coming soon" ? (
+                        <Tag color="#00215F">{status}</Tag>
+                    ) : null}
+                </Flex>
+            )}
             pagination={false}
             columns={[
                 {
@@ -40,7 +49,12 @@ const DiseaseTable = ({
                         <h4>{formatCellLineId(cell_line_id)}</h4>
                     ),
                 },
-                { title: "SNP", key: "snp", dataIndex: "snp" },
+                {
+                    title: "SNP",
+                    key: "snp",
+                    dataIndex: "snp",
+                    className: snpColumn,
+                },
                 {
                     title: "Gene symbol & name",
                     width: 280,
@@ -53,11 +67,29 @@ const DiseaseTable = ({
                     dataIndex: "parentalLine",
                 },
                 { title: "Clones", key: "clones", dataIndex: "clones" },
-                { title: "", key: "order_link", dataIndex: "order_link" },
+                {
+                    title: "",
+                    key: "order_link",
+                    dataIndex: "order_link",
+                    render: (order_link) => (
+                        <Button ghost href={order_link}>
+                            Obtain Line
+                        </Button>
+                    ),
+                },
                 {
                     title: "",
                     key: "certificate_of_analysis",
                     dataIndex: "certificate_of_analysis",
+                    render: (certificate_of_analysis) => (
+                        <Button
+                            ghost
+                            href={certificate_of_analysis}
+                            target="_blank"
+                        >
+                            Cert. of Analysis
+                        </Button>
+                    ),
                 },
             ]}
             dataSource={diseaseCellLines}

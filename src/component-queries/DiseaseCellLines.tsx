@@ -1,6 +1,6 @@
 import React from "react";
 import { graphql, StaticQuery } from "gatsby";
-import { DescriptionsProps, Tag } from "antd";
+import { Flex, Tag } from "antd";
 
 import DiseaseTable from "../components/DiseaseTable";
 import { UnpackedDisease } from "./Diseases";
@@ -70,10 +70,10 @@ const groupLines = (
             return acc;
         }
         cellLineData.diseaseGene = (
-            <>
-                <Tag>{diseaseData.geneSymbol}</Tag>
+            <Flex>
+                <Tag bordered={false} color="#F2F2F2">{diseaseData.geneSymbol}</Tag>
                 <div>{diseaseData.geneName}</div>
-            </>
+            </Flex>
         );
         const parentalLine = cellLineData.parental_line.frontmatter;
         const parentalLineItems = getParentalLineItems(parentalLine);
@@ -107,20 +107,31 @@ const DiseaseCellLineTemplate = (props: DiseaseCellLineTemplateProps) => {
     const { edges: cellLines } = props.data.allMarkdownRemark;
     const { diseases } = props;
     const groupedCellLines = groupLines(diseases, cellLines);
-    return diseases.map((disease) => {
-        if (!groupedCellLines[disease.name].length) {
-            return null;
-        }
-        return (
-            <div key={disease.name}>
-                <DiseaseTable
-                    diseaseName={disease.name}
-                    diseaseCellLines={groupedCellLines[disease.name]}
-                    acknowledgements={disease.acknowledgements}
-                />
-            </div>
-        );
-    });
+    return diseases
+        .sort((a, b) => {
+            if (a.status === "Coming soon") {
+                return 1;
+            } else if (b.status === "Coming soon") {
+                return -1;
+            } else {
+                return 0;
+            }
+        })
+        .map((disease) => {
+            if (!groupedCellLines[disease.name].length) {
+                return null;
+            }
+            return (
+                <div key={disease.name}>
+                    <DiseaseTable
+                        diseaseName={disease.name}
+                        diseaseCellLines={groupedCellLines[disease.name]}
+                        acknowledgements={disease.acknowledgements}
+                        status={disease.status}
+                    />
+                </div>
+            );
+        });
 };
 
 export default function DiseaseCellLineQuery(props: {
