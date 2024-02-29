@@ -35,7 +35,7 @@ export const DiseaseCatalogTemplate = ({
                 <PageContent className="banner-content" content={main.description} />
             </Card>
             <Diseases />
-            <div>{footerText}</div>
+            <div className="footer">{footerText}</div>
         </section>
     );
 };

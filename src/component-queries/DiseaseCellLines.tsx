@@ -77,15 +77,20 @@ const groupLines = (
         );
         const parentalLine = cellLineData.parental_line.frontmatter;
         const parentalLineItems = getParentalLineItems(parentalLine);
-        cellLineData.parentalLine = (
-            <ParentalLineModal
-                key={parentalLine.cell_line_id}
-                cellLineId={formatCellLineId(parentalLine.cell_line_id)}
-                cloneNumber={parentalLine.clone_number}
-                displayItems={parentalLineItems}
-                image={parentalLine.thumbnail_image}
-            />
-        );
+        if (diseaseData.status?.toLowerCase() === "coming soon") {
+            cellLineData.parentalLine = <>{formatCellLineId(parentalLine.cell_line_id)}</>;
+        } else {
+            cellLineData.parentalLine = (
+                <ParentalLineModal
+                    key={parentalLine.cell_line_id}
+                    cellLineId={formatCellLineId(parentalLine.cell_line_id)}
+                    cloneNumber={parentalLine.clone_number}
+                    displayItems={parentalLineItems}
+                    image={parentalLine.thumbnail_image}
+                />
+            );
+        }
+
         acc[disease].push(cellLineData);
         return acc;
     }, diseaseObj);

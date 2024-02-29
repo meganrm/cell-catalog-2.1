@@ -33,7 +33,6 @@
     font-weight: 700;
     color: #00215f;
     font-size: 24px;
-
 }
 
 .container h4 {
@@ -49,7 +48,6 @@
     margin-bottom: 16px;
     padding: 10px 16px;
 }
-
 
 .container :global(.banner .ant-card-body) {
     padding: 0;

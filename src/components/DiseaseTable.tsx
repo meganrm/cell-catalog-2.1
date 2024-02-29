@@ -1,5 +1,5 @@
 import React from "react";
-import { Table, Tag, Flex, Button } from "antd";
+import { Table, Tag, Flex } from "antd";
 
 import Content from "./Content";
 import { UnpackedDiseaseCellLine } from "../component-queries/DiseaseCellLines";
@@ -12,6 +12,7 @@ import {
     snpColumn,
     actionButton,
     clones,
+    comingSoon,
 } from "./disease-table.module.css";
 
 interface DiseaseTableProps {
@@ -27,16 +28,15 @@ const DiseaseTable = ({
     acknowledgements,
     status,
 }: DiseaseTableProps) => {
+    const inProgress = status?.toLowerCase() === "coming soon";
     return (
         <Table
             key={diseaseName}
-            className={container}
+            className={[container, inProgress ? comingSoon : ""].join(" ")}
             title={() => (
                 <Flex align="center">
                     <h3 className={tableTitle}>{diseaseName}</h3>
-                    {status === "Coming soon" ? (
-                        <Tag color="#00215F">{status}</Tag>
-                    ) : null}
+                    {inProgress ? <Tag color="#00215F">{status}</Tag> : null}
                 </Flex>
             )}
             pagination={false}
@@ -87,11 +87,17 @@ const DiseaseTable = ({
                     title: "",
                     key: "order_link",
                     dataIndex: "order_link",
-                    render: (order_link) => (
-                        <a className={actionButton} href={order_link}>
-                            Obtain Line
-                        </a>
-                    ),
+                    render: (order_link) => {
+                        if (inProgress) {
+                            return <>{""}</>; // still want a blank column 
+                        } else {
+                            return (
+                                <a className={actionButton} href={order_link}>
+                                    Obtain Line
+                                </a>
+                            );
+                        }
+                    },
                 },
                 {
                     title: "",

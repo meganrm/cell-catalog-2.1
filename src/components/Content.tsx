@@ -2,12 +2,12 @@ import * as React from "react";
 
 interface ContentProps {
     content: React.ReactNode;
-    className: string;
+    className?: string;
 }
 
 interface HTMLContentProps {
     content: string;
-    className: string;
+    className?: string;
 }
 
 

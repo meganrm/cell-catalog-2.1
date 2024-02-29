@@ -5,7 +5,7 @@ import { withPrefix } from "gatsby";
 const { Content } = AntLayout;
 
 import Navbar from "./Navbar";
-import "../style/index.css";
+import "../style/index.sass";
 import useSiteMetadata from "./SiteMetadata";
 import { container } from "./layout.module.css";
 
@@ -58,6 +58,8 @@ const TemplateWrapper = ({ children }: React.PropsWithChildren) => {
                         borderColor: DARK_GRAY,
                         headerBg: WHITE,
                         cellFontSize: 16,
+                        borderRadius: 4,
+                        
                     },
                     Descriptions: {
                         itemPaddingBottom: 0,
