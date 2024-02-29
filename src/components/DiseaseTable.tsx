@@ -11,6 +11,7 @@ import {
     footerContainer,
     snpColumn,
     actionButton,
+    clones,
 } from "./disease-table.module.css";
 
 interface DiseaseTableProps {
@@ -54,6 +55,14 @@ const DiseaseTable = ({
                     key: "snp",
                     dataIndex: "snp",
                     className: snpColumn,
+                    render: (snp: string) => {
+                        const snps = snp.split(":");
+                        return (<Flex wrap="wrap">
+                            {snps.map((snp) => (
+                            <span>{snp}</span>
+                        ))}
+                        </Flex>)
+                    },
                 },
                 {
                     title: "Gene symbol & name",
@@ -66,13 +75,22 @@ const DiseaseTable = ({
                     key: "parentalLine",
                     dataIndex: "parentalLine",
                 },
-                { title: "Clones", key: "clones", dataIndex: "clones" },
+                {
+                    title: "Clones",
+                    key: "clones",
+                    dataIndex: "clones",
+                    className: clones,
+                },
                 {
                     title: "",
                     key: "order_link",
                     dataIndex: "order_link",
                     render: (order_link) => (
-                        <Button className={ actionButton } ghost href={order_link}>
+                        <Button
+                            className={actionButton}
+                            ghost
+                            href={order_link}
+                        >
                             Obtain Line
                         </Button>
                     ),
