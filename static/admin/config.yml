@@ -120,11 +120,15 @@ collections:
             }
     - name: "disease-cell-line"
       label: "Disease Cell Lines"
+      label_singular: "Disease Cell Line"
       folder: "src/pages/disease-cell-line"
       create: true
-      slug: "{{cell_line_id}}"
+      slug: "AICS-{{cell_line_id}}"
+      path: "{{slug}}/index"
       identifier_field: "cell_line_id"
       summary: "AICS-{{cell_line_id}} - {{disease}}"
+      media_folder: ""
+      public_folder: ""
       fields:
           - {
                 label: "Template Key",
@@ -177,7 +181,7 @@ collections:
           - {
                 label: "Certificate of Analysis",
                 name: "certificate_of_analysis",
-                widget: "string",
+                widget: "file",
                 required: false,
             }
     - name: "gene-name"

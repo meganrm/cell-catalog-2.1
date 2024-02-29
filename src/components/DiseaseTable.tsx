@@ -1,7 +1,6 @@
 import React from "react";
 import { Table, Tag, Flex, Button } from "antd";
 
-
 import Content from "./Content";
 import { UnpackedDiseaseCellLine } from "../component-queries/DiseaseCellLines";
 import { formatCellLineId } from "../utils";
@@ -11,6 +10,7 @@ import {
     container,
     footerContainer,
     snpColumn,
+    actionButton,
 } from "./disease-table.module.css";
 
 interface DiseaseTableProps {
@@ -24,7 +24,7 @@ const DiseaseTable = ({
     diseaseName,
     diseaseCellLines,
     acknowledgements,
-    status
+    status,
 }: DiseaseTableProps) => {
     return (
         <Table
@@ -72,7 +72,7 @@ const DiseaseTable = ({
                     key: "order_link",
                     dataIndex: "order_link",
                     render: (order_link) => (
-                        <Button ghost href={order_link}>
+                        <Button className={ actionButton } ghost href={order_link}>
                             Obtain Line
                         </Button>
                     ),
@@ -81,15 +81,20 @@ const DiseaseTable = ({
                     title: "",
                     key: "certificate_of_analysis",
                     dataIndex: "certificate_of_analysis",
-                    render: (certificate_of_analysis) => (
-                        <Button
-                            ghost
-                            href={certificate_of_analysis}
-                            target="_blank"
-                        >
-                            Cert. of Analysis
-                        </Button>
-                    ),
+                    render: (certificate_of_analysis) => {
+                        return (
+                            certificate_of_analysis && (
+                                <Button
+                                    className={actionButton}
+                                    ghost
+                                    href={certificate_of_analysis.publicURL}
+                                    target="_blank"
+                                >
+                                    Cert. of Analysis
+                                </Button>
+                            )
+                        );
+                    },
                 },
             ]}
             dataSource={diseaseCellLines}
