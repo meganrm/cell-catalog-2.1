@@ -45,7 +45,7 @@
     max-width: 64px;
 }
 
-.action-button span {
+.action-button a {
     text-wrap: wrap;
     text-align: left;
 }

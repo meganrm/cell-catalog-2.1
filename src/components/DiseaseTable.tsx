@@ -57,11 +57,13 @@ const DiseaseTable = ({
                     className: snpColumn,
                     render: (snp: string) => {
                         const snps = snp.split(":");
-                        return (<Flex wrap="wrap">
-                            {snps.map((snp) => (
-                            <span>{snp}</span>
-                        ))}
-                        </Flex>)
+                        return (
+                            <Flex wrap="wrap">
+                                {snps.map((snp) => (
+                                    <span>{snp}</span>
+                                ))}
+                            </Flex>
+                        );
                     },
                 },
                 {
@@ -86,13 +88,9 @@ const DiseaseTable = ({
                     key: "order_link",
                     dataIndex: "order_link",
                     render: (order_link) => (
-                        <Button
-                            className={actionButton}
-                            ghost
-                            href={order_link}
-                        >
+                        <a className={actionButton} href={order_link}>
                             Obtain Line
-                        </Button>
+                        </a>
                     ),
                 },
                 {
@@ -102,14 +100,13 @@ const DiseaseTable = ({
                     render: (certificate_of_analysis) => {
                         return (
                             certificate_of_analysis && (
-                                <Button
+                                <a
                                     className={actionButton}
-                                    ghost
                                     href={certificate_of_analysis.publicURL}
                                     target="_blank"
                                 >
                                     Cert. of Analysis
-                                </Button>
+                                </a>
                             )
                         );
                     },
