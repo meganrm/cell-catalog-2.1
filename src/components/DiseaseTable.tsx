@@ -13,7 +13,7 @@ import {
     actionButton,
     clones,
     comingSoon,
-} from "./disease-table.module.css";
+} from "../style/disease-table.module.css";
 
 interface DiseaseTableProps {
     diseaseName: string;

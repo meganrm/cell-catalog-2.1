@@ -26,6 +26,10 @@
     border-left: 1.5px solid var(--border-color); 
 }
 
+.container :global(.ant-table-title) h3 {
+    margin: 22px 16px 22px 0;
+}
+
 .container :global(.ant-table-thead .ant-table-cell) {
     padding: 10px 16px 10px 16px;
     font-size: 14px;
@@ -99,7 +103,7 @@
 }
 
 .container.coming-soon :global(.ant-table-cell),  
-.container.coming-soon :global(.ant-table-body .ant-tag),
+.container.coming-soon :global(.ant-table-tbody .ant-tag),
 .container.coming-soon h4 {
     color: var(--disabled);
 }

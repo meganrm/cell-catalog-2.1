@@ -1,0 +1,26 @@
+.coriell-card {
+    width: 382px;
+    border: 1px solid var(--border-color)
+}
+
+.coriell-card :global(.ant-card-head) {
+    font-family: "Open Sans";
+    font-size: 24px;
+    font-weight: 600;
+    text-align: center;
+    border-bottom: none;
+}
+
+.coriell-card :global(.gatsby-image-wrapper) {
+    margin: auto;
+}
+
+.banner:global(.ant-card) {
+    border-color: #cbcbcc;
+    margin-bottom: 16px;
+    padding: 10px 16px;
+}
+
+.banner :global(.ant-card-body) {
+    padding: 0;
+}
