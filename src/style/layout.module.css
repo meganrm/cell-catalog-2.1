@@ -45,13 +45,3 @@
     font-weight: 500;
     color: #003075;
 }
-
-.container :global(.banner.ant-card) {
-    border-color: #cbcbcc;
-    margin-bottom: 16px;
-    padding: 10px 16px;
-}
-
-.container :global(.banner .ant-card-body) {
-    padding: 0;
-}

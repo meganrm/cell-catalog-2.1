@@ -7,7 +7,7 @@ const { Content } = AntLayout;
 import Navbar from "./Navbar";
 import "../style/index.sass";
 import useSiteMetadata from "./SiteMetadata";
-import { container } from "./layout.module.css";
+import { container } from "../style/layout.module.css";
 
 const OFF_WHITE = "#F2F2F2";
 const DARK_BLUE = "#00215F";

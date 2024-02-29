@@ -14,3 +14,13 @@
 .coriell-card :global(.gatsby-image-wrapper) {
     margin: auto;
 }
+
+.banner:global(.ant-card) {
+    border-color: #cbcbcc;
+    margin-bottom: 16px;
+    padding: 10px 16px;
+}
+
+.banner :global(.ant-card-body) {
+    padding: 0;
+}

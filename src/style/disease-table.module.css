@@ -103,7 +103,7 @@
 }
 
 .container.coming-soon :global(.ant-table-cell),  
-.container.coming-soon :global(.ant-table-body .ant-tag),
+.container.coming-soon :global(.ant-table-tbody .ant-tag),
 .container.coming-soon h4 {
     color: var(--disabled);
 }
