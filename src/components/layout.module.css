@@ -1,27 +1,56 @@
-.body {
-  font-family: "Open Sans", sans-serif;
-  font-optical-sizing: auto;
-  font-weight: 400;
-  font-style: normal;
+.container {
+    font-family: "Open Sans", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+    max-width: 1728px;
+    padding: 32px;
+    margin: auto;
 }
 
-.body p {
+.container p {
     font-size: 20px;
     font-weight: 400;
-    line-height: 32px;
-    color: #00215F;
+    color: #00215f;
 }
 
-.body h2 {
-    font-size: 33px;
+.container h1 {
+    font-size: 32px;
     font-weight: 400;
-    line-height: 39px;
+    font-family: "Raleway", sans-serif;
+    font-style: normal;
 }
 
-.body h3 {
+.container h2 {
+    font-family: "Open Sans", sans-serif;
+    font-size: 30px;
     font-weight: 700;
-    line-height: 33px;
+    margin: 0;
+    margin-bottom: 12px;
+}
+
+.container h3 {
+    font-weight: 700;
     color: #00215f;
     font-size: 24px;
+
 }
 
+.container h4 {
+    font-family: Raleway;
+    font-size: 20px;
+    font-weight: 500;
+    margin: 0;
+    color: #003075;
+}
+
+.container :global(.banner.ant-card) {
+    border-color: #cbcbcc;
+    margin-bottom: 16px;
+    padding: 10px 16px;
+}
+
+
+.container :global(.banner .ant-card-body) {
+    padding: 0;
+}

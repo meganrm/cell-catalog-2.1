@@ -9293,6 +9293,13 @@ gatsby-remark-images@^7.13.1:
     unist-util-select "^3.0.4"
     unist-util-visit-parents "^3.1.1"
 
+gatsby-remark-line-breaks@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/gatsby-remark-line-breaks/-/gatsby-remark-line-breaks-1.0.0.tgz#60f838433acc24ddf425f4d135e12cea634bc7a3"
+  integrity sha512-chLmEttxDDLGy18nhOlfPFDmzt8EhLEnj1RSxvdtskpIS8F0M3vIhRN9J1MFB5s+19OeLzscubrjT+kK4gKrgw==
+  dependencies:
+    remark-breaks "^1.0.5"
+
 gatsby-remark-relative-images@^2.0.2:
   version "2.0.5"
   resolved "https://registry.yarnpkg.com/gatsby-remark-relative-images/-/gatsby-remark-relative-images-2.0.5.tgz#065bf6d928b3229d6e12ff307a68be3c19fec816"
@@ -15961,6 +15968,11 @@ relay-runtime@12.0.0:
     "@babel/runtime" "^7.0.0"
     fbjs "^3.0.0"
     invariant "^2.2.4"
+
+remark-breaks@^1.0.5:
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/remark-breaks/-/remark-breaks-1.0.5.tgz#e9785f8b174f45c05af542fbeb18354b766e1139"
+  integrity sha512-lr8+TlJI273NjEqL27eUthPYPTCgXEj4NaLbnazS3bQaQL2FySlsbtgo52gE36fE1gWeQgkn1VdmWsoT+uA7FA==
 
 remark-footnotes@^3.0.0:
   version "3.0.0"

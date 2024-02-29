@@ -322,10 +322,12 @@ collections:
                       fields:
                           [
                               { label: Heading, name: heading, widget: string },
+                              { label: Subheading, name: subheading, widget: string },
+
                               {
                                   label: Description,
                                   name: description,
-                                  widget: text,
+                                  widget: markdown,
                               },
                           ],
                   }

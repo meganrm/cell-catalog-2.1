@@ -1,5 +1,5 @@
 import React from "react";
-import PropTypes from "prop-types";
+import { Card } from "antd";
 import { graphql } from "gatsby";
 import Layout from "../components/Layout";
 import Diseases from "../component-queries/Diseases";
@@ -10,6 +10,11 @@ interface DiseaseCatalogTemplateProps {
     content: string;
     contentComponent?: JSX.ElementType;
     footerText: string;
+    main: {
+        heading: string;
+        description: string;
+        subheading: string;
+    };
 }
 // eslint-disable-next-line
 export const DiseaseCatalogTemplate = ({
@@ -17,13 +22,18 @@ export const DiseaseCatalogTemplate = ({
     content,
     contentComponent,
     footerText,
+    main
 }: DiseaseCatalogTemplateProps) => {
     const PageContent = contentComponent || Content;
-
     return (
         <section className="section section--gradient">
-            <h2 className="">{title}</h2>
+            <h1 className="">{title}</h1>
             <PageContent className="content" content={content} />
+            <h2>{main.heading}</h2>
+            <Card className={"banner"} bordered={true}>
+                <h4>{main.subheading}</h4>
+                <PageContent className="banner-content" content={main.description} />
+            </Card>
             <Diseases />
             <div>{footerText}</div>
         </section>
@@ -39,6 +49,7 @@ interface QueryResult {
                 footer_text: string;
                 main: {
                     heading: string;
+                    subheading: string;
                     description: string;
                 };
             };
@@ -56,14 +67,12 @@ const DiseaseCatalog = ({ data }: QueryResult) => {
                 title={post.frontmatter.title}
                 content={post.html}
                 footerText={post.frontmatter.footer_text}
+                main={post.frontmatter.main}
             />
         </Layout>
     );
 };
 
-DiseaseCatalog.propTypes = {
-    data: PropTypes.object.isRequired,
-};
 
 export default DiseaseCatalog;
 
@@ -76,6 +85,7 @@ export const aboutPageQuery = graphql`
                 footer_text
                 main {
                     heading
+                    subheading
                     description
                 }
             }

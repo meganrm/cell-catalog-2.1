@@ -32,7 +32,7 @@ const DiseaseTable = ({
             key={diseaseName}
             className={container}
             title={() => (
-                <Flex>
+                <Flex align="center">
                     <h3 className={tableTitle}>{diseaseName}</h3>
                     {status === "Coming soon" ? (
                         <Tag color="#00215F">{status}</Tag>

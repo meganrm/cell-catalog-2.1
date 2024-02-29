@@ -5,6 +5,7 @@
 
 .table-title {
     margin-right: 18px;
+    line-height: 0;
 }
 
 .container :global(.ant-table) {
@@ -63,14 +64,21 @@
 }
 
 .container h4 {
+    font-family: 'Open Sans', sans-serif;
     font-size: 24px;
     font-weight: 600;
-    line-height: 34px;
     color: #323233;
+    margin: 2px;
 }
 
 .container :global(.ant-table-cell .ant-tag) {
-    color: #084b9f;
+    color: #323233;
+    font-size: 14px;
+}
+
+.container :global(.ant-table-cell .ant-btn) {
+    font-weight: 600;
+    font-size: 16px;
 }
 
 .container :global(.ant-table-title .ant-tag) {
@@ -78,6 +86,7 @@
     font-size: 20px;
     font-style: italic;
     font-weight: 800;
-    line-height: 27px;
     text-transform: uppercase;
+    vertical-align: middle;
+    padding: 4px 8px;
 }
