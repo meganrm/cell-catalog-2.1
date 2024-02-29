@@ -1,5 +1,6 @@
 .coriell-card {
     width: 382px;
+    border: 1px solid var(--border-color)
 }
 
 .coriell-card :global(.ant-card-head) {

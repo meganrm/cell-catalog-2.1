@@ -6,7 +6,7 @@ import Diseases from "../component-queries/Diseases";
 import Content, { HTMLContent } from "../components/Content";
 import { GatsbyImage, getImage } from "gatsby-plugin-image";
 import { FileNode } from "gatsby-plugin-image/dist/src/components/hooks";
-import { coriellCard } from "../style/disease-catalog.module.css";
+import { header, coriellCard } from "../style/disease-catalog.module.css";
 interface DiseaseCatalogTemplateProps {
     title: string;
     content: string;
@@ -35,15 +35,20 @@ export const DiseaseCatalogTemplate = ({
     const PageContent = contentComponent || Content;
     return (
         <section className="section">
-            <Flex>
+            <Flex className={header}>
                 <div>
                     <h1 className="">{title}</h1>
                     <PageContent className="content" content={content} />
                 </div>
-                <Divider type="vertical" />
+                <Divider
+                    type="vertical"
+                    style={{ height: "initial", marginInline: "20px"}}
+                    
+                />
                 {image && (
                     <a href={coriellLink} target="_blank" rel="noreferrer">
                         <Card
+                            bordered={true}
                             className={coriellCard}
                             title="View Allen Cell Collection on"
                             cover={<GatsbyImage image={image} alt="Coriell" />}
