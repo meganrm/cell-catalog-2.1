@@ -7,6 +7,7 @@ module.exports = {
     plugins: [
         "gatsby-plugin-react-helmet",
         "gatsby-plugin-fix-fouc",
+        "gatsby-remark-line-breaks",
         {
             resolve: "gatsby-plugin-sass",
             options: {

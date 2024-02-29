@@ -15,7 +15,6 @@ It follows the [JAMstack architecture](https://jamstack.org) by using Git as a s
 - Create Cell-line posts from decap CMS
 - Tags: Separate page for posts under each tag
 - Basic directory organization
-- Uses Bulma for styling, but size is reduced by `gatsy-plugin-purgecss`
 - Blazing fast loading times thanks to pre-rendered HTML and automatic chunk loading of JS files
 - Uses `gatsby-plugin-image` with Decap CMS preview support
 - Separate components for everything
@@ -127,7 +126,7 @@ MacOS and WSL users who might also encounter some errors, check [node-gyp](https
 
 ## Purgecss
 
-This plugin uses [gatsby-plugin-purgecss](https://www.gatsbyjs.org/packages/gatsby-plugin-purgecss/) and [bulma](https://bulma.io/). The bulma builds are usually ~170K but reduced 90% by purgecss.
+This plugin uses [gatsby-plugin-purgecss](https://www.gatsbyjs.org/packages/gatsby-plugin-purgecss/).
 
 # CONTRIBUTING
 
