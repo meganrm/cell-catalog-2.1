@@ -1,10 +1,12 @@
 import React from "react";
-import { Card } from "antd";
+import { Card, Divider, Flex } from "antd";
 import { graphql } from "gatsby";
 import Layout from "../components/Layout";
 import Diseases from "../component-queries/Diseases";
 import Content, { HTMLContent } from "../components/Content";
-
+import { GatsbyImage, getImage } from "gatsby-plugin-image";
+import { FileNode } from "gatsby-plugin-image/dist/src/components/hooks";
+import { coriellCard } from "../style/disease-catalog.module.css";
 interface DiseaseCatalogTemplateProps {
     title: string;
     content: string;
@@ -15,6 +17,8 @@ interface DiseaseCatalogTemplateProps {
         description: string;
         subheading: string;
     };
+    coriellImage: FileNode;
+    coriellLink: string;
 }
 // eslint-disable-next-line
 export const DiseaseCatalogTemplate = ({
@@ -22,17 +26,38 @@ export const DiseaseCatalogTemplate = ({
     content,
     contentComponent,
     footerText,
-    main
+    main,
+    coriellImage,
+    coriellLink
 }: DiseaseCatalogTemplateProps) => {
+    console.log(coriellImage);
+    const image = getImage(coriellImage);
     const PageContent = contentComponent || Content;
     return (
-        <section className="section section--gradient">
-            <h1 className="">{title}</h1>
-            <PageContent className="content" content={content} />
+        <section className="section">
+            <Flex>
+                <div>
+                    <h1 className="">{title}</h1>
+                    <PageContent className="content" content={content} />
+                </div>
+                <Divider type="vertical" />
+                {image && (
+                    <a href={coriellLink} target="_blank" rel="noreferrer">
+                        <Card
+                            className={coriellCard}
+                            title="View Allen Cell Collection on"
+                            cover={<GatsbyImage image={image} alt="Coriell" />}
+                        ></Card>
+                    </a>
+                )}
+            </Flex>
             <h2>{main.heading}</h2>
             <Card className={"banner"} bordered={true}>
                 <h4>{main.subheading}</h4>
-                <PageContent className="banner-content" content={main.description} />
+                <PageContent
+                    className="banner-content"
+                    content={main.description}
+                />
             </Card>
             <Diseases />
             <div className="footer">{footerText}</div>
@@ -52,6 +77,8 @@ interface QueryResult {
                     subheading: string;
                     description: string;
                 };
+                coriell_image: FileNode;
+                coriell_link: string;
             };
         };
     };
@@ -59,7 +86,7 @@ interface QueryResult {
 
 const DiseaseCatalog = ({ data }: QueryResult) => {
     const { markdownRemark: post } = data;
-
+    console.log(data)
     return (
         <Layout>
             <DiseaseCatalogTemplate
@@ -68,6 +95,8 @@ const DiseaseCatalog = ({ data }: QueryResult) => {
                 content={post.html}
                 footerText={post.frontmatter.footer_text}
                 main={post.frontmatter.main}
+                coriellImage={post.frontmatter.coriell_image}
+                coriellLink={post.frontmatter.coriell_link}
             />
         </Layout>
     );
@@ -88,6 +117,16 @@ export const aboutPageQuery = graphql`
                     subheading
                     description
                 }
+                coriell_image {
+                    childImageSharp {
+                        gatsbyImageData(
+                            placeholder: BLURRED
+                            layout: FIXED
+                            width: 309
+                        )
+                    }
+                }
+                coriell_link
             }
         }
     }

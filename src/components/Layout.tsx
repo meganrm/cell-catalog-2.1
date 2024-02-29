@@ -9,7 +9,7 @@ import "../style/index.sass";
 import useSiteMetadata from "./SiteMetadata";
 import { container } from "./layout.module.css";
 
-const GRAY = "#F2F2F2";
+const OFF_WHITE = "#F2F2F2";
 const DARK_BLUE = "#00215F";
 const WHITE = "#FFFFFF";
 const LIGHT_BLUE = "#E5E9F1";
@@ -32,7 +32,7 @@ const TemplateWrapper = ({ children }: React.PropsWithChildren) => {
                 },
                 components: {
                     Layout: {
-                        bodyBg: GRAY,
+                        bodyBg: OFF_WHITE,
                     },
                     Modal: {
                         contentBg: LIGHT_BLUE,
@@ -45,8 +45,8 @@ const TemplateWrapper = ({ children }: React.PropsWithChildren) => {
                         defaultBg: DARK_GRAY,
                         defaultBorderColor: DARK_BLUE,
                         defaultHoverBg: DARK_GRAY,
-                        colorPrimary: GRAY,
-                        colorPrimaryBgHover: GRAY,
+                        colorPrimary: OFF_WHITE,
+                        colorPrimaryBgHover: OFF_WHITE,
                         primaryColor: DARK_BLUE,
                         colorPrimaryBorder: DARK_BLUE,
                         primaryShadow: "none",
