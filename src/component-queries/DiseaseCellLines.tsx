@@ -70,7 +70,7 @@ const groupLines = (
             return acc;
         }
         cellLineData.diseaseGene = (
-            <Flex>
+            <Flex wrap="wrap">
                 <Tag bordered={false} color="#F2F2F2">{diseaseData.geneSymbol}</Tag>
                 <div>{diseaseData.geneName}</div>
             </Flex>
