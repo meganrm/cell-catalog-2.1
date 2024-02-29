@@ -38,20 +38,10 @@
 
 .snp-column {
     max-width: 380px;
-    text-wrap: balance;
 }
 
 .action-button {
     max-width: 64px;
-}
-
-.action-button a {
-    text-wrap: wrap;
-    text-align: left;
-}
-
-.clones {
-    text-wrap: balance;
 }
 
 .container :global(.ant-table-footer) {

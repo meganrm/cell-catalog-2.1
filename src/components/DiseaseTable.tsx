@@ -1,7 +1,6 @@
 import React from "react";
 import { Table, Tag, Flex, Button } from "antd";
 
-
 import Content from "./Content";
 import { UnpackedDiseaseCellLine } from "../component-queries/DiseaseCellLines";
 import { formatCellLineId } from "../utils";
@@ -11,6 +10,8 @@ import {
     container,
     footerContainer,
     snpColumn,
+    actionButton,
+    clones,
 } from "./disease-table.module.css";
 
 interface DiseaseTableProps {
@@ -24,7 +25,7 @@ const DiseaseTable = ({
     diseaseName,
     diseaseCellLines,
     acknowledgements,
-    status
+    status,
 }: DiseaseTableProps) => {
     return (
         <Table
@@ -54,6 +55,16 @@ const DiseaseTable = ({
                     key: "snp",
                     dataIndex: "snp",
                     className: snpColumn,
+                    render: (snp: string) => {
+                        const snps = snp.split(":");
+                        return (
+                            <Flex wrap="wrap">
+                                {snps.map((snp) => (
+                                    <span>{snp}</span>
+                                ))}
+                            </Flex>
+                        );
+                    },
                 },
                 {
                     title: "Gene symbol & name",
@@ -66,30 +77,39 @@ const DiseaseTable = ({
                     key: "parentalLine",
                     dataIndex: "parentalLine",
                 },
-                { title: "Clones", key: "clones", dataIndex: "clones" },
+                {
+                    title: "Clones",
+                    key: "clones",
+                    dataIndex: "clones",
+                    className: clones,
+                },
                 {
                     title: "",
                     key: "order_link",
                     dataIndex: "order_link",
                     render: (order_link) => (
-                        <Button ghost href={order_link}>
+                        <a className={actionButton} href={order_link}>
                             Obtain Line
-                        </Button>
+                        </a>
                     ),
                 },
                 {
                     title: "",
                     key: "certificate_of_analysis",
                     dataIndex: "certificate_of_analysis",
-                    render: (certificate_of_analysis) => (
-                        <Button
-                            ghost
-                            href={certificate_of_analysis}
-                            target="_blank"
-                        >
-                            Cert. of Analysis
-                        </Button>
-                    ),
+                    render: (certificate_of_analysis) => {
+                        return (
+                            certificate_of_analysis && (
+                                <a
+                                    className={actionButton}
+                                    href={certificate_of_analysis.publicURL}
+                                    target="_blank"
+                                >
+                                    Cert. of Analysis
+                                </a>
+                            )
+                        );
+                    },
                 },
             ]}
             dataSource={diseaseCellLines}

@@ -24,6 +24,9 @@ const TemplateWrapper = ({ children }: React.PropsWithChildren) => {
                 token: {
                     colorPrimary: DARK_BLUE,
                     colorBgContainer: WHITE,
+                    colorLink: DARK_BLUE,
+                    colorLinkActive: DARK_BLUE,
+                    colorLinkHover: DARK_BLUE,
                 },
                 components: {
                     Layout: {
