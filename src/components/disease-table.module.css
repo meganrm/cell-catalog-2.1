@@ -79,7 +79,7 @@
 
 
 .container :global(.ant-table-cell .ant-tag) {
-    color: var(--BLACK);;
+    color: var(--BLACK);
     font-size: 14px;
 }
 
@@ -99,7 +99,7 @@
 }
 
 .container.coming-soon :global(.ant-table-cell),  
-.container.coming-soon :global(.ant-tag),
+.container.coming-soon :global(.ant-table-body .ant-tag),
 .container.coming-soon h4 {
     color: var(--disabled);
 }
