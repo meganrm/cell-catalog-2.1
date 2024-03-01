@@ -5,7 +5,7 @@ import { GatsbyImage, getImage } from "gatsby-plugin-image";
 
 import { FileNode } from "gatsby-plugin-image/dist/src/components/hooks";
 import { DescriptionsItemType } from "antd/es/descriptions";
-import { modal, title, header, subTitle, clone } from "./modal.module.css";
+import { modal, title, header, subTitle, clone } from "../style/modal.module.css";
 
 interface ParentalLineModalProps {
     displayItems: DescriptionsItemType[];

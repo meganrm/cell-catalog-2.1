@@ -11,18 +11,6 @@ const Navbar = () => {
       aria-label="main-navigation"
     >
       <div className="container">
-        <div className="navbar-brand">
-          {/* Hamburger menu */}
-          <button
-            className={`navbar-burger burger ${isActive && "is-active"}`}
-            aria-expanded={isActive}
-            onClick={() => setIsActive(!isActive)}
-          >
-            <span />
-            <span />
-            <span />
-          </button>
-        </div>
         <ul
           id="navMenu"
           className={` navbar-start has-text-centered navbar-menu ${
