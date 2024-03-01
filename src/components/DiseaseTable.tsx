@@ -66,7 +66,7 @@ const DiseaseTable = ({
                     },
                 },
                 {
-                    title: "Gene symbol & name",
+                    title: "Gene Symbol & Name",
                     width: 280,
                     key: "diseaseGene",
                     dataIndex: "diseaseGene",
