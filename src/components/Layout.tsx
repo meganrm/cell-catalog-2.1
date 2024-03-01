@@ -42,7 +42,7 @@ const TemplateWrapper = ({ children }: React.PropsWithChildren) => {
                     },
                     Button: {
                         defaultColor: DARK_BLUE,
-                        defaultBg: DARK_GRAY,
+                        defaultBg: OFF_WHITE,
                         defaultBorderColor: DARK_BLUE,
                         defaultHoverBg: DARK_GRAY,
                         colorPrimary: OFF_WHITE,

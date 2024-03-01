@@ -69,17 +69,12 @@ const ParentalLineModal = (props: ParentalLineModalProps) => {
                         column={1}
                         items={props.displayItems}
                         layout="horizontal"
-                        style={{
-                            margin: "auto",
-                        }}
                         colon={false}
                         labelStyle={{
-                            height: "48px",
                             alignItems: "center",
                             width: "142px",
                         }}
                         contentStyle={{
-                            height: "48px",
                             alignItems: "center",
                         }}
                     />

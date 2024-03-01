@@ -7,9 +7,9 @@ import Content, { HTMLContent } from "../components/Content";
 import { GatsbyImage, getImage } from "gatsby-plugin-image";
 import { FileNode } from "gatsby-plugin-image/dist/src/components/hooks";
 import {
-    container,
     coriellCard,
     banner,
+    bannerContent,
     header
 } from "../style/disease-catalog.module.css";
 interface DiseaseCatalogTemplateProps {
@@ -39,7 +39,7 @@ export const DiseaseCatalogTemplate = ({
     const image = getImage(coriellImage);
     const PageContent = contentComponent || Content;
     return (
-        <section className={container}>
+        <section>
             <Flex className={header}>
                 <div>
                     <h1 className="">{title}</h1>
@@ -47,25 +47,28 @@ export const DiseaseCatalogTemplate = ({
                 </div>
                 <Divider
                     type="vertical"
-                    style={{ height: "initial", marginInline: "20px"}}
-                    
+                    style={{ height: "initial", marginInline: "20px" }}
                 />
-                {image && (
-                    <a href={coriellLink} target="_blank" rel="noreferrer">
-                        <Card
-                            bordered={true}
-                            className={coriellCard}
-                            title="View Allen Cell Collection on"
-                            cover={<GatsbyImage image={image} alt="Coriell" />}
-                        ></Card>
-                    </a>
-                )}
+                <div>
+                    {image && (
+                        <a href={coriellLink} target="_blank" rel="noreferrer">
+                            <Card
+                                bordered={true}
+                                className={coriellCard}
+                                title="View Allen Cell Collection on"
+                                cover={
+                                    <GatsbyImage image={image} alt="Coriell" />
+                                }
+                            ></Card>
+                        </a>
+                    )}
+                </div>
             </Flex>
             <h2>{main.heading}</h2>
             <Card className={banner} bordered={true}>
                 <h4>{main.subheading}</h4>
                 <PageContent
-                    className="banner-content"
+                    className={bannerContent}
                     content={main.description}
                 />
             </Card>

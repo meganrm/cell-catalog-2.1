@@ -78,6 +78,7 @@
     padding: 8px 0;
     border-radius: 0;
     font-size: 14px;
+    font-weight: 300;
     color: var(--LIGHT_BLUE);
 }
 

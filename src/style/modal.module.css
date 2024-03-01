@@ -7,6 +7,7 @@
 .modal :global(.ant-modal-header) {
     border-bottom: 2px solid #003075;
     padding: 8px 32px;
+    border-radius: 10px 10px 0 0;
 }
 
 .modal :global(.ant-modal-body) {
@@ -17,6 +18,7 @@
     border-top: 2px solid #003075;
     padding: 16px 32px;
     border-radius: 0 0 10px 10px;
+    margin-top: 10px;
 }
 
 .modal :global(.ant-modal-close) {
@@ -24,7 +26,17 @@
 }
 
 .modal :global(.ant-descriptions-row) {
-    border-bottom: 1px solid #cbcbcc;
+    font-family: "Open Sans", sans-serif;
+    height: 46px;
+}
+
+.modal :global(.ant-descriptions-item) {
+    vertical-align: middle;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.modal :global(.ant-descriptions-row:last-child .ant-descriptions-item) {
+    border-bottom: none;
 }
 
 .modal :global(.ant-divider) {
@@ -40,10 +52,10 @@
     font-style: italic;
     font-weight: 600;
     display: inline-block;
-    color: #323233;
+    color: var(--BLACK);
 }
 
-.subTitle {
+.sub-title {
     display: inline-block;
     font-size: 24px;
     font-weight: 700;

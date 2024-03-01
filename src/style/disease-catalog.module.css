@@ -1,6 +1,11 @@
-.header a {
-    color: #0094FF;
+.header {
+    margin-bottom: 32px;
 }
+
+.header a {
+    color: var(--link-color);
+}
+
 .coriell-card {
     width: 382px;
     border: 1px solid var(--border-color)
@@ -14,16 +19,31 @@
     border-bottom: none;
 }
 
+.coriell-card :global(.ant-card-head) {
+    color: var(--BLUE);
+    padding: 16px 0 0 0 ;
+}
+
 .coriell-card :global(.gatsby-image-wrapper) {
     margin: auto;
 }
 
+.coriell-card :global(.ant-card-body) {
+    padding: 14px;
+}
+
 .banner:global(.ant-card) {
-    border-color: #cbcbcc;
+    border-color: var(--border-color);
     margin-bottom: 16px;
-    padding: 10px 16px;
+    padding: 20px 32px;
 }
 
 .banner :global(.ant-card-body) {
     padding: 0;
+}
+
+.banner-content {
+    font-size: 16px;
+    color: var(--DARK_BLUE);
+    font-weight: 200;
 }

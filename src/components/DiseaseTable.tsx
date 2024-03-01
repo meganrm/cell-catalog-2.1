@@ -8,7 +8,6 @@ import { formatCellLineId } from "../utils";
 import {
     tableTitle,
     container,
-    footerContainer,
     snpColumn,
     actionButton,
     clones,
@@ -120,7 +119,7 @@ const DiseaseTable = ({
             ]}
             dataSource={diseaseCellLines}
             footer={() => (
-                <div className={footerContainer}>
+                <div>
                     <Content content={acknowledgements} />
                 </div>
             )}

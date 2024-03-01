@@ -11,7 +11,7 @@
 .container p {
     font-size: 20px;
     font-weight: 400;
-    color: #00215f;
+    color: var(--BLACK);
     
 }
 
@@ -35,7 +35,7 @@
 
 .container h3 {
     font-weight: 700;
-    color: #00215f;
+    color: var(--DARK_BLUE);
     font-size: 24px;
 }
 
@@ -43,5 +43,5 @@
     font-family: Raleway;
     font-size: 20px;
     font-weight: 500;
-    color: #003075;
+    color: var(--BLUE);
 }
