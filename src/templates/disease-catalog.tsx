@@ -10,7 +10,8 @@ import {
     coriellCard,
     banner,
     bannerContent,
-    header
+    header,
+    mainHeading,
 } from "../style/disease-catalog.module.css";
 interface DiseaseCatalogTemplateProps {
     title: string;
@@ -64,7 +65,7 @@ export const DiseaseCatalogTemplate = ({
                     )}
                 </div>
             </Flex>
-            <h2>{main.heading}</h2>
+            <h2 className={mainHeading}>{main.heading}</h2>
             <Card className={banner} bordered={true}>
                 <h4>{main.subheading}</h4>
                 <PageContent

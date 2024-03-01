@@ -32,6 +32,10 @@
     padding: 14px;
 }
 
+.main-heading {
+    color: var(--DARK_BLUE)
+}
+
 .banner:global(.ant-card) {
     border-color: var(--border-color);
     margin-bottom: 16px;
