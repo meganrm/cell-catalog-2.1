@@ -113,15 +113,7 @@ const DiseaseCellLineTemplate = (props: DiseaseCellLineTemplateProps) => {
     const { diseases } = props;
     const groupedCellLines = groupLines(diseases, cellLines);
     return diseases
-        .sort((a, b) => {
-            if (a.status === "Coming soon") {
-                return 1;
-            } else if (b.status === "Coming soon") {
-                return -1;
-            } else {
-                return 0;
-            }
-        })
+ 
         .map((disease) => {
             if (!groupedCellLines[disease.name].length) {
                 return null;

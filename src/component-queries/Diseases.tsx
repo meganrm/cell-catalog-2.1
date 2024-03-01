@@ -30,16 +30,27 @@ export interface UnpackedDisease {
 const DiseaseTemplate = (props: QueryResult) => {
     const { edges: diseases } = props.data.allMarkdownRemark;
 
-    const unpackedDiseases = diseases.map(({ node: disease }) => {
-        const { name, gene, acknowledgements, status } = disease.frontmatter;
-        return {
-            name,
-            geneSymbol: gene.frontmatter.symbol,
-            geneName: gene.frontmatter.name,
-            acknowledgements,
-            status
-        };
-    });
+    const unpackedDiseases = diseases
+        .map(({ node: disease }) => {
+            const { name, gene, acknowledgements, status } =
+                disease.frontmatter;
+            return {
+                name,
+                geneSymbol: gene.frontmatter.symbol,
+                geneName: gene.frontmatter.name,
+                acknowledgements,
+                status,
+            };
+        })
+        .sort((a, b) => {
+            if (a.status === "Coming soon") {
+                return 1;
+            } else if (b.status === "Coming soon") {
+                return -1;
+            } else {
+                return a.name.localeCompare(b.name);
+            }
+        });
     return (
         <DiseaseCellLineQuery
             diseases={unpackedDiseases as UnpackedDisease[]}
