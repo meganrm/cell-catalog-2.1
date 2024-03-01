@@ -1,3 +1,6 @@
+.header a {
+    color: #0094FF;
+}
 .coriell-card {
     width: 382px;
     border: 1px solid var(--border-color)

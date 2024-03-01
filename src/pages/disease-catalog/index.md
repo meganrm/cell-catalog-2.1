@@ -14,6 +14,6 @@ footer_text: All cell lines were originally generated using the WTC-11 hiPS cell
   coverage) for the WTC-11 line on the Genomics page. The donor of the WTC line
   has consented to the sharing of this data.
 ---
-The Disease Collection Cell Catalog is a growing compilation of cell lines that carry mutations in genes known to cause disease. These cell lines were created by introducing a point mutation in one of the fluorescently tagged WTC-11 clonal lines from the Allen Cell Collection.
+The Disease Collection Cell Catalog is a growing compilation of cell lines that carry mutations in genes known to cause disease. These cell lines were created by introducing a point mutation in one of the fluorescently tagged WTC-11 clonal lines from the [Allen Cell Collection](https://www.allencell.org/cell-catalog.html).
 
-Subscribe to our newsletter to stay informed of frequently released new cell lines.
+[Subscribe to our newsletter](https://secure2.convio.net/allins/site/SPageServer/?pagename=sign_up_newsletter) to stay informed of frequently released new cell lines.
