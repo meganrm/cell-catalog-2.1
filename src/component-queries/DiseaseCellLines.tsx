@@ -70,22 +70,27 @@ const groupLines = (
             return acc;
         }
         cellLineData.diseaseGene = (
-            <Flex>
+            <Flex wrap="wrap">
                 <Tag bordered={false} color="#F2F2F2">{diseaseData.geneSymbol}</Tag>
                 <div>{diseaseData.geneName}</div>
             </Flex>
         );
         const parentalLine = cellLineData.parental_line.frontmatter;
         const parentalLineItems = getParentalLineItems(parentalLine);
-        cellLineData.parentalLine = (
-            <ParentalLineModal
-                key={parentalLine.cell_line_id}
-                cellLineId={formatCellLineId(parentalLine.cell_line_id)}
-                cloneNumber={parentalLine.clone_number}
-                displayItems={parentalLineItems}
-                image={parentalLine.thumbnail_image}
-            />
-        );
+        if (diseaseData.status?.toLowerCase() === "coming soon") {
+            cellLineData.parentalLine = <>{formatCellLineId(parentalLine.cell_line_id)}</>;
+        } else {
+            cellLineData.parentalLine = (
+                <ParentalLineModal
+                    key={parentalLine.cell_line_id}
+                    cellLineId={formatCellLineId(parentalLine.cell_line_id)}
+                    cloneNumber={parentalLine.clone_number}
+                    displayItems={parentalLineItems}
+                    image={parentalLine.thumbnail_image}
+                />
+            );
+        }
+
         acc[disease].push(cellLineData);
         return acc;
     }, diseaseObj);
@@ -108,15 +113,7 @@ const DiseaseCellLineTemplate = (props: DiseaseCellLineTemplateProps) => {
     const { diseases } = props;
     const groupedCellLines = groupLines(diseases, cellLines);
     return diseases
-        .sort((a, b) => {
-            if (a.status === "Coming soon") {
-                return 1;
-            } else if (b.status === "Coming soon") {
-                return -1;
-            } else {
-                return 0;
-            }
-        })
+ 
         .map((disease) => {
             if (!groupedCellLines[disease.name].length) {
                 return null;
@@ -184,7 +181,9 @@ export default function DiseaseCellLineQuery(props: {
                                     disease
                                     snp
                                     clones
-                                    certificate_of_analysis
+                                    certificate_of_analysis {
+                                        publicURL    
+                                    }
                                     order_link
                                 }
                             }

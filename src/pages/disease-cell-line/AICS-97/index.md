@@ -8,5 +8,4 @@ parental_line: 75
 status: done
 clones: 3 mutant clones; 2 isogenic controls
 order_link: test
-certificate_of_analysis: test
 ---

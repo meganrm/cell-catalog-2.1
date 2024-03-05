@@ -5,11 +5,11 @@ import { withPrefix } from "gatsby";
 const { Content } = AntLayout;
 
 import Navbar from "./Navbar";
-import "../style/bulma-style.sass";
+import "../style/index.sass";
 import useSiteMetadata from "./SiteMetadata";
-import { body } from "./layout.module.css";
+import { container } from "../style/layout.module.css";
 
-const GRAY = "#F2F2F2";
+const OFF_WHITE = "#F2F2F2";
 const DARK_BLUE = "#00215F";
 const WHITE = "#FFFFFF";
 const LIGHT_BLUE = "#E5E9F1";
@@ -24,10 +24,15 @@ const TemplateWrapper = ({ children }: React.PropsWithChildren) => {
                 token: {
                     colorPrimary: DARK_BLUE,
                     colorBgContainer: WHITE,
+                    colorLink: DARK_BLUE,
+                    colorLinkActive: DARK_BLUE,
+                    colorLinkHover: DARK_BLUE,
+                    borderRadius: 4,
+                    colorBorder: DARK_GRAY,
                 },
                 components: {
                     Layout: {
-                        bodyBg: GRAY,
+                        bodyBg: OFF_WHITE,
                     },
                     Modal: {
                         contentBg: LIGHT_BLUE,
@@ -37,11 +42,11 @@ const TemplateWrapper = ({ children }: React.PropsWithChildren) => {
                     },
                     Button: {
                         defaultColor: DARK_BLUE,
-                        defaultBg: DARK_GRAY,
+                        defaultBg: OFF_WHITE,
                         defaultBorderColor: DARK_BLUE,
                         defaultHoverBg: DARK_GRAY,
-                        colorPrimary: GRAY,
-                        colorPrimaryBgHover: GRAY,
+                        colorPrimary: OFF_WHITE,
+                        colorPrimaryBgHover: OFF_WHITE,
                         primaryColor: DARK_BLUE,
                         colorPrimaryBorder: DARK_BLUE,
                         primaryShadow: "none",
@@ -53,12 +58,18 @@ const TemplateWrapper = ({ children }: React.PropsWithChildren) => {
                         borderColor: DARK_GRAY,
                         headerBg: WHITE,
                         cellFontSize: 16,
+                        borderRadius: 4,
+                        
                     },
                     Descriptions: {
                         itemPaddingBottom: 0,
                     },
                     Tag: {
                         defaultColor: DARK_BLUE,
+                    },
+                    Card: {
+                        colorBorder: DARK_GRAY,
+                        lineWidth: 1.5,
                     },
                 },
             }}
@@ -100,6 +111,15 @@ const TemplateWrapper = ({ children }: React.PropsWithChildren) => {
                     href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
                     rel="stylesheet"
                 ></link>
+                <link
+                    rel="preconnect"
+                    href="https://fonts.googleapis.com"
+                ></link>
+                <link rel="preconnect" href="https://fonts.gstatic.com"></link>
+                <link
+                    href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap"
+                    rel="stylesheet"
+                ></link>
                 <meta name="theme-color" content="#fff" />
 
                 <meta property="og:type" content="business.business" />
@@ -110,7 +130,7 @@ const TemplateWrapper = ({ children }: React.PropsWithChildren) => {
                     content={`${withPrefix("/")}img/og-image.jpg`}
                 />
             </Helmet>
-            <AntLayout className={body}>
+            <AntLayout className={container}>
                 <Navbar />
                 <Content>{children}</Content>
             </AntLayout>

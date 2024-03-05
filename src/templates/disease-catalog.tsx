@@ -1,15 +1,30 @@
 import React from "react";
-import PropTypes from "prop-types";
+import { Card, Divider, Flex } from "antd";
 import { graphql } from "gatsby";
 import Layout from "../components/Layout";
 import Diseases from "../component-queries/Diseases";
 import Content, { HTMLContent } from "../components/Content";
-
+import { GatsbyImage, getImage } from "gatsby-plugin-image";
+import { FileNode } from "gatsby-plugin-image/dist/src/components/hooks";
+import {
+    coriellCard,
+    banner,
+    bannerContent,
+    header,
+    mainHeading,
+} from "../style/disease-catalog.module.css";
 interface DiseaseCatalogTemplateProps {
     title: string;
     content: string;
     contentComponent?: JSX.ElementType;
     footerText: string;
+    main: {
+        heading: string;
+        description: string;
+        subheading: string;
+    };
+    coriellImage: FileNode;
+    coriellLink: string;
 }
 // eslint-disable-next-line
 export const DiseaseCatalogTemplate = ({
@@ -17,15 +32,49 @@ export const DiseaseCatalogTemplate = ({
     content,
     contentComponent,
     footerText,
+    main,
+    coriellImage,
+    coriellLink
 }: DiseaseCatalogTemplateProps) => {
+    console.log(coriellImage);
+    const image = getImage(coriellImage);
     const PageContent = contentComponent || Content;
-
     return (
-        <section className="section section--gradient">
-            <h2 className="">{title}</h2>
-            <PageContent className="content" content={content} />
+        <section>
+            <Flex className={header}>
+                <div>
+                    <h1 className="">{title}</h1>
+                    <PageContent className="content" content={content} />
+                </div>
+                <Divider
+                    type="vertical"
+                    style={{ height: "initial", marginInline: "20px" }}
+                />
+                <div>
+                    {image && (
+                        <a href={coriellLink} target="_blank" rel="noreferrer">
+                            <Card
+                                bordered={true}
+                                className={coriellCard}
+                                title="View Allen Cell Collection on"
+                                cover={
+                                    <GatsbyImage image={image} alt="Coriell" />
+                                }
+                            ></Card>
+                        </a>
+                    )}
+                </div>
+            </Flex>
+            <h2 className={mainHeading}>{main.heading}</h2>
+            <Card className={banner} bordered={true}>
+                <h4>{main.subheading}</h4>
+                <PageContent
+                    className={bannerContent}
+                    content={main.description}
+                />
+            </Card>
             <Diseases />
-            <div>{footerText}</div>
+            <div className="footer">{footerText}</div>
         </section>
     );
 };
@@ -39,8 +88,11 @@ interface QueryResult {
                 footer_text: string;
                 main: {
                     heading: string;
+                    subheading: string;
                     description: string;
                 };
+                coriell_image: FileNode;
+                coriell_link: string;
             };
         };
     };
@@ -48,7 +100,7 @@ interface QueryResult {
 
 const DiseaseCatalog = ({ data }: QueryResult) => {
     const { markdownRemark: post } = data;
-
+    console.log(data)
     return (
         <Layout>
             <DiseaseCatalogTemplate
@@ -56,14 +108,14 @@ const DiseaseCatalog = ({ data }: QueryResult) => {
                 title={post.frontmatter.title}
                 content={post.html}
                 footerText={post.frontmatter.footer_text}
+                main={post.frontmatter.main}
+                coriellImage={post.frontmatter.coriell_image}
+                coriellLink={post.frontmatter.coriell_link}
             />
         </Layout>
     );
 };
 
-DiseaseCatalog.propTypes = {
-    data: PropTypes.object.isRequired,
-};
 
 export default DiseaseCatalog;
 
@@ -76,8 +128,19 @@ export const aboutPageQuery = graphql`
                 footer_text
                 main {
                     heading
+                    subheading
                     description
                 }
+                coriell_image {
+                    childImageSharp {
+                        gatsbyImageData(
+                            placeholder: BLURRED
+                            layout: FIXED
+                            width: 309
+                        )
+                    }
+                }
+                coriell_link
             }
         }
     }

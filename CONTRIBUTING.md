@@ -1,22 +1,38 @@
-# CONTRIBUTING
+# Contributing to Allen Institute for Cell Science Open Source
 
-Contributions are always welcome, no matter how large or small. Before contributing,
-please read the [code of conduct](CODE_OF_CONDUCT.md).
+Thank you for your interest in contributing to this Allen Institute for Cell Science open source project! This document is
+a set of guidelines to help you contribute to this project.
 
-## Setup
+## Code of Conduct
 
-> Install yarn on your system: [https://yarnpkg.com/en/docs/install](https://yarnpkg.com/en/docs/install)
+By participating in this project, you are expected to uphold our [Code of
+Conduct][code_of_conduct].
+
+[code_of_conduct]: CODE_OF_CONDUCT.md
+
+## Project Documentation
+
+The `README` in the root of the repository should contain or link to
+project documentation. If you cannot find the documentation you're
+looking for, please file a GitHub issue with details of what
+you'd like to see documented.
+
+___
+
+## How to Contribute
+
+1. Fork the repo on GitHub.
+2. Create a branch and make your edits on your branch, pushing back to your fork.
+3. Make sure `npm run typeCheck`, `npm run test` and `npm run lint` all exit without errors. Add tests and documentation as needed.
+4. Submit a pull request back to the main branch via GitHub.
+
+
 
 ### Install dependencies
 
 > Only required on the first run, subsequent runs can use `yarn` to both
 bootstrap and run the development server using `yarn develop`.
 Since this starter using the [netlify-dev](https://www.netlify.com/products/dev/#how-it-works), there could be further issues you, please check the [netlify-dev](https://github.com/netlify/netlify-dev) repository for further information and set up questions. 
-
-```sh
-$ git clone https://github.com/decaporg/gatsby-starter-decap-cms
-$ yarn 
-```
 
 ## Available scripts
 
@@ -41,61 +57,51 @@ Runs `gatsby clean` command.
 yarn clean
 ```
 
-### `netlify dev`
 
-Starts the netlify dev environment, including the gatsby dev environment.
-For more infor check the [Netlify Dev Docs](https://github.com/netlify/cli/blob/master/docs/netlify-dev.md)
+## Access Locally
 
-```sh
-netlify dev
+Pulldown a local copy of the Github repository Netlify created for you, with the name you specified in the previous step
+
 ```
-
-### `develop` or `start`
-
-Runs the `clean` script and starts the gatsby develop server using the command `gatsby develop`. We recomend using this command when you don't need Netlify specific features
-
-#### Usage
-
-```sh
-yarn develop
-```
-### `test`
-
-Not implmented yet
-
-#### Usage
-
-```sh
-yarn test
-```
-
-### `format`
-
-Formats code and docs according to our style guidelines using `prettier`
-
-#### Usage
-
-```sh
-yarn format
+$ git clone https://github.com/[GITHUB_USERNAME]/[REPO_NAME].git
+$ cd [REPO_NAME]
+$ yarn
+$ netlify dev # or npm start
 ```
 
 
-## Pull Requests
+## Getting Started (Without Netlify)
 
-We actively welcome your pull requests!
+```
+$ npm start
+```
 
-If you need help with Git or our workflow, please ask on [Gitter.im](https://gitter.im/netlify/NetlifyCMS). We want your contributions even if you're just learning Git. Our maintainers are happy to help!
+### Setting up the CMS
 
-Netlify CMS uses the [Forking Workflow](https://www.atlassian.com/git/tutorials/comparing-workflows/forking-workflow) + [Feature Branches](https://www.atlassian.com/git/tutorials/comparing-workflows/feature-branch-workflow). Additionally, PR's should be [rebased](https://www.atlassian.com/git/tutorials/merging-vs-rebasing) on master when opened, and again before merging.
+Follow the [Decap CMS Quick Start Guide](https://www.netlifycms.org/docs/quick-start/#authentication) to set up authentication, and hosting for production.
 
-1. Fork the repo.
-2. Create a branch from `master`. If you're addressing a specific issue, prefix your branch name with the issue number.
-2. If you've added code that should be tested, add tests.
-3. If you've changed APIs, update the documentation.
-4. Run `yarn test` and ensure the test suite passes. (Not applicable yet)
-5. Use `yarn format` to format and lint your code.
-6. PR's must be rebased before merge (feel free to ask for help).
-7. PR should be reviewed by two maintainers prior to merging.
+If you want use Decap CMS locally, run the site in one terminal with `npm run start` and in another
+Terminal you can use `npx netlify-cms-proxy-server` which proxy requests so you'll be automatically logged
+in as a user on [http:localhost:3000/admin](http:localhost:3000/admin).
+
+## Debugging
+
+Windows users, who aren't using [WSL](https://docs.microsoft.com/en-us/windows/wsl/about), might encounter `node-gyp` errors when trying to npm install.
+To resolve, make sure that you have both Python 2.7 and the Visual C++ build environment installed.
+
+```
+npm config set python python2.7
+npm install --global --production windows-build-tools
+```
+
+[Full details here](https://www.npmjs.com/package/node-gyp "NPM node-gyp page").
+
+MacOS and WSL users who might also encounter some errors, check [node-gyp](https://github.com/nodejs/node-gyp) for more info. We recommend using the latest stable node version.
+
+## Purgecss
+
+This plugin uses [gatsby-plugin-purgecss](https://www.gatsbyjs.org/packages/gatsby-plugin-purgecss/).
+
 
 ## License
 
