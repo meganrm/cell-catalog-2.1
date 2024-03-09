@@ -35,6 +35,7 @@ const TemplateWrapper = ({ children }: React.PropsWithChildren) => {
                         bodyBg: OFF_WHITE,
                     },
                     Modal: {
+                        motionDurationMid: "0.1s",
                         contentBg: LIGHT_BLUE,
                         headerBg: LIGHT_BLUE,
                         footerBg: LIGHT_BLUE,
@@ -44,7 +45,7 @@ const TemplateWrapper = ({ children }: React.PropsWithChildren) => {
                         defaultColor: DARK_BLUE,
                         defaultBg: OFF_WHITE,
                         defaultBorderColor: DARK_BLUE,
-                        defaultHoverBg: DARK_GRAY,
+                        defaultHoverBg: OFF_WHITE,
                         colorPrimary: OFF_WHITE,
                         colorPrimaryBgHover: OFF_WHITE,
                         primaryColor: DARK_BLUE,

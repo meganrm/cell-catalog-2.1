@@ -63,10 +63,9 @@ const DiseaseTable = ({
                     render: (snp: string) => {
                         const snps = snp.split(":");
                         return (
-                            <Flex wrap="wrap">
-                                {snps.map((snp) => (
-                                    <span>{snp}</span>
-                                ))}
+                            <Flex vertical={true}>
+                                <span>{snps[0]}: </span>
+                                <span>{snps[1]}</span>
                             </Flex>
                         );
                     },
@@ -87,6 +86,15 @@ const DiseaseTable = ({
                     key: "clones",
                     dataIndex: "clones",
                     className: clones,
+                    render: (clones: string) => {
+                        return (
+                            <Flex vertical={true}>
+                                {clones.split(";").map((clone) => (
+                                    <span>{clone}</span>
+                                ))}
+                            </Flex>
+                        );
+                    }
                 },
                 {
                     title: "",
