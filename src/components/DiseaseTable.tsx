@@ -1,7 +1,7 @@
 import React from "react";
 import { Table, Tag, Flex } from "antd";
 
-import Content from "./Content";
+import HTMLContent from "./Content";
 import { UnpackedDiseaseCellLine } from "../component-queries/DiseaseCellLines";
 import { formatCellLineId } from "../utils";
 
@@ -88,7 +88,7 @@ const DiseaseTable = ({
                     dataIndex: "order_link",
                     render: (order_link) => {
                         if (inProgress) {
-                            return <>{""}</>; // still want a blank column 
+                            return <>{""}</>; // still want a blank column
                         } else {
                             return (
                                 <a className={actionButton} href={order_link}>
@@ -120,7 +120,9 @@ const DiseaseTable = ({
             dataSource={diseaseCellLines}
             footer={() => (
                 <div>
-                    <Content content={acknowledgements} />
+                    <HTMLContent
+                        content={acknowledgements.replace("*", "<i>")}
+                    />
                 </div>
             )}
         />

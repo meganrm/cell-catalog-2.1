@@ -15,15 +15,16 @@
 }
 
 .container :global(.ant-table-container) {
-    border-right: 1.5px solid var(--border-color); 
-    border-left: 1.5px solid var(--border-color); 
+    border-right: 1.5px solid var(--border-color);
+    border-left: 1.5px solid var(--border-color);
 }
 
 .container :global(.ant-table-title) {
-    border-top: 1.5px solid var(--border-color); 
-    border-bottom: 3px solid var(--BLUE);
-    border-right: 1.5px solid var(--border-color);
-    border-left: 1.5px solid var(--border-color); 
+    box-shadow:
+        inset 1.5px 0 0 0 var(--border-color),
+        inset -1.5px 0 0 0 var(--border-color),
+        inset 0 -3px 0 0 var(--DARK_BLUE),
+        inset 0 1.5px 0 0 var(--border-color);
 }
 
 .container :global(.ant-table-title) h3 {
@@ -39,11 +40,11 @@
 }
 
 .container :global(.ant-table-thead .ant-table-cell)::before {
-    display: none ; /* remove dividers between column headers */
+    display: none; /* remove dividers between column headers */
 }
 
 .container h4 {
-    font-family: 'Open Sans', sans-serif;
+    font-family: "Open Sans", sans-serif;
     font-size: 24px;
     font-weight: 600;
     color: var(--BLACK);
@@ -82,7 +83,6 @@
     color: var(--LIGHT_BLUE);
 }
 
-
 .container :global(.ant-table-cell .ant-tag) {
     color: var(--BLACK);
     font-size: 14px;
@@ -103,7 +103,7 @@
     padding: 4px 8px;
 }
 
-.container.coming-soon :global(.ant-table-cell),  
+.container.coming-soon :global(.ant-table-cell),
 .container.coming-soon :global(.ant-table-tbody .ant-tag),
 .container.coming-soon h4 {
     color: var(--disabled);
