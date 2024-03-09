@@ -70,8 +70,15 @@
     text-align: left;
 }
 
+
+
 .clones {
     text-wrap: balance;
+    border-right: 1px solid var(--border-color);
+}
+
+.container :global(.ant-table-thead .ant-table-cell).clones {
+    border-right: none;
 }
 
 .container :global(.ant-table-footer) {
