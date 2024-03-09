@@ -59,7 +59,7 @@ const TemplateWrapper = ({ children }: React.PropsWithChildren) => {
                         headerBg: WHITE,
                         cellFontSize: 16,
                         borderRadius: 4,
-                        
+                        rowHoverBg: WHITE,
                     },
                     Descriptions: {
                         itemPaddingBottom: 0,
