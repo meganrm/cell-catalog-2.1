@@ -259,9 +259,9 @@ collections:
             }
           - {
                 label: "Acknowledgements",
-                name: "acknowledgements",
+                name: "body",
                 widget: "markdown",
-            }
+          }
     - name: "pages"
       label: "Pages"
       files:
