@@ -6,6 +6,8 @@ date: 2024-02-10T06:30:07.929Z
 snp: NM_000257.4(MYH7):c.767G>A(p.Gly256Glu)
 parental_line: 75
 status: done
-clones: 3 mutant clones; 2 isogenic controls
+clones:
+    mutants: 3
+    isogenic_controls: 2
 order_link: test
 ---

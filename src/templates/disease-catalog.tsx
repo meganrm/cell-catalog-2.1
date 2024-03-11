@@ -36,7 +36,6 @@ export const DiseaseCatalogTemplate = ({
     coriellImage,
     coriellLink
 }: DiseaseCatalogTemplateProps) => {
-    console.log(coriellImage);
     const image = getImage(coriellImage);
     const PageContent = contentComponent || Content;
     return (
@@ -100,7 +99,6 @@ interface QueryResult {
 
 const DiseaseCatalog = ({ data }: QueryResult) => {
     const { markdownRemark: post } = data;
-    console.log(data)
     return (
         <Layout>
             <DiseaseCatalogTemplate
