@@ -20,6 +20,9 @@
 }
 
 .container :global(.ant-table-title) {
+    /* this keeps the change in border color from being 
+    mitered at the corners, which looked weird
+    */
     box-shadow:
         inset 1.5px 0 0 0 var(--border-color),
         inset -1.5px 0 0 0 var(--border-color),
