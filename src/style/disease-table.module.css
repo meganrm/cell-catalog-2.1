@@ -83,6 +83,7 @@
 }
 
 .container :global(.ant-table-footer p) {
+    margin: 0;
     font-size: inherit;
     color: inherit;
 }
