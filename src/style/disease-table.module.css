@@ -77,15 +77,13 @@
     background-color: var(--OFF_WHITE);
     padding: 8px 0;
     border-radius: 0;
-    font-size: 14px;
     font-weight: 300;
-    color: var(--LIGHT_BLUE);
 }
 
 .container :global(.ant-table-footer p) {
     margin: 0;
-    font-size: inherit;
-    color: inherit;
+    font-size: 14px;
+    color: var(--LIGHT_BLUE);
 }
 
 .container :global(.ant-table-cell .ant-tag) {
