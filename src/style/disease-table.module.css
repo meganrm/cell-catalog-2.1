@@ -82,6 +82,10 @@
     color: var(--LIGHT_BLUE);
 }
 
+.container :global(.ant-table-footer p) {
+    font-size: inherit;
+    color: inherit;
+}
 
 .container :global(.ant-table-cell .ant-tag) {
     color: var(--BLACK);
