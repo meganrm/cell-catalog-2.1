@@ -1,9 +1,13 @@
 import React from "react";
 import { Table, Tag, Flex } from "antd";
+import Icon from "@ant-design/icons";
 
 import Content from "./Content";
 import { UnpackedDiseaseCellLine } from "../component-queries/DiseaseCellLines";
 import { formatCellLineId } from "../utils";
+
+const Tube = require("../img/tube.svg");
+const CertificateIcon = require("../img/cert-icon.svg");
 
 import {
     tableTitle,
@@ -13,6 +17,8 @@ import {
     clones,
     comingSoon,
 } from "../style/disease-table.module.css";
+import { WHITE } from "./Layout";
+import { Certificate } from "crypto";
 
 interface DiseaseTableProps {
     diseaseName: string;
@@ -92,7 +98,13 @@ const DiseaseTable = ({
                         } else {
                             return (
                                 <a className={actionButton} href={order_link}>
-                                    Obtain Line
+                                    <Flex>
+                                        <Icon
+                                            component={Tube}
+                                            style={{ color: WHITE, fontSize: "40px"}}
+                                        />
+                                        Obtain Line
+                                    </Flex>
                                 </a>
                             );
                         }
@@ -110,7 +122,13 @@ const DiseaseTable = ({
                                     href={certificate_of_analysis.publicURL}
                                     target="_blank"
                                 >
-                                    Cert. of Analysis
+                                    <Flex>
+                                        <Icon
+                                            component={CertificateIcon}
+                                            style={{ color: WHITE, fontSize: "40px"}}
+                                        />
+                                        Cert. of Analysis
+                                    </Flex>
                                 </a>
                             )
                         );
