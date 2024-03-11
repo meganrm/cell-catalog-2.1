@@ -6,5 +6,7 @@ date: 2024-02-26T21:35:41.941Z
 snp: NM_170707.4(LMNA):c.1824C>T(p.Gly608=)
 parental_line: 13
 status: in progress
-clones: 2 mutant clones; 2 isogenic controls
+clones: 
+    mutants: 2
+    isogenic_controls: 2
 ---

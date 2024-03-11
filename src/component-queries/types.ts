@@ -23,7 +23,10 @@ export interface DiseaseCellLineFrontmatter {
     parental_line: { frontmatter: ParentalLineFrontmatter };
     disease: string;
     snp: string;
-    clones: string;
+    clones: {
+        isogenic_controls: number;
+        mutants: number;
+    };
     certificate_of_analysis: string;
     order_link: string;
     status: string;

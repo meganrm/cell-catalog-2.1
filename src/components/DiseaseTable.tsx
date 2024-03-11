@@ -12,6 +12,7 @@ import {
     actionButton,
     clones,
     comingSoon,
+    cloneNumber,
 } from "../style/disease-table.module.css";
 
 interface DiseaseTableProps {
@@ -58,8 +59,8 @@ const DiseaseTable = ({
                         const snps = snp.split(":");
                         return (
                             <Flex vertical={true}>
-                                <span>{snps[0]}: </span>
-                                <span>{snps[1]}</span>
+                                <span key={"snp-0"}>{snps[0]}: </span>
+                                <span key={"snp-1"}>{snps[1]}</span>
                             </Flex>
                         );
                     },
@@ -80,15 +81,28 @@ const DiseaseTable = ({
                     key: "clones",
                     dataIndex: "clones",
                     className: clones,
-                    render: (clones: string) => {
+                    render: ({ mutants, isogenic_controls }) => {
                         return (
                             <Flex vertical={true}>
-                                {clones.split(";").map((clone) => (
-                                    <span>{clone}</span>
-                                ))}
+                                <div>
+                                    {" "}
+                                    <span className={cloneNumber} key={mutants}>
+                                        {mutants}
+                                    </span>
+                                    <span> mutant clones</span>
+                                </div>
+                                <div>
+                                    <span
+                                        className={cloneNumber}
+                                        key={isogenic_controls}
+                                    >
+                                        {isogenic_controls}
+                                    </span>
+                                    <span> isogenic controls</span>
+                                </div>
                             </Flex>
                         );
-                    }
+                    },
                 },
                 {
                     title: "",

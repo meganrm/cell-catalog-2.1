@@ -70,11 +70,13 @@
     text-align: left;
 }
 
-
-
 .clones {
     text-wrap: balance;
     border-right: 1px solid var(--border-color);
+}
+
+.clone-number {
+    font-weight: 600;
 }
 
 .container :global(.ant-table-thead .ant-table-cell).clones {
