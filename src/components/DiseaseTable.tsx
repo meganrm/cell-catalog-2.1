@@ -1,7 +1,7 @@
 import React from "react";
 import { Table, Tag, Flex } from "antd";
 
-import Content from "./Content";
+import {HTMLContent} from "./Content";
 import { UnpackedDiseaseCellLine } from "../component-queries/DiseaseCellLines";
 import { formatCellLineId } from "../utils";
 
@@ -120,7 +120,7 @@ const DiseaseTable = ({
             dataSource={diseaseCellLines}
             footer={() => (
                 <div>
-                    <Content content={acknowledgements} />
+                    <HTMLContent content={acknowledgements} />
                 </div>
             )}
         />
