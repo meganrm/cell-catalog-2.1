@@ -12,6 +12,7 @@ export interface QueryResult {
                     fields: {
                         slug: string;
                     };
+                    html: string;
                     frontmatter: DiseaseFrontmatter;
                 };
             }[];
@@ -32,13 +33,13 @@ const DiseaseTemplate = (props: QueryResult) => {
 
     const unpackedDiseases = diseases
         .map(({ node: disease }) => {
-            const { name, gene, acknowledgements, status } =
+            const { name, gene, status } =
                 disease.frontmatter;
             return {
                 name,
                 geneSymbol: gene.frontmatter.symbol,
                 geneName: gene.frontmatter.name,
-                acknowledgements,
+                acknowledgements: disease.html,
                 status,
             };
         })
@@ -74,11 +75,11 @@ export default function Diseases() {
                                 fields {
                                     slug
                                 }
+                                html
                                 frontmatter {
                                     templateKey
                                     name
                                     status
-                                    acknowledgements
                                     gene {
                                         frontmatter {
                                             symbol
