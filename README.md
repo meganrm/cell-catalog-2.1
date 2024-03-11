@@ -29,3 +29,9 @@ Media Libraries have been included in this starter as a default.
 
 Contributions are always welcome, no matter how large or small. Before contributing,
 please read the [code of conduct](CODE_OF_CONDUCT.md).
+
+## Development 
+See [contributing guide](CONTRIBUTING.md)
+
+## Changes to the content
+see [admin guide](ADMIN.md)
