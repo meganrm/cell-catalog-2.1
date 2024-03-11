@@ -1,7 +1,7 @@
 import React from "react";
 import { Table, Tag, Flex } from "antd";
 
-import {HTMLContent} from "./Content";
+import { HTMLContent } from "./Content";
 import { UnpackedDiseaseCellLine } from "../component-queries/DiseaseCellLines";
 import { formatCellLineId } from "../utils";
 
