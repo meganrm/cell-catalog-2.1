@@ -3,7 +3,6 @@ import { Link, graphql, StaticQuery } from "gatsby";
 
 const CellLineTableTemplate = (props: QueryResult) => {
     const { edges: cellLines } = props.data.allMarkdownRemark;
-    console.log("parental line", cellLines)
 
     return (
         <table className="">
@@ -26,53 +25,50 @@ const CellLineTableTemplate = (props: QueryResult) => {
                         if (cellLine.frontmatter.cell_line_id === 0) {
                             return null;
                         }
-                            return (
-                                <tr className="" key={cellLine.id}>
-                                    <td className="is-child">
-                                        <Link to={cellLine.fields.slug}>
-                                            <h4>
-                                                AICS-
-                                                {
-                                                    cellLine.frontmatter
-                                                        .cell_line_id
-                                                }
-                                            </h4>
-                                        </Link>
-                                    </td>
-                                    <td>
-                                        {
-                                            cellLine.frontmatter.gene
-                                                .frontmatter.protein
-                                        }
-                                    </td>
-                                    <td>{cellLine.frontmatter.clone_number}</td>
-                                    <td>
-                                        {
-                                            cellLine.frontmatter.gene
-                                                .frontmatter.name
-                                        }{" "}
-                                        (
-                                        {
-                                            cellLine.frontmatter.gene
-                                                .frontmatter.symbol
-                                        }
-                                        )
-                                    </td>
-                                    <td>{cellLine.frontmatter.allele_count}</td>
-                                    <td>
-                                        {
-                                            cellLine.frontmatter.gene
-                                                .frontmatter.structure
-                                        }
-                                    </td>
-                                    <td>
-                                        {cellLine.frontmatter.fluorescent_tag}
-                                    </td>
-                                    <td>{cellLine.frontmatter.tag_location}</td>
-                                    <td>{cellLine.frontmatter.parental_line.frontmatter.name}</td>
-                                </tr>
-                            );}
-                    )}
+                        return (
+                            <tr className="" key={cellLine.id}>
+                                <td className="is-child">
+                                    <Link to={cellLine.fields.slug}>
+                                        <h4>
+                                            AICS-
+                                            {cellLine.frontmatter.cell_line_id}
+                                        </h4>
+                                    </Link>
+                                </td>
+                                <td>
+                                    {
+                                        cellLine.frontmatter.gene.frontmatter
+                                            .protein
+                                    }
+                                </td>
+                                <td>{cellLine.frontmatter.clone_number}</td>
+                                <td>
+                                    {cellLine.frontmatter.gene.frontmatter.name}{" "}
+                                    (
+                                    {
+                                        cellLine.frontmatter.gene.frontmatter
+                                            .symbol
+                                    }
+                                    )
+                                </td>
+                                <td>{cellLine.frontmatter.allele_count}</td>
+                                <td>
+                                    {
+                                        cellLine.frontmatter.gene.frontmatter
+                                            .structure
+                                    }
+                                </td>
+                                <td>{cellLine.frontmatter.fluorescent_tag}</td>
+                                <td>{cellLine.frontmatter.tag_location}</td>
+                                <td>
+                                    {
+                                        cellLine.frontmatter.parental_line
+                                            .frontmatter.name
+                                    }
+                                </td>
+                            </tr>
+                        );
+                    })}
             </tbody>
         </table>
     );
@@ -96,7 +92,6 @@ interface QueryResult {
                         allele_count: string;
                         parental_line: {
                             frontmatter: {
-
                                 name: string;
                             };
                         };
@@ -151,16 +146,13 @@ export default function CellLineTable() {
                                             name
                                         }
                                     }
-                                    
                                 }
                             }
                         }
                     }
                 }
             `}
-            render={(data: any) => (
-                <CellLineTableTemplate data={data} />
-            )}
+            render={(data: any) => <CellLineTableTemplate data={data} />}
         />
     );
 }
