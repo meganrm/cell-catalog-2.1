@@ -6,10 +6,7 @@ import Layout from "../components/Layout";
 // eslint-disable-next-line
 export const CellLineTemplate = ({
     cellLineId,
-    cloneNumber,
     gene,
-    tagLocation,
-    status,
 }) => {
     return (
         <section className="section">

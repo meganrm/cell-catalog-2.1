@@ -5,7 +5,10 @@ import HTMLContent from "./Content";
 import { UnpackedDiseaseCellLine } from "../component-queries/DiseaseCellLines";
 import { formatCellLineId } from "../utils";
 
-import {
+const Tube = require("../img/tube.svg");
+const CertificateIcon = require("../img/cert-icon.svg");
+
+const {
     tableTitle,
     container,
     snpColumn,
@@ -13,8 +16,9 @@ import {
     clones,
     comingSoon,
     cloneNumber,
-} from "../style/disease-table.module.css";
+} = require("../style/disease-table.module.css");
 
+import { WHITE } from "./Layout";
 interface DiseaseTableProps {
     diseaseName: string;
     diseaseCellLines: UnpackedDiseaseCellLine[];

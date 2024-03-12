@@ -5,7 +5,15 @@ import { GatsbyImage, getImage } from "gatsby-plugin-image";
 
 import { FileNode } from "gatsby-plugin-image/dist/src/components/hooks";
 import { DescriptionsItemType } from "antd/es/descriptions";
-import { modal, title, header, subTitle, clone } from "../style/modal.module.css";
+const {
+    modal,
+    title,
+    header,
+    subTitle,
+    clone,
+    linkOutContainer,
+} = require("../style/modal.module.css");
+const LinkOut = require("../img/external-link.svg");
 
 interface ParentalLineModalProps {
     displayItems: DescriptionsItemType[];
@@ -23,6 +31,7 @@ const ParentalLineModal = (props: ParentalLineModalProps) => {
         setIsModalOpen(false);
     };
     const image = getImage(props.image);
+    console.log("image" , image);
     const headerElement = (
         <div className={header}>
             <div className={title}>Parental Line </div>
