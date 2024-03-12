@@ -7,11 +7,11 @@ const { Content } = AntLayout;
 import Navbar from "./Navbar";
 import "../style/index.sass";
 import useSiteMetadata from "./SiteMetadata";
-import { container } from "../style/layout.module.css";
+const { container } = require("../style/layout.module.css");
 
 const OFF_WHITE = "#F2F2F2";
 const DARK_BLUE = "#00215F";
-const WHITE = "#FFFFFF";
+export const WHITE = "#FFFFFF";
 const LIGHT_BLUE = "#E5E9F1";
 const DARK_GRAY = "#CBCBCC";
 const LIGHT_GRAY = "#323233";
@@ -35,6 +35,7 @@ const TemplateWrapper = ({ children }: React.PropsWithChildren) => {
                         bodyBg: OFF_WHITE,
                     },
                     Modal: {
+                        motionDurationMid: "0.1s",
                         contentBg: LIGHT_BLUE,
                         headerBg: LIGHT_BLUE,
                         footerBg: LIGHT_BLUE,
@@ -44,7 +45,7 @@ const TemplateWrapper = ({ children }: React.PropsWithChildren) => {
                         defaultColor: DARK_BLUE,
                         defaultBg: OFF_WHITE,
                         defaultBorderColor: DARK_BLUE,
-                        defaultHoverBg: DARK_GRAY,
+                        defaultHoverBg: OFF_WHITE,
                         colorPrimary: OFF_WHITE,
                         colorPrimaryBgHover: OFF_WHITE,
                         primaryColor: DARK_BLUE,
@@ -59,7 +60,7 @@ const TemplateWrapper = ({ children }: React.PropsWithChildren) => {
                         headerBg: WHITE,
                         cellFontSize: 16,
                         borderRadius: 4,
-                        
+                        rowHoverBg: WHITE,
                     },
                     Descriptions: {
                         itemPaddingBottom: 0,

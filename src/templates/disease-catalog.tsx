@@ -6,13 +6,13 @@ import Diseases from "../component-queries/Diseases";
 import Content, { HTMLContent } from "../components/Content";
 import { GatsbyImage, getImage } from "gatsby-plugin-image";
 import { FileNode } from "gatsby-plugin-image/dist/src/components/hooks";
-import {
+const {
     coriellCard,
     banner,
     bannerContent,
     header,
     mainHeading,
-} from "../style/disease-catalog.module.css";
+} = require("../style/disease-catalog.module.css");
 interface DiseaseCatalogTemplateProps {
     title: string;
     content: string;
@@ -36,7 +36,6 @@ export const DiseaseCatalogTemplate = ({
     coriellImage,
     coriellLink
 }: DiseaseCatalogTemplateProps) => {
-    console.log(coriellImage);
     const image = getImage(coriellImage);
     const PageContent = contentComponent || Content;
     return (
@@ -74,7 +73,7 @@ export const DiseaseCatalogTemplate = ({
                 />
             </Card>
             <Diseases />
-            <div className="footer">{footerText}</div>
+            <HTMLContent className="footer" content={footerText} />
         </section>
     );
 };
@@ -85,7 +84,9 @@ interface QueryResult {
             html: string;
             frontmatter: {
                 title: string;
-                footer_text: string;
+                footer_text: {
+                    html: string
+                };
                 main: {
                     heading: string;
                     subheading: string;
@@ -100,14 +101,13 @@ interface QueryResult {
 
 const DiseaseCatalog = ({ data }: QueryResult) => {
     const { markdownRemark: post } = data;
-    console.log(data)
     return (
         <Layout>
             <DiseaseCatalogTemplate
                 contentComponent={HTMLContent}
                 title={post.frontmatter.title}
                 content={post.html}
-                footerText={post.frontmatter.footer_text}
+                footerText={post.frontmatter.footer_text.html}
                 main={post.frontmatter.main}
                 coriellImage={post.frontmatter.coriell_image}
                 coriellLink={post.frontmatter.coriell_link}
@@ -125,7 +125,9 @@ export const aboutPageQuery = graphql`
             html
             frontmatter {
                 title
-                footer_text
+                footer_text {
+                    html
+                }
                 main {
                     heading
                     subheading

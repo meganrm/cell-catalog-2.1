@@ -69,3 +69,19 @@
     font-weight: 400;
     line-height: 33px;
 }
+
+.link-out-container {
+    position: absolute;
+    display: inline-block;
+    width: 333px;
+}
+
+.link-out-container span {
+    position: relative;
+    right: 0;
+    top: -3px
+}
+
+.link-out-container path:hover {
+    stroke: var(--WHITE);
+}

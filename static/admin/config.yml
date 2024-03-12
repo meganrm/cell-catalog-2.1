@@ -171,7 +171,12 @@ collections:
                 default: "in progress",
                 required: true,
             }
-          - { label: "Clones", name: "clones", widget: string }
+          - { label: "Clones", name: "clones", widget: object,
+              fields: [
+                  { label: "Number of mutant clones", name: "mutants", widget: number },
+                  { label: "Number of isogenic conrols", name: "isogenic_controls", widget: number },
+              ]
+            }
           - {
                 label: "Order Link",
                 name: "order_link",
@@ -344,5 +349,5 @@ collections:
                 - {
                       label: "Footer text",
                       name: "footer_text",
-                      widget: "string",
+                      widget: "markdown",
                   }
