@@ -2,7 +2,7 @@ import React from "react";
 import { Table, Tag, Flex } from "antd";
 import Icon from "@ant-design/icons";
 
-import HTMLContent from "./Content";
+import { HTMLContent } from "./Content";
 import { UnpackedDiseaseCellLine } from "../component-queries/DiseaseCellLines";
 import { formatCellLineId } from "../utils";
 
@@ -161,7 +161,7 @@ const DiseaseTable = ({
             footer={() => (
                 <div>
                     <HTMLContent
-                        content={acknowledgements.replace("*", "<i>")}
+                        content={acknowledgements}
                     />
                 </div>
             )}

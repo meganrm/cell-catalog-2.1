@@ -38,7 +38,7 @@ const DiseaseTemplate = (props: QueryResult) => {
                 name,
                 geneSymbol: gene.frontmatter.symbol,
                 geneName: gene.frontmatter.name,
-                acknowledgements,
+                acknowledgements: acknowledgements.html,
                 status,
             };
         })
@@ -78,7 +78,9 @@ export default function Diseases() {
                                     templateKey
                                     name
                                     status
-                                    acknowledgements
+                                    acknowledgements {
+                                        html
+                                    }
                                     gene {
                                         frontmatter {
                                             symbol
