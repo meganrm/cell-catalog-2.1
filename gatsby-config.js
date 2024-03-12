@@ -42,6 +42,7 @@ module.exports = {
         "gatsby-plugin-sharp",
         "gatsby-transformer-sharp",
         "gatsby-transformer-remark-frontmatter",
+        'gatsby-plugin-react-svg',
         {
             resolve: "gatsby-transformer-remark",
             options: {

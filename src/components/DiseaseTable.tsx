@@ -1,9 +1,11 @@
 import React from "react";
 import { Table, Tag, Flex } from "antd";
+import Icon from "@ant-design/icons";
 
 import HTMLContent from "./Content";
 import { UnpackedDiseaseCellLine } from "../component-queries/DiseaseCellLines";
 import { formatCellLineId } from "../utils";
+import { WHITE } from "./Layout";
 
 const Tube = require("../img/tube.svg");
 const CertificateIcon = require("../img/cert-icon.svg");
@@ -18,7 +20,6 @@ const {
     cloneNumber,
 } = require("../style/disease-table.module.css");
 
-import { WHITE } from "./Layout";
 interface DiseaseTableProps {
     diseaseName: string;
     diseaseCellLines: UnpackedDiseaseCellLine[];
@@ -118,7 +119,13 @@ const DiseaseTable = ({
                         } else {
                             return (
                                 <a className={actionButton} href={order_link}>
-                                    Obtain Line
+                                    <Flex>
+                                        <Icon
+                                            component={Tube}
+                                            style={{ color: WHITE, fontSize: "40px"}}
+                                        />
+                                        Obtain Line
+                                    </Flex>
                                 </a>
                             );
                         }
@@ -136,7 +143,13 @@ const DiseaseTable = ({
                                     href={certificate_of_analysis.publicURL}
                                     target="_blank"
                                 >
-                                    Cert. of Analysis
+                                    <Flex>
+                                        <Icon
+                                            component={CertificateIcon}
+                                            style={{ color: WHITE, fontSize: "40px"}}
+                                        />
+                                        Cert. of Analysis
+                                    </Flex>
                                 </a>
                             )
                         );

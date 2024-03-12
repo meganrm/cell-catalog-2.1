@@ -11,7 +11,7 @@ const { container } = require("../style/layout.module.css");
 
 const OFF_WHITE = "#F2F2F2";
 const DARK_BLUE = "#00215F";
-const WHITE = "#FFFFFF";
+export const WHITE = "#FFFFFF";
 const LIGHT_BLUE = "#E5E9F1";
 const DARK_GRAY = "#CBCBCC";
 const LIGHT_GRAY = "#323233";

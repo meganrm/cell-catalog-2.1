@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Button, Descriptions, Divider, Flex, Modal } from "antd";
-import { InfoCircleOutlined } from "@ant-design/icons";
+import Icon, { InfoCircleOutlined } from "@ant-design/icons";
 import { GatsbyImage, getImage } from "gatsby-plugin-image";
 
 import { FileNode } from "gatsby-plugin-image/dist/src/components/hooks";
@@ -43,7 +43,7 @@ const ParentalLineModal = (props: ParentalLineModalProps) => {
     );
     return (
         <>
-            <Button onClick={showModal} >
+            <Button onClick={showModal}>
                 {props.cellLineId} {<InfoCircleOutlined />}
             </Button>
             <Modal
@@ -62,6 +62,10 @@ const ParentalLineModal = (props: ParentalLineModalProps) => {
                             target="_blank"
                         >
                             More information
+                            <div className={linkOutContainer}>
+
+                            <Icon component={LinkOut} style={{color:"transparent", fontSize: "24px"}}/>
+                            </div>
                         </Button>
                     </div>
                 }
