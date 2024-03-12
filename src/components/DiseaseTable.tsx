@@ -9,7 +9,7 @@ import { formatCellLineId } from "../utils";
 const Tube = require("../img/tube.svg");
 const CertificateIcon = require("../img/cert-icon.svg");
 
-import {
+const {
     tableTitle,
     container,
     snpColumn,
@@ -18,7 +18,7 @@ import {
     comingSoon,
     cloneNumber,
     footer,
-} from "../style/disease-table.module.css";
+} = require("../style/disease-table.module.css");
 import { WHITE } from "./Layout";
 
 interface DiseaseTableProps {
@@ -56,7 +56,7 @@ const DiseaseTable = ({
                         width: 180,
                         dataIndex: "cell_line_id",
                         render: (cell_line_id: string) => (
-                            <h4>{formatCellLineId(cell_line_id)}</h4>
+                            <h4 key={cell_line_id} >{formatCellLineId(cell_line_id)}</h4>
                         ),
                     },
                     {
@@ -67,7 +67,7 @@ const DiseaseTable = ({
                         render: (snp: string) => {
                             const snps = snp.split(":");
                             return (
-                                <Flex vertical={true}>
+                                <Flex vertical={true} key={snp}>
                                     <span key={"snp-0"}>{snps[0]}: </span>
                                     <span key={"snp-1"}>{snps[1]}</span>
                                 </Flex>
@@ -92,7 +92,7 @@ const DiseaseTable = ({
                         className: clones,
                         render: ({ mutants, isogenic_controls }) => {
                             return (
-                                <Flex vertical={true}>
+                                <Flex vertical={true} key={mutants}>
                                     <div>
                                         {" "}
                                         <span
@@ -128,6 +128,7 @@ const DiseaseTable = ({
                                     <a
                                         className={actionButton}
                                         href={order_link}
+                                        key={order_link}
                                     >
                                         <Flex>
                                             <Icon
@@ -155,6 +156,7 @@ const DiseaseTable = ({
                                         className={actionButton}
                                         href={certificate_of_analysis.publicURL}
                                         target="_blank"
+                                        key={certificate_of_analysis.publicURL}
                                     >
                                         <Flex>
                                             <Icon

@@ -6,13 +6,13 @@ import Diseases from "../component-queries/Diseases";
 import Content, { HTMLContent } from "../components/Content";
 import { GatsbyImage, getImage } from "gatsby-plugin-image";
 import { FileNode } from "gatsby-plugin-image/dist/src/components/hooks";
-import {
+const {
     coriellCard,
     banner,
     bannerContent,
     header,
     mainHeading,
-} from "../style/disease-catalog.module.css";
+} = require("../style/disease-catalog.module.css");
 interface DiseaseCatalogTemplateProps {
     title: string;
     content: string;
