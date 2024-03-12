@@ -48,5 +48,5 @@ export interface DiseaseFrontmatter {
         frontmatter: GeneFrontMatter;
     };
     status: string;
-    acknowledgements: string;
+    acknowledgements: { html: string };
 }

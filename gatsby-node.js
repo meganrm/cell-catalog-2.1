@@ -10,6 +10,7 @@ exports.createSchemaCustomization = ({ actions, schema }) => {
             gene: MarkdownRemark @link(by: "frontmatter.symbol")
             parental_line: MarkdownRemark @link(by: "frontmatter.cell_line_id")
             footer_text: String @md
+            acknowledgements: String @md
         }`,
     ];
     createTypes(typeDefs);
