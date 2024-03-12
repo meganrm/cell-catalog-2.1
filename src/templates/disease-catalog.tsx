@@ -73,7 +73,7 @@ export const DiseaseCatalogTemplate = ({
                 />
             </Card>
             <Diseases />
-            <div className="footer">{footerText}</div>
+            <HTMLContent className="footer" content={footerText} />
         </section>
     );
 };
@@ -84,7 +84,9 @@ interface QueryResult {
             html: string;
             frontmatter: {
                 title: string;
-                footer_text: string;
+                footer_text: {
+                    html: string
+                };
                 main: {
                     heading: string;
                     subheading: string;
@@ -105,7 +107,7 @@ const DiseaseCatalog = ({ data }: QueryResult) => {
                 contentComponent={HTMLContent}
                 title={post.frontmatter.title}
                 content={post.html}
-                footerText={post.frontmatter.footer_text}
+                footerText={post.frontmatter.footer_text.html}
                 main={post.frontmatter.main}
                 coriellImage={post.frontmatter.coriell_image}
                 coriellLink={post.frontmatter.coriell_link}
@@ -123,7 +125,9 @@ export const aboutPageQuery = graphql`
             html
             frontmatter {
                 title
-                footer_text
+                footer_text {
+                    html
+                }
                 main {
                     heading
                     subheading
