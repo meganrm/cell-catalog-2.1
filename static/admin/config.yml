@@ -349,5 +349,5 @@ collections:
                 - {
                       label: "Footer text",
                       name: "footer_text",
-                      widget: "string",
+                      widget: "markdown",
                   }
