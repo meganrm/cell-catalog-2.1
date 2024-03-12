@@ -120,3 +120,7 @@
 .container.coming-soon h4 {
     color: var(--disabled);
 }
+
+.container.coming-soon .clones {
+    border-right: 1px solid transparent;
+}
