@@ -1,7 +1,6 @@
 @import "../style/colors.sass";
 
 .container {
-    margin-bottom: 8px;
     max-width: 1728px;
 }
 
@@ -11,7 +10,7 @@
 }
 
 .container :global(.ant-table) {
-    border-radius: 4px 4px 0 0;
+    border-radius: 4px;
 }
 
 .container :global(.ant-table-container) {
@@ -86,13 +85,15 @@
     border-right: none;
 }
 
-.container :global(.ant-table-footer) {
-    background-color: var(--OFF_WHITE);
-    padding: 8px 0;
-    border-radius: 0;
+.footer {
+    padding: 8px 0 16px 0;
     font-size: 14px;
     font-weight: 300;
     color: var(--LIGHT_BLUE);
+}
+
+.footer p {
+    margin: 0;
 }
 
 .container :global(.ant-table-cell .ant-tag) {
