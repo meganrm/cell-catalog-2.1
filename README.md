@@ -29,3 +29,4 @@ Media Libraries have been included in this starter as a default.
 
 Contributions are always welcome, no matter how large or small. Before contributing,
 please read the [code of conduct](CODE_OF_CONDUCT.md).
+Read [development instructions](CONTRIBUTING.md) to run the app locally. 
