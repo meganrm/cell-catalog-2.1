@@ -62,7 +62,7 @@ collections:
                 label: "Clone Number",
                 name: "clone_number",
                 widget: "number",
-                valueType: int,
+                value_type: int,
                 required: false,
             }
           - {

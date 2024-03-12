@@ -5,6 +5,7 @@ import { GatsbyImage, getImage } from "gatsby-plugin-image";
 
 import { FileNode } from "gatsby-plugin-image/dist/src/components/hooks";
 import { DescriptionsItemType } from "antd/es/descriptions";
+
 const {
     modal,
     title,
