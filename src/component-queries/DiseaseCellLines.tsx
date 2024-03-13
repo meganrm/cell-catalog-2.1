@@ -143,6 +143,7 @@ export default function DiseaseCellLineQuery(props: {
                         filter: {
                             frontmatter: {
                                 templateKey: { eq: "disease-cell-line" }
+                                status: { eq: "done" }
                             }
                         }
                     ) {
