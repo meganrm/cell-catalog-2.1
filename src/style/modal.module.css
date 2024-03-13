@@ -82,6 +82,6 @@
     top: -3px
 }
 
-.link-out-container path:hover {
+.link-out-container:hover path{
     stroke: var(--WHITE);
 }
