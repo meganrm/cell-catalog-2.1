@@ -58,6 +58,11 @@
     padding: 14px 16px;
 }
 
+.container :global(.ant-table-thead .ant-table-cell).cell-line-id, 
+.container :global(.ant-table-cell).cell-line-id {
+    padding: 10px 16px 10px 32px;
+}
+
 .snp-column {
     max-width: 380px;
     text-wrap: balance;
