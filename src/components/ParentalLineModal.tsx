@@ -5,14 +5,14 @@ import { GatsbyImage, getImage } from "gatsby-plugin-image";
 
 import { FileNode } from "gatsby-plugin-image/dist/src/components/hooks";
 import { DescriptionsItemType } from "antd/es/descriptions";
-import {
+const {
     modal,
     title,
     header,
     subTitle,
     clone,
     linkOutContainer,
-} from "../style/modal.module.css";
+} = require("../style/modal.module.css");
 const LinkOut = require("../img/external-link.svg");
 
 interface ParentalLineModalProps {
@@ -85,9 +85,12 @@ const ParentalLineModal = (props: ParentalLineModalProps) => {
                         labelStyle={{
                             alignItems: "center",
                             width: "142px",
+                            fontSize: "16px",
                         }}
                         contentStyle={{
                             alignItems: "center",
+                            fontSize: "18px",
+                            fontWeight: "semi-bold",
                         }}
                     />
                 </Flex>
