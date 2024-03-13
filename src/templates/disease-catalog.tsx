@@ -12,6 +12,7 @@ const {
     bannerContent,
     header,
     mainHeading,
+    coriellWrapper,
 } = require("../style/disease-catalog.module.css");
 interface DiseaseCatalogTemplateProps {
     title: string;
@@ -49,7 +50,7 @@ export const DiseaseCatalogTemplate = ({
                     type="vertical"
                     style={{ height: "initial", marginInline: "20px" }}
                 />
-                <div>
+                <div className={coriellWrapper}>
                     {image && (
                         <a href={coriellLink} target="_blank" rel="noreferrer">
                             <Card
