@@ -116,7 +116,10 @@ export default function CellLineTable() {
                 query CellLineTableQuery {
                     allMarkdownRemark(
                         filter: {
-                            frontmatter: { templateKey: { eq: "cell-line" } }
+                            frontmatter: { 
+                                templateKey: { eq: "cell-line" } 
+                                status: { eq: "done" }
+                            }
                         }
                     ) {
                         edges {
