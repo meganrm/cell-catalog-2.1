@@ -10,7 +10,7 @@ module.exports = {
             headers: [
                 {
                     key: "Content-Security-Policy",
-                    value: "frame-ancestors '*.allencell.org';",
+                    value: "frame-ancestors *.allencell.org;",
                 },
             ],
         },
