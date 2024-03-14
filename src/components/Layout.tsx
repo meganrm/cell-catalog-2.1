@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Helmet } from "react-helmet";
 import { ConfigProvider, Layout as AntLayout } from "antd";
-import { withPrefix } from "gatsby";
+import { Script, withPrefix } from "gatsby";
 const { Content } = AntLayout;
 
 import Navbar from "./Navbar";
@@ -135,6 +135,8 @@ const TemplateWrapper = ({ children }: React.PropsWithChildren) => {
                 <Navbar />
                 <Content>{children}</Content>
             </AntLayout>
+            <Script
+                src="iframeResizer.js" />
         </ConfigProvider>
     );
 };
