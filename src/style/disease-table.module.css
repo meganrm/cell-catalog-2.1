@@ -51,8 +51,11 @@
 
 .container :global(.ant-table-tbody > tr > td:nth-child(n+6):hover) .action-button {
     color: var(--WHITE);
-    fill: var(--WHITE);
-    stroke: var(--DARK_BLUE);
+}
+
+.container :global(.ant-table-tbody > tr > td:nth-child(n+6):hover) .action-button path {
+    fill: var(--DARK_BLUE);
+    stroke: var(--WHITE);
 }
 
 .container h4 {
