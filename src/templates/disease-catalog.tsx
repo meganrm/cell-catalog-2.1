@@ -34,17 +34,15 @@ export const DiseaseCatalogTemplate = ({
     footerText,
     main,
     coriellImage,
-    coriellLink
+    coriellLink,
 }: DiseaseCatalogTemplateProps) => {
     const image = getImage(coriellImage);
     const PageContent = contentComponent || Content;
     return (
         <section>
+            <h1 className="">{title}</h1>
             <Flex className={header}>
-                <div>
-                    <h1 className="">{title}</h1>
-                    <PageContent className="content" content={content} />
-                </div>
+                <PageContent className="content" content={content} />
                 <Divider
                     type="vertical"
                     style={{ height: "initial", marginInline: "20px" }}
@@ -85,7 +83,7 @@ interface QueryResult {
             frontmatter: {
                 title: string;
                 footer_text: {
-                    html: string
+                    html: string;
                 };
                 main: {
                     heading: string;
@@ -116,7 +114,6 @@ const DiseaseCatalog = ({ data }: QueryResult) => {
     );
 };
 
-
 export default DiseaseCatalog;
 
 export const aboutPageQuery = graphql`
@@ -138,7 +135,7 @@ export const aboutPageQuery = graphql`
                         gatsbyImageData(
                             placeholder: BLURRED
                             layout: FIXED
-                            width: 309
+                            width: 190
                         )
                     }
                 }
