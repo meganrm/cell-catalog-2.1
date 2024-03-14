@@ -136,6 +136,7 @@ const TemplateWrapper = ({ children }: React.PropsWithChildren) => {
                 <Content>{children}</Content>
             </AntLayout>
             <Script
+                type="text/javascript"
                 src="iframeResizer.js" />
         </ConfigProvider>
     );
