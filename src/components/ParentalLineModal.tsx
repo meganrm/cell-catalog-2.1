@@ -11,7 +11,7 @@ const {
     header,
     subTitle,
     clone,
-    linkOutContainer,
+    actionButton,
 } = require("../style/modal.module.css");
 const LinkOut = require("../img/external-link.svg");
 
@@ -58,12 +58,18 @@ const ParentalLineModal = (props: ParentalLineModalProps) => {
                             style={{ width: 480, border: "2px solid #003075" }}
                             href="https://www.allencell.org/cell-catalog.html"
                             target="_blank"
+                            className={actionButton}
                         >
-                            More information
-                            <div className={linkOutContainer}>
-
-                            <Icon component={LinkOut} style={{color:"transparent", fontSize: "24px"}}/>
-                            </div>
+                            <Flex justify="flex-end" gap={142}>
+                                More information
+                                <Icon
+                                    component={LinkOut}
+                                    style={{
+                                        color: "transparent",
+                                        fontSize: "24px",
+                                    }}
+                                />
+                            </Flex>
                         </Button>
                     </div>
                 }

@@ -70,18 +70,11 @@
     line-height: 33px;
 }
 
-.link-out-container {
-    position: absolute;
-    display: inline-block;
-    width: 333px;
-}
-
-.link-out-container span {
-    position: relative;
-    right: 0;
-    top: -3px
-}
-
-.link-out-container:hover path{
+.action-button:hover path{
     stroke: var(--WHITE);
+}
+
+.action-button {
+    height: auto;
+    font-weight: 600;
 }

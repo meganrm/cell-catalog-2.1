@@ -53,6 +53,7 @@ const TemplateWrapper = ({ children }: React.PropsWithChildren) => {
                         primaryShadow: "none",
                         defaultGhostColor: DARK_BLUE,
                         defaultHoverBorderColor: DARK_BLUE,
+                        contentFontSize: 16,
                     },
                     Table: {
                         headerColor: LIGHT_GRAY,
