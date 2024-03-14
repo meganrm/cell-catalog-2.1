@@ -5,5 +5,7 @@
   NODE_VERSION = "18.17.1"
   YARN_VERSION = "1.22.4"
   YARN_FLAGS = "--no-ignore-optional"
-
-
+[[headers]]
+  [headers.values]
+    X-Frame-Options = "SAMEORIGIN"
+    Content-Security-Policy = frame-ancestors allencell.org *.allencell.org;
