@@ -8,4 +8,3 @@
 [[headers]]
   [headers.values]
     X-Frame-Options = "SAMEORIGIN"
-    Content-Security-Policy = frame-ancestors allencell.org *.allencell.org;
