@@ -48,7 +48,7 @@ const ParentalLineModal = (props: ParentalLineModalProps) => {
                 title={headerElement}
                 open={isModalOpen}
                 onCancel={handleCancel}
-                width={544}
+                width={555}
                 centered={true}
                 className={modal}
                 footer={
