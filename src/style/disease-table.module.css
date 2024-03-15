@@ -45,6 +45,19 @@
     display: none; /* remove dividers between column headers */
 }
 
+.container .hover-column:global(.ant-table-cell):has(a):hover {
+    background-color: var(--DARK_BLUE);
+}
+
+.hover-column:hover .action-button {
+    color: var(--WHITE);
+}
+
+.hover-column:hover .action-button path {
+    fill: var(--DARK_BLUE);
+    stroke: var(--WHITE);
+}
+
 .container h4 {
     font-family: "Open Sans", sans-serif;
     font-size: 24px;

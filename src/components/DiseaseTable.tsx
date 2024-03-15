@@ -17,6 +17,7 @@ const {
     clones,
     comingSoon,
     cloneNumber,
+    hoverColumn,
     footer,
     cellLineId
 } = require("../style/disease-table.module.css");
@@ -122,6 +123,7 @@ const DiseaseTable = ({
                         title: "",
                         key: "order_link",
                         dataIndex: "order_link",
+                        className: hoverColumn,
                         render: (order_link) => {
                             if (inProgress) {
                                 return <>{""}</>; // still want a blank column
@@ -151,6 +153,7 @@ const DiseaseTable = ({
                         title: "",
                         key: "certificate_of_analysis",
                         dataIndex: "certificate_of_analysis",
+                        className: hoverColumn,
                         render: (certificate_of_analysis) => {
                             return (
                                 certificate_of_analysis && (
