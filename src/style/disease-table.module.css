@@ -45,15 +45,15 @@
     display: none; /* remove dividers between column headers */
 }
 
-.container :global(.ant-table-tbody > tr > td:nth-child(n+6):hover) {
+.container .hover-column:global(.ant-table-cell):has(a):hover {
     background-color: var(--DARK_BLUE);
 }
 
-.container :global(.ant-table-tbody > tr > td:nth-child(n+6):hover) .action-button {
+.hover-column:hover .action-button {
     color: var(--WHITE);
 }
 
-.container :global(.ant-table-tbody > tr > td:nth-child(n+6):hover) .action-button path {
+.hover-column:hover .action-button path {
     fill: var(--DARK_BLUE);
     stroke: var(--WHITE);
 }
