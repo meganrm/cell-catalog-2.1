@@ -5,14 +5,14 @@ import { GatsbyImage, getImage } from "gatsby-plugin-image";
 
 import { FileNode } from "gatsby-plugin-image/dist/src/components/hooks";
 import { DescriptionsItemType } from "antd/es/descriptions";
-import {
+const {
     modal,
     title,
     header,
     subTitle,
     clone,
-    linkOutContainer,
-} from "../style/modal.module.css";
+    actionButton,
+} = require("../style/modal.module.css");
 const LinkOut = require("../img/external-link.svg");
 
 interface ParentalLineModalProps {
@@ -48,7 +48,7 @@ const ParentalLineModal = (props: ParentalLineModalProps) => {
                 title={headerElement}
                 open={isModalOpen}
                 onCancel={handleCancel}
-                width={544}
+                width={555}
                 centered={true}
                 className={modal}
                 footer={
@@ -58,12 +58,18 @@ const ParentalLineModal = (props: ParentalLineModalProps) => {
                             style={{ width: 480, border: "2px solid #003075" }}
                             href="https://www.allencell.org/cell-catalog.html"
                             target="_blank"
+                            className={actionButton}
                         >
-                            More information
-                            <div className={linkOutContainer}>
-
-                            <Icon component={LinkOut} style={{color:"transparent", fontSize: "24px"}}/>
-                            </div>
+                            <Flex justify="flex-end" gap={142}>
+                                More information
+                                <Icon
+                                    component={LinkOut}
+                                    style={{
+                                        color: "transparent",
+                                        fontSize: "24px",
+                                    }}
+                                />
+                            </Flex>
                         </Button>
                     </div>
                 }
@@ -85,9 +91,12 @@ const ParentalLineModal = (props: ParentalLineModalProps) => {
                         labelStyle={{
                             alignItems: "center",
                             width: "142px",
+                            fontSize: "16px",
                         }}
                         contentStyle={{
                             alignItems: "center",
+                            fontSize: "18px",
+                            fontWeight: "semi-bold",
                         }}
                     />
                 </Flex>

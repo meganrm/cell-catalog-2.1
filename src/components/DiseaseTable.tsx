@@ -18,6 +18,7 @@ const {
     comingSoon,
     cloneNumber,
     footer,
+    cellLineId
 } = require("../style/disease-table.module.css");
 import { WHITE } from "./Layout";
 
@@ -53,6 +54,7 @@ const DiseaseTable = ({
                     {
                         title: "Cell Line ID",
                         key: "cell_line_id",
+                        className: cellLineId,
                         width: 180,
                         dataIndex: "cell_line_id",
                         render: (cell_line_id: string) => (

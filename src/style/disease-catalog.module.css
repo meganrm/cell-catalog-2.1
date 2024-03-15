@@ -13,6 +13,10 @@
     color: var(--link-color);
 }
 
+.coriell-wrapper {
+    margin: auto;
+}
+
 .coriell-card {
     width: 382px;
     border: 1px solid var(--border-color)
