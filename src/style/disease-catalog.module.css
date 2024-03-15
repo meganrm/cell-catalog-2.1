@@ -1,12 +1,18 @@
 .header {
-    margin-bottom: 32px;
+    margin: 16px 0 40px 0;
+}
+
+.header :global(.content) {
+    display: flex;
+    gap: 16px;
+    flex-direction: column;
 }
 
 .header p {
     font-size: 20px;
     font-weight: 400;
     color: var(--BLACK); 
-    margin: 16px 0 0 0;
+    margin: 0;
 }
 
 .header a {
@@ -18,13 +24,13 @@
 }
 
 .coriell-card {
-    width: 382px;
+    width: 250px;
     border: 1px solid var(--border-color)
 }
 
 .coriell-card :global(.ant-card-head) {
     font-family: "Open Sans";
-    font-size: 24px;
+    font-size: 16px;
     font-weight: 600;
     text-align: center;
     border-bottom: none;
@@ -32,7 +38,8 @@
 
 .coriell-card :global(.ant-card-head) {
     color: var(--BLUE);
-    padding: 16px 0 0 0 ;
+    padding: 9px 0 0 0;
+    min-height: inherit;
 }
 
 .coriell-card :global(.gatsby-image-wrapper) {
@@ -40,7 +47,7 @@
 }
 
 .coriell-card :global(.ant-card-body) {
-    padding: 14px;
+    padding: 9px;
 }
 
 .main-heading {
