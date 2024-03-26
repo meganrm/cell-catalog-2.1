@@ -133,7 +133,6 @@ const TemplateWrapper = ({ children }: React.PropsWithChildren) => {
                 />
             </Helmet>
             <AntLayout className={container}>
-                <Navbar />
                 <Content>{children}</Content>
             </AntLayout>
             <Script
