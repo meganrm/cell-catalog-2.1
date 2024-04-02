@@ -8,5 +8,5 @@ parental_line: 75
 status: done
 clones:
   mutants: 2
-  isogenic_controls: 1
+  isogenic_controls: 3
 ---
