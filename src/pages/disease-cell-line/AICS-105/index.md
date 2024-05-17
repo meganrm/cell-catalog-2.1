@@ -7,6 +7,7 @@ snp: NM_000257.4(MYH7):c.1106G>A(p.Arg369Gln)
 parental_line: 75
 status: done
 clones:
-    mutants: 4
-    isogenic_controls: 2
+  mutants: 4
+  isogenic_controls: 2
+certificate_of_analysis: aics_0105__myh7_r369q_cofa_final.pdf
 ---
