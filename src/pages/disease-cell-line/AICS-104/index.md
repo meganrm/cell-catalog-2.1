@@ -7,8 +7,8 @@ snp: NM_000257.4(MYH7):c.752C>A(p.His251Asn)
 parental_line: 75
 status: done
 clones:
-    mutants: 2
-    isogenic_controls: 2
-order_link: test
-certificate_of_analysis: aics_0104__myh7_h251n_cofa-2-.pdf
+  mutants: 2
+  isogenic_controls: 2
+order_link: ""
+certificate_of_analysis: aics_0104__myh7_h251n_cofa_final.pdf
 ---
