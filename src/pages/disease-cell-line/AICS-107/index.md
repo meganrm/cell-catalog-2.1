@@ -7,7 +7,8 @@ snp: NM_000257.4(MYH7):c.1816G>A(p.Val606Met)
 parental_line: 75
 status: done
 clones:
-    mutants: 2
-    isogenic_controls: 1
-order_link: test
+  mutants: 2
+  isogenic_controls: 1
+order_link: ""
+certificate_of_analysis: aics_0107__myh7_v606m_cofa_final.pdf
 ---
