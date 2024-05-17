@@ -8,5 +8,6 @@ parental_line: 75
 status: done
 clones:
   mutants: 2
-  isogenic_controls: 3
+  isogenic_controls: 2
+certificate_of_analysis: aics_109__myh7_e525k_cofa_final.pdf
 ---
