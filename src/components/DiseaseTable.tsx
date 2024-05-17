@@ -144,7 +144,7 @@ const DiseaseTable = ({
                                                     fontSize: "40px",
                                                 }}
                                             />
-                                            Obtain Line
+                                            Obtain Collection
                                         </Flex>
                                     </a>
                                 );
