@@ -19,7 +19,7 @@ const {
     cloneNumber,
     hoverColumn,
     footer,
-    cellLineId
+    cellLineId,
 } = require("../style/disease-table.module.css");
 import { WHITE } from "./Layout";
 
@@ -53,13 +53,15 @@ const DiseaseTable = ({
                 pagination={false}
                 columns={[
                     {
-                        title: "Cell Line ID",
+                        title: "Cell Collection ID",
                         key: "cell_line_id",
                         className: cellLineId,
                         width: 180,
                         dataIndex: "cell_line_id",
                         render: (cell_line_id: string) => (
-                            <h4 key={cell_line_id} >{formatCellLineId(cell_line_id)}</h4>
+                            <h4 key={cell_line_id}>
+                                {formatCellLineId(cell_line_id)}
+                            </h4>
                         ),
                     },
                     {
