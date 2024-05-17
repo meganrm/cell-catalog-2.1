@@ -9,5 +9,6 @@ status: done
 clones:
   mutants: 2
   isogenic_controls: 2
-order_link: test
+order_link: ""
+certificate_of_analysis: aics_0106__myh7_s291f_cofa_final.pdf
 ---
