@@ -37,12 +37,7 @@ collections:
                 widget: "number",
                 required: true,
             }
-          - {
-                label: "name",
-                name: "name",
-                widget: "string",
-                required: false,
-            }
+          - { label: "name", name: "name", widget: "string", required: false }
           - {
                 label: "Status",
                 name: "status",
@@ -70,7 +65,7 @@ collections:
                 name: "parental_line",
                 widget: "number",
                 default: 0,
-                required: true
+                required: true,
             }
           - {
                 label: "Gene",
@@ -80,7 +75,7 @@ collections:
                 search_fields: ["symbol", "name", "protein", "structure"],
                 value_field: "symbol",
                 display_fields: ["symbol"],
-                required: false
+                required: false,
             }
           - {
                 label: "Allele Count",
@@ -145,13 +140,10 @@ collections:
           - {
                 label: "Disease",
                 name: "disease",
-                widget: "select",
-                options:
-                    [
-                        "Cardiomyopathy",
-                        "Cardiomyopathy (Skeletal)",
-                        "Laminopathy",
-                    ],
+                widget: "relation",
+                collection: "disease",
+                search_fields: ["name"],
+                value_field: "name",
             }
           - { label: "Publish Date", name: "date", widget: "datetime" }
           - { label: "SNP", name: "snp", widget: string }
@@ -171,11 +163,23 @@ collections:
                 default: "in progress",
                 required: true,
             }
-          - { label: "Clones", name: "clones", widget: object,
-              fields: [
-                  { label: "Number of mutant clones", name: "mutants", widget: number },
-                  { label: "Number of isogenic conrols", name: "isogenic_controls", widget: number },
-              ]
+          - {
+                label: "Clones",
+                name: "clones",
+                widget: object,
+                fields:
+                    [
+                        {
+                            label: "Number of mutant clones",
+                            name: "mutants",
+                            widget: number,
+                        },
+                        {
+                            label: "Number of isogenic conrols",
+                            name: "isogenic_controls",
+                            widget: number,
+                        },
+                    ],
             }
           - {
                 label: "Order Link",
@@ -327,7 +331,11 @@ collections:
                       fields:
                           [
                               { label: Heading, name: heading, widget: string },
-                              { label: Subheading, name: subheading, widget: string },
+                              {
+                                  label: Subheading,
+                                  name: subheading,
+                                  widget: string,
+                              },
 
                               {
                                   label: Description,

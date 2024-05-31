@@ -9,6 +9,6 @@ status: done
 clones:
   mutants: 3
   isogenic_controls: 2
-order_link: ""
+order_link: https://www.coriell.org/0/Sections/Search/DiseaseCollection_Detail.aspx?Ref=AICS-0097&Product=CiPSC&PgId=166
 certificate_of_analysis: aics_0097__myh7_g256e_cofa_final.pdf
 ---
