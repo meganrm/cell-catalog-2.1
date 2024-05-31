@@ -10,5 +10,5 @@ clones:
   mutants: 4
   isogenic_controls: 2
 order_link: https://www.coriell.org/0/Sections/Search/DiseaseCollection_Detail.aspx?Ref=AICS-0105&Product=CiPSC&PgId=166
-certificate_of_analysis: aics_0105__myh7_r369q_cofa_final.pdf
+certificate_of_analysis: https://www.coriell.org/0/PDF/Allen/iPSC/AICS-0105_CofA.pdf
 ---
