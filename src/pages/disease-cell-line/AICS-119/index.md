@@ -10,5 +10,5 @@ clones:
   mutants: 2
   isogenic_controls: 2
 order_link: https://www.coriell.org/0/Sections/Search/DiseaseCollection_Detail.aspx?Ref=AICS-0119&Product=CiPSC&PgId=166
-certificate_of_analysis: aics_119__lmna_g608g_cofa_final_updated.pdf
+certificate_of_analysis: https://www.coriell.org/0/PDF/Allen/iPSC/AICS-0119_CofA.pdf
 ---
