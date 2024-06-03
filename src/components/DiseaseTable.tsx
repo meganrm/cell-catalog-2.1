@@ -162,9 +162,9 @@ const DiseaseTable = ({
                             return (
                                 certificate_of_analysis && (
                                     <a
-                                        key={certificate_of_analysis.publicURL}
+                                        key={certificate_of_analysis}
                                         className={actionButton}
-                                        href={certificate_of_analysis.publicURL}
+                                        href={certificate_of_analysis}
                                         target="_blank"
                                         rel="noreferrer"
                                     >

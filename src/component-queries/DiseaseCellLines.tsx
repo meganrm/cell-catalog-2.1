@@ -71,14 +71,18 @@ const groupLines = (
         }
         cellLineData.diseaseGene = (
             <Flex wrap="wrap">
-                <Tag bordered={false} color="#F2F2F2">{diseaseData.geneSymbol}</Tag>
+                <Tag bordered={false} color="#F2F2F2">
+                    {diseaseData.geneSymbol}
+                </Tag>
                 <div>{diseaseData.geneName}</div>
             </Flex>
         );
         const parentalLine = cellLineData.parental_line.frontmatter;
         const parentalLineItems = getParentalLineItems(parentalLine);
         if (diseaseData.status?.toLowerCase() === "coming soon") {
-            cellLineData.parentalLine = <>{formatCellLineId(parentalLine.cell_line_id)}</>;
+            cellLineData.parentalLine = (
+                <>{formatCellLineId(parentalLine.cell_line_id)}</>
+            );
         } else {
             cellLineData.parentalLine = (
                 <ParentalLineModal
@@ -112,23 +116,21 @@ const DiseaseCellLineTemplate = (props: DiseaseCellLineTemplateProps) => {
     const { edges: cellLines } = props.data.allMarkdownRemark;
     const { diseases } = props;
     const groupedCellLines = groupLines(diseases, cellLines);
-    return diseases
- 
-        .map((disease) => {
-            if (!groupedCellLines[disease.name].length) {
-                return null;
-            }
-            return (
-                <div key={disease.name}>
-                    <DiseaseTable
-                        diseaseName={disease.name}
-                        diseaseCellLines={groupedCellLines[disease.name]}
-                        acknowledgements={disease.acknowledgements}
-                        status={disease.status}
-                    />
-                </div>
-            );
-        });
+    return diseases.map((disease) => {
+        if (!groupedCellLines[disease.name].length) {
+            return null;
+        }
+        return (
+            <div key={disease.name}>
+                <DiseaseTable
+                    diseaseName={disease.name}
+                    diseaseCellLines={groupedCellLines[disease.name]}
+                    acknowledgements={disease.acknowledgements}
+                    status={disease.status}
+                />
+            </div>
+        );
+    });
 };
 
 export default function DiseaseCellLineQuery(props: {
@@ -185,9 +187,7 @@ export default function DiseaseCellLineQuery(props: {
                                         isogenic_controls
                                         mutants
                                     }
-                                    certificate_of_analysis {
-                                        publicURL
-                                    }
+                                    certificate_of_analysis
                                     order_link
                                 }
                             }
