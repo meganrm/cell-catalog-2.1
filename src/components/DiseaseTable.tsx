@@ -132,9 +132,11 @@ const DiseaseTable = ({
                             } else {
                                 return (
                                     <a
+                                        key={order_link}
                                         className={actionButton}
                                         href={order_link}
-                                        key={order_link}
+                                        target="_blank"
+                                        rel="noreferrer"
                                     >
                                         <Flex>
                                             <Icon
@@ -160,10 +162,11 @@ const DiseaseTable = ({
                             return (
                                 certificate_of_analysis && (
                                     <a
+                                        key={certificate_of_analysis.publicURL}
                                         className={actionButton}
                                         href={certificate_of_analysis.publicURL}
                                         target="_blank"
-                                        key={certificate_of_analysis.publicURL}
+                                        rel="noreferrer"
                                     >
                                         <Flex>
                                             <Icon
