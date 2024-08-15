@@ -170,14 +170,51 @@ collections:
                 fields:
                     [
                         {
-                            label: "Number of mutant clones",
+                            label: "Mutant clones",
                             name: "mutants",
-                            widget: number,
+                            widget: list,
+                            fields:
+                                [
+                                    {
+                                        label: "Clone number",
+                                        name: "clone_number",
+                                        widget: "number",
+                                    },
+                                    {
+                                        label: "Transfection Replicate",
+                                        name: "transfection_replicate",
+                                        widget: "string",
+                                    },
+                                    {
+                                        label: "PCR Sanger Result",
+                                        name: "pcr_sanger_result",
+                                        widget: "string",
+                                    },
+                                ],
                         },
+
                         {
-                            label: "Number of isogenic conrols",
+                            label: "Isogenic controls",
                             name: "isogenic_controls",
-                            widget: number,
+                            widget: list,
+                            fields:
+                                [
+                                    {
+                                        label: "Clone number",
+                                        name: "clone_number",
+                                        widget: "number",
+                                    },
+                                    {
+                                        label: "Transfection Replicate",
+                                        name: "transfection_replicate",
+                                        widget: "string",
+                                    },
+                                    {
+                                        label: "PCR Sanger Result",
+                                        name: "pcr_sanger_result",
+                                        widget: "string",
+                                    },
+                                ],
                         },
                     ],
             }
@@ -191,6 +228,12 @@ collections:
                 label: "Certificate of Analysis",
                 name: "certificate_of_analysis",
                 widget: "file",
+                required: false,
+            }
+          - {
+                label: "hPSCreg Certificate",
+                name: "hPSCreg_certificate_link",
+                widget: "string",
                 required: false,
             }
     - name: "gene-name"
