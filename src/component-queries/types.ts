@@ -1,4 +1,3 @@
-
 export interface GeneFrontMatter {
     name: string;
     symbol: string;
@@ -21,12 +20,14 @@ export interface DiseaseCellLineFrontmatter {
     templateKey: string;
     cell_line_id: string;
     parental_line: { frontmatter: ParentalLineFrontmatter };
-    disease: string;
-    snp: string;
-    clones: {
-        isogenic_controls: number;
-        mutants: number;
+    disease: {
+        frontmatter: DiseaseFrontmatter;
     };
+    snp: string;
+    // clones: {
+    //     isogenic_controls: number;
+    //     mutants: number;
+    // };
     certificate_of_analysis: string;
     order_link: string;
     status: string;

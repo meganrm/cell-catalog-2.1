@@ -14,7 +14,6 @@ const {
     container,
     snpColumn,
     actionButton,
-    clones,
     comingSoon,
     cloneNumber,
     hoverColumn,
@@ -22,6 +21,7 @@ const {
     cellLineId,
 } = require("../style/disease-table.module.css");
 import { WHITE } from "./Layout";
+import { Link } from "gatsby";
 
 interface DiseaseTableProps {
     diseaseName: string;
@@ -58,10 +58,12 @@ const DiseaseTable = ({
                         className: cellLineId,
                         width: 180,
                         dataIndex: "cell_line_id",
-                        render: (cell_line_id: string) => (
-                            <h4 key={cell_line_id}>
-                                {formatCellLineId(cell_line_id)}
-                            </h4>
+                        render: (cell_line_id: string, record) => (
+                            <Link to={record.path}>
+                                <h4 key={cell_line_id}>
+                                    {formatCellLineId(cell_line_id)}
+                                </h4>
+                            </Link>
                         ),
                     },
                     {
@@ -90,37 +92,37 @@ const DiseaseTable = ({
                         key: "parentalLine",
                         dataIndex: "parentalLine",
                     },
-                    {
-                        title: "Clones",
-                        key: "clones",
-                        dataIndex: "clones",
-                        className: clones,
-                        render: ({ mutants, isogenic_controls }) => {
-                            return (
-                                <Flex vertical={true} key={mutants}>
-                                    <div>
-                                        {" "}
-                                        <span
-                                            className={cloneNumber}
-                                            key={mutants}
-                                        >
-                                            {mutants}
-                                        </span>
-                                        <span> mutant clones</span>
-                                    </div>
-                                    <div>
-                                        <span
-                                            className={cloneNumber}
-                                            key={isogenic_controls}
-                                        >
-                                            {isogenic_controls}
-                                        </span>
-                                        <span> isogenic controls</span>
-                                    </div>
-                                </Flex>
-                            );
-                        },
-                    },
+                    // {
+                    //     title: "Clones",
+                    //     key: "clones",
+                    //     dataIndex: "clones",
+                    //     className: clones,
+                    //     render: ({ mutants, isogenic_controls }) => {
+                    //         return (
+                    //             <Flex vertical={true} key={mutants}>
+                    //                 <div>
+                    //                     {" "}
+                    //                     <span
+                    //                         className={cloneNumber}
+                    //                         key={mutants}
+                    //                     >
+                    //                         {mutants}
+                    //                     </span>
+                    //                     <span> mutant clones</span>
+                    //                 </div>
+                    //                 <div>
+                    //                     <span
+                    //                         className={cloneNumber}
+                    //                         key={isogenic_controls}
+                    //                     >
+                    //                         {isogenic_controls}
+                    //                     </span>
+                    //                     <span> isogenic controls</span>
+                    //                 </div>
+                    //             </Flex>
+                    //         );
+                    //     },
+                    // },
                     {
                         title: "",
                         key: "order_link",

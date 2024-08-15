@@ -1,60 +1,126 @@
 import React from "react";
-import PropTypes from "prop-types";
 import { graphql } from "gatsby";
 import Layout from "../components/Layout";
+import {
+    DiseaseCellLineEdge,
+    DiseaseCellLineFrontmatter,
+    GeneFrontMatter,
+    ParentalLineFrontmatter,
+} from "../component-queries/types";
+import { Button, Card, Descriptions, Flex } from "antd";
+import { formatCellLineId } from "../utils";
+import Icon from "@ant-design/icons";
 
+interface DiseaseCellLineTemplateProps {
+    cellLineId: string;
+    geneName: string;
+    geneSymbol: string;
+    status: string;
+    snp: string;
+    orderLink: string;
+    certificateOfAnalysis: string;
+    parentalLine: any;
+    parentLineGene: GeneFrontMatter;
+}
 // eslint-disable-next-line
-export const CellLineTemplate = ({
+export const DiseaseCellLineTemplate = ({
     cellLineId,
-    cloneNumber,
-    gene,
-    tagLocation,
+    parentLineGene,
+    geneName,
+    geneSymbol,
     status,
-}) => {
+    snp,
+    orderLink,
+    certificateOfAnalysis,
+    parentalLine,
+}: DiseaseCellLineTemplateProps) => {
+    const tableData = [
+        {
+            key: "1",
+            label: "SNP",
+            children: snp,
+        },
+        {
+            key: "2",
+            label: "Gene Symbol",
+            children: geneSymbol,
+        },
+        {
+            key: "3",
+            label: "Gene Name",
+            children: geneName,
+        },
+        {
+            key: "4",
+            label: "Parental Line",
+            children: `${parentalLine.cell_line_id} cl. ${parentalLine.clone_number} ${parentLineGene.symbol}`,
+        },
+    ];
     return (
-        <section className="section">
-            <div className="container content">
-                <div className="columns">
-                    <div className="column is-10 is-offset-1">
-                        <h1 className="title is-size-2 has-text-weight-bold is-bold-light">
-                            AICS-{cellLineId}
-                        </h1>
-                        <p>Gene: {gene}</p>
-                    </div>
-                </div>
-            </div>
-        </section>
+        <Card
+            title={formatCellLineId(cellLineId)}
+            bordered={false}
+            style={{ width: 538 }}
+        >
+            <Descriptions
+                items={tableData}
+                column={1}
+                layout="horizontal"
+                colon={false}
+                bordered
+                labelStyle={{
+                    alignItems: "center",
+                    width: "142px",
+                    fontSize: "16px",
+                }}
+                contentStyle={{
+                    alignItems: "center",
+                    fontSize: "18px",
+                    fontWeight: "semi-bold",
+                }}
+            />
+            <Button
+                type="primary"
+                style={{ width: 480, border: "2px solid #003075" }}
+                href={certificateOfAnalysis}
+                target="_blank"
+                rel="noreferrer"
+            >
+                QC Data Summary
+            </Button>
+        </Card>
     );
 };
 
-CellLineTemplate.propTypes = {
-    cellLineId: PropTypes.string,
-    cloneNumber: PropTypes.number,
-    gene: PropTypes.string,
-    tagLocation: PropTypes.string,
-    status: PropTypes.string,
+const CellLine = ({ data }: QueryResult) => {
+    const { markdownRemark: cellLine } = data;
+    const parentalLineData = cellLine.frontmatter.parental_line.frontmatter;
+    const { name: geneName, symbol: geneSymbol } =
+        cellLine.frontmatter.disease.frontmatter.gene.frontmatter;
+    return (
+        <Layout>
+            <DiseaseCellLineTemplate
+                cellLineId={cellLine.frontmatter.cell_line_id}
+                snp={cellLine.frontmatter.snp}
+                orderLink={cellLine.frontmatter.order_link}
+                certificateOfAnalysis={
+                    cellLine.frontmatter.certificate_of_analysis
+                }
+                geneName={geneName}
+                geneSymbol={geneSymbol}
+                parentalLine={parentalLineData}
+                status={cellLine.frontmatter.status}
+                parentLineGene={parentalLineData.gene.frontmatter}
+            />
+        </Layout>
+    );
 };
 
-const CellLine = ({ data }) => {
-  const { markdownRemark: cellLine } = data;
-  return (
-      <Layout>
-          <CellLineTemplate
-              cellLineId={cellLine.frontmatter.cell_line_id}
-              cloneNumber={cellLine.frontmatter.clone_number}
-              gene={cellLine.frontmatter.gene}
-              tagLocation={cellLine.frontmatter.tag_location}
-              status={cellLine.frontmatter.status}
-          />
-      </Layout>
-  );
-};
-
-CellLine.propTypes = {
-  data: PropTypes.shape({
-    markdownRemark: PropTypes.object,
-  }),
-};
+interface QueryResult {
+    data: {
+        markdownRemark: { frontmatter: DiseaseCellLineFrontmatter };
+    };
+}
 
 export default CellLine;
 
@@ -64,6 +130,43 @@ export const pageQuery = graphql`
             id
             frontmatter {
                 cell_line_id
+                parental_line {
+                    frontmatter {
+                        cell_line_id
+                        clone_number
+                        tag_location
+                        fluorescent_tag
+                        thumbnail_image {
+                            childImageSharp {
+                                gatsbyImageData(
+                                    placeholder: BLURRED
+                                    layout: FIXED
+                                    width: 192
+                                )
+                            }
+                        }
+                        gene {
+                            frontmatter {
+                                symbol
+                                name
+                            }
+                        }
+                    }
+                }
+                disease {
+                    frontmatter {
+                        name
+                        gene {
+                            frontmatter {
+                                symbol
+                                name
+                            }
+                        }
+                    }
+                }
+                snp
+                certificate_of_analysis
+                order_link
             }
         }
     }

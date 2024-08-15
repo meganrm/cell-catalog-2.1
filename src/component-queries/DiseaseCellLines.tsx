@@ -15,6 +15,7 @@ import { formatCellLineId } from "../utils";
 export interface UnpackedDiseaseCellLine extends DiseaseCellLineFrontmatter {
     diseaseGene: JSX.Element | null;
     parentalLine: JSX.Element | null;
+    path: string;
 }
 
 const getParentalLineItems = (parentalLine: ParentalLineFrontmatter) => {
@@ -60,12 +61,15 @@ const groupLines = (
     }, initObject);
     return cellLines.reduce((acc, cellLine) => {
         const { disease } = cellLine.node.frontmatter;
+        const diseaseName = disease.frontmatter.name;
+        console.log(cellLine.node.fields.slug);
         const cellLineData: UnpackedDiseaseCellLine = {
             ...cellLine.node.frontmatter,
+            path: cellLine.node.fields.slug,
             diseaseGene: null,
             parentalLine: null,
         };
-        const diseaseData = diseases.find((d) => d.name === disease);
+        const diseaseData = diseases.find((d) => d.name === diseaseName);
         if (!diseaseData) {
             return acc;
         }
@@ -95,7 +99,7 @@ const groupLines = (
             );
         }
 
-        acc[disease].push(cellLineData);
+        acc[diseaseName].push(cellLineData);
         return acc;
     }, diseaseObj);
 };
@@ -181,12 +185,12 @@ export default function DiseaseCellLineQuery(props: {
                                             }
                                         }
                                     }
-                                    disease
-                                    snp
-                                    clones {
-                                        isogenic_controls
-                                        mutants
+                                    disease {
+                                        frontmatter {
+                                            name
+                                        }
                                     }
+                                    snp
                                     certificate_of_analysis
                                     order_link
                                 }

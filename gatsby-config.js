@@ -103,6 +103,7 @@ module.exports = {
     ],
     mapping: {
         "MarkdownRemark.frontmatter.gene": `MarkdownRemark.frontmatter.symbol`,
+        "MarkdownRemark.frontmatter.disease": `MarkdownRemark.frontmatter.name`,
         "MarkdownRemark.frontmatter.parental_line": `MarkdownRemark.frontmatter.cell_line_id`,
     },
 };
