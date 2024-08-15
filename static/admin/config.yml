@@ -233,8 +233,53 @@ collections:
           - {
                 label: "hPSCreg Certificate",
                 name: "hPSCreg_certificate_link",
-                widget: "string",
+                widget: "file",
                 required: false,
+            }
+          - {
+                label: "Image and Video Carousel",
+                name: "images_and_videos",
+                widget: "object",
+                required: false,
+                fields:
+                    [
+                        {
+                            label: "Images",
+                            name: "images",
+                            widget: "list",
+                            fields:
+                                [
+                                    {
+                                        label: "Image",
+                                        name: "image",
+                                        widget: "image",
+                                    },
+                                    {
+                                        label: "Caption",
+                                        name: "caption",
+                                        widget: "string",
+                                    },
+                                ],
+                        },
+                        {
+                            label: "Videos",
+                            name: "videos",
+                            widget: "list",
+                            fields:
+                                [
+                                    {
+                                        label: "Video",
+                                        name: "video",
+                                        widget: "file",
+                                    },
+                                    {
+                                        label: "Caption",
+                                        name: "caption",
+                                        widget: "string",
+                                    },
+                                ],
+                        },
+                    ],
             }
     - name: "gene-name"
       label: "Gene and structures names"
