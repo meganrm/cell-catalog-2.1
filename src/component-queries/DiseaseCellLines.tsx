@@ -183,10 +183,6 @@ export default function DiseaseCellLineQuery(props: {
                                     }
                                     disease
                                     snp
-                                    clones {
-                                        isogenic_controls
-                                        mutants
-                                    }
                                     certificate_of_analysis
                                     order_link
                                 }
