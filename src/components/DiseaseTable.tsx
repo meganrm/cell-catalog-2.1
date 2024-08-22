@@ -99,13 +99,13 @@ const DiseaseTable = ({
                         key: "clones",
                         dataIndex: "clones",
                         className: clones,
-                        render: (clones) => {
+                        render: (clones, _, index) => {
                             const numMutants = filter(clones, {
                                 type: "Mutant",
                             }).length;
                             const numIsogenics = clones.length - numMutants;
                             return (
-                                <Flex vertical={true} key={numMutants}>
+                                <Flex vertical={true} key={index}>
                                     <div>
                                         {" "}
                                         <span

@@ -185,7 +185,11 @@ export default function DiseaseCellLineQuery(props: {
                                             }
                                         }
                                     }
-                                    disease
+                                    disease {
+                                        frontmatter {
+                                            name
+                                        }
+                                    }
                                     clones {
                                         type
                                     }
