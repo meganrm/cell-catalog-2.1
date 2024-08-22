@@ -2,14 +2,16 @@ import React from "react";
 import { graphql } from "gatsby";
 import Layout from "../components/Layout";
 import {
+    Clone,
     DiseaseCellLineEdge,
     DiseaseCellLineFrontmatter,
     GeneFrontMatter,
     ParentalLineFrontmatter,
 } from "../component-queries/types";
-import { Button, Card, Descriptions, Flex } from "antd";
+import { Button, Card, Descriptions, Flex, Table } from "antd";
 import { formatCellLineId } from "../utils";
 import Icon from "@ant-design/icons";
+import CloneTable from "../components/CloneTable";
 
 interface DiseaseCellLineTemplateProps {
     cellLineId: string;
@@ -21,6 +23,7 @@ interface DiseaseCellLineTemplateProps {
     certificateOfAnalysis: string;
     parentalLine: any;
     parentLineGene: GeneFrontMatter;
+    clones: Clone[];
 }
 // eslint-disable-next-line
 export const DiseaseCellLineTemplate = ({
@@ -29,6 +32,7 @@ export const DiseaseCellLineTemplate = ({
     geneName,
     geneSymbol,
     status,
+    clones,
     snp,
     orderLink,
     certificateOfAnalysis,
@@ -53,15 +57,21 @@ export const DiseaseCellLineTemplate = ({
         {
             key: "4",
             label: "Parental Line",
-            children: `${parentalLine.cell_line_id} cl. ${parentalLine.clone_number} ${parentLineGene.symbol}`,
+            children: `${formatCellLineId(parentalLine.cell_line_id)} cl. ${
+                parentalLine.clone_number
+            } ${parentLineGene.symbol}`,
         },
     ];
+
+    const title = (
+        <Flex>
+            <h2>{formatCellLineId(cellLineId)}</h2>
+            <Button href={orderLink}>Share</Button>
+        </Flex>
+    );
+
     return (
-        <Card
-            title={formatCellLineId(cellLineId)}
-            bordered={false}
-            style={{ width: 538 }}
-        >
+        <Card title={title} bordered={false} style={{ width: 538 }}>
             <Descriptions
                 items={tableData}
                 column={1}
@@ -79,6 +89,7 @@ export const DiseaseCellLineTemplate = ({
                     fontWeight: "semi-bold",
                 }}
             />
+            <CloneTable dataSource={clones} />
             <Button
                 type="primary"
                 style={{ width: 480, border: "2px solid #003075" }}
@@ -111,6 +122,7 @@ const CellLine = ({ data }: QueryResult) => {
                 parentalLine={parentalLineData}
                 status={cellLine.frontmatter.status}
                 parentLineGene={parentalLineData.gene.frontmatter}
+                clones={cellLine.frontmatter.clones}
             />
         </Layout>
     );
@@ -165,6 +177,9 @@ export const pageQuery = graphql`
                     }
                 }
                 snp
+                clones {
+                    type
+                }
                 certificate_of_analysis
                 order_link
             }

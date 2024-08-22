@@ -16,6 +16,15 @@ export interface ParentalLineFrontmatter {
     };
 }
 
+// NOTE: Temporarily optional fields, but
+// once the data has been updated by gene editing
+// these fields will be required
+export interface Clone {
+    type: string;
+    clone_number?: number;
+    genotype?: string;
+    transfection_replicate?: string;
+}
 export interface DiseaseCellLineFrontmatter {
     templateKey: string;
     cell_line_id: string;
@@ -24,10 +33,7 @@ export interface DiseaseCellLineFrontmatter {
         frontmatter: DiseaseFrontmatter;
     };
     snp: string;
-    // clones: {
-    //     isogenic_controls: number;
-    //     mutants: number;
-    // };
+    clones: Clone[];
     certificate_of_analysis: string;
     order_link: string;
     status: string;

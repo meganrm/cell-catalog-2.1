@@ -29,6 +29,7 @@ const TemplateWrapper = ({ children }: React.PropsWithChildren) => {
                     colorLinkHover: DARK_BLUE,
                     borderRadius: 4,
                     colorBorder: DARK_GRAY,
+                    fontFamily: "Open Sans",
                 },
                 components: {
                     Layout: {
@@ -135,9 +136,7 @@ const TemplateWrapper = ({ children }: React.PropsWithChildren) => {
             <AntLayout className={container}>
                 <Content>{children}</Content>
             </AntLayout>
-            <Script
-                type="text/javascript"
-                src="/iframeResizer.js" />
+            <Script type="text/javascript" src="/iframeResizer.js" />
         </ConfigProvider>
     );
 };

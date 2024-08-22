@@ -1,0 +1,19 @@
+.container :global(.ant-table-thead .ant-table-cell)::before {
+    display: none; /* remove dividers between column headers */
+}
+
+.container {
+    border-radius: 4px;
+    border: 1px var(--small-table-border-color) solid;
+}
+
+.container :global(.ant-table) {
+    border-radius: 4px;
+}
+.row :global(.ant-table-cell) {
+    border-bottom: none !important;
+}
+
+.footer {
+    font-size: 12px;
+}
