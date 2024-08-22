@@ -1,17 +1,19 @@
 import React from "react";
 import { graphql } from "gatsby";
+import { Button, Card, Descriptions, Divider, Flex } from "antd";
+
 import Layout from "../components/Layout";
 import {
     Clone,
-    DiseaseCellLineEdge,
     DiseaseCellLineFrontmatter,
     GeneFrontMatter,
-    ParentalLineFrontmatter,
 } from "../component-queries/types";
-import { Button, Card, Descriptions, Flex, Table } from "antd";
-import { formatCellLineId } from "../utils";
-import Icon from "@ant-design/icons";
+import { formatCellLineId, getCloneSummary } from "../utils";
 import CloneTable from "../components/CloneTable";
+import Icon from "@ant-design/icons";
+
+const { container, title } = require("../style/main-card.module.css");
+const Share = require("../img/share-icon.svg");
 
 interface DiseaseCellLineTemplateProps {
     cellLineId: string;
@@ -24,6 +26,7 @@ interface DiseaseCellLineTemplateProps {
     parentalLine: any;
     parentLineGene: GeneFrontMatter;
     clones: Clone[];
+    healthCertificate: string;
 }
 // eslint-disable-next-line
 export const DiseaseCellLineTemplate = ({
@@ -31,12 +34,12 @@ export const DiseaseCellLineTemplate = ({
     parentLineGene,
     geneName,
     geneSymbol,
-    status,
     clones,
     snp,
     orderLink,
     certificateOfAnalysis,
     parentalLine,
+    healthCertificate,
 }: DiseaseCellLineTemplateProps) => {
     const tableData = [
         {
@@ -63,15 +66,30 @@ export const DiseaseCellLineTemplate = ({
         },
     ];
 
-    const title = (
-        <Flex>
-            <h2>{formatCellLineId(cellLineId)}</h2>
-            <Button href={orderLink}>Share</Button>
+    const titleContents = (
+        <Flex justify="space-between" align="center">
+            <div className={title}>{formatCellLineId(cellLineId)}</div>
+            <Button ghost href={orderLink}>
+                Share
+                <Icon
+                    component={Share}
+                    style={{
+                        color: "transparent",
+                        fontSize: "18px",
+                    }}
+                />
+            </Button>
         </Flex>
     );
 
+    const cloneSummary = getCloneSummary(clones);
     return (
-        <Card title={title} bordered={false} style={{ width: 538 }}>
+        <Card
+            title={titleContents}
+            bordered={false}
+            style={{ width: 590 }}
+            className={container}
+        >
             <Descriptions
                 items={tableData}
                 column={1}
@@ -80,7 +98,6 @@ export const DiseaseCellLineTemplate = ({
                 bordered
                 labelStyle={{
                     alignItems: "center",
-                    width: "142px",
                     fontSize: "16px",
                 }}
                 contentStyle={{
@@ -91,13 +108,52 @@ export const DiseaseCellLineTemplate = ({
             />
             <CloneTable dataSource={clones} />
             <Button
-                type="primary"
-                style={{ width: 480, border: "2px solid #003075" }}
+                type="default"
+                ghost
+                style={{
+                    padding: "7.5px 15px",
+                    width: "100%",
+                    height: 40,
+                    border: "2px solid #003075",
+                }}
                 href={certificateOfAnalysis}
                 target="_blank"
                 rel="noreferrer"
             >
-                QC Data Summary
+                Certificate of Analysis
+            </Button>
+            <Button
+                type="default"
+                ghost
+                style={{
+                    padding: "7.5px 15px",
+                    width: "100%",
+                    height: 40,
+                    border: "2px solid #003075",
+                }}
+                href={healthCertificate}
+                target="_blank"
+                rel="noreferrer"
+            >
+                hPSCreg Certificate
+            </Button>
+            <Button
+                type="primary"
+                style={{
+                    width: "100%",
+                    height: 102,
+                    border: "2px solid #003075",
+                }}
+                href={healthCertificate}
+                target="_blank"
+                rel="noreferrer"
+            >
+                <h2>Obtain {formatCellLineId(cellLineId)}</h2>
+                <>
+                    <span>{cloneSummary.numMutants}</span> mutant clones
+                    <Divider type="vertical" />
+                    <span>{cloneSummary.numIsogenics}</span> isogenic controls
+                </>
             </Button>
         </Card>
     );
@@ -123,6 +179,9 @@ const CellLine = ({ data }: QueryResult) => {
                 status={cellLine.frontmatter.status}
                 parentLineGene={parentalLineData.gene.frontmatter}
                 clones={cellLine.frontmatter.clones}
+                healthCertificate={
+                    cellLine.frontmatter.hPSCreg_certificate_link
+                }
             />
         </Layout>
     );

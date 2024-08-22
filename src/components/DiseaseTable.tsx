@@ -6,7 +6,7 @@ import { Link } from "gatsby";
 
 import { HTMLContent } from "./Content";
 import { UnpackedDiseaseCellLine } from "../component-queries/DiseaseCellLines";
-import { formatCellLineId } from "../utils";
+import { formatCellLineId, getCloneSummary } from "../utils";
 import { WHITE } from "./Layout";
 
 const Tube = require("../img/tube.svg");
@@ -100,10 +100,9 @@ const DiseaseTable = ({
                         dataIndex: "clones",
                         className: clones,
                         render: (clones, _, index) => {
-                            const numMutants = filter(clones, {
-                                type: "Mutant",
-                            }).length;
-                            const numIsogenics = clones.length - numMutants;
+                            const { numMutants, numIsogenics } =
+                                getCloneSummary(clones);
+
                             return (
                                 <Flex vertical={true} key={index}>
                                     <div>

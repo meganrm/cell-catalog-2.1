@@ -37,6 +37,7 @@ export interface DiseaseCellLineFrontmatter {
     certificate_of_analysis: string;
     order_link: string;
     status: string;
+    hPSCreg_certificate_link: string;
 }
 
 export interface DiseaseCellLineEdge {
