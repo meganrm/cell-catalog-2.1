@@ -166,55 +166,32 @@ collections:
           - {
                 label: "Clones",
                 name: "clones",
-                widget: object,
+                widget: list,
                 fields:
                     [
                         {
-                            label: "Mutant clones",
-                            name: "mutants",
-                            widget: list,
-                            fields:
-                                [
-                                    {
-                                        label: "Clone number",
-                                        name: "clone_number",
-                                        widget: "number",
-                                    },
-                                    {
-                                        label: "Transfection Replicate",
-                                        name: "transfection_replicate",
-                                        widget: "string",
-                                    },
-                                    {
-                                        label: "PCR Sanger Result",
-                                        name: "pcr_sanger_result",
-                                        widget: "string",
-                                    },
-                                ],
+                            label: "Clone number",
+                            name: "clone_number",
+                            widget: "number",
+                            required: false,
                         },
-
                         {
-                            label: "Isogenic controls",
-                            name: "isogenic_controls",
-                            widget: list,
-                            fields:
-                                [
-                                    {
-                                        label: "Clone number",
-                                        name: "clone_number",
-                                        widget: "number",
-                                    },
-                                    {
-                                        label: "Transfection Replicate",
-                                        name: "transfection_replicate",
-                                        widget: "string",
-                                    },
-                                    {
-                                        label: "PCR Sanger Result",
-                                        name: "pcr_sanger_result",
-                                        widget: "string",
-                                    },
-                                ],
+                            label: "Clone Type",
+                            name: "type",
+                            widget: "select",
+                            options: ["Mutant", "Control"],
+                        },
+                        {
+                            label: "Transfection Replicate",
+                            name: "transfection_replicate",
+                            widget: "string",
+                            required: false,
+                        },
+                        {
+                            label: "Genotype",
+                            name: "genotype",
+                            widget: "string",
+                            required: false,
                         },
                     ],
             }

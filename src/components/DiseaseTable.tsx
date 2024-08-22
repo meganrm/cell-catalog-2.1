@@ -1,10 +1,13 @@
 import React from "react";
 import { Table, Tag, Flex } from "antd";
 import Icon from "@ant-design/icons";
+import { filter } from "lodash";
+import { Link } from "gatsby";
 
 import { HTMLContent } from "./Content";
 import { UnpackedDiseaseCellLine } from "../component-queries/DiseaseCellLines";
 import { formatCellLineId } from "../utils";
+import { WHITE } from "./Layout";
 
 const Tube = require("../img/tube.svg");
 const CertificateIcon = require("../img/cert-icon.svg");
@@ -18,10 +21,9 @@ const {
     cloneNumber,
     hoverColumn,
     footer,
+    clones,
     cellLineId,
 } = require("../style/disease-table.module.css");
-import { WHITE } from "./Layout";
-import { Link } from "gatsby";
 
 interface DiseaseTableProps {
     diseaseName: string;
@@ -92,37 +94,41 @@ const DiseaseTable = ({
                         key: "parentalLine",
                         dataIndex: "parentalLine",
                     },
-                    // {
-                    //     title: "Clones",
-                    //     key: "clones",
-                    //     dataIndex: "clones",
-                    //     className: clones,
-                    //     render: ({ mutants, isogenic_controls }) => {
-                    //         return (
-                    //             <Flex vertical={true} key={mutants}>
-                    //                 <div>
-                    //                     {" "}
-                    //                     <span
-                    //                         className={cloneNumber}
-                    //                         key={mutants}
-                    //                     >
-                    //                         {mutants}
-                    //                     </span>
-                    //                     <span> mutant clones</span>
-                    //                 </div>
-                    //                 <div>
-                    //                     <span
-                    //                         className={cloneNumber}
-                    //                         key={isogenic_controls}
-                    //                     >
-                    //                         {isogenic_controls}
-                    //                     </span>
-                    //                     <span> isogenic controls</span>
-                    //                 </div>
-                    //             </Flex>
-                    //         );
-                    //     },
-                    // },
+                    {
+                        title: "Clones",
+                        key: "clones",
+                        dataIndex: "clones",
+                        className: clones,
+                        render: (clones) => {
+                            const numMutants = filter(clones, {
+                                type: "Mutant",
+                            }).length;
+                            const numIsogenics = clones.length - numMutants;
+                            return (
+                                <Flex vertical={true} key={numMutants}>
+                                    <div>
+                                        {" "}
+                                        <span
+                                            className={cloneNumber}
+                                            key={numMutants}
+                                        >
+                                            {numMutants}
+                                        </span>
+                                        <span> mutant clones</span>
+                                    </div>
+                                    <div>
+                                        <span
+                                            className={cloneNumber}
+                                            key={numIsogenics}
+                                        >
+                                            {numIsogenics}
+                                        </span>
+                                        <span> isogenic controls</span>
+                                    </div>
+                                </Flex>
+                            );
+                        },
+                    },
                     {
                         title: "",
                         key: "order_link",

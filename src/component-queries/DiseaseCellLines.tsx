@@ -185,10 +185,9 @@ export default function DiseaseCellLineQuery(props: {
                                             }
                                         }
                                     }
-                                    disease {
-                                        frontmatter {
-                                            name
-                                        }
+                                    disease
+                                    clones {
+                                        type
                                     }
                                     snp
                                     certificate_of_analysis
