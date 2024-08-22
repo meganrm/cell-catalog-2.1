@@ -1,19 +1,28 @@
-.container :global(.ant-table-thead .ant-table-cell)::before {
-    display: none; /* remove dividers between column headers */
-}
-
 .container {
     border-radius: 4px;
     border: 1px var(--small-table-border-color) solid;
 }
 
+.container :global(.ant-table-thead .ant-table-cell)::before {
+    display: none; /* remove dividers between column headers */
+}
+
+.container :global(.ant-table-thead .ant-table-cell) {
+    font-size: 14px;
+    font-weight: 400;
+    color: #575859;
+}
+
 .container :global(.ant-table) {
     border-radius: 4px;
 }
-.row :global(.ant-table-cell) {
-    border-bottom: none !important;
+
+.container .row :global(.ant-table-cell) {
+    border-bottom: none;
+    padding: 10px;
 }
 
 .footer {
+    margin: 4px 0 20px 0;
     font-size: 12px;
 }
