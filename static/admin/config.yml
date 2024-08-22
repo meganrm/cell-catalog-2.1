@@ -188,8 +188,8 @@ collections:
                             required: false,
                         },
                         {
-                            label: "PCR Sanger Result",
-                            name: "pcr_sanger_result",
+                            label: "Genotype",
+                            name: "genotype",
                             widget: "string",
                             required: false,
                         },
