@@ -95,7 +95,6 @@ export const DiseaseCellLineTemplate = ({
                 column={1}
                 layout="horizontal"
                 colon={false}
-                bordered
                 labelStyle={{
                     alignItems: "center",
                     fontSize: "16px",

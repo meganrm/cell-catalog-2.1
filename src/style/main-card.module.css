@@ -3,6 +3,7 @@
     color: white;
     padding: 16px 28px;
     border-radius: 4px 4px 0 0;
+    height: 79px;
 }
 
 .container .title {
@@ -21,4 +22,30 @@
 .container :global(.ant-card-head-title .ant-btn):active {
     color: white;
     border: 1px solid white;
+}
+
+.container :global(.ant-descriptions) {
+    border-radius: 4px;
+    border: 1px var(--small-table-border-color) solid;
+    margin-bottom: 20px;
+}
+
+.container :global(.ant-descriptions-view) table {
+    border-collapse: collapse;
+}
+
+.container :global(.ant-descriptions-item) {
+    border-spacing: 0;
+    border-bottom: 1px var(--small-table-border-color) solid;
+    padding: 14.5px 0 14.5px 20px !important;
+}
+
+.container
+    :global(.ant-descriptions-row):last-of-type
+    :global(.ant-descriptions-item) {
+    border-bottom: none;
+}
+
+.container tbody {
+    border-spacing: 10px;
 }
