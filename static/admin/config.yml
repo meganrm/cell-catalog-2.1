@@ -166,13 +166,14 @@ collections:
           - {
                 label: "Clones",
                 name: "clones",
-                widget: object,
+                widget: list,
                 fields:
                     [
                         {
                             label: "Clone number",
                             name: "clone_number",
                             widget: "number",
+                            required: false,
                         },
                         {
                             label: "Clone Type",
@@ -184,11 +185,13 @@ collections:
                             label: "Transfection Replicate",
                             name: "transfection_replicate",
                             widget: "string",
+                            required: false,
                         },
                         {
                             label: "PCR Sanger Result",
                             name: "pcr_sanger_result",
                             widget: "string",
+                            required: false,
                         },
                     ],
             }

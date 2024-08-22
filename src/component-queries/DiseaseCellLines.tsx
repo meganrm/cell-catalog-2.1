@@ -182,6 +182,9 @@ export default function DiseaseCellLineQuery(props: {
                                         }
                                     }
                                     disease
+                                    clones {
+                                        type
+                                    }
                                     snp
                                     certificate_of_analysis
                                     order_link

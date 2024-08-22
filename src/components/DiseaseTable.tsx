@@ -22,6 +22,7 @@ const {
     cellLineId,
 } = require("../style/disease-table.module.css");
 import { WHITE } from "./Layout";
+import { filter } from "lodash";
 
 interface DiseaseTableProps {
     diseaseName: string;
@@ -95,25 +96,30 @@ const DiseaseTable = ({
                         key: "clones",
                         dataIndex: "clones",
                         className: clones,
-                        render: ({ mutants, isogenic_controls }) => {
+                        render: (clones) => {
+                            console.log(clones);
+                            const numMutants = filter(clones, {
+                                type: "Mutant",
+                            }).length;
+                            const numIsogenics = clones.length - numMutants;
                             return (
-                                <Flex vertical={true} key={mutants}>
+                                <Flex vertical={true} key={numMutants}>
                                     <div>
                                         {" "}
                                         <span
                                             className={cloneNumber}
-                                            key={mutants}
+                                            key={numMutants}
                                         >
-                                            {mutants}
+                                            {numMutants}
                                         </span>
                                         <span> mutant clones</span>
                                     </div>
                                     <div>
                                         <span
                                             className={cloneNumber}
-                                            key={isogenic_controls}
+                                            key={numIsogenics}
                                         >
-                                            {isogenic_controls}
+                                            {numIsogenics}
                                         </span>
                                         <span> isogenic controls</span>
                                     </div>
