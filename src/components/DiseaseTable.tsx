@@ -1,13 +1,12 @@
 import React from "react";
 import { Table, Tag, Flex } from "antd";
 import Icon from "@ant-design/icons";
-import { filter } from "lodash";
 import { Link } from "gatsby";
 
 import { HTMLContent } from "./Content";
 import { UnpackedDiseaseCellLine } from "../component-queries/DiseaseCellLines";
 import { formatCellLineId, getCloneSummary } from "../utils";
-import { WHITE } from "./Layout";
+import { WHITE } from "../style/theme";
 
 const Tube = require("../img/tube.svg");
 const CertificateIcon = require("../img/cert-icon.svg");
