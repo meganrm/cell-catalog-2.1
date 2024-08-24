@@ -12,10 +12,12 @@ import { formatCellLineId, getCloneSummary } from "../utils";
 import CloneTable from "../components/CloneTable";
 import Icon from "@ant-design/icons";
 import InfoPanel from "../components/shared/InfoPanel";
+import { ALLEN_BLUE } from "../style/theme";
 
 const {
     container,
     title,
+    shareButton,
     smallButton,
     extraLargeButton,
 } = require("../style/main-card.module.css");
@@ -75,12 +77,11 @@ export const DiseaseCellLineTemplate = ({
     const titleContents = (
         <Flex justify="space-between" align="center">
             <div className={title}>{formatCellLineId(cellLineId)}</div>
-            <Button ghost href={orderLink}>
+            <Button ghost className={shareButton}>
                 Share
                 <Icon
                     component={Share}
                     style={{
-                        color: "transparent",
                         fontSize: "18px",
                     }}
                 />
@@ -126,9 +127,18 @@ export const DiseaseCellLineTemplate = ({
             >
                 <h2>Obtain {formatCellLineId(cellLineId)}</h2>
                 <>
-                    <span>{cloneSummary.numMutants}</span> mutant clones
-                    <Divider type="vertical" />
-                    <span>{cloneSummary.numIsogenics}</span> isogenic controls
+                    <span style={{ fontWeight: 400 }}>
+                        {cloneSummary.numMutants}
+                    </span>
+                    <span style={{ fontWeight: 300 }}> mutant clones</span>
+                    <Divider
+                        type="vertical"
+                        style={{ borderColor: ALLEN_BLUE }}
+                    />
+                    <span style={{ fontWeight: 400 }}>
+                        {cloneSummary.numIsogenics}
+                    </span>{" "}
+                    <span style={{ fontWeight: 300 }}>isogenic controls</span>
                 </>
             </Button>
         </Card>

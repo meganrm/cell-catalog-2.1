@@ -21,9 +21,15 @@
     padding: 16px 20px;
 }
 
-.container :global(.ant-card-head-title .ant-btn) {
+.container .share-button {
     color: white;
     padding: 4px 8px;
+}
+
+.container .share-button:hover {
+    color: var(--DEEP_BLUE) !important;
+    border: 1px solid var(--DEEP_BLUE) !important;
+    background-color: var(--ALLEN_BLUE_10) !important;
 }
 
 .container :global(.ant-card-head-title .ant-btn):hover,
@@ -53,6 +59,7 @@
     height: 102px;
     border: 2.5px solid var(--DEEP_BLUE);
     margin-top: 20px;
+    background-color: var(--ALLEN_BLUE_10);
 }
 
 .extra-large-button h2 {
@@ -61,6 +68,7 @@
 }
 
 .extra-large-button:hover {
+    color: var(--DEEP_BLUE) !important;
     transition: background 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
     background: linear-gradient(
         180deg,

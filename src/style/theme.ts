@@ -4,6 +4,7 @@ export const WHITE = "#FFFFFF";
 export const LIGHT_BLUE = "#E5E9F1";
 export const DARK_GRAY = "#CBCBCC";
 export const LIGHT_GRAY = "#323233";
+export const ALLEN_BLUE = "#003057";
 
 export default {
     token: {
