@@ -1,6 +1,6 @@
 import React from "react";
 import { graphql } from "gatsby";
-import { Button, Card, Descriptions, Divider, Flex } from "antd";
+import { Button, Card, Divider, Flex } from "antd";
 
 import Layout from "../components/Layout";
 import {
@@ -11,8 +11,14 @@ import {
 import { formatCellLineId, getCloneSummary } from "../utils";
 import CloneTable from "../components/CloneTable";
 import Icon from "@ant-design/icons";
+import InfoPanel from "../components/shared/InfoPanel";
 
-const { container, title } = require("../style/main-card.module.css");
+const {
+    container,
+    title,
+    smallButton,
+    extraLargeButton,
+} = require("../style/main-card.module.css");
 const Share = require("../img/share-icon.svg");
 
 interface DiseaseCellLineTemplateProps {
@@ -86,35 +92,15 @@ export const DiseaseCellLineTemplate = ({
     return (
         <Card
             title={titleContents}
-            bordered={false}
-            style={{ width: 590 }}
+            style={{ maxWidth: 590, width: "40%", minWidth: 460 }}
             className={container}
         >
-            <Descriptions
-                items={tableData}
-                column={1}
-                layout="horizontal"
-                colon={false}
-                labelStyle={{
-                    alignItems: "center",
-                    fontSize: "16px",
-                }}
-                contentStyle={{
-                    alignItems: "center",
-                    fontSize: "18px",
-                    fontWeight: "semi-bold",
-                }}
-            />
+            <InfoPanel data={tableData} />
             <CloneTable dataSource={clones} />
             <Button
                 type="default"
                 ghost
-                style={{
-                    padding: "7.5px 15px",
-                    width: "100%",
-                    height: 40,
-                    border: "2px solid #003075",
-                }}
+                className={smallButton}
                 href={certificateOfAnalysis}
                 target="_blank"
                 rel="noreferrer"
@@ -124,12 +110,7 @@ export const DiseaseCellLineTemplate = ({
             <Button
                 type="default"
                 ghost
-                style={{
-                    padding: "7.5px 15px",
-                    width: "100%",
-                    height: 40,
-                    border: "2px solid #003075",
-                }}
+                className={smallButton}
                 href={healthCertificate}
                 target="_blank"
                 rel="noreferrer"
@@ -138,11 +119,7 @@ export const DiseaseCellLineTemplate = ({
             </Button>
             <Button
                 type="primary"
-                style={{
-                    width: "100%",
-                    height: 102,
-                    border: "2px solid #003075",
-                }}
+                className={extraLargeButton}
                 href={healthCertificate}
                 target="_blank"
                 rel="noreferrer"

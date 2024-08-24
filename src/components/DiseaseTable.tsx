@@ -3,7 +3,7 @@ import { Table, Tag, Flex } from "antd";
 import Icon from "@ant-design/icons";
 import { Link } from "gatsby";
 
-import { HTMLContent } from "./Content";
+import { HTMLContent } from "./shared/Content";
 import { UnpackedDiseaseCellLine } from "../component-queries/DiseaseCellLines";
 import { formatCellLineId, getCloneSummary } from "../utils";
 import { WHITE } from "../style/theme";
