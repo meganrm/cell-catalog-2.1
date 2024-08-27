@@ -20,7 +20,7 @@ const CloneTable: React.FC<CloneTableProps> = ({ dataSource }) => {
             key: "type",
         },
         {
-            title: "Transfection Replicate",
+            title: "Replicate",
             dataIndex: "transfection_replicate",
             key: "transfection_replicate",
         },

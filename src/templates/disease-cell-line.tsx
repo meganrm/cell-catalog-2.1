@@ -93,7 +93,7 @@ export const DiseaseCellLineTemplate = ({
     return (
         <Card
             title={titleContents}
-            style={{ maxWidth: 590, width: "40%", minWidth: 460 }}
+            style={{ maxWidth: 505, width: "40%", minWidth: 460 }}
             className={container}
         >
             <InfoPanel data={tableData} />
