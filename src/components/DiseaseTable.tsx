@@ -1,7 +1,6 @@
 import React from "react";
 import { Table, Tag, Flex } from "antd";
 import Icon from "@ant-design/icons";
-import { Link } from "gatsby";
 
 import { HTMLContent } from "./shared/Content";
 import { UnpackedDiseaseCellLine } from "../component-queries/DiseaseCellLines";
@@ -59,12 +58,10 @@ const DiseaseTable = ({
                         className: cellLineId,
                         width: 180,
                         dataIndex: "cell_line_id",
-                        render: (cell_line_id: string, record) => (
-                            <Link to={record.path}>
-                                <h4 key={cell_line_id}>
-                                    {formatCellLineId(cell_line_id)}
-                                </h4>
-                            </Link>
+                        render: (cell_line_id: string) => (
+                            <h4 key={cell_line_id}>
+                                {formatCellLineId(cell_line_id)}
+                            </h4>
                         ),
                     },
                     {
