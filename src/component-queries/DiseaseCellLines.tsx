@@ -62,7 +62,6 @@ const groupLines = (
     return cellLines.reduce((acc, cellLine) => {
         const { disease } = cellLine.node.frontmatter;
         const diseaseName = disease.frontmatter.name;
-        console.log(cellLine.node.fields.slug);
         const cellLineData: UnpackedDiseaseCellLine = {
             ...cellLine.node.frontmatter,
             path: cellLine.node.fields.slug,
