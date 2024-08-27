@@ -1,8 +1,9 @@
 import { Descriptions } from "antd";
 import React from "react";
+import type { DescriptionsProps } from "antd";
 
 interface InfoPanelProps {
-    data: any[];
+    data: DescriptionsProps["items"];
 }
 
 const { container } = require("../../style/info-panel.module.css");

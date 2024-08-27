@@ -1,10 +1,11 @@
 import { Table } from "antd";
 import React from "react";
+import { Clone } from "../component-queries/types";
 
 const { container, row } = require("../style/clone-table.module.css");
 
 interface CloneTableProps {
-    dataSource: any[];
+    dataSource: Clone[];
 }
 
 const CloneTable: React.FC<CloneTableProps> = ({ dataSource }) => {
