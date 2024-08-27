@@ -27,6 +27,7 @@ const Share = require("../img/share-icon.svg");
 const Arrow = require("../img/arrow.svg");
 
 interface DiseaseCellLineTemplateProps {
+    href: string;
     cellLineId: string;
     geneName: string;
     geneSymbol: string;
@@ -41,6 +42,7 @@ interface DiseaseCellLineTemplateProps {
 }
 // eslint-disable-next-line
 export const DiseaseCellLineTemplate = ({
+    href,
     cellLineId,
     parentLineGene,
     geneName,
@@ -78,8 +80,7 @@ export const DiseaseCellLineTemplate = ({
             } ${parentLineGene.symbol}`,
         },
     ];
-
-    const urlToCopy = `Check out this cell line from the Allen Cell Collection! ${window.location.href}`;
+    const urlToCopy = `Check out this cell line from the Allen Cell Collection! ${href}`;
 
     const titleContents = (
         <Flex justify="space-between" align="center">
@@ -180,7 +181,7 @@ export const DiseaseCellLineTemplate = ({
     );
 };
 
-const CellLine = ({ data }: QueryResult) => {
+const CellLine = ({ data, location }: QueryResult) => {
     const { markdownRemark: cellLine } = data;
     const parentalLineData = cellLine.frontmatter.parental_line.frontmatter;
     const { name: geneName, symbol: geneSymbol } =
@@ -188,6 +189,7 @@ const CellLine = ({ data }: QueryResult) => {
     return (
         <Layout>
             <DiseaseCellLineTemplate
+                href={location.href || ""}
                 cellLineId={cellLine.frontmatter.cell_line_id}
                 snp={cellLine.frontmatter.snp}
                 orderLink={cellLine.frontmatter.order_link}
@@ -209,6 +211,7 @@ const CellLine = ({ data }: QueryResult) => {
 };
 
 interface QueryResult {
+    location: Location;
     data: {
         markdownRemark: { frontmatter: DiseaseCellLineFrontmatter };
     };
