@@ -166,18 +166,32 @@ collections:
           - {
                 label: "Clones",
                 name: "clones",
-                widget: object,
+                widget: list,
                 fields:
                     [
                         {
-                            label: "Number of mutant clones",
-                            name: "mutants",
-                            widget: number,
+                            label: "Clone number",
+                            name: "clone_number",
+                            widget: "number",
+                            required: false,
                         },
                         {
-                            label: "Number of isogenic conrols",
-                            name: "isogenic_controls",
-                            widget: number,
+                            label: "Clone Type",
+                            name: "type",
+                            widget: "select",
+                            options: ["Mutant", "Control"],
+                        },
+                        {
+                            label: "Transfection Replicate",
+                            name: "transfection_replicate",
+                            widget: "string",
+                            required: false,
+                        },
+                        {
+                            label: "Genotype",
+                            name: "genotype",
+                            widget: "string",
+                            required: false,
                         },
                     ],
             }
@@ -192,6 +206,57 @@ collections:
                 name: "certificate_of_analysis",
                 widget: "file",
                 required: false,
+            }
+          - {
+                label: "hPSCreg Certificate",
+                name: "hPSCreg_certificate_link",
+                widget: "file",
+                required: false,
+            }
+          - {
+                label: "Image and Video Carousel",
+                name: "images_and_videos",
+                widget: "object",
+                required: false,
+                fields:
+                    [
+                        {
+                            label: "Images",
+                            name: "images",
+                            widget: "list",
+                            fields:
+                                [
+                                    {
+                                        label: "Image",
+                                        name: "image",
+                                        widget: "image",
+                                    },
+                                    {
+                                        label: "Caption",
+                                        name: "caption",
+                                        widget: "string",
+                                    },
+                                ],
+                        },
+                        {
+                            label: "Videos",
+                            name: "videos",
+                            widget: "list",
+                            fields:
+                                [
+                                    {
+                                        label: "Video",
+                                        name: "video",
+                                        widget: "file",
+                                    },
+                                    {
+                                        label: "Caption",
+                                        name: "caption",
+                                        widget: "string",
+                                    },
+                                ],
+                        },
+                    ],
             }
     - name: "gene-name"
       label: "Gene and structures names"

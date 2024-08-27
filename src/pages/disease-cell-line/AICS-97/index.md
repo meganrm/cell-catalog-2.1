@@ -7,8 +7,11 @@ snp: NM_000257.4(MYH7):c.767G>A(p.Gly256Glu)
 parental_line: 75
 status: done
 clones:
-  mutants: 3
-  isogenic_controls: 2
+  - type: Mutant
+  - type: Mutant
+  - type: Mutant
+  - type: Control
+  - type: Control
 order_link: https://www.coriell.org/0/Sections/Search/DiseaseCollection_Detail.aspx?Ref=AICS-0097&Product=CiPSC&PgId=166
 certificate_of_analysis: https://www.coriell.org/0/PDF/Allen/iPSC/AICS-0097_CofA.pdf
 ---

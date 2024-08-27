@@ -1,10 +1,12 @@
 import React from "react";
 import { Table, Tag, Flex } from "antd";
 import Icon from "@ant-design/icons";
+import { filter } from "lodash";
 
 import { HTMLContent } from "./Content";
 import { UnpackedDiseaseCellLine } from "../component-queries/DiseaseCellLines";
 import { formatCellLineId } from "../utils";
+import { WHITE } from "./Layout";
 
 const Tube = require("../img/tube.svg");
 const CertificateIcon = require("../img/cert-icon.svg");
@@ -21,7 +23,6 @@ const {
     footer,
     cellLineId,
 } = require("../style/disease-table.module.css");
-import { WHITE } from "./Layout";
 
 interface DiseaseTableProps {
     diseaseName: string;
@@ -95,25 +96,29 @@ const DiseaseTable = ({
                         key: "clones",
                         dataIndex: "clones",
                         className: clones,
-                        render: ({ mutants, isogenic_controls }) => {
+                        render: (clones) => {
+                            const numMutants = filter(clones, {
+                                type: "Mutant",
+                            }).length;
+                            const numIsogenics = clones.length - numMutants;
                             return (
-                                <Flex vertical={true} key={mutants}>
+                                <Flex vertical={true} key={numMutants}>
                                     <div>
                                         {" "}
                                         <span
                                             className={cloneNumber}
-                                            key={mutants}
+                                            key={numMutants}
                                         >
-                                            {mutants}
+                                            {numMutants}
                                         </span>
                                         <span> mutant clones</span>
                                     </div>
                                     <div>
                                         <span
                                             className={cloneNumber}
-                                            key={isogenic_controls}
+                                            key={numIsogenics}
                                         >
-                                            {isogenic_controls}
+                                            {numIsogenics}
                                         </span>
                                         <span> isogenic controls</span>
                                     </div>
