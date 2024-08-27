@@ -1,50 +1,52 @@
-export const OFF_WHITE = "#F2F2F2";
-export const DARK_BLUE = "#00215F";
+// GRAYS
 export const WHITE = "#FFFFFF";
-export const LIGHT_BLUE = "#E5E9F1";
-export const DARK_GRAY = "#CBCBCC";
-export const LIGHT_GRAY = "#323233";
+export const SOFT_WHITE = "#F2F2F2";
+export const RAIN_SHADOW = "#CBCBCC";
+export const SERIOUS_GRAY = "#323233";
+
+export const ALLEN_LIGHT_10 = "#DFE5EA";
+export const ALLEN_LIGHT_30 = "#9FB1C0";
 export const ALLEN_BLUE = "#003057";
 
 export default {
     token: {
-        colorPrimary: DARK_BLUE,
+        colorPrimary: ALLEN_BLUE,
         colorBgContainer: WHITE,
-        colorLink: DARK_BLUE,
-        colorLinkActive: DARK_BLUE,
-        colorLinkHover: DARK_BLUE,
+        colorLink: ALLEN_BLUE,
+        colorLinkActive: ALLEN_BLUE,
+        colorLinkHover: ALLEN_BLUE,
         borderRadius: 4,
-        colorBorder: DARK_GRAY,
+        colorBorder: RAIN_SHADOW,
         fontFamily: "Open Sans",
     },
     components: {
         Layout: {
-            bodyBg: OFF_WHITE,
+            bodyBg: SOFT_WHITE,
         },
         Modal: {
             motionDurationMid: "0.1s",
-            contentBg: LIGHT_BLUE,
-            headerBg: LIGHT_BLUE,
-            footerBg: LIGHT_BLUE,
-            titleColor: DARK_BLUE,
+            contentBg: ALLEN_LIGHT_10,
+            headerBg: ALLEN_LIGHT_10,
+            footerBg: ALLEN_LIGHT_10,
+            titleColor: ALLEN_BLUE,
         },
         Button: {
-            defaultColor: DARK_BLUE,
-            defaultBg: OFF_WHITE,
-            defaultBorderColor: DARK_BLUE,
-            defaultHoverBg: OFF_WHITE,
-            colorPrimary: OFF_WHITE,
-            colorPrimaryBgHover: OFF_WHITE,
-            primaryColor: DARK_BLUE,
-            colorPrimaryBorder: DARK_BLUE,
+            defaultColor: ALLEN_BLUE,
+            defaultBg: SOFT_WHITE,
+            defaultBorderColor: ALLEN_BLUE,
+            defaultHoverBg: SOFT_WHITE,
+            colorPrimary: SOFT_WHITE,
+            colorPrimaryBgHover: SOFT_WHITE,
+            primaryColor: ALLEN_BLUE,
+            colorPrimaryBorder: ALLEN_BLUE,
             primaryShadow: "none",
-            defaultGhostColor: DARK_BLUE,
-            defaultHoverBorderColor: DARK_BLUE,
+            defaultGhostColor: ALLEN_BLUE,
+            defaultHoverBorderColor: ALLEN_BLUE,
             contentFontSize: 16,
         },
         Table: {
-            headerColor: LIGHT_GRAY,
-            borderColor: DARK_GRAY,
+            headerColor: SERIOUS_GRAY,
+            borderColor: RAIN_SHADOW,
             headerBg: WHITE,
             cellFontSize: 16,
             borderRadius: 4,
@@ -54,10 +56,10 @@ export default {
             itemPaddingBottom: 0,
         },
         Tag: {
-            defaultColor: DARK_BLUE,
+            defaultColor: ALLEN_BLUE,
         },
         Card: {
-            colorBorder: DARK_GRAY,
+            colorBorder: RAIN_SHADOW,
             lineWidth: 1.5,
         },
     },
