@@ -1,7 +1,7 @@
 import { Table } from "antd";
 import React from "react";
 
-const { container, row, footer } = require("../style/clone-table.module.css");
+const { container, row } = require("../style/clone-table.module.css");
 
 interface CloneTableProps {
     dataSource: any[];
@@ -40,11 +40,6 @@ const CloneTable: React.FC<CloneTableProps> = ({ dataSource }) => {
                 bordered={false}
                 rowClassName={row}
             />
-            <div className={footer}>
-                Clones were derived from separate replicated transfections.
-                Comparisons between clones of different genotypes recommended
-                from same replicate.
-            </div>
         </>
     );
 };

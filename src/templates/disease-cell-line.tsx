@@ -1,6 +1,6 @@
-import React from "react";
-import { graphql } from "gatsby";
-import { Button, Card, Divider, Flex } from "antd";
+import React, { useState } from "react";
+import { graphql, Link } from "gatsby";
+import { Button, Card, Divider, Flex, Tooltip } from "antd";
 
 import Layout from "../components/Layout";
 import {
@@ -12,16 +12,19 @@ import { formatCellLineId, getCloneSummary } from "../utils";
 import CloneTable from "../components/CloneTable";
 import Icon from "@ant-design/icons";
 import InfoPanel from "../components/shared/InfoPanel";
-import { ALLEN_BLUE } from "../style/theme";
+import { primaryColor } from "../style/theme";
+import {
+    DarkThemeGhostButton,
+    DefaultButton,
+} from "../components/shared/Buttons";
 
 const {
     container,
     title,
-    shareButton,
-    smallButton,
     extraLargeButton,
 } = require("../style/main-card.module.css");
 const Share = require("../img/share-icon.svg");
+const Arrow = require("../img/arrow.svg");
 
 interface DiseaseCellLineTemplateProps {
     cellLineId: string;
@@ -49,6 +52,8 @@ export const DiseaseCellLineTemplate = ({
     parentalLine,
     healthCertificate,
 }: DiseaseCellLineTemplateProps) => {
+    const defaultToolTipText = "Copy cell line link to clipboard";
+    const [toolTipText, setToolTipText] = useState(defaultToolTipText);
     const tableData = [
         {
             key: "1",
@@ -74,74 +79,104 @@ export const DiseaseCellLineTemplate = ({
         },
     ];
 
+    const urlToCopy = `Check out this cell line from the Allen Cell Collection! ${window.location.href}`;
+
     const titleContents = (
         <Flex justify="space-between" align="center">
             <div className={title}>{formatCellLineId(cellLineId)}</div>
-            <Button ghost className={shareButton}>
-                Share
-                <Icon
-                    component={Share}
-                    style={{
-                        fontSize: "18px",
+            <Tooltip title={toolTipText} placement="bottom">
+                <DarkThemeGhostButton
+                    onMouseEnter={() => {
+                        if (!toolTipText) {
+                            // this way it doesn't go back to default text after being copied
+                            setToolTipText(defaultToolTipText);
+                        }
                     }}
-                />
-            </Button>
+                    onClick={() => {
+                        navigator.clipboard.writeText(urlToCopy).then(() => {
+                            setToolTipText("Copied!");
+                            setTimeout(() => {
+                                setToolTipText("");
+                            }, 1000);
+                        });
+                    }}
+                >
+                    Share
+                    <Icon
+                        component={Share}
+                        style={{
+                            fontSize: "18px",
+                        }}
+                    />
+                </DarkThemeGhostButton>
+            </Tooltip>
         </Flex>
     );
 
     const cloneSummary = getCloneSummary(clones);
     return (
-        <Card
-            title={titleContents}
-            style={{ maxWidth: 505, width: "40%", minWidth: 460 }}
-            className={container}
-        >
-            <InfoPanel data={tableData} />
-            <CloneTable dataSource={clones} />
-            <Button
-                type="default"
-                ghost
-                className={smallButton}
-                href={certificateOfAnalysis}
-                target="_blank"
-                rel="noreferrer"
+        <Flex>
+            <Flex
+                vertical
+                gap={16}
+                style={{ maxWidth: 505, width: "40%", minWidth: 460 }}
             >
-                Certificate of Analysis
-            </Button>
-            <Button
-                type="default"
-                ghost
-                className={smallButton}
-                href={healthCertificate}
-                target="_blank"
-                rel="noreferrer"
-            >
-                hPSCreg Certificate
-            </Button>
-            <Button
-                type="primary"
-                className={extraLargeButton}
-                href={healthCertificate}
-                target="_blank"
-                rel="noreferrer"
-            >
-                <h2>Obtain {formatCellLineId(cellLineId)}</h2>
-                <>
-                    <span style={{ fontWeight: 400 }}>
-                        {cloneSummary.numMutants}
-                    </span>
-                    <span style={{ fontWeight: 300 }}> mutant clones</span>
-                    <Divider
-                        type="vertical"
-                        style={{ borderColor: ALLEN_BLUE }}
-                    />
-                    <span style={{ fontWeight: 400 }}>
-                        {cloneSummary.numIsogenics}
-                    </span>{" "}
-                    <span style={{ fontWeight: 300 }}>isogenic controls</span>
-                </>
-            </Button>
-        </Card>
+                <Link to="/disease-catalog">
+                    <DefaultButton>
+                        <Arrow style={{ marginRight: 8 }} />
+                        Return to Cell Catalog
+                    </DefaultButton>
+                </Link>
+                <Card title={titleContents} className={container}>
+                    <InfoPanel data={tableData} />
+                    <CloneTable dataSource={clones} />
+                    <Flex vertical gap={8}>
+                        <DefaultButton
+                            href={certificateOfAnalysis}
+                            target="_blank"
+                            rel="noreferrer"
+                        >
+                            Certificate of Analysis
+                        </DefaultButton>
+                        <DefaultButton
+                            href={healthCertificate}
+                            target="_blank"
+                            rel="noreferrer"
+                        >
+                            hPSCreg Certificate
+                        </DefaultButton>
+                    </Flex>
+                    <Button
+                        type="primary"
+                        className={extraLargeButton}
+                        href={orderLink}
+                        target="_blank"
+                        rel="noreferrer"
+                    >
+                        <h2>Obtain {formatCellLineId(cellLineId)}</h2>
+                        <>
+                            <span style={{ fontWeight: 400 }}>
+                                {cloneSummary.numMutants}
+                            </span>
+                            <span style={{ fontWeight: 300 }}>
+                                {" "}
+                                mutant clones
+                            </span>
+                            <Divider
+                                type="vertical"
+                                style={{ borderColor: primaryColor }}
+                            />
+                            <span style={{ fontWeight: 400 }}>
+                                {cloneSummary.numIsogenics}
+                            </span>{" "}
+                            <span style={{ fontWeight: 300 }}>
+                                isogenic controls
+                            </span>
+                        </>
+                    </Button>
+                </Card>
+            </Flex>
+        </Flex>
     );
 };
 
