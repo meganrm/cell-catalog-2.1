@@ -57,7 +57,8 @@ export const DiseaseCellLineTemplate = ({
     healthCertificate,
 }: DiseaseCellLineTemplateProps) => {
     const defaultToolTipText = "Copy cell line link to clipboard";
-    const [toolTipText, setToolTipText] = useState(defaultToolTipText);
+    const [shareTooltipText, setShareTooltipText] =
+        useState(defaultToolTipText);
     const tableData = [
         {
             key: "1",
@@ -86,19 +87,19 @@ export const DiseaseCellLineTemplate = ({
     const titleContents = (
         <Flex justify="space-between" align="center">
             <div className={title}>{formatCellLineId(cellLineId)}</div>
-            <Tooltip title={toolTipText} placement="bottom">
+            <Tooltip title={shareTooltipText} placement="bottom">
                 <DarkThemeGhostButton
                     onMouseEnter={() => {
-                        if (!toolTipText) {
+                        if (!shareTooltipText) {
                             // this way it doesn't go back to default text after being copied
-                            setToolTipText(defaultToolTipText);
+                            setShareTooltipText(defaultToolTipText);
                         }
                     }}
                     onClick={() => {
                         navigator.clipboard.writeText(href).then(() => {
-                            setToolTipText("Copied!");
+                            setShareTooltipText("Copied!");
                             setTimeout(() => {
-                                setToolTipText("");
+                                setShareTooltipText("");
                             }, 1000);
                         });
                     }}
