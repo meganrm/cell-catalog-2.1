@@ -25,6 +25,7 @@ const {
 } = require("../style/main-card.module.css");
 const Share = require("../img/share-icon.svg");
 const Arrow = require("../img/arrow.svg");
+const LinkOut = require("../img/external-link.svg");
 
 interface DiseaseCellLineTemplateProps {
     href: string;
@@ -153,7 +154,12 @@ export const DiseaseCellLineTemplate = ({
                         target="_blank"
                         rel="noreferrer"
                     >
-                        <h2>Obtain {formatCellLineId(cellLineId)}</h2>
+                        <h2>
+                            <Flex gap={8} align="center" justify="center">
+                                Obtain {formatCellLineId(cellLineId)}
+                                <LinkOut />
+                            </Flex>
+                        </h2>
                         <>
                             <span style={{ fontWeight: 400 }}>
                                 {cloneSummary.numMutants}
