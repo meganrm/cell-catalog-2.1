@@ -9,6 +9,10 @@ interface CloneTableProps {
 }
 
 const CloneTable: React.FC<CloneTableProps> = ({ dataSource }) => {
+    // NOTE: once the clone data is filled in, we can use the id as the key
+    const dataSourceWithKey = dataSource.map((data, index) => {
+        return { ...data, key: index };
+    });
     const cloneTableColumns = [
         {
             title: "Clone Number",
@@ -36,7 +40,7 @@ const CloneTable: React.FC<CloneTableProps> = ({ dataSource }) => {
             <Table
                 className={container}
                 columns={cloneTableColumns}
-                dataSource={dataSource}
+                dataSource={dataSourceWithKey}
                 pagination={false}
                 bordered={false}
                 rowClassName={row}
