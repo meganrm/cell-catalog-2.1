@@ -80,7 +80,6 @@ export const DiseaseCellLineTemplate = ({
             } ${parentLineGene.symbol}`,
         },
     ];
-    const urlToCopy = `Check out this cell line from the Allen Cell Collection! ${href}`;
 
     const titleContents = (
         <Flex justify="space-between" align="center">
@@ -94,7 +93,7 @@ export const DiseaseCellLineTemplate = ({
                         }
                     }}
                     onClick={() => {
-                        navigator.clipboard.writeText(urlToCopy).then(() => {
+                        navigator.clipboard.writeText(href).then(() => {
                             setToolTipText("Copied!");
                             setTimeout(() => {
                                 setToolTipText("");
