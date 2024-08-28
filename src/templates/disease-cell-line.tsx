@@ -7,6 +7,7 @@ import {
     Clone,
     DiseaseCellLineFrontmatter,
     GeneFrontMatter,
+    ParentalLineFrontmatter,
 } from "../component-queries/types";
 import { formatCellLineId, getCloneSummary } from "../utils";
 import CloneTable from "../components/CloneTable";
@@ -36,7 +37,7 @@ interface DiseaseCellLineTemplateProps {
     snp: string;
     orderLink: string;
     certificateOfAnalysis: string;
-    parentalLine: any;
+    parentalLine: ParentalLineFrontmatter;
     parentLineGene: GeneFrontMatter;
     clones: Clone[];
     healthCertificate: string;
