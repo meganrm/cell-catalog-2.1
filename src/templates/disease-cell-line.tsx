@@ -13,7 +13,7 @@ import { formatCellLineId, getCloneSummary } from "../utils";
 import CloneTable from "../components/CloneTable";
 import Icon from "@ant-design/icons";
 import InfoPanel from "../components/shared/InfoPanel";
-import { primaryColor } from "../style/theme";
+import { PRIMARY_COLOR } from "../style/theme";
 import {
     DarkThemeGhostButton,
     DefaultButton,
@@ -171,7 +171,7 @@ export const DiseaseCellLineTemplate = ({
                             </span>
                             <Divider
                                 type="vertical"
-                                style={{ borderColor: primaryColor }}
+                                style={{ borderColor: PRIMARY_COLOR }}
                             />
                             <span style={{ fontWeight: 400 }}>
                                 {cloneSummary.numIsogenics}

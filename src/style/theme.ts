@@ -8,15 +8,15 @@ export const ALLEN_LIGHT_10 = "#DFE5EA";
 export const ALLEN_LIGHT_30 = "#9FB1C0";
 export const ALLEN_BLUE = "#003057";
 
-export const primaryColor = ALLEN_BLUE;
+export const PRIMARY_COLOR = ALLEN_BLUE;
 
 export default {
     token: {
-        colorPrimary: primaryColor,
+        colorPrimary: PRIMARY_COLOR,
         colorBgContainer: WHITE,
-        colorLink: primaryColor,
-        colorLinkActive: primaryColor,
-        colorLinkHover: primaryColor,
+        colorLink: PRIMARY_COLOR,
+        colorLinkActive: PRIMARY_COLOR,
+        colorLinkHover: PRIMARY_COLOR,
         borderRadius: 4,
         colorBorder: RAIN_SHADOW,
         fontFamily: "Open Sans",
@@ -30,20 +30,20 @@ export default {
             contentBg: ALLEN_LIGHT_10,
             headerBg: ALLEN_LIGHT_10,
             footerBg: ALLEN_LIGHT_10,
-            titleColor: primaryColor,
+            titleColor: PRIMARY_COLOR,
         },
         Button: {
-            defaultColor: primaryColor,
+            defaultColor: PRIMARY_COLOR,
             defaultBg: SOFT_WHITE,
-            defaultBorderColor: primaryColor,
+            defaultBorderColor: PRIMARY_COLOR,
             defaultHoverBg: SOFT_WHITE,
             colorPrimary: SOFT_WHITE,
             colorPrimaryBgHover: SOFT_WHITE,
-            primaryColor: primaryColor,
-            colorPrimaryBorder: primaryColor,
+            primaryColor: PRIMARY_COLOR,
+            colorPrimaryBorder: PRIMARY_COLOR,
             primaryShadow: "none",
-            defaultGhostColor: primaryColor,
-            defaultHoverBorderColor: primaryColor,
+            defaultGhostColor: PRIMARY_COLOR,
+            defaultHoverBorderColor: PRIMARY_COLOR,
             contentFontSize: 16,
         },
         Table: {
@@ -58,7 +58,7 @@ export default {
             itemPaddingBottom: 0,
         },
         Tag: {
-            defaultColor: primaryColor,
+            defaultColor: PRIMARY_COLOR,
         },
         Card: {
             colorBorder: RAIN_SHADOW,
