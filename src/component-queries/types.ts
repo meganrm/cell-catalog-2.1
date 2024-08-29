@@ -17,6 +17,12 @@ export interface ParentalLineFrontmatter {
     };
 }
 
+export enum CellLineStatus {
+    DataComplete = "data complete",
+    Released = "released",
+    InProgress = "in progress",
+}
+
 export interface DiseaseCellLineFrontmatter {
     templateKey: string;
     cell_line_id: string;
@@ -29,7 +35,7 @@ export interface DiseaseCellLineFrontmatter {
     };
     certificate_of_analysis: string;
     order_link: string;
-    status: string;
+    status: CellLineStatus;
 }
 
 export interface DiseaseCellLineEdge {
