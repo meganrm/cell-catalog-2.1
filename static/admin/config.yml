@@ -269,6 +269,7 @@ collections:
                             label: "Diagrams",
                             name: "diagrams",
                             widget: "list",
+                            required: false,
                             fields:
                                 [
                                     {
