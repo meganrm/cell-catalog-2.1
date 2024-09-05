@@ -20,7 +20,7 @@ clones:
     transfection_replicate: A
     genotype: WT/WT
   - type: Mutant
-    clone_number: 84
+    clone_number: 85
     transfection_replicate: B
     genotype: H251N/WT
 order_link: https://www.coriell.org/0/Sections/Search/DiseaseCollection_Detail.aspx?Ref=AICS-0104&Product=CiPSC&PgId=166
