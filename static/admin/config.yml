@@ -258,6 +258,69 @@ collections:
                         },
                     ],
             }
+          - {
+                label: "Editing Design",
+                name: "editing_design",
+                widget: "object",
+                required: false,
+                collapsed: true,
+                fields:
+                    [
+                        {
+                            label: "cRNA Target Site",
+                            name: "crna_target_site",
+                            widget: "string",
+                        },
+                        {
+                            label: "DNA Donor Sequence",
+                            name: "dna_donor_sequence",
+                            widget: "string",
+                        },
+                        { label: "Cas9", name: "cas9", widget: "string" },
+                        {
+                            label: "F Primer for PCR/Sequencing",
+                            name: "f_primer",
+                            widget: "string",
+                        },
+                        {
+                            label: "R primer for PCR/Sequencing",
+                            name: "r_primer",
+                            widget: "string",
+                        },
+                        {
+                            label: "Diagrams",
+                            name: "diagrams",
+                            widget: "list",
+                            collapsed: true,
+                            fields:
+                                [
+                                    {
+                                        label: "Diagram",
+                                        name: "diagram",
+                                        widget: "object",
+                                        fields:
+                                            [
+                                                {
+                                                    label: "title",
+                                                    name: "title",
+                                                    widget: "string"
+                                                },
+                                                {
+                                                    label: "image",
+                                                    name: "iamge",
+                                                    widget: "image"
+                                                },
+                                                {
+                                                    label: "caption",
+                                                    name: "caption",
+                                                    widget: "string"
+                                                },
+                                            ]
+                                    },
+                                ],
+                        },
+                    ],
+            }
     - name: "gene-name"
       label: "Gene and structures names"
       folder: "src/pages/gene-names"
