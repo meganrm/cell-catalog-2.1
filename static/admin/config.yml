@@ -291,6 +291,7 @@ collections:
                             label: "Diagrams",
                             name: "diagrams",
                             widget: "list",
+                            required: false,
                             collapsed: true,
                             fields:
                                 [
