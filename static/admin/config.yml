@@ -301,17 +301,17 @@ collections:
                                         fields:
                                             [
                                                 {
-                                                    label: "title",
+                                                    label: "Title",
                                                     name: "title",
                                                     widget: "string"
                                                 },
                                                 {
-                                                    label: "image",
+                                                    label: "Image",
                                                     name: "iamge",
                                                     widget: "image"
                                                 },
                                                 {
-                                                    label: "caption",
+                                                    label: "Caption",
                                                     name: "caption",
                                                     widget: "string"
                                                 },
