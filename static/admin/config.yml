@@ -263,6 +263,7 @@ collections:
                 name: "genomic_characterization",
                 widget: "object",
                 required: false,
+                collapsed: true,
                 fields:
                     [
                         {
