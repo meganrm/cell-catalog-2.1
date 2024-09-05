@@ -258,6 +258,39 @@ collections:
                         },
                     ],
             }
+          - {
+                label: "Genomic Characterization",
+                name: "genomic_characterization",
+                widget: "object",
+                required: false,
+                fields:
+                    [
+                        {
+                            label: "Diagrams",
+                            name: "diagrams",
+                            widget: "list",
+                            fields:
+                                [
+                                    {
+                                        label: "Title",
+                                        name: "title",
+                                        widget: "string",
+                                        default: "HDR Editing Design:"
+                                    },
+                                    {
+                                        label: "Image",
+                                        name: "image",
+                                        widget: "image",
+                                    },
+                                    {
+                                        label: "Caption",
+                                        name: "caption",
+                                        widget: "string",
+                                    },
+                                ],
+                        }
+                    ]
+            }
     - name: "gene-name"
       label: "Gene and structures names"
       folder: "src/pages/gene-names"
