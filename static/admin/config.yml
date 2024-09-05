@@ -276,7 +276,6 @@ collections:
                                         label: "Title",
                                         name: "title",
                                         widget: "string",
-                                        default: "HDR Editing Design:"
                                     },
                                     {
                                         label: "Image",
