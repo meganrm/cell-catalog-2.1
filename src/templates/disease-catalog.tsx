@@ -3,9 +3,10 @@ import { Card, Divider, Flex } from "antd";
 import { graphql } from "gatsby";
 import Layout from "../components/Layout";
 import Diseases from "../component-queries/Diseases";
-import Content, { HTMLContent } from "../components/Content";
+import Content, { HTMLContent } from "../components/shared/Content";
 import { GatsbyImage, getImage } from "gatsby-plugin-image";
 import { FileNode } from "gatsby-plugin-image/dist/src/components/hooks";
+
 const {
     coriellCard,
     banner,

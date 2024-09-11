@@ -1,12 +1,11 @@
 import React from "react";
 import { Table, Tag, Flex } from "antd";
 import Icon from "@ant-design/icons";
-import { filter } from "lodash";
 
-import { HTMLContent } from "./Content";
+import { HTMLContent } from "./shared/Content";
 import { UnpackedDiseaseCellLine } from "../component-queries/DiseaseCellLines";
-import { formatCellLineId } from "../utils";
-import { WHITE } from "./Layout";
+import { formatCellLineId, getCloneSummary } from "../utils";
+import { WHITE } from "../style/theme";
 
 const Tube = require("../img/tube.svg");
 const CertificateIcon = require("../img/cert-icon.svg");
@@ -16,11 +15,11 @@ const {
     container,
     snpColumn,
     actionButton,
-    clones,
     comingSoon,
     cloneNumber,
     hoverColumn,
     footer,
+    clones,
     cellLineId,
 } = require("../style/disease-table.module.css");
 
@@ -96,13 +95,12 @@ const DiseaseTable = ({
                         key: "clones",
                         dataIndex: "clones",
                         className: clones,
-                        render: (clones) => {
-                            const numMutants = filter(clones, {
-                                type: "Mutant",
-                            }).length;
-                            const numIsogenics = clones.length - numMutants;
+                        render: (clones, _, index) => {
+                            const { numMutants, numIsogenics } =
+                                getCloneSummary(clones);
+
                             return (
-                                <Flex vertical={true} key={numMutants}>
+                                <Flex vertical={true} key={index}>
                                     <div>
                                         {" "}
                                         <span

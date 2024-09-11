@@ -7,6 +7,7 @@ exports.createSchemaCustomization = ({ actions, schema }) => {
     const typeDefs = [
         "type MarkdownRemark implements Node { frontmatter: Frontmatter }",
         `type Frontmatter {
+            disease: MarkdownRemark @link(by: "frontmatter.name")
             gene: MarkdownRemark @link(by: "frontmatter.symbol")
             parental_line: MarkdownRemark @link(by: "frontmatter.cell_line_id")
             footer_text: String @md
