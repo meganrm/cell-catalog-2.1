@@ -270,22 +270,31 @@ collections:
                             label: "cRNA Target Site",
                             name: "crna_target_site",
                             widget: "string",
+                            required: false,
                         },
                         {
                             label: "DNA Donor Sequence",
                             name: "dna_donor_sequence",
                             widget: "string",
+                            required: false,
                         },
-                        { label: "Cas9", name: "cas9", widget: "string" },
+                        {
+                            label: "Cas9",
+                            name: "cas9",
+                            widget: "string",
+                            required: false,
+                        },
                         {
                             label: "F Primer for PCR/Sequencing",
                             name: "f_primer",
                             widget: "string",
+                            required: false,
                         },
                         {
                             label: "R primer for PCR/Sequencing",
                             name: "r_primer",
                             widget: "string",
+                            required: false,
                         },
                         {
                             label: "Diagrams",
@@ -296,27 +305,19 @@ collections:
                             fields:
                                 [
                                     {
-                                        label: "Diagram",
-                                        name: "diagram",
-                                        widget: "object",
-                                        fields:
-                                            [
-                                                {
-                                                    label: "Title",
-                                                    name: "title",
-                                                    widget: "string"
-                                                },
-                                                {
-                                                    label: "Image",
-                                                    name: "iamge",
-                                                    widget: "image"
-                                                },
-                                                {
-                                                    label: "Caption",
-                                                    name: "caption",
-                                                    widget: "string"
-                                                },
-                                            ]
+                                        label: "Title",
+                                        name: "title",
+                                        widget: "string",
+                                    },
+                                    {
+                                        label: "Image",
+                                        name: "image",
+                                        widget: "image",
+                                    },
+                                    {
+                                        label: "Caption",
+                                        name: "caption",
+                                        widget: "string",
                                     },
                                 ],
                         },
