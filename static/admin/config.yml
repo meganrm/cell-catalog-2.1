@@ -258,6 +258,40 @@ collections:
                         },
                     ],
             }
+          - {
+                label: "Protocols",
+                name: "protocols",
+                widget: "list",
+                required: false,
+                collapsed: true,
+                fields:
+                    [
+                        {   
+                            label: "File Upload", #File or link?
+                            name: "file", 
+                            widget: "file",
+                            required: false,
+                        },
+                        {
+                            label: "File Name",
+                            name: "file_name",
+                            widget: "string",
+                            required: false,
+                        },
+                        {
+                            label: "Protocol",
+                            name: "protocol",
+                            widget: "select",
+                            options:
+                                [
+                                    "Cell Culture",
+                                    "Gene Editing",
+                                    "Cardiomyocyte Differentiation",
+                                ],
+                            required: false,
+                        },
+                    ],
+            }
     - name: "gene-name"
       label: "Gene and structures names"
       folder: "src/pages/gene-names"
