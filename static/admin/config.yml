@@ -273,7 +273,7 @@ collections:
                             required: false,
                         },
                         {
-                            label: "% Positive Cells",
+                            label: "Troponin T, % Positive Cells(n)",
                             name: "positive_cells",
                             widget: "number",
                             required: false,
