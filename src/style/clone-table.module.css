@@ -1,0 +1,25 @@
+.container {
+    border-radius: 4px;
+    border: 1px var(--small-table-border-color) solid;
+    margin-bottom: 24px;
+}
+
+.container :global(.ant-table-thead .ant-table-cell)::before {
+    display: none; /* remove dividers between column headers */
+}
+
+.container :global(.ant-table-thead .ant-table-cell) {
+    font-size: 14px;
+    font-weight: 400;
+    color: #575859;
+}
+
+.container :global(.ant-table) {
+    border-radius: 4px;
+}
+
+.container .row :global(.ant-table-cell) {
+    border-bottom: none;
+    padding: 5px 16px;
+    line-height: 1.4;
+}
