@@ -358,6 +358,28 @@ collections:
                         },
                     ],
             }
+          - {
+                label: "Stem Cell Characteristics",
+                name: "stem_cell_characteristics",
+                widget: "list",
+                required: false,
+                collapsed: true,
+                fields:
+                    [
+                        {
+                            label: "Clone number",
+                            name: "clone_number",
+                            widget: "number",
+                            required: false,
+                        },
+                        {
+                            label: "Troponin T, % Positive Cells(n)",
+                            name: "positive_cells",
+                            widget: "number",
+                            required: false,
+                        }
+                    ],
+            }
     - name: "gene-name"
       label: "Gene and structures names"
       folder: "src/pages/gene-names"
