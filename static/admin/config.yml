@@ -259,6 +259,128 @@ collections:
                     ],
             }
           - {
+                label: "Genomic Characterization",
+                name: "genomic_characterization",
+                widget: "object",
+                required: false,
+                collapsed: true,
+                fields:
+                    [
+                        {
+                            label: "Diagrams",
+                            name: "diagrams",
+                            widget: "list",
+                            required: false,
+                            collapsed: true,
+                            fields:
+                                [
+                                    {
+                                        label: "Title",
+                                        name: "title",
+                                        widget: "string",
+                                    },
+                                    {
+                                        label: "Image",
+                                        name: "image",
+                                        widget: "image",
+                                    },
+                                    {
+                                        label: "Caption",
+                                        name: "caption",
+                                        widget: "string",
+                                    },
+                                ],
+                        }
+                    ]
+            }
+          - {
+                label: "Editing Design",
+                name: "editing_design",
+                widget: "object",
+                required: false,
+                collapsed: true,
+                fields:
+                    [
+                        {
+                            label: "cRNA Target Site",
+                            name: "crna_target_site",
+                            widget: "string",
+                            required: false,
+                        },
+                        {
+                            label: "DNA Donor Sequence",
+                            name: "dna_donor_sequence",
+                            widget: "string",
+                            required: false,
+                        },
+                        {
+                            label: "Cas9",
+                            name: "cas9",
+                            widget: "string",
+                            required: false,
+                        },
+                        {
+                            label: "F Primer for PCR/Sequencing",
+                            name: "f_primer",
+                            widget: "string",
+                            required: false,
+                        },
+                        {
+                            label: "R primer for PCR/Sequencing",
+                            name: "r_primer",
+                            widget: "string",
+                            required: false,
+                        },
+                        {
+                            label: "Diagrams",
+                            name: "diagrams",
+                            widget: "list",
+                            required: false,
+                            collapsed: true,
+                            fields:
+                                [
+                                    {
+                                        label: "Title",
+                                        name: "title",
+                                        widget: "string",
+                                    },
+                                    {
+                                        label: "Image",
+                                        name: "image",
+                                        widget: "image",
+                                    },
+                                    {
+                                        label: "Caption",
+                                        name: "caption",
+                                        widget: "string",
+                                    },
+                                ],
+                        },
+                    ],
+            }
+          - {
+                label: "Stem Cell Characteristics",
+                name: "stem_cell_characteristics",
+                widget: "list",
+                required: false,
+                collapsed: true,
+                fields:
+                    [
+                        {
+                            label: "Clone number",
+                            name: "clone_number",
+                            widget: "number",
+                            required: false,
+                        },
+                        {
+                            label: "Troponin T, % Positive Cells(n)",
+                            name: "positive_cells",
+                            widget: "number",
+                            required: false,
+                        }
+                    ],
+            }
+          - {
                 label: "Protocols",
                 name: "protocols",
                 widget: "list",
