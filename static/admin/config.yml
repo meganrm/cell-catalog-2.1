@@ -267,7 +267,7 @@ collections:
                 fields:
                     [
                         {   
-                            label: "File Upload", #File or link?
+                            label: "File Upload",
                             name: "file", 
                             widget: "file",
                             required: false,
@@ -279,8 +279,8 @@ collections:
                             required: false,
                         },
                         {
-                            label: "Protocol",
-                            name: "protocol",
+                            label: "Category",
+                            name: "category",
                             widget: "select",
                             options:
                                 [
