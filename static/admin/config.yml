@@ -302,16 +302,18 @@ collections:
                 fields:
                     [
                         {
-                            label: "cRNA Target Site: enter PAM sites between square brackets like: AG[TGG]",
+                            label: "cRNA Target Site",
                             name: "crna_target_site",
                             widget: "string",
                             required: false,
+                            hint: "Enter entire cRNA Target Site sequence. Place square brackets around PAM site. e.g. AG[TGG]ATA",
                         },
                         {
                             label: "DNA Donor Sequence: enter mutation sites between square brackets like: AG[A]",
                             name: "dna_donor_sequence",
                             widget: "string",
                             required: false,
+                            hint: "Enter entire DNA donor sequence. Place square brackets around mutation sites. e.g. AG[A]AA",
                         },
                         {
                             label: "Cas9",
