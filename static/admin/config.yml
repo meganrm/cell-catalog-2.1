@@ -309,7 +309,7 @@ collections:
                             hint: "Enter entire cRNA Target Site sequence. Place square brackets around PAM site. e.g. AG[TGG]ATA",
                         },
                         {
-                            label: "DNA Donor Sequence: enter mutation sites between square brackets like: AG[A]",
+                            label: "DNA Donor Sequence",
                             name: "dna_donor_sequence",
                             widget: "string",
                             required: false,
