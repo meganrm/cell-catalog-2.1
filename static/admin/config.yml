@@ -302,13 +302,13 @@ collections:
                 fields:
                     [
                         {
-                            label: "cRNA Target Site",
+                            label: "cRNA Target Site: enter PAM sites between square brackets like: AG[TGG]",
                             name: "crna_target_site",
                             widget: "string",
                             required: false,
                         },
                         {
-                            label: "DNA Donor Sequence",
+                            label: "DNA Donor Sequence: enter mutation sites between square brackets like: AG[A]",
                             name: "dna_donor_sequence",
                             widget: "string",
                             required: false,
