@@ -409,9 +409,17 @@ collections:
                                     "Cell Culture",
                                     "Gene Editing",
                                     "Cardiomyocyte Differentiation",
+                                    "New Category",
                                 ],
                             required: false,
                         },
+                        {
+                            label: "New Category Name",
+                            name: "new_category_name",
+                            widget: "string",
+                            required: false,
+                            hint: "If 'New Category' is selected in 'Category', please specify the name here."
+                        }
                     ],
             }
     - name: "gene-name"
