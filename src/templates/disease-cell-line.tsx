@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { graphql, Link } from "gatsby";
 import { Button, Card, Divider, Flex, Tooltip } from "antd";
+import { GatsbyImage, getImage } from "gatsby-plugin-image";
 
 import Layout from "../components/Layout";
 import {
@@ -41,7 +42,26 @@ interface DiseaseCellLineTemplateProps {
     parentLineGene: GeneFrontMatter;
     clones: Clone[];
     healthCertificate: string;
+    images_and_videos: any;
 }
+
+const MediaTable = ({ images_and_videos }) => {
+    return (
+        <Flex vertical gap={16}>
+            {images_and_videos.images.map((img, index) => (
+                const image = getImage(images_and_videos.images.image.childImageSharp.gatsbyImageData);
+
+                return (
+                    <Card key={index} style={{ width: "100%" }}>
+                        {<image && GatsbyImage image={image} alt={img.caption} />}
+                        <p>{img.caption}</p>
+                    </Card>
+                );
+            })}
+        </Flex>
+    );
+};
+
 // eslint-disable-next-line
 export const DiseaseCellLineTemplate = ({
     href,
@@ -212,6 +232,7 @@ const CellLine = ({ data, location }: QueryResult) => {
                 healthCertificate={
                     cellLine.frontmatter.hPSCreg_certificate_link
                 }
+                images_and_videos={cellLine.frontmatter.images_and_videos}
             />
         </Layout>
     );
@@ -272,6 +293,20 @@ export const pageQuery = graphql`
                 }
                 certificate_of_analysis
                 order_link
+                images_and_videos {
+                    images {
+                        image {
+                            childImageSharp {
+                                gatsbyImageData(
+                                    placeholder: BLURRED
+                                    layout: CONSTRAINED
+                                    width: 500
+                                )
+                            }
+                        }
+                        caption
+                    }
+                }
             }
         }
     }

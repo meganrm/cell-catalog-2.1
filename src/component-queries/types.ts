@@ -38,6 +38,16 @@ export interface DiseaseCellLineFrontmatter {
     order_link: string;
     status: string;
     hPSCreg_certificate_link: string;
+    images_and_videos: {
+        images: {
+            image: any;
+            caption: string;
+        }[];
+        videos: {
+            video: any;
+            caption: string;
+        }[];
+    };
 }
 
 export interface DiseaseCellLineEdge {
