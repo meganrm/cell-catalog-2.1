@@ -408,7 +408,7 @@ collections:
                                 [
                                     "Cell Culture Protocols",
                                     "Gene Editing Protocols",
-                                    "Disease Specify Protocols",
+                                    "Disease Specific Protocols",
                                 ],
                             required: false,
                         },
