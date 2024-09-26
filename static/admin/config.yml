@@ -306,12 +306,14 @@ collections:
                             name: "crna_target_site",
                             widget: "string",
                             required: false,
+                            hint: "Enter entire cRNA Target Site sequence. Place square brackets around PAM site. e.g. AG[TGG]ATA",
                         },
                         {
                             label: "DNA Donor Sequence",
                             name: "dna_donor_sequence",
                             widget: "string",
                             required: false,
+                            hint: "Enter entire DNA donor sequence. Place square brackets around mutation sites. e.g. AG[A]AA",
                         },
                         {
                             label: "Cas9",
@@ -378,6 +380,40 @@ collections:
                             widget: "number",
                             required: false,
                         }
+                    ],
+            }
+          - {
+                label: "Protocols",
+                name: "protocols",
+                widget: "list",
+                required: false,
+                collapsed: true,
+                fields:
+                    [
+                        {   
+                            label: "File Upload",
+                            name: "file", 
+                            widget: "file",
+                            required: false,
+                        },
+                        {
+                            label: "File Name",
+                            name: "file_name",
+                            widget: "string",
+                            required: false,
+                        },
+                        {
+                            label: "Category",
+                            name: "category",
+                            widget: "select",
+                            options:
+                                [
+                                    "Cell Culture Protocols",
+                                    "Gene Editing Protocols",
+                                    "Disease Specific Protocols",
+                                ],
+                            required: false,
+                        },
                     ],
             }
     - name: "gene-name"
