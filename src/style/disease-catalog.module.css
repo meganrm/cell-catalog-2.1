@@ -70,7 +70,7 @@
     font-weight: 300;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: var(--tablet-breakpoint)) {
     .header {
         flex-direction: column;
     }
