@@ -160,7 +160,7 @@
     color: var(--ALLEN_LIGHT_60);
 }
 
-@media screen and (max-width: var(--tablet-breakpoint)) {
+@media screen and (max-width: 768px) {
     .container h4 {
         font-size: 20px;
     }
@@ -171,7 +171,7 @@
     }
 }
 
-@media screen and (max-width: var(--mobile-breakpoint)) {
+@media screen and (max-width: 576px) {
     .container h4 {
         font-size: 16px;
     }
