@@ -41,6 +41,10 @@ const DiseaseTable = ({
     const inProgress = status?.toLowerCase() === "coming soon";
 
     const useWindowWidth = () => {
+        // so the build doesn't fail
+        if (typeof window === "undefined") {
+            return 0;
+        }
         const [width, SetWidth] = useState(window.innerWidth);
 
         useEffect(() => {
