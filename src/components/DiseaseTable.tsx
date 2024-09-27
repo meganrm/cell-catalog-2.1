@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Table, Tag, Flex } from "antd";
 import Icon from "@ant-design/icons";
 
@@ -6,6 +6,8 @@ import { HTMLContent } from "./shared/Content";
 import { UnpackedDiseaseCellLine } from "../component-queries/DiseaseCellLines";
 import { formatCellLineId, getCloneSummary } from "../utils";
 import { WHITE } from "../style/theme";
+import { debounce } from "lodash";
+import exp from "constants";
 
 const Tube = require("../img/tube.svg");
 const CertificateIcon = require("../img/cert-icon.svg");
@@ -21,6 +23,7 @@ const {
     footer,
     clones,
     cellLineId,
+    expandableContent,
 } = require("../style/disease-table.module.css");
 
 interface DiseaseTableProps {
@@ -37,6 +40,70 @@ const DiseaseTable = ({
     status,
 }: DiseaseTableProps) => {
     const inProgress = status?.toLowerCase() === "coming soon";
+
+    const useWindowWidth = () => {
+        const tabletBreakpoint = 768;
+        const [isMobile, setIsMobile] = useState(
+            window.innerWidth <= tabletBreakpoint
+        );
+
+        useEffect(() => {
+            const handleResize = () => {
+                setIsMobile(window.innerWidth <= tabletBreakpoint);
+            };
+            const debouncedHandleResize = debounce(handleResize, 200);
+            window.addEventListener("resize", debouncedHandleResize);
+            return () => {
+                window.removeEventListener("resize", debouncedHandleResize);
+            };
+        }, []);
+        return isMobile;
+    };
+
+    const hasExpandableData = useWindowWidth();
+    const renderCloneSummary = (
+        numMutants: number,
+        numIsogenics: number,
+        index: number
+    ) => (
+        <Flex vertical={true} key={index}>
+            <div>
+                <span className={cloneNumber} key={numMutants}>
+                    {numMutants}
+                </span>
+                <span> mutant clones</span>
+            </div>
+            <div>
+                <span className={cloneNumber} key={numIsogenics}>
+                    {numIsogenics}
+                </span>
+                <span> isogenic controls</span>
+            </div>
+        </Flex>
+    );
+    const expandableConfig = {
+        expandedRowRender: (record: UnpackedDiseaseCellLine, index: number) => (
+            <Flex
+                key={record.cell_line_id}
+                gap={16}
+                justify="flex-start"
+                className={expandableContent}
+            >
+                <div>
+                    <label>Gene Symbol & Name:</label>
+                    <span key={record.cell_line_id}>{record.diseaseGene}</span>
+                </div>
+                <div>
+                    {renderCloneSummary(
+                        getCloneSummary(record.clones).numMutants,
+                        getCloneSummary(record.clones).numIsogenics,
+                        index
+                    )}
+                </div>
+            </Flex>
+        ),
+    };
+
     return (
         <>
             <Table
@@ -50,14 +117,16 @@ const DiseaseTable = ({
                         ) : null}
                     </Flex>
                 )}
+                scroll={{ x: "max-content" }}
                 pagination={false}
+                expandable={hasExpandableData ? expandableConfig : undefined}
                 columns={[
                     {
                         title: "Cell Collection ID",
                         key: "cell_line_id",
                         className: cellLineId,
-                        width: 180,
                         dataIndex: "cell_line_id",
+                        fixed: "left",
                         render: (cell_line_id: string) => (
                             <h4 key={cell_line_id}>
                                 {formatCellLineId(cell_line_id)}
@@ -84,43 +153,28 @@ const DiseaseTable = ({
                         width: 280,
                         key: "diseaseGene",
                         dataIndex: "diseaseGene",
+                        responsive: ["md"],
                     },
                     {
                         title: "Parental Line",
                         key: "parentalLine",
                         dataIndex: "parentalLine",
+                        responsive: ["md"],
                     },
                     {
                         title: "Clones",
                         key: "clones",
                         dataIndex: "clones",
                         className: clones,
+                        responsive: ["md"],
                         render: (clones, _, index) => {
                             const { numMutants, numIsogenics } =
                                 getCloneSummary(clones);
 
-                            return (
-                                <Flex vertical={true} key={index}>
-                                    <div>
-                                        {" "}
-                                        <span
-                                            className={cloneNumber}
-                                            key={numMutants}
-                                        >
-                                            {numMutants}
-                                        </span>
-                                        <span> mutant clones</span>
-                                    </div>
-                                    <div>
-                                        <span
-                                            className={cloneNumber}
-                                            key={numIsogenics}
-                                        >
-                                            {numIsogenics}
-                                        </span>
-                                        <span> isogenic controls</span>
-                                    </div>
-                                </Flex>
+                            return renderCloneSummary(
+                                numMutants,
+                                numIsogenics,
+                                index
                             );
                         },
                     },
@@ -129,6 +183,7 @@ const DiseaseTable = ({
                         key: "order_link",
                         dataIndex: "order_link",
                         className: hoverColumn,
+                        fixed: "right",
                         render: (order_link) => {
                             if (inProgress) {
                                 return <>{""}</>; // still want a blank column
@@ -161,6 +216,8 @@ const DiseaseTable = ({
                         key: "certificate_of_analysis",
                         dataIndex: "certificate_of_analysis",
                         className: hoverColumn,
+                        fixed: "right",
+                        responsive: ["md"],
                         render: (certificate_of_analysis) => {
                             return (
                                 certificate_of_analysis && (

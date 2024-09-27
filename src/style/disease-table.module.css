@@ -33,7 +33,7 @@
 }
 
 .container :global(.ant-table-thead .ant-table-cell) {
-    padding: 10px 16px 10px 16px;
+    padding: 10px 16px;
     font-size: 14px;
     font-weight: 400;
     line-height: 34px;
@@ -65,7 +65,7 @@
     margin: 2px;
 }
 
-.container :global(.ant-table-cell) {
+.container :global(.ant-table-row .ant-table-cell) {
     vertical-align: middle;
     padding: 14px 16px;
 }
@@ -80,8 +80,8 @@
     text-wrap: balance;
 }
 
-.action-button {
-    max-width: 64px;
+.hover-column {
+    width: 160px;
 }
 
 .action-button a {
@@ -92,6 +92,7 @@
 .clones {
     text-wrap: balance;
     border-right: 1px solid var(--border-color);
+    min-width: 175px;
 }
 
 .clone-number {
@@ -141,4 +142,51 @@
 
 .container.coming-soon .clones {
     border-right: 1px solid transparent;
+}
+
+.container
+    :global(
+        .ant-table-cell.ant-table-row-expand-icon-cell.ant-table-cell-fix-left
+    ) {
+    width: 0px;
+    padding: 0px;
+}
+
+.expandable-content label {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--SERIOUS_GRAY);
+}
+
+@media screen and (max-width: 768px) {
+    .container h4 {
+        font-size: 20px;
+    }
+    .container :global(.ant-table-row .ant-table-cell),
+    .container :global(.ant-table-thead .ant-table-cell).cell-line-id,
+    .container :global(.ant-table-cell).cell-line-id {
+        padding: 8px 4px 8px 14px;
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .container h4 {
+        font-size: 16px;
+    }
+    .container :global(.ant-table-row .ant-table-cell) {
+        padding-bottom: 4px;
+    }
+    .hover-column {
+        width: 120px;
+        padding: 4px !important;
+    }
+    .hover-column .action-button {
+        font-size: 14px;
+    }
+    .container
+        :global(
+            .ant-table-cell.ant-table-row-expand-icon-cell.ant-table-cell-fix-left
+        ) {
+        width: initial;
+    }
 }
