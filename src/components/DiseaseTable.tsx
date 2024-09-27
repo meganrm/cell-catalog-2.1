@@ -41,14 +41,11 @@ const DiseaseTable = ({
     const inProgress = status?.toLowerCase() === "coming soon";
 
     const useWindowWidth = () => {
-        const tabletBreakpoint = 768;
-        const [isMobile, setIsMobile] = useState(
-            window.innerWidth <= tabletBreakpoint
-        );
+        const [width, SetWidth] = useState(window.innerWidth);
 
         useEffect(() => {
             const handleResize = () => {
-                setIsMobile(window.innerWidth <= tabletBreakpoint);
+                SetWidth(window.innerWidth);
             };
             const debouncedHandleResize = debounce(handleResize, 200);
             window.addEventListener("resize", debouncedHandleResize);
@@ -56,10 +53,12 @@ const DiseaseTable = ({
                 window.removeEventListener("resize", debouncedHandleResize);
             };
         }, []);
-        return isMobile;
+        return width;
     };
 
-    const hasExpandableData = useWindowWidth();
+    const width = useWindowWidth();
+    const isTablet = width < 768;
+    const isMobile = width < 576;
     const renderCloneSummary = (
         numMutants: number,
         numIsogenics: number,
@@ -87,12 +86,28 @@ const DiseaseTable = ({
                 gap={16}
                 justify="flex-start"
                 className={expandableContent}
+                wrap={"wrap"}
             >
+                {isMobile && (
+                    <div>
+                        <label>SNP:</label>
+                        <Flex vertical={true} key={record.snp}>
+                            <span key={"snp-0"}>
+                                {record.snp.split(":")[0]}:{" "}
+                            </span>
+                            <span key={"snp-1"}>
+                                {record.snp.split(":")[1]}
+                            </span>
+                        </Flex>
+                    </div>
+                )}
                 <div>
                     <label>Gene Symbol & Name:</label>
-                    <span key={record.cell_line_id}>{record.diseaseGene}</span>
+                    <span>{record.diseaseGene}</span>
                 </div>
                 <div>
+                    <label>Clones:</label>
+
                     {renderCloneSummary(
                         getCloneSummary(record.clones).numMutants,
                         getCloneSummary(record.clones).numIsogenics,
@@ -118,7 +133,7 @@ const DiseaseTable = ({
                 )}
                 scroll={{ x: "max-content" }}
                 pagination={false}
-                expandable={hasExpandableData ? expandableConfig : undefined}
+                expandable={isTablet ? expandableConfig : undefined}
                 columns={[
                     {
                         title: "Cell Collection ID",
@@ -137,6 +152,7 @@ const DiseaseTable = ({
                         key: "snp",
                         dataIndex: "snp",
                         className: snpColumn,
+                        responsive: ["sm"],
                         render: (snp: string) => {
                             const snps = snp.split(":");
                             return (

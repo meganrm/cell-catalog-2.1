@@ -153,9 +153,10 @@
 }
 
 .expandable-content label {
-    font-size: 14px;
+    font-size: 12px;
     font-weight: 600;
-    color: var(--SERIOUS_GRAY);
+    font-weight: 300;
+    color: var(--ALLEN_LIGHT_60);
 }
 
 @media screen and (max-width: 768px) {
