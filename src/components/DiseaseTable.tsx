@@ -6,7 +6,8 @@ import { HTMLContent } from "./shared/Content";
 import { UnpackedDiseaseCellLine } from "../component-queries/DiseaseCellLines";
 import { formatCellLineId, getCloneSummary } from "../utils";
 import { WHITE } from "../style/theme";
-import { debounce } from "lodash";
+import useWindowWidth from "../hooks/useWindowWidth";
+import { MOBILE_BREAKPOINT, TABLET_BREAKPOINT } from "../constants";
 
 const Tube = require("../img/tube.svg");
 const CertificateIcon = require("../img/cert-icon.svg");
@@ -40,29 +41,9 @@ const DiseaseTable = ({
 }: DiseaseTableProps) => {
     const inProgress = status?.toLowerCase() === "coming soon";
 
-    const useWindowWidth = () => {
-        // so the build doesn't fail
-        if (typeof window === "undefined") {
-            return 0;
-        }
-        const [width, SetWidth] = useState(window.innerWidth);
-
-        useEffect(() => {
-            const handleResize = () => {
-                SetWidth(window.innerWidth);
-            };
-            const debouncedHandleResize = debounce(handleResize, 200);
-            window.addEventListener("resize", debouncedHandleResize);
-            return () => {
-                window.removeEventListener("resize", debouncedHandleResize);
-            };
-        }, []);
-        return width;
-    };
-
     const width = useWindowWidth();
-    const isTablet = width < 768;
-    const isMobile = width < 576;
+    const isTablet = width < TABLET_BREAKPOINT;
+    const isMobile = width < MOBILE_BREAKPOINT;
     const renderCloneSummary = (
         numMutants: number,
         numIsogenics: number,
