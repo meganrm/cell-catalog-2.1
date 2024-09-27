@@ -7,7 +7,6 @@ import { UnpackedDiseaseCellLine } from "../component-queries/DiseaseCellLines";
 import { formatCellLineId, getCloneSummary } from "../utils";
 import { WHITE } from "../style/theme";
 import { debounce } from "lodash";
-import exp from "constants";
 
 const Tube = require("../img/tube.svg");
 const CertificateIcon = require("../img/cert-icon.svg");
