@@ -16,6 +16,7 @@ export interface UnpackedDiseaseCellLine extends DiseaseCellLineFrontmatter {
     diseaseGene: JSX.Element | null;
     parentalLine: JSX.Element | null;
     path: string;
+    key: string;
 }
 
 const getParentalLineItems = (parentalLine: ParentalLineFrontmatter) => {
@@ -67,6 +68,7 @@ const groupLines = (
             path: cellLine.node.fields.slug,
             diseaseGene: null,
             parentalLine: null,
+            key: cellLine.node.id,
         };
         const diseaseData = diseases.find((d) => d.name === diseaseName);
         if (!diseaseData) {
