@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { graphql, Link } from "gatsby";
 import { Button, Card, Divider, Flex, Tooltip } from "antd";
-import { GatsbyImage, getImage } from "gatsby-plugin-image";
 
 import Layout from "../components/Layout";
 import {
@@ -19,6 +18,7 @@ import {
     DarkThemeGhostButton,
     DefaultButton,
 } from "../components/shared/Buttons";
+import ImagesAndVideos from "../components/ImagesAndVideos";
 
 const {
     container,
@@ -42,25 +42,9 @@ interface DiseaseCellLineTemplateProps {
     parentLineGene: GeneFrontMatter;
     clones: Clone[];
     healthCertificate: string;
-    images_and_videos: any;
+    imagesAndVideos: any;
 }
 
-const MediaTable = ({ images_and_videos }) => {
-    return (
-        <Flex vertical gap={16}>
-            {images_and_videos.images.map((img, index) => (
-                const image = getImage(images_and_videos.images.image.childImageSharp.gatsbyImageData);
-
-                return (
-                    <Card key={index} style={{ width: "100%" }}>
-                        {<image && GatsbyImage image={image} alt={img.caption} />}
-                        <p>{img.caption}</p>
-                    </Card>
-                );
-            })}
-        </Flex>
-    );
-};
 
 // eslint-disable-next-line
 export const DiseaseCellLineTemplate = ({
@@ -75,6 +59,7 @@ export const DiseaseCellLineTemplate = ({
     certificateOfAnalysis,
     parentalLine,
     healthCertificate,
+    imagesAndVideos,
 }: DiseaseCellLineTemplateProps) => {
     const defaultToolTipText = "Copy cell line link to clipboard";
     const [shareTooltipText, setShareTooltipText] =
@@ -203,6 +188,7 @@ export const DiseaseCellLineTemplate = ({
                         </>
                     </Button>
                 </Card>
+                <ImagesAndVideos images={imagesAndVideos.images} />
             </Flex>
         </Flex>
     );
@@ -232,7 +218,7 @@ const CellLine = ({ data, location }: QueryResult) => {
                 healthCertificate={
                     cellLine.frontmatter.hPSCreg_certificate_link
                 }
-                images_and_videos={cellLine.frontmatter.images_and_videos}
+                imagesAndVideos={cellLine.frontmatter.images_and_videos}
             />
         </Layout>
     );
