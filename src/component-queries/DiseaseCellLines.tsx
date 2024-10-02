@@ -197,25 +197,11 @@ export default function DiseaseCellLineQuery(props: {
                                     snp
                                     certificate_of_analysis
                                     order_link
-                                    images_and_videos {
-                                        images {
-                                            image {
-                                                childImageSharp {
-                                                    gatsbyImageData(
-                                                        placeholder: BLURRED
-                                                        layout: CONSTRAINED
-                                                        width: 500
-                                                    )
-                                                }
-                                            }
-                                            caption
-                                        }
                                     }
                                 }
                             }
                         }
                     }
-                }
             `}
             render={(data) => (
                 <DiseaseCellLineTemplate
