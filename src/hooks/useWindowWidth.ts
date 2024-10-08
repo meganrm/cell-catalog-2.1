@@ -1,8 +1,9 @@
 import { debounce } from "lodash";
 import { useState, useEffect } from "react";
+import { TABLET_BREAKPOINT } from "../constants";
 
 const useWindowWidth = () => {
-    const [width, SetWidth] = useState(0);
+    const [width, SetWidth] = useState(TABLET_BREAKPOINT);
 
     useEffect(() => {
         const handleResize = () => {
