@@ -2,11 +2,7 @@ import { debounce } from "lodash";
 import { useState, useEffect } from "react";
 
 const useWindowWidth = () => {
-    // so the build doesn't fail
-    if (typeof window === "undefined") {
-        return 0;
-    }
-    const [width, SetWidth] = useState(window.innerWidth);
+    const [width, SetWidth] = useState(0);
 
     useEffect(() => {
         const handleResize = () => {
