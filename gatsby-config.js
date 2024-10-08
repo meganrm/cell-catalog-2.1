@@ -16,6 +16,10 @@ module.exports = {
             ],
         },
     ],
+    // turn on if seeing minified errors in production
+    // flags: {
+    //     DEV_SSR: true,
+    // },
     plugins: [
         "gatsby-plugin-react-helmet",
         "gatsby-plugin-fix-fouc",
