@@ -188,6 +188,8 @@ export const DiseaseCellLineTemplate = ({
                         </>
                     </Button>
                 </Card>
+            </Flex>
+            <Flex vertical gap={16} style={{ width: "60%", padding: "0 24px" }}>
                 <ImagesAndVideos images={imagesAndVideos.images} />
             </Flex>
         </Flex>
