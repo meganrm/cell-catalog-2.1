@@ -2,11 +2,11 @@ import React from "react";
 import { graphql } from "gatsby";
 import Layout from "../components/Layout";
 
-// eslint-disable-next-line
-export const DiseaseTemplate = ({
-    name,
-    gene
-}) => {
+interface DiseaseTemplateProps {
+    name: string;
+    gene: string;
+}
+export const DiseaseTemplate = ({ name, gene }: DiseaseTemplateProps) => {
     return (
         <section className="section">
             <div className="container content">
@@ -21,19 +21,17 @@ export const DiseaseTemplate = ({
     );
 };
 
-
-const Disease = ({ data }) => {
-  const { markdownRemark: cellLine } = data;
-  return (
-      <Layout>
-          <DiseaseTemplate
-              name={cellLine.frontmatter.name}
-              gene={`${cellLine.frontmatter.gene.frontmatter.symbol} - ${cellLine.frontmatter.gene.frontmatter.name}`}
-          />
-      </Layout>
-  );
+const Disease = ({ data }: any) => {
+    const { markdownRemark: cellLine } = data;
+    return (
+        <Layout>
+            <DiseaseTemplate
+                name={cellLine.frontmatter.name}
+                gene={`${cellLine.frontmatter.gene.frontmatter.symbol} - ${cellLine.frontmatter.gene.frontmatter.name}`}
+            />
+        </Layout>
+    );
 };
-
 
 export default Disease;
 

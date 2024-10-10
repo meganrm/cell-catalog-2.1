@@ -1,4 +1,3 @@
-
 export interface GeneFrontMatter {
     name: string;
     symbol: string;
@@ -23,19 +22,29 @@ export enum CellLineStatus {
     InProgress = "in progress",
 }
 
+// NOTE: Temporarily optional fields, but
+// once the data has been updated by gene editing
+// these fields will be required
+export interface Clone {
+    type: string;
+    clone_number?: number;
+    genotype?: string;
+    transfection_replicate?: string;
+}
+
 export interface DiseaseCellLineFrontmatter {
     templateKey: string;
     cell_line_id: string;
     parental_line: { frontmatter: ParentalLineFrontmatter };
-    disease: string;
-    snp: string;
-    clones: {
-        isogenic_controls: number;
-        mutants: number;
+    disease: {
+        frontmatter: DiseaseFrontmatter;
     };
+    snp: string;
+    clones: Clone[];
     certificate_of_analysis: string;
     order_link: string;
     status: CellLineStatus;
+    hPSCreg_certificate_link: string;
 }
 
 export interface DiseaseCellLineEdge {

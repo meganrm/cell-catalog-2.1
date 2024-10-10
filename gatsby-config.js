@@ -1,6 +1,7 @@
 module.exports = {
     siteMetadata: {
         title: "Disease Cell Line Catalog",
+        siteURL: "https://cell-catalog.allencell.org",
         description:
             "The Disease Collection Cell Catalog is a growing compilation of cell lines that carry mutations in genes known to cause disease. These cell lines were created by introducing a point mutation in one of the fluorescently tagged WTC-11 clonal lines from the Allen Cell Collection.",
     },
@@ -15,6 +16,10 @@ module.exports = {
             ],
         },
     ],
+    // turn on if seeing minified errors in production
+    // flags: {
+    //     DEV_SSR: true,
+    // },
     plugins: [
         "gatsby-plugin-react-helmet",
         "gatsby-plugin-fix-fouc",
@@ -58,6 +63,7 @@ module.exports = {
             resolve: "gatsby-transformer-remark",
             options: {
                 plugins: [
+                    { resolve: "gatsby-remark-external-links" },
                     "gatsby-remark-relative-images",
                     {
                         resolve: "gatsby-remark-images",
@@ -103,6 +109,7 @@ module.exports = {
     ],
     mapping: {
         "MarkdownRemark.frontmatter.gene": `MarkdownRemark.frontmatter.symbol`,
+        "MarkdownRemark.frontmatter.disease": `MarkdownRemark.frontmatter.name`,
         "MarkdownRemark.frontmatter.parental_line": `MarkdownRemark.frontmatter.cell_line_id`,
     },
 };

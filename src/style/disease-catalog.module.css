@@ -11,7 +11,7 @@
 .header p {
     font-size: 20px;
     font-weight: 400;
-    color: var(--BLACK); 
+    color: var(--SERIOUS_GRAY);
     margin: 0;
 }
 
@@ -25,7 +25,7 @@
 
 .coriell-card {
     width: 250px;
-    border: 1px solid var(--border-color)
+    border: 1px solid var(--border-color);
 }
 
 .coriell-card :global(.ant-card-head) {
@@ -37,7 +37,7 @@
 }
 
 .coriell-card :global(.ant-card-head) {
-    color: var(--BLUE);
+    color: var(--primary-color);
     padding: 9px 0 0 0;
     min-height: inherit;
 }
@@ -51,7 +51,7 @@
 }
 
 .main-heading {
-    color: var(--DARK_BLUE)
+    color: var(--primary-color);
 }
 
 .banner:global(.ant-card) {
@@ -66,6 +66,12 @@
 
 .banner-content {
     font-size: 16px;
-    color: var(--DARK_BLUE);
+    color: var(--primary-color);
     font-weight: 300;
+}
+
+@media screen and (max-width: 768px) {
+    .header {
+        flex-direction: column;
+    }
 }

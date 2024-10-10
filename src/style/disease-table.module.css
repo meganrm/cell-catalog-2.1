@@ -22,10 +22,9 @@
     /* this keeps the change in border color from being 
     mitered at the corners, which looked weird
     */
-    box-shadow:
-        inset 1.5px 0 0 0 var(--border-color),
+    box-shadow: inset 1.5px 0 0 0 var(--border-color),
         inset -1.5px 0 0 0 var(--border-color),
-        inset 0 -3px 0 0 var(--DARK_BLUE),
+        inset 0 -3px 0 0 var(--primary-color),
         inset 0 1.5px 0 0 var(--border-color);
 }
 
@@ -34,11 +33,11 @@
 }
 
 .container :global(.ant-table-thead .ant-table-cell) {
-    padding: 10px 16px 10px 16px;
+    padding: 10px 16px;
     font-size: 14px;
     font-weight: 400;
     line-height: 34px;
-    color: var(--BLACK);
+    color: var(--SERIOUS_GRAY);
 }
 
 .container :global(.ant-table-thead .ant-table-cell)::before {
@@ -46,7 +45,7 @@
 }
 
 .container .hover-column:global(.ant-table-cell):has(a):hover {
-    background-color: var(--DARK_BLUE);
+    background-color: var(--primary-color);
 }
 
 .hover-column:hover .action-button {
@@ -54,7 +53,7 @@
 }
 
 .hover-column:hover .action-button path {
-    fill: var(--DARK_BLUE);
+    fill: var(--primary-color);
     stroke: var(--WHITE);
 }
 
@@ -62,16 +61,16 @@
     font-family: "Open Sans", sans-serif;
     font-size: 24px;
     font-weight: 600;
-    color: var(--BLACK);
+    color: var(--SERIOUS_GRAY);
     margin: 2px;
 }
 
-.container :global(.ant-table-cell) {
+.container :global(.ant-table-row .ant-table-cell) {
     vertical-align: middle;
     padding: 14px 16px;
 }
 
-.container :global(.ant-table-thead .ant-table-cell).cell-line-id, 
+.container :global(.ant-table-thead .ant-table-cell).cell-line-id,
 .container :global(.ant-table-cell).cell-line-id {
     padding: 10px 16px 10px 32px;
 }
@@ -81,8 +80,8 @@
     text-wrap: balance;
 }
 
-.action-button {
-    max-width: 64px;
+.hover-column {
+    width: 160px;
 }
 
 .action-button a {
@@ -93,6 +92,7 @@
 .clones {
     text-wrap: balance;
     border-right: 1px solid var(--border-color);
+    min-width: 175px;
 }
 
 .clone-number {
@@ -107,7 +107,7 @@
     padding: 8px 0 16px 0;
     font-size: 14px;
     font-weight: 300;
-    color: var(--LIGHT_BLUE);
+    color: var(--ALLEN_LIGHT_60);
 }
 
 .footer p {
@@ -115,7 +115,7 @@
 }
 
 .container :global(.ant-table-cell .ant-tag) {
-    color: var(--BLACK);
+    color: var(--SERIOUS_GRAY);
     font-size: 14px;
 }
 
@@ -142,4 +142,52 @@
 
 .container.coming-soon .clones {
     border-right: 1px solid transparent;
+}
+
+.container
+    :global(
+        .ant-table-cell.ant-table-row-expand-icon-cell.ant-table-cell-fix-left
+    ) {
+    width: 0px;
+    padding: 0px;
+}
+
+.expandable-content label {
+    font-size: 12px;
+    font-weight: 600;
+    font-weight: 300;
+    color: var(--ALLEN_LIGHT_60);
+}
+
+@media screen and (max-width: 768px) {
+    .container h4 {
+        font-size: 20px;
+    }
+    .container :global(.ant-table-row .ant-table-cell),
+    .container :global(.ant-table-thead .ant-table-cell).cell-line-id,
+    .container :global(.ant-table-cell).cell-line-id {
+        padding: 8px 4px 8px 14px;
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .container h4 {
+        font-size: 16px;
+    }
+    .container :global(.ant-table-row .ant-table-cell) {
+        padding-bottom: 4px;
+    }
+    .hover-column {
+        width: 120px;
+        padding: 4px !important;
+    }
+    .hover-column .action-button {
+        font-size: 14px;
+    }
+    .container
+        :global(
+            .ant-table-cell.ant-table-row-expand-icon-cell.ant-table-cell-fix-left
+        ) {
+        width: initial;
+    }
 }
