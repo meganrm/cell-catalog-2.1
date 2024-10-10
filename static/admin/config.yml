@@ -159,7 +159,21 @@ collections:
                 label: "Status",
                 name: "status",
                 widget: "select",
-                options: ["in progress", "done"],
+                options:
+                    [
+                        {
+                            label: "Data is complete: will render on the table and the subpage",
+                            value: "data complete",
+                        },
+                        {
+                            label: "Released: renders only on the table",
+                            value: "released",
+                        },
+                        {
+                            label: "In progress: completely hidden",
+                            value: "in progress",
+                        },
+                    ],
                 default: "in progress",
                 required: true,
             }

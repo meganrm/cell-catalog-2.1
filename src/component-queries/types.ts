@@ -16,6 +16,12 @@ export interface ParentalLineFrontmatter {
     };
 }
 
+export enum CellLineStatus {
+    DataComplete = "data complete",
+    Released = "released",
+    InProgress = "in progress",
+}
+
 // NOTE: Temporarily optional fields, but
 // once the data has been updated by gene editing
 // these fields will be required
@@ -25,6 +31,7 @@ export interface Clone {
     genotype?: string;
     transfection_replicate?: string;
 }
+
 export interface DiseaseCellLineFrontmatter {
     templateKey: string;
     cell_line_id: string;
@@ -36,7 +43,7 @@ export interface DiseaseCellLineFrontmatter {
     clones: Clone[];
     certificate_of_analysis: string;
     order_link: string;
-    status: string;
+    status: CellLineStatus;
     hPSCreg_certificate_link: string;
 }
 

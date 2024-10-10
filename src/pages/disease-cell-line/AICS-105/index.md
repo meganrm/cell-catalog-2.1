@@ -5,7 +5,7 @@ disease: Cardiomyopathy
 date: 2024-02-26T21:30:55.945Z
 snp: NM_000257.4(MYH7):c.1106G>A(p.Arg369Gln)
 parental_line: 75
-status: done
+status: released
 clones:
   - type: Control
     clone_number: 22
