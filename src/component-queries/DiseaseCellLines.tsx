@@ -150,7 +150,7 @@ export default function DiseaseCellLineQuery(props: {
                         filter: {
                             frontmatter: {
                                 templateKey: { eq: "disease-cell-line" }
-                                status: { eq: "done" }
+                                status: { ne: "in progress" }
                             }
                         }
                     ) {
@@ -197,6 +197,7 @@ export default function DiseaseCellLineQuery(props: {
                                     snp
                                     certificate_of_analysis
                                     order_link
+                                    status
                                 }
                             }
                         }
