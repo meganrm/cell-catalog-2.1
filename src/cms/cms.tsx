@@ -10,6 +10,10 @@ import DiseaseCellLinePreview from "./preview-templates/DiseaseCellLinePreview";
 
 CMS.registerMediaLibrary(uploadcare);
 CMS.registerMediaLibrary(cloudinary);
+CMS.registerPreviewStyle(
+    "https://cdnjs.cloudflare.com/ajax/libs/antd/4.4.3/antd.min.css"
+);
+CMS.registerPreviewStyle("./style.css");
 
 CMS.registerPreviewTemplate("index", IndexPagePreview);
 CMS.registerPreviewTemplate("about", DiseaseCatalogPreview);

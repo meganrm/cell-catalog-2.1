@@ -15,8 +15,6 @@ const PreviewCompatibleImage = ({
     imageStyle,
 }: PreviewCompatibleImageProps) => {
     const { alt = "", childImageSharp, image } = imageInfo;
-    console.log("image", image);
-
     if (!!image && !!image.childImageSharp) {
         return (
             <GatsbyImage

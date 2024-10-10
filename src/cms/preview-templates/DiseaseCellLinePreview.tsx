@@ -6,6 +6,7 @@ import { formatCellLineId } from "../../utils";
 import CloneTable from "../../components/CloneTable";
 import { Clone } from "../../component-queries/types";
 import PreviewCompatibleImage from "../../components/PreviewCompatibleImage";
+import ProgressPreview from "./ProgressPreview";
 
 const DiseaseCellLinePreview = ({ entry, getAsset }: TemplateProps) => {
     const parental_line_id = entry.getIn(["data", "parental_line"]);
@@ -74,13 +75,10 @@ const DiseaseCellLinePreview = ({ entry, getAsset }: TemplateProps) => {
             images.push(data);
         });
     }
+    console.log(status);
     return (
         <>
-            <div
-                style={{ backgroundColor: status === "done" ? "green" : "red" }}
-            >
-                {status}
-            </div>
+            <ProgressPreview status={status} />
             <InfoPanel data={data} />
             <CloneTable dataSource={cloneData} />
 
