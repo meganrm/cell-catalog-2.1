@@ -21,14 +21,14 @@ const ProgressPreview = ({ status }: ProgressPreviewProps) => {
             current={statusMap[status]}
             items={[
                 {
-                    title: "Cell line initiated",
+                    title: "Initiated",
                 },
                 {
                     title: "Released",
                     description: "Visible on main table",
                 },
                 {
-                    title: "QC data entered",
+                    title: "QC data finished",
                     description: "Subpages are complete",
                 },
             ]}
