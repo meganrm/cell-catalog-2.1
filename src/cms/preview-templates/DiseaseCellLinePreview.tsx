@@ -14,32 +14,32 @@ const DiseaseCellLinePreview = ({ entry, getAsset }: TemplateProps) => {
     const data = [
         {
             key: "cell_line_id",
-            label: "Cell Line ID: ",
+            label: "Cell Line ID",
             children: formatCellLineId(entry.getIn(["data", "cell_line_id"])),
         },
         {
             key: "parental_line",
-            label: "Parental Line: ",
+            label: "Parental Line",
             children: formatCellLineId(parental_line_id),
         },
         {
             key: "snp",
-            label: "SNP: ",
+            label: "SNP",
             children: entry.getIn(["data", "snp"]),
         },
         {
             key: "order_link",
-            label: "",
+            label: "Order Link",
             children: (
-                <a href={entry.getIn(["data", "order_link"])}>Order Link</a>
+                <a href={entry.getIn(["data", "order_link"])}>Order Cells</a>
             ),
         },
         {
             key: "certificate_of_analysis",
-            label: "",
+            label: "Certification Link",
             children: (
                 <a href={entry.getIn(["data", "certificate_of_analysis"])}>
-                    Certificate of Analysis
+                    View Certificate of Analysis
                 </a>
             ),
         },
@@ -75,7 +75,6 @@ const DiseaseCellLinePreview = ({ entry, getAsset }: TemplateProps) => {
             images.push(data);
         });
     }
-    console.log(status);
     return (
         <>
             <ProgressPreview status={status} />
