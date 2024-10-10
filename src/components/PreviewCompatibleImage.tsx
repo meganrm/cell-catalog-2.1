@@ -7,12 +7,15 @@ interface PreviewCompatibleImageProps {
         childImageSharp?: any;
         image: any;
     };
-};
+    imageStyle?: React.CSSProperties;
+}
 
-const PreviewCompatibleImage = ({ imageInfo }: PreviewCompatibleImageProps) => {
-    const imageStyle = { borderRadius: "5px" };
-
+const PreviewCompatibleImage = ({
+    imageInfo,
+    imageStyle,
+}: PreviewCompatibleImageProps) => {
     const { alt = "", childImageSharp, image } = imageInfo;
+    console.log("image", image);
 
     if (!!image && !!image.childImageSharp) {
         return (
@@ -23,20 +26,19 @@ const PreviewCompatibleImage = ({ imageInfo }: PreviewCompatibleImageProps) => {
             />
         );
     } else if (!!childImageSharp) {
-      return (
-        <GatsbyImage
-          image={childImageSharp.gatsbyImageData}
-          style={imageStyle}
-          alt={alt}
-        />
-      );
-      // for Netlify CMS
+        return (
+            <GatsbyImage
+                image={childImageSharp.gatsbyImageData}
+                style={imageStyle}
+                alt={alt}
+            />
+        );
+        // for Netlify CMS
     } else if (image) {
-      return <img style={imageStyle} src={image} alt={alt} />;
+        return <img style={imageStyle} src={image} alt={alt} />;
     } else {
-      return null;
+        return null;
     }
 };
-
 
 export default PreviewCompatibleImage;
