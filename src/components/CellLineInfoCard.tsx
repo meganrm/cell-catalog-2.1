@@ -7,7 +7,6 @@ import CloneTable from "./CloneTable";
 import { DarkThemeGhostButton, DefaultButton } from "./shared/Buttons";
 import InfoPanel from "./shared/InfoPanel";
 import Icon from "@ant-design/icons";
-import { title } from "process";
 import {
     ParentalLineFrontmatter,
     GeneFrontMatter,
@@ -17,6 +16,7 @@ const Share = require("../img/share-icon.svg");
 const LinkOut = require("../img/external-link.svg");
 
 const {
+    title,
     container,
     extraLargeButton,
 } = require("../style/cell-line-info-card.module.css");
