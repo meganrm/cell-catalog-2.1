@@ -1,0 +1,53 @@
+.container {
+    border: 1px solid var(--primary-color);
+    border-radius: 4px;
+}
+
+.container :global(.ant-card-head) {
+    border: none;
+}
+
+.container :global(.ant-card-head-title) {
+    border-bottom: 1px solid #ddd;
+}
+
+.title-section {
+    display: flex;
+    justify-content: space-between;
+    /* align-items: center; */
+    padding-top: 24px;
+    font-weight: 400;
+    width: 100%;
+}
+
+.main-title h3 {
+    font-size: 24px;
+}
+
+.sub-title {
+    font-size: 16px;
+}
+
+.left-title {
+    flex-direction: column;
+}
+
+.right-title {
+    font-size: 12px;
+    font-weight: 600;
+    font-style: italic;
+    margin-top: auto;
+}
+
+.image-section {
+    display: flex;
+    justify-content: center;
+    padding: 16px;
+}
+
+.caption {
+    padding: 8px 80px;
+    margin: 10px 0;
+    font-size: 12px;
+    font-weight: 400;
+}
