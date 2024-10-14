@@ -47,7 +47,7 @@ export const DiseaseCellLineTemplate = ({
   imagesAndVideos,
 }: DiseaseCellLineTemplateProps) => {
   return (
-    <Flex gap={40}>
+    <Flex gap={40} justify="space-between">
       <Flex
         vertical
         gap={16}

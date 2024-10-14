@@ -1,18 +1,9 @@
-import { Card } from "antd";
+import { Card, Flex } from "antd";
 import { getImage, GatsbyImage } from "gatsby-plugin-image";
 import React from "react";
 import { GeneFrontMatter } from "../component-queries/types";
 import { formatCellLineId } from "../utils";
-const {
-    titleSection,
-    container,
-    mainTitle,
-    subTitle,
-    leftTitle,
-    rightTitle,
-    imageSection,
-    caption,
-} = require("../style/images-and-videos.module.css");
+const { container } = require("../style/images-and-videos.module.css");
 
 interface ImagesAndVideosProps {
     images: any;
@@ -28,24 +19,37 @@ const ImagesAndVideos: React.FC<ImagesAndVideosProps> = ({
     const mainImage = images[0];
     const imageData = getImage(mainImage.image);
     const title = (
-        <div className={titleSection}>
-            <div className={leftTitle}>
-                <h3 className={mainTitle}>{formatCellLineId(cellLineId)}</h3>
-                <span className={subTitle}>here is the subtitle</span>
+        <Flex justify="space-between" style={{ paddingTop: 24 }}>
+            <div>
+                <h3 style={{ fontWeight: 400 }}>{formatCellLineId(cellLineId)}</h3>
+                <span style={{ fontWeight: 400, fontSize: 16 }}>
+                    here is the subtitle
+                </span>
             </div>
-            <span className={rightTitle}>Representative images for all clones</span>
-        </div>
+            <span
+                style={{
+                    fontWeight: 600,
+                    fontSize: 12,
+                    fontStyle: "italic",
+                    marginTop: "auto",
+                }}
+            >
+                Representative images for all clones
+            </span>
+        </Flex>
     );
 
     return (
         <div>
             <Card className={container} title={title} style={{ width: "100%" }}>
-                <div className={imageSection}>
+                <Flex justify="center">
                     {imageData && (
                         <GatsbyImage image={imageData} alt="main image"></GatsbyImage>
                     )}
-                </div>
-                <p className={caption}>{mainImage.caption}</p>
+                </Flex>
+                <p style={{ fontWeight: 400, fontSize: 12, padding: "8px 80px" }}>
+                    {mainImage.caption}
+                </p>
             </Card>
         </div>
     );
