@@ -44,6 +44,11 @@
     display: none; /* remove dividers between column headers */
 }
 
+.container :global(.ant-table-row) .hovered-row:global(.ant-table-cell) {
+    background-color: var(--ALLEN_LIGHT_10);
+    cursor: pointer;
+}
+
 .container .hover-column:global(.ant-table-cell):has(a):hover {
     background-color: var(--primary-color);
 }

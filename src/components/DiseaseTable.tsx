@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Table, Tag, Flex } from "antd";
 import Icon from "@ant-design/icons";
 
@@ -24,6 +24,7 @@ const {
     clones,
     cellLineId,
     expandableContent,
+    hoveredRow,
 } = require("../style/disease-table.module.css");
 
 interface DiseaseTableProps {
@@ -39,6 +40,7 @@ const DiseaseTable = ({
     acknowledgements,
     status,
 }: DiseaseTableProps) => {
+    const [hoveredRowIndex, setHoveredRowIndex] = useState(-1);
     const inProgress = status?.toLowerCase() === "coming soon";
 
     const width = useWindowWidth();
@@ -103,6 +105,29 @@ const DiseaseTable = ({
         ),
     };
 
+    const handleCellInHoveredRow = (
+        record: UnpackedDiseaseCellLine,
+        index: number | undefined
+    ) => {
+        const hoveredAndDataComplete =
+            index === hoveredRowIndex && record.status === "data complete";
+        return {
+            className: hoveredAndDataComplete ? hoveredRow : "",
+            onMouseEnter: () => {
+                if (index !== undefined) {
+                    setHoveredRowIndex(index);
+                }
+            },
+            onMouseLeave: () => {
+                setHoveredRowIndex(-1);
+            },
+            onClick: () => {
+                if (hoveredAndDataComplete)
+                    window.location.href = `/disease-cell-line/AICS-${record.cell_line_id}`;
+            },
+        };
+    };
+
     return (
         <>
             <Table
@@ -131,6 +156,7 @@ const DiseaseTable = ({
                                 {formatCellLineId(cell_line_id)}
                             </h4>
                         ),
+                        onCell: handleCellInHoveredRow,
                     },
                     {
                         title: "SNP",
@@ -147,6 +173,7 @@ const DiseaseTable = ({
                                 </Flex>
                             );
                         },
+                        onCell: handleCellInHoveredRow,
                     },
                     {
                         title: "Gene Symbol & Name",
@@ -154,12 +181,14 @@ const DiseaseTable = ({
                         key: "diseaseGene",
                         dataIndex: "diseaseGene",
                         responsive: ["md"],
+                        onCell: handleCellInHoveredRow,
                     },
                     {
                         title: "Parental Line",
                         key: "parentalLine",
                         dataIndex: "parentalLine",
                         responsive: ["md"],
+                        onCell: handleCellInHoveredRow,
                     },
                     {
                         title: "Clones",
@@ -177,6 +206,7 @@ const DiseaseTable = ({
                                 index
                             );
                         },
+                        onCell: handleCellInHoveredRow,
                     },
                     {
                         title: "",
