@@ -23,11 +23,13 @@ interface ParentalLineModalProps {
 }
 const ParentalLineModal = (props: ParentalLineModalProps) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const showModal = () => {
+    const showModal = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
+        e.stopPropagation();
         setIsModalOpen(true);
     };
 
-    const handleCancel = () => {
+    const handleCancel = (e: React.MouseEvent<HTMLButtonElement>) => {
+        e.stopPropagation();
         setIsModalOpen(false);
     };
     const image = getImage(props.image);
@@ -41,13 +43,13 @@ const ParentalLineModal = (props: ParentalLineModalProps) => {
     );
     return (
         <>
-            <Button onClick={showModal}>
+            <Button onClick={(e) => showModal(e)}>
                 {props.cellLineId} {<InfoCircleOutlined />}
             </Button>
             <Modal
                 title={headerElement}
                 open={isModalOpen}
-                onCancel={handleCancel}
+                onCancel={(e) => handleCancel(e)}
                 width={555}
                 centered={true}
                 className={modal}
