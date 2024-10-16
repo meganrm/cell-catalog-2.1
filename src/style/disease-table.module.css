@@ -49,6 +49,10 @@
     cursor: pointer;
 }
 
+.container .data-complete .hovered-row:global(.ant-table-cell) h4 {
+    text-decoration: underline;
+}
+
 .container .action-column:global(.ant-table-cell):has(a):hover {
     background-color: var(--primary-color);
 }
@@ -125,8 +129,13 @@
 }
 
 .container :global(.ant-table-cell .ant-btn) {
+    background-color: var(--WHITE);
     font-weight: 600;
     font-size: 16px;
+}
+
+.container .data-complete .hovered-row:global(.ant-table-cell .ant-btn) {
+    background-color: var(--ALLEN_LIGHT_10);
 }
 
 .container :global(.ant-table-title .ant-tag) {
