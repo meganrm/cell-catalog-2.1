@@ -34,6 +34,8 @@
     border: 2.5px solid var(--primary-color);
     margin-top: 16px;
     background-color: var(--ALLEN_LIGHT_10);
+    display: flex;
+    flex-direction: column;
 }
 
 .extra-large-button h2 {
