@@ -3,5 +3,5 @@ export interface TemplateProps {
         getIn: (args: string[]) => any;
     };
     widgetFor: (arg: string) => any;
+    getAsset: (arg: string) => any;
 }
-
