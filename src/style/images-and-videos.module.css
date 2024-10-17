@@ -1,12 +1,43 @@
 .container {
     border: 1px solid var(--primary-color);
     border-radius: 5px;
-    /* height: 100%; */
 }
 
 .container :global(.ant-card-head) {
     border: none;
 }
+
 .container :global(.ant-card-head-title) {
     border-bottom: 1px solid #ddd;
+}
+
+.title-section {
+    font-weight: 400;
+    width: 100%;
+}
+
+#main-title {
+    font-weight: 400;
+    color: var(--SERIOUS_GRAY);
+}
+
+.subtitle {
+    font-size: 16px;
+}
+
+.right-title {
+    font-weight: 600;
+    font-size: 12px;
+    font-style: italic;
+    margin-top: auto;
+}
+
+.image-section {
+    max-width: 75%;
+}
+
+.caption {
+    font-weight: 400;
+    font-size: 12px;
+    padding: 8px 80px;
 }

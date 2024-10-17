@@ -76,6 +76,8 @@ export const DiseaseCellLineTemplate = ({
       <ImagesAndVideos
         cellLineId={cellLineId}
         parentLineGene={parentLineGene}
+        geneName={geneName}
+        geneSymbol={geneSymbol}
         images={imagesAndVideos.images}
       />
     </Flex>
@@ -131,7 +133,7 @@ export const pageQuery = graphql`
             fluorescent_tag
             thumbnail_image {
               childImageSharp {
-                gatsbyImageData(placeholder: BLURRED, layout: FIXED, width: 192)
+                gatsbyImageData(placeholder: BLURRED, layout: FIXED)
               }
             }
             gene {

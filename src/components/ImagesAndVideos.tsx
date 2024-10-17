@@ -3,55 +3,64 @@ import { getImage, GatsbyImage } from "gatsby-plugin-image";
 import React from "react";
 import { GeneFrontMatter } from "../component-queries/types";
 import { formatCellLineId } from "../utils";
-const { container } = require("../style/images-and-videos.module.css");
+const {
+    container,
+    titleSection,
+    mainTitle,
+    subtitle,
+    rightTitle,
+    imageSection,
+    caption,
+} = require("../style/images-and-videos.module.css");
 
 interface ImagesAndVideosProps {
     images: any;
     cellLineId: string;
     parentLineGene: GeneFrontMatter;
     videos?: any;
+    geneName: string;
+    geneSymbol: string;
 }
 
 const ImagesAndVideos: React.FC<ImagesAndVideosProps> = ({
     images,
     cellLineId,
+    parentLineGene,
+    geneName,
+    geneSymbol,
 }) => {
     const mainImage = images[0];
     const imageData = getImage(mainImage.image);
+    const subtitleData = parentLineGene;
     const title = (
-        <Flex justify="space-between" style={{ paddingTop: 24 }}>
+        <Flex
+            justify="space-between"
+            style={{ paddingTop: 24 }}
+            className={titleSection}
+        >
             <div>
-                <h3 style={{ fontWeight: 400 }}>{formatCellLineId(cellLineId)}</h3>
-                <span style={{ fontWeight: 400, fontSize: 16 }}>
-                    here is the subtitle
+                <h3 id={mainTitle}>{formatCellLineId(cellLineId)}</h3>
+                <span className={subtitle}>
+                    {geneName} ({geneSymbol}) - {subtitleData.name}
                 </span>
             </div>
-            <span
-                style={{
-                    fontWeight: 600,
-                    fontSize: 12,
-                    fontStyle: "italic",
-                    marginTop: "auto",
-                }}
-            >
-                Representative images for all clones
-            </span>
+            <span className={rightTitle}>Representative images for all clones</span>
         </Flex>
     );
 
     return (
-        <div>
-            <Card className={container} title={title} style={{ width: "100%" }}>
-                <Flex justify="center">
-                    {imageData && (
-                        <GatsbyImage image={imageData} alt="main image"></GatsbyImage>
-                    )}
-                </Flex>
-                <p style={{ fontWeight: 400, fontSize: 12, padding: "8px 80px" }}>
-                    {mainImage.caption}
-                </p>
-            </Card>
-        </div>
+        <Card className={container} title={title} style={{ width: "100%" }}>
+            <Flex vertical justify="center" align="center">
+                {imageData && (
+                    <GatsbyImage
+                        image={imageData}
+                        alt="main image"
+                        className={imageSection}
+                    ></GatsbyImage>
+                )}
+                <p className={caption}>{mainImage.caption}</p>
+            </Flex>
+        </Card>
     );
 };
 
