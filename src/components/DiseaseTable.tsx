@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "gatsby";
 import { Table, Tag, Flex } from "antd";
 import Icon from "@ant-design/icons";
 
@@ -119,8 +120,10 @@ const DiseaseTable = ({
             onMouseEnter: () => setHoveredRowIndex(index),
             onMouseLeave: () => setHoveredRowIndex(-1),
             onClick: () => {
-                if (record.status === CellLineStatus.DataComplete)
+                if (record.status === CellLineStatus.DataComplete) {
+                    // if (true)
                     window.location.href = `/disease-cell-line/AICS-${record.cell_line_id}`;
+                }
             },
         };
     };
@@ -153,11 +156,20 @@ const DiseaseTable = ({
                         className: cellLineId,
                         dataIndex: "cell_line_id",
                         fixed: "left",
-                        render: (cell_line_id: string) => (
-                            <h4 key={cell_line_id}>
-                                {formatCellLineId(cell_line_id)}
-                            </h4>
-                        ),
+                        render: (cell_line_id, record) =>
+                            record.status === CellLineStatus.DataComplete ? (
+                                <Link
+                                    to={`/disease-cell-line/AICS-${cell_line_id}`}
+                                >
+                                    <h4 key={cell_line_id}>
+                                        {formatCellLineId(cell_line_id)}
+                                    </h4>
+                                </Link>
+                            ) : (
+                                <h4 key={cell_line_id}>
+                                    {formatCellLineId(cell_line_id)}
+                                </h4>
+                            ),
                         onCell: onCellInteraction,
                     },
                     {
