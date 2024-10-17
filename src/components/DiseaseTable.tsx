@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { Link } from "gatsby";
 import { Table, Tag, Flex } from "antd";
 import Icon from "@ant-design/icons";
+// TODO: debug gatsby navigate throwing errors when passed strings
+import { navigate } from "@reach/router";
 
 import { HTMLContent } from "./shared/Content";
 import { UnpackedDiseaseCellLine } from "../component-queries/DiseaseCellLines";
@@ -122,7 +124,7 @@ const DiseaseTable = ({
             onMouseLeave: () => setHoveredRowIndex(-1),
             onClick: () => {
                 if (record.status === CellLineStatus.DataComplete) {
-                    window.location.href = CELL_LINE_PATH + record.cell_line_id;
+                    navigate(CELL_LINE_PATH + record.cell_line_id);
                 }
             },
         };

@@ -5,6 +5,7 @@
   "author": "Austin Green",
   "dependencies": {
     "@ant-design/icons": "^5.5.1",
+    "@reach/router": "^1.3.4",
     "antd": "^5.21.2",
     "decap-cms-app": "^3.0.12",
     "decap-cms-media-library-cloudinary": "^3.0.1",
