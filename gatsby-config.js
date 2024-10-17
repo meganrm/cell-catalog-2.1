@@ -16,6 +16,10 @@ module.exports = {
             ],
         },
     ],
+    // turn on if seeing minified errors in production
+    // flags: {
+    //     DEV_SSR: true,
+    // },
     plugins: [
         "gatsby-plugin-react-helmet",
         "gatsby-plugin-fix-fouc",
@@ -59,6 +63,7 @@ module.exports = {
             resolve: "gatsby-transformer-remark",
             options: {
                 plugins: [
+                    { resolve: "gatsby-remark-external-links" },
                     "gatsby-remark-relative-images",
                     {
                         resolve: "gatsby-remark-images",
