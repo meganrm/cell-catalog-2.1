@@ -44,15 +44,24 @@
     display: none; /* remove dividers between column headers */
 }
 
-.container .hover-column:global(.ant-table-cell):has(a):hover {
+.container .data-complete .hovered-row:global(.ant-table-cell) {
+    background-color: var(--ALLEN_LIGHT_10);
+    cursor: pointer;
+}
+
+.container .data-complete .hovered-row:global(.ant-table-cell) h4 {
+    text-decoration: underline;
+}
+
+.container .action-column:global(.ant-table-cell):has(a):hover {
     background-color: var(--primary-color);
 }
 
-.hover-column:hover .action-button {
+.action-column:hover .action-button {
     color: var(--WHITE);
 }
 
-.hover-column:hover .action-button path {
+.action-column:hover .action-button path {
     fill: var(--primary-color);
     stroke: var(--WHITE);
 }
@@ -80,7 +89,7 @@
     text-wrap: balance;
 }
 
-.hover-column {
+.action-column {
     width: 160px;
 }
 
@@ -120,8 +129,13 @@
 }
 
 .container :global(.ant-table-cell .ant-btn) {
+    background-color: var(--WHITE);
     font-weight: 600;
     font-size: 16px;
+}
+
+.container .data-complete .hovered-row:global(.ant-table-cell .ant-btn) {
+    background-color: var(--ALLEN_LIGHT_10);
 }
 
 .container :global(.ant-table-title .ant-tag) {
@@ -177,11 +191,11 @@
     .container :global(.ant-table-row .ant-table-cell) {
         padding-bottom: 4px;
     }
-    .hover-column {
+    .action-column {
         width: 120px;
         padding: 4px !important;
     }
-    .hover-column .action-button {
+    .action-column .action-button {
         font-size: 14px;
     }
     .container

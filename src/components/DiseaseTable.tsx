@@ -1,9 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
+import { Link } from "gatsby";
 import { Table, Tag, Flex } from "antd";
 import Icon from "@ant-design/icons";
+// TODO: debug gatsby navigate throwing errors when passed strings
+import { navigate } from "@reach/router";
 
 import { HTMLContent } from "./shared/Content";
 import { UnpackedDiseaseCellLine } from "../component-queries/DiseaseCellLines";
+import { CellLineStatus } from "../component-queries/types";
 import { formatCellLineId, getCloneSummary } from "../utils";
 import { WHITE } from "../style/theme";
 import useWindowWidth from "../hooks/useWindowWidth";
@@ -19,11 +23,13 @@ const {
     actionButton,
     comingSoon,
     cloneNumber,
-    hoverColumn,
+    actionColumn,
     footer,
     clones,
     cellLineId,
     expandableContent,
+    hoveredRow,
+    dataComplete,
 } = require("../style/disease-table.module.css");
 
 interface DiseaseTableProps {
@@ -39,6 +45,7 @@ const DiseaseTable = ({
     acknowledgements,
     status,
 }: DiseaseTableProps) => {
+    const [hoveredRowIndex, setHoveredRowIndex] = useState(-1);
     const inProgress = status?.toLowerCase() === "coming soon";
 
     const width = useWindowWidth();
@@ -103,11 +110,35 @@ const DiseaseTable = ({
         ),
     };
 
+    const onCellInteraction = (
+        record: UnpackedDiseaseCellLine,
+        index: number | undefined
+    ) => {
+        if (index === undefined) {
+            return {};
+        }
+        return {
+            className: index === hoveredRowIndex ? hoveredRow : "",
+            onMouseEnter: () => setHoveredRowIndex(index),
+            onMouseLeave: () => setHoveredRowIndex(-1),
+            onClick: () => {
+                if (record.status === CellLineStatus.DataComplete) {
+                    navigate(record.path);
+                }
+            },
+        };
+    };
+
     return (
         <>
             <Table
                 key={diseaseName}
                 className={[container, inProgress ? comingSoon : ""].join(" ")}
+                rowClassName={(record) =>
+                    record.status === CellLineStatus.DataComplete
+                        ? dataComplete
+                        : ""
+                }
                 title={() => (
                     <Flex align="center">
                         <h3 className={tableTitle}>{diseaseName}</h3>
@@ -126,11 +157,20 @@ const DiseaseTable = ({
                         className: cellLineId,
                         dataIndex: "cell_line_id",
                         fixed: "left",
-                        render: (cell_line_id: string) => (
-                            <h4 key={cell_line_id}>
-                                {formatCellLineId(cell_line_id)}
-                            </h4>
-                        ),
+                        render: (cell_line_id, record) => {
+                            const cellLine = (
+                                <h4 key={cell_line_id}>
+                                    {formatCellLineId(cell_line_id)}
+                                </h4>
+                            );
+                            return record.status ===
+                                CellLineStatus.DataComplete ? (
+                                <Link to={record.path}>{cellLine}</Link>
+                            ) : (
+                                cellLine
+                            );
+                        },
+                        onCell: onCellInteraction,
                     },
                     {
                         title: "SNP",
@@ -147,6 +187,7 @@ const DiseaseTable = ({
                                 </Flex>
                             );
                         },
+                        onCell: onCellInteraction,
                     },
                     {
                         title: "Gene Symbol & Name",
@@ -154,12 +195,14 @@ const DiseaseTable = ({
                         key: "diseaseGene",
                         dataIndex: "diseaseGene",
                         responsive: ["md"],
+                        onCell: onCellInteraction,
                     },
                     {
                         title: "Parental Line",
                         key: "parentalLine",
                         dataIndex: "parentalLine",
                         responsive: ["md"],
+                        onCell: onCellInteraction,
                     },
                     {
                         title: "Clones",
@@ -177,12 +220,13 @@ const DiseaseTable = ({
                                 index
                             );
                         },
+                        onCell: onCellInteraction,
                     },
                     {
                         title: "",
                         key: "order_link",
                         dataIndex: "order_link",
-                        className: hoverColumn,
+                        className: actionColumn,
                         fixed: "right",
                         render: (order_link) => {
                             if (inProgress) {
@@ -215,7 +259,7 @@ const DiseaseTable = ({
                         title: "",
                         key: "certificate_of_analysis",
                         dataIndex: "certificate_of_analysis",
-                        className: hoverColumn,
+                        className: actionColumn,
                         fixed: "right",
                         responsive: ["md"],
                         render: (certificate_of_analysis) => {
