@@ -15,7 +15,7 @@ const {
 } = require("../style/images-and-videos.module.css");
 
 interface ImagesAndVideosProps {
-    images: any;
+    images?: any[];
     cellLineId: string;
     parentalLine: ParentalLineFrontmatter;
     videos?: any;
@@ -24,14 +24,14 @@ interface ImagesAndVideosProps {
 }
 
 const ImagesAndVideos: React.FC<ImagesAndVideosProps> = ({
-    images,
+    images = [],
     cellLineId,
     parentalLine,
     geneSymbol,
     snp,
 }) => {
-    const mainImage = images[0];
-    const imageData = getImage(mainImage.image);
+    const mainImage = images.length > 0 ? images[0] : null;
+    const imageData = mainImage ? getImage(mainImage.image) : null;
     const fluorescentTag = parentalLine.fluorescent_tag;
     const parentalGeneSymbol = parentalLine.gene.frontmatter.symbol;
     const snps = snp.split(">");

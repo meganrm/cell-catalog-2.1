@@ -78,7 +78,7 @@ export const DiseaseCellLineTemplate = ({
         parentalLine={parentalLine}
         geneSymbol={geneSymbol}
         snp={snp}
-        images={imagesAndVideos.images}
+        images={imagesAndVideos?.images || []}
       />
     </Flex>
   );
