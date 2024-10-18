@@ -61,7 +61,7 @@ const ImagesAndVideos: React.FC<ImagesAndVideosProps> = ({
                         className={image}
                     ></GatsbyImage>
                 )}
-                <p className={caption}>{mainImage.caption}</p>
+                {mainImage?.caption && <p className={caption}>{mainImage.caption}</p>}
             </Flex>
         </Card>
     );
