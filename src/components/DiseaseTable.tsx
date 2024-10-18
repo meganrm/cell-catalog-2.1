@@ -47,7 +47,6 @@ const DiseaseTable = ({
 }: DiseaseTableProps) => {
     const [hoveredRowIndex, setHoveredRowIndex] = useState(-1);
     const inProgress = status?.toLowerCase() === "coming soon";
-    const CELL_LINE_PATH = `/${diseaseCellLines[0].templateKey}/AICS-`;
 
     const width = useWindowWidth();
     const isTablet = width < TABLET_BREAKPOINT;
@@ -124,7 +123,7 @@ const DiseaseTable = ({
             onMouseLeave: () => setHoveredRowIndex(-1),
             onClick: () => {
                 if (record.status === CellLineStatus.DataComplete) {
-                    navigate(CELL_LINE_PATH + record.cell_line_id);
+                    navigate(record.path);
                 }
             },
         };
@@ -166,9 +165,7 @@ const DiseaseTable = ({
                             );
                             return record.status ===
                                 CellLineStatus.DataComplete ? (
-                                <Link to={CELL_LINE_PATH + cell_line_id}>
-                                    {cellLine}
-                                </Link>
+                                <Link to={record.path}>{cellLine}</Link>
                             ) : (
                                 cellLine
                             );
