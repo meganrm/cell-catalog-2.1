@@ -1,7 +1,7 @@
 import { Card, Flex } from "antd";
 import { getImage, GatsbyImage } from "gatsby-plugin-image";
 import React from "react";
-import { GeneFrontMatter } from "../component-queries/types";
+import { ParentalLineFrontmatter } from "../component-queries/types";
 import { formatCellLineId } from "../utils";
 const {
     container,
@@ -17,22 +17,24 @@ const {
 interface ImagesAndVideosProps {
     images: any;
     cellLineId: string;
-    parentLineGene: GeneFrontMatter;
+    parentalLine: ParentalLineFrontmatter;
     videos?: any;
-    geneName: string;
     geneSymbol: string;
+    snp: string;
 }
 
 const ImagesAndVideos: React.FC<ImagesAndVideosProps> = ({
     images,
     cellLineId,
-    parentLineGene,
-    geneName,
+    parentalLine,
     geneSymbol,
+    snp,
 }) => {
     const mainImage = images[0];
     const imageData = getImage(mainImage.image);
-    const subtitleData = parentLineGene;
+    const fluorescentTag = parentalLine.fluorescent_tag;
+    const parentalGeneSymbol = parentalLine.gene.frontmatter.symbol;
+    const snps = snp.split(">");
     const title = (
         <Flex
             justify="space-between"
@@ -42,7 +44,7 @@ const ImagesAndVideos: React.FC<ImagesAndVideosProps> = ({
             <div>
                 <h3 id={mainTitle}>{formatCellLineId(cellLineId)}</h3>
                 <span className={subtitle}>
-                    {geneName} ({geneSymbol}) - {subtitleData.name}
+                    {geneSymbol}-{snps[1]} in WTC-{fluorescentTag}-{parentalGeneSymbol} (mono-alleic tag)
                 </span>
             </div>
             <span className={rightTitle}>Representative images for all clones</span>
