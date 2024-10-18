@@ -10,6 +10,7 @@ const {
     subtitle,
     rightTitle,
     imageSection,
+    image,
     caption,
 } = require("../style/images-and-videos.module.css");
 
@@ -50,12 +51,12 @@ const ImagesAndVideos: React.FC<ImagesAndVideosProps> = ({
 
     return (
         <Card className={container} title={title} style={{ width: "100%" }}>
-            <Flex vertical justify="center" align="center">
+            <Flex vertical justify="space-between" align="center" className={imageSection}>
                 {imageData && (
                     <GatsbyImage
                         image={imageData}
                         alt="main image"
-                        className={imageSection}
+                        className={image}
                     ></GatsbyImage>
                 )}
                 <p className={caption}>{mainImage.caption}</p>

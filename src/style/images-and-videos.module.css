@@ -7,6 +7,10 @@
     border: none;
 }
 
+.container :global(.ant-card-body) {
+    height: 90%;
+}
+
 .container :global(.ant-card-head-title) {
     border-bottom: 1px solid #ddd;
 }
@@ -33,7 +37,11 @@
 }
 
 .image-section {
-    max-width: 75%;
+    height: 100%;
+}
+
+.image {
+    margin-top: 50px;
 }
 
 .caption {
