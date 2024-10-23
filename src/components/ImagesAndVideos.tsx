@@ -10,8 +10,8 @@ const {
     subtitle,
     rightTitle,
     imageSection,
-    image,
     caption,
+    imageContainer,
 } = require("../style/images-and-videos.module.css");
 
 interface ImagesAndVideosProps {
@@ -44,7 +44,8 @@ const ImagesAndVideos: React.FC<ImagesAndVideosProps> = ({
             <div>
                 <h3 id={mainTitle}>{formatCellLineId(cellLineId)}</h3>
                 <span className={subtitle}>
-                    {geneSymbol}-{snps[1]} in WTC-{fluorescentTag}-{parentalGeneSymbol} (mono-alleic tag)
+                    {geneSymbol}-{snps[1]} in WTC-{fluorescentTag}-{parentalGeneSymbol}
+                    (mono-alleic tag)
                 </span>
             </div>
             <span className={rightTitle}>Representative images for all clones</span>
@@ -53,13 +54,16 @@ const ImagesAndVideos: React.FC<ImagesAndVideosProps> = ({
 
     return (
         <Card className={container} title={title} style={{ width: "100%" }}>
-            <Flex vertical justify="space-between" align="center" className={imageSection}>
+            <Flex
+                vertical
+                justify="space-between"
+                align="center"
+                className={imageSection}
+            >
                 {imageData && (
-                    <GatsbyImage
-                        image={imageData}
-                        alt="main image"
-                        className={image}
-                    ></GatsbyImage>
+                    <div className={imageContainer}>
+                        <GatsbyImage image={imageData} alt="main image"></GatsbyImage>
+                    </div>
                 )}
                 {mainImage?.caption && <p className={caption}>{mainImage.caption}</p>}
             </Flex>

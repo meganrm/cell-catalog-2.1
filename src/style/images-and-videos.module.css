@@ -40,8 +40,10 @@
     height: 100%;
 }
 
-.image {
-    margin-top: 50px;
+.image-container {
+    display: flex;
+    align-items: center;
+    height: 100%;
 }
 
 .caption {
