@@ -13,8 +13,19 @@
     background-color: var(--ALLEN_LIGHT_10) !important;
 }
 
+.dark-blue-hover-button {
+    color: var(--primary-color) !important;
+    background-color: var(--WHITE);
+    border: 1px solid var(--primary-color);
+}
+
+.dark-blue-hover-button:hover {
+    color: var(--WHITE) !important;
+    background-color: var(--primary-color) !important;
+}
+
 .dark-theme-ghost-button {
-    color: white !important;
+    color: var(--WHITE) !important;
     padding: 4px 8px;
 }
 
