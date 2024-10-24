@@ -62,7 +62,11 @@ const ParentalLineModal = (props: ParentalLineModalProps) => {
                             target="_blank"
                             className={actionButton}
                         >
-                            <Flex justify="flex-end" gap={142}>
+                            <Flex
+                                justify="flex-end"
+                                gap={142}
+                                style={{ width: "100%" }}
+                            >
                                 More information
                                 <Icon
                                     component={LinkOut}
