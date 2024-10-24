@@ -61,6 +61,7 @@ const ParentalLineModal = (props: ParentalLineModalProps) => {
                             style={{
                                 width: 480,
                                 borderWidth: "2px",
+                                backgroundColor: "white",
                             }}
                             href="https://www.allencell.org/cell-catalog.html"
                             target="_blank"
