@@ -129,6 +129,7 @@ export const pageQuery = graphql`
           frontmatter {
             cell_line_id
             clone_number
+            allele_count
             tag_location
             fluorescent_tag
             thumbnail_image {

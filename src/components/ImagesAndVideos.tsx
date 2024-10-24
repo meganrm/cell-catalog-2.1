@@ -28,13 +28,12 @@ const ImagesAndVideos: React.FC<ImagesAndVideosProps> = ({
     cellLineId,
     parentalLine,
     geneSymbol,
-    snp,
 }) => {
     const mainImage = images.length > 0 ? images[0] : null;
     const imageData = mainImage ? getImage(mainImage.image) : null;
     const fluorescentTag = parentalLine.fluorescent_tag;
     const parentalGeneSymbol = parentalLine.gene.frontmatter.symbol;
-    const snps = snp.split(">");
+    const alleicTag = parentalLine.allele_count;
     const title = (
         <Flex
             justify="space-between"
@@ -44,8 +43,8 @@ const ImagesAndVideos: React.FC<ImagesAndVideosProps> = ({
             <div>
                 <h3 id={mainTitle}>{formatCellLineId(cellLineId)}</h3>
                 <span className={subtitle}>
-                    {geneSymbol}-{snps[1]} in WTC-{fluorescentTag}-{parentalGeneSymbol}
-                    (mono-alleic tag)
+                    {geneSymbol}-(placeholder) in WTC-{fluorescentTag}-{parentalGeneSymbol}
+                    ({alleicTag}-allelic tag)
                 </span>
             </div>
             <span className={rightTitle}>Representative images for all clones</span>

@@ -8,6 +8,7 @@ export interface GeneFrontMatter {
 export interface ParentalLineFrontmatter {
     cell_line_id: string;
     clone_number: number;
+    allele_count: string;
     tag_location: string;
     fluorescent_tag: string;
     thumbnail_image: any;
