@@ -51,3 +51,36 @@
     font-size: 12px;
     padding: 8px 80px;
 }
+
+.thumbnail {
+    max-width: 545px;
+    max-height: 545px;
+    overflow: hidden;
+    cursor: pointer;
+    width: 100%;
+}
+
+.modal {
+    display: flex;
+    justify-content: center;
+    background-color: var(--WHITE);
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 70%;
+    height: 80%;
+    padding-bottom: 20px;
+}
+
+.modal-content {
+    max-width: 100%;
+    max-height: 100%;
+    margin: auto;
+}
+
+.close {
+    position: absolute;
+    top: 20px;
+    right: 35px;
+    cursor: pointer;
+}
