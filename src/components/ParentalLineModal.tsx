@@ -1,10 +1,12 @@
 import React, { useState } from "react";
-import { Button, Descriptions, Divider, Flex, Modal } from "antd";
+import { Descriptions, Divider, Flex, Modal } from "antd";
 import Icon, { InfoCircleOutlined } from "@ant-design/icons";
 import { GatsbyImage, getImage } from "gatsby-plugin-image";
-
 import { FileNode } from "gatsby-plugin-image/dist/src/components/hooks";
 import { DescriptionsItemType } from "antd/es/descriptions";
+
+import { DarkBlueHoverButton } from "./shared/Buttons";
+
 const {
     modal,
     title,
@@ -43,9 +45,9 @@ const ParentalLineModal = (props: ParentalLineModalProps) => {
     );
     return (
         <>
-            <Button onClick={(e) => showModal(e)}>
+            <DarkBlueHoverButton onClick={(e) => showModal(e)}>
                 {props.cellLineId} {<InfoCircleOutlined />}
-            </Button>
+            </DarkBlueHoverButton>
             <Modal
                 title={headerElement}
                 open={isModalOpen}
@@ -55,24 +57,28 @@ const ParentalLineModal = (props: ParentalLineModalProps) => {
                 className={modal}
                 footer={
                     <div style={{ textAlign: "center" }}>
-                        <Button
-                            type="primary"
-                            style={{ width: 480, border: "2px solid #003075" }}
+                        <DarkBlueHoverButton
+                            style={{
+                                width: 480,
+                                borderWidth: "2px",
+                                backgroundColor: "white",
+                            }}
                             href="https://www.allencell.org/cell-catalog.html"
                             target="_blank"
                             className={actionButton}
                         >
-                            <Flex justify="flex-end" gap={142}>
-                                More information
-                                <Icon
-                                    component={LinkOut}
-                                    style={{
-                                        color: "transparent",
-                                        fontSize: "24px",
-                                    }}
-                                />
+                            <Flex
+                                justify="flex-end"
+                                gap={110}
+                                style={{
+                                    width: "100%",
+                                    fontWeight: 600,
+                                }}
+                            >
+                                Go to Parental Line
+                                <Icon component={LinkOut} />
                             </Flex>
-                        </Button>
+                        </DarkBlueHoverButton>
                     </div>
                 }
             >
