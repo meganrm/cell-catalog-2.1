@@ -75,7 +75,7 @@ const ParentalLineModal = (props: ParentalLineModalProps) => {
                                     fontWeight: 600,
                                 }}
                             >
-                                Go to Parental Line Page
+                                Go to Parental Line
                                 <Icon component={LinkOut} />
                             </Flex>
                         </DarkBlueHoverButton>
