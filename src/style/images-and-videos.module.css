@@ -12,7 +12,7 @@
 }
 
 .container :global(.ant-card-head-title) {
-    border-bottom: 1px solid #ddd;
+    border-bottom: 1px solid var(--RAIN_SHADOW);
 }
 
 .container .header {
