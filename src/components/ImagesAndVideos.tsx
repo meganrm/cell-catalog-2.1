@@ -5,6 +5,7 @@ import { ParentalLineFrontmatter } from "../component-queries/types";
 import { formatCellLineId } from "../utils";
 const {
     container,
+    header,
     titleSection,
     mainTitle,
     subtitle,
@@ -33,21 +34,23 @@ const ImagesAndVideos: React.FC<ImagesAndVideosProps> = ({
     const imageData = mainImage ? getImage(mainImage.image) : null;
     const fluorescentTag = parentalLine.fluorescent_tag;
     const parentalGeneSymbol = parentalLine.gene.frontmatter.symbol;
-    const alleicTag = parentalLine.allele_count;
+    const alleleTag = parentalLine.allele_count;
     const title = (
         <Flex
             justify="space-between"
             style={{ paddingTop: 24 }}
-            className={titleSection}
+            className={header}
         >
-            <div>
-                <h3 id={mainTitle}>{formatCellLineId(cellLineId)}</h3>
+            <div className={titleSection}>
+                <h3 className={mainTitle}>{formatCellLineId(cellLineId)}</h3>
                 <span className={subtitle}>
-                    {geneSymbol}-(placeholder) in WTC-{fluorescentTag}-{parentalGeneSymbol}
-                    ({alleicTag}-allelic tag)
+                    {geneSymbol}-(placeholder) in WTC-{fluorescentTag}-
+                    {parentalGeneSymbol}({alleleTag}-allelic tag)
                 </span>
             </div>
-            <span className={rightTitle}>Representative images for all clones</span>
+            <span className={rightTitle}>
+                Representative images for all clones
+            </span>
         </Flex>
     );
 
@@ -61,10 +64,15 @@ const ImagesAndVideos: React.FC<ImagesAndVideosProps> = ({
             >
                 {imageData && (
                     <div className={imageContainer}>
-                        <GatsbyImage image={imageData} alt="main image"></GatsbyImage>
+                        <GatsbyImage
+                            image={imageData}
+                            alt="main image"
+                        ></GatsbyImage>
                     </div>
                 )}
-                {mainImage?.caption && <p className={caption}>{mainImage.caption}</p>}
+                {mainImage?.caption && (
+                    <p className={caption}>{mainImage.caption}</p>
+                )}
             </Flex>
         </Card>
     );

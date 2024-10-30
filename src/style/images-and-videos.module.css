@@ -15,22 +15,20 @@
     border-bottom: 1px solid #ddd;
 }
 
-.title-section {
-    font-weight: 400;
+.container .header {
     width: 100%;
 }
 
-#main-title {
+.container .title-section,
+.container h3 {
     font-weight: 400;
+}
+
+.container .main-title {
     color: var(--SERIOUS_GRAY);
 }
 
-.subtitle {
-    font-size: 16px;
-}
-
 .right-title {
-    font-weight: 600;
     font-size: 12px;
     font-style: italic;
     margin-top: auto;
@@ -47,7 +45,6 @@
 }
 
 .caption {
-    font-weight: 400;
     font-size: 12px;
     padding: 8px 80px;
 }
