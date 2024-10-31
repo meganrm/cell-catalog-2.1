@@ -1,0 +1,50 @@
+.container {
+    border: 1px solid var(--primary-color);
+    border-radius: 5px;
+}
+
+.container :global(.ant-card-head) {
+    border: none;
+}
+
+.container :global(.ant-card-body) {
+    height: 90%;
+}
+
+.container :global(.ant-card-head-title) {
+    border-bottom: 1px solid var(--RAIN_SHADOW);
+}
+
+.container .header {
+    width: 100%;
+}
+
+.container .title-section,
+.container h3 {
+    font-weight: 400;
+}
+
+.container .main-title {
+    color: var(--SERIOUS_GRAY);
+}
+
+.right-title {
+    font-size: 12px;
+    font-style: italic;
+    margin-top: auto;
+}
+
+.image-section {
+    height: 100%;
+}
+
+.image-container {
+    display: flex;
+    align-items: center;
+    height: 100%;
+}
+
+.caption {
+    font-size: 12px;
+    padding: 8px 80px;
+}
