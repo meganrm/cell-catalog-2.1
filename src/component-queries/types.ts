@@ -8,6 +8,7 @@ export interface GeneFrontMatter {
 export interface ParentalLineFrontmatter {
     cell_line_id: string;
     clone_number: number;
+    allele_count: string;
     tag_location: string;
     fluorescent_tag: string;
     thumbnail_image: any;
@@ -45,6 +46,16 @@ export interface DiseaseCellLineFrontmatter {
     order_link: string;
     status: CellLineStatus;
     hPSCreg_certificate_link: string;
+    images_and_videos: {
+        images: {
+            image: any;
+            caption: string;
+        }[];
+        videos: {
+            video: any;
+            caption: string;
+        }[];
+    };
 }
 
 export interface DiseaseCellLineEdge {
