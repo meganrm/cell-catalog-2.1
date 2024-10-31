@@ -158,7 +158,10 @@ export const pageQuery = graphql`
         }
         snp
         clones {
+          clone_number
           type
+          transfection_replicate
+          genotype
         }
         certificate_of_analysis
         order_link

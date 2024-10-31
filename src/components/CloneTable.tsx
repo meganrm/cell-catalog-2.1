@@ -10,8 +10,8 @@ interface CloneTableProps {
 
 const CloneTable: React.FC<CloneTableProps> = ({ dataSource }) => {
     // NOTE: once the clone data is filled in, we can use the id as the key
-    const dataSourceWithKey = dataSource.map((data, index) => {
-        return { ...data, key: index };
+    const dataSourceWithKey = dataSource.map((data) => {
+        return { ...data, clone_number: `cl.${data.clone_number}`, key: data.clone_number };
     });
     const cloneTableColumns = [
         {
