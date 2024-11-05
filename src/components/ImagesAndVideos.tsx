@@ -32,6 +32,8 @@ const ImagesAndVideos: React.FC<ImagesAndVideosProps> = ({
 }) => {
     const mainImage = images.length > 0 ? images[0] : null;
     const imageData = mainImage ? getImage(mainImage.image) : null;
+    const thumbnailImage = parentalLine.thumbnail_image ? getImage(parentalLine.thumbnail_image) : null;
+    console.log("thumbnailImage", thumbnailImage);
     const fluorescentTag = parentalLine.fluorescent_tag;
     const parentalGeneSymbol = parentalLine.gene.frontmatter.symbol;
     const alleleTag = parentalLine.allele_count;
@@ -74,6 +76,14 @@ const ImagesAndVideos: React.FC<ImagesAndVideosProps> = ({
                     <p className={caption}>{mainImage.caption}</p>
                 )}
             </Flex>
+            <div>
+                {thumbnailImage && (
+                    <GatsbyImage
+                            image={thumbnailImage}
+                            alt="thumbnail image"
+                    ></GatsbyImage>
+            )}
+            </div>
         </Card>
     );
 };
