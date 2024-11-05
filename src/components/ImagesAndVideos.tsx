@@ -1,6 +1,6 @@
 import { Card, Flex } from "antd";
 import { getImage, GatsbyImage } from "gatsby-plugin-image";
-import React from "react";
+import React, { useState } from "react";
 import { ParentalLineFrontmatter } from "../component-queries/types";
 import { formatCellLineId } from "../utils";
 const {
@@ -13,6 +13,10 @@ const {
     imageSection,
     caption,
     imageContainer,
+    mainImageContainer,
+    thumbnailContainer,
+    primaryImageOnly,
+    primaryImageWithThumbnail,
 } = require("../style/images-and-videos.module.css");
 
 interface ImagesAndVideosProps {
@@ -30,10 +34,26 @@ const ImagesAndVideos: React.FC<ImagesAndVideosProps> = ({
     parentalLine,
     geneSymbol,
 }) => {
-    const mainImage = images.length > 0 ? images[0] : null;
+    const [mainImage, setMainImage] = useState(images[0]);
+    const thumbnails = images.map((image) => {
+        const renderImage = getImage(image.image);
+        if (renderImage) {
+            return (
+                <div onClick={() => setMainImage(image)}>
+                    <GatsbyImage
+                        image={renderImage}
+                        alt="thumbnail image"
+                    ></GatsbyImage>
+                </div>
+            );
+        }
+    });
+    const hasMultipleImages = images.length > 1;
+    const primaryImageClassName = hasMultipleImages
+        ? primaryImageWithThumbnail
+        : primaryImageOnly;
+
     const imageData = mainImage ? getImage(mainImage.image) : null;
-    const thumbnailImage = parentalLine.thumbnail_image ? getImage(parentalLine.thumbnail_image) : null;
-    console.log("thumbnailImage", thumbnailImage);
     const fluorescentTag = parentalLine.fluorescent_tag;
     const parentalGeneSymbol = parentalLine.gene.frontmatter.symbol;
     const alleleTag = parentalLine.allele_count;
@@ -66,24 +86,24 @@ const ImagesAndVideos: React.FC<ImagesAndVideosProps> = ({
             >
                 {imageData && (
                     <div className={imageContainer}>
-                        <GatsbyImage
-                            image={imageData}
-                            alt="main image"
-                        ></GatsbyImage>
+                        <div className={mainImageContainer}>
+                            <GatsbyImage
+                                className={primaryImageClassName}
+                                image={imageData}
+                                alt="main image"
+                            ></GatsbyImage>
+                            {mainImage?.caption && (
+                                <p className={caption}>{mainImage.caption}</p>
+                            )}
+                        </div>
+                        {hasMultipleImages && (
+                            <div className={thumbnailContainer}>
+                                {thumbnails}
+                            </div>
+                        )}
                     </div>
                 )}
-                {mainImage?.caption && (
-                    <p className={caption}>{mainImage.caption}</p>
-                )}
             </Flex>
-            <div>
-                {thumbnailImage && (
-                    <GatsbyImage
-                            image={thumbnailImage}
-                            alt="thumbnail image"
-                    ></GatsbyImage>
-            )}
-            </div>
         </Card>
     );
 };
