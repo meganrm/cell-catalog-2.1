@@ -17,8 +17,10 @@ const {
     thumbnailContainer,
     thumbnail,
     selectedThumbnail,
+    notSelectedThumbnail,
     primaryImageOnly,
     primaryImageWithThumbnail,
+    primaryImageContainer,
 } = require("../style/images-and-videos.module.css");
 
 interface ImagesAndVideosProps {
@@ -43,14 +45,19 @@ const ImagesAndVideos: React.FC<ImagesAndVideosProps> = ({
     const thumbnails = images.map((image) => {
         const renderImage = getImage(image.image);
         const isSelected = mainImage === image;
-        const thumbnailClassName = isSelected ? selectedThumbnail : thumbnail;
+        const thumbnailClassName = isSelected
+            ? selectedThumbnail
+            : notSelectedThumbnail;
         if (renderImage) {
             return (
                 <div
                     onClick={() => selectThumbnail(image)}
-                    className={thumbnailClassName}
+                    className={`${thumbnail} ${thumbnailClassName}`}
                 >
-                    <GatsbyImage image={renderImage} alt="thumbnail image"></GatsbyImage>
+                    <GatsbyImage
+                        image={renderImage}
+                        alt="thumbnail image"
+                    ></GatsbyImage>
                 </div>
             );
         }
@@ -65,7 +72,11 @@ const ImagesAndVideos: React.FC<ImagesAndVideosProps> = ({
     const parentalGeneSymbol = parentalLine.gene.frontmatter.symbol;
     const alleleTag = parentalLine.allele_count;
     const title = (
-        <Flex justify="space-between" style={{ paddingTop: 24 }} className={header}>
+        <Flex
+            justify="space-between"
+            style={{ paddingTop: 24 }}
+            className={header}
+        >
             <div className={titleSection}>
                 <h3 className={mainTitle}>{formatCellLineId(cellLineId)}</h3>
                 <span className={subtitle}>
@@ -73,7 +84,9 @@ const ImagesAndVideos: React.FC<ImagesAndVideosProps> = ({
                     {parentalGeneSymbol}({alleleTag}-allelic tag)
                 </span>
             </div>
-            <span className={rightTitle}>Representative images for all clones</span>
+            <span className={rightTitle}>
+                Representative images for all clones
+            </span>
         </Flex>
     );
 
@@ -88,17 +101,21 @@ const ImagesAndVideos: React.FC<ImagesAndVideosProps> = ({
                 {imageData && (
                     <div className={imageContainer}>
                         <div className={mainImageContainer}>
-                            <GatsbyImage
-                                className={primaryImageClassName}
-                                image={imageData}
-                                alt="main image"
-                            ></GatsbyImage>
+                            <div className={primaryImageContainer}>
+                                <GatsbyImage
+                                    className={primaryImageClassName}
+                                    image={imageData}
+                                    alt="main image"
+                                ></GatsbyImage>
+                            </div>
                             {mainImage?.caption && (
                                 <p className={caption}>{mainImage.caption}</p>
                             )}
                         </div>
                         {hasMultipleImages && (
-                            <div className={thumbnailContainer}>{thumbnails}</div>
+                            <div className={thumbnailContainer}>
+                                {thumbnails}
+                            </div>
                         )}
                     </div>
                 )}
