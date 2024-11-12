@@ -1,5 +1,7 @@
 import { Card, Flex } from "antd";
 import { getImage, GatsbyImage } from "gatsby-plugin-image";
+import { Link } from "gatsby";
+import { ModalRoutingContext } from "gatsby-plugin-modal-routing";
 import React from "react";
 import { ParentalLineFrontmatter } from "../component-queries/types";
 import { formatCellLineId } from "../utils";
@@ -55,26 +57,37 @@ const ImagesAndVideos: React.FC<ImagesAndVideosProps> = ({
     );
 
     return (
-        <Card className={container} title={title} style={{ width: "100%" }}>
-            <Flex
-                vertical
-                justify="space-between"
-                align="center"
-                className={imageSection}
-            >
-                {imageData && (
-                    <div className={imageContainer}>
-                        <GatsbyImage
-                            image={imageData}
-                            alt="main image"
-                        ></GatsbyImage>
-                    </div>
-                )}
-                {mainImage?.caption && (
-                    <p className={caption}>{mainImage.caption}</p>
-                )}
-            </Flex>
-        </Card>
+        <ModalRoutingContext.Consumer>
+            {({ modal, closeTo }: { modal: boolean; closeTo: string }) => (
+                <Card className={container} title={title} style={{ width: "100%" }}>
+                    {modal && (
+                        <Link to={closeTo} style={{ position: "absolute", top: 0, right: 0 }}>
+                            Close
+                        </Link> 
+                    )}
+                    <Flex
+                        vertical
+                        justify="space-between"
+                        align="center"
+                        className={imageSection}
+                    >
+                        {imageData && (
+                            <div className={imageContainer}>
+                                <GatsbyImage
+                                    image={imageData}
+                                    alt="main image"
+                                ></GatsbyImage>
+                            </div>
+                        )}
+                        {mainImage?.caption && (
+                            <p className={caption}>{mainImage.caption}</p>
+                        )}
+                    </Flex>
+                </Card>
+            )}
+            
+        </ModalRoutingContext.Consumer>
+        
     );
 };
 
