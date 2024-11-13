@@ -1,6 +1,7 @@
 .container {
     border: 1px solid var(--primary-color);
     border-radius: 5px;
+    width: 100%;
 }
 
 .container :global(.ant-card-head) {
@@ -39,20 +40,13 @@
 }
 
 .image-container {
-    display: flex;
-    align-items: center;
     height: 100%;
-    flex-direction: row;
     margin-left: 104px;
     margin-right: 104px;
 }
 
 .main-image-container {
-    display: flex;
-    align-items: center;
     height: 100%;
-    flex-direction: column;
-    justify-content: space-between;
 }
 
 .primary-image-only {
@@ -74,7 +68,7 @@
     align-self: start;
 }
 
-.selectedThumbnail {
+.selected-thumbnail {
     border: 4px solid var(--AQUA_BLUE);
 }
 

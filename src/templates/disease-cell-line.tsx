@@ -46,6 +46,7 @@ export const DiseaseCellLineTemplate = ({
   healthCertificate,
   imagesAndVideos,
 }: DiseaseCellLineTemplateProps) => {
+  const hasImagesOrVideos = imagesAndVideos.images.length || imagesAndVideos.videos.length;
   return (
     <Flex gap={40} justify="space-between">
       <Flex
@@ -73,13 +74,18 @@ export const DiseaseCellLineTemplate = ({
           healthCertificate={healthCertificate}
         />
       </Flex>
-      <ImagesAndVideos
-        cellLineId={cellLineId}
-        parentalLine={parentalLine}
-        geneSymbol={geneSymbol}
-        snp={snp}
-        images={imagesAndVideos?.images || []}
-      />
+      {hasImagesOrVideos && (
+        <ImagesAndVideos
+          cellLineId={cellLineId}
+          fluorescentTag={parentalLine.fluorescent_tag}
+          parentalGeneSymbol={parentalLine.gene.frontmatter.symbol}
+          alleleTag={parentalLine.allele_count}
+          parentalLine={parentalLine}
+          geneSymbol={geneSymbol}
+          snp={snp}
+          images={imagesAndVideos.images}
+        />
+      )}
     </Flex>
   );
 };
@@ -169,10 +175,7 @@ export const pageQuery = graphql`
           images {
             image {
               childImageSharp {
-                gatsbyImageData(
-                  placeholder: BLURRED
-                  layout: CONSTRAINED
-                )
+                gatsbyImageData(placeholder: BLURRED, layout: CONSTRAINED)
               }
             }
             caption

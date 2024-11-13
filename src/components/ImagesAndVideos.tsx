@@ -28,18 +28,21 @@ interface ImagesAndVideosProps {
     videos?: any;
     geneSymbol: string;
     snp: string;
+    fluorescentTag: string;
+    parentalGeneSymbol: string;
+    alleleTag: string;
 }
 
 const ImagesAndVideos: React.FC<ImagesAndVideosProps> = ({
     images = [],
     cellLineId,
-    parentalLine,
+    fluorescentTag,
+    parentalGeneSymbol,
+    alleleTag,
     geneSymbol,
 }) => {
     const [mainImage, setMainImage] = useState(images[0]);
-    const selectThumbnail = (image: any) => {
-        setMainImage(image);
-    };
+    const hasMultipleImages = images.length > 1;
     const thumbnails = images.map((image) => {
         const renderImage = getImage(image.image);
         const isSelected = mainImage === image;
@@ -47,7 +50,7 @@ const ImagesAndVideos: React.FC<ImagesAndVideosProps> = ({
         if (renderImage) {
             return (
                 <div
-                    onClick={() => selectThumbnail(image)}
+                    onClick={() => setMainImage(image)}
                     className={thumbnailClassName}
                 >
                     <GatsbyImage image={renderImage} alt="thumbnail image"></GatsbyImage>
@@ -55,15 +58,15 @@ const ImagesAndVideos: React.FC<ImagesAndVideosProps> = ({
             );
         }
     });
-    const hasMultipleImages = images.length > 1;
     const primaryImageClassName = hasMultipleImages
         ? primaryImageWithThumbnail
         : primaryImageOnly;
 
-    const imageData = mainImage ? getImage(mainImage.image) : null;
-    const fluorescentTag = parentalLine.fluorescent_tag;
-    const parentalGeneSymbol = parentalLine.gene.frontmatter.symbol;
-    const alleleTag = parentalLine.allele_count;
+    const imageData = getImage(mainImage.image);
+    if (!imageData) {
+        return null;
+    }
+
     const title = (
         <Flex justify="space-between" style={{ paddingTop: 24 }} className={header}>
             <div className={titleSection}>
@@ -78,30 +81,28 @@ const ImagesAndVideos: React.FC<ImagesAndVideosProps> = ({
     );
 
     return (
-        <Card className={container} title={title} style={{ width: "100%" }}>
+        <Card className={container} title={title}>
             <Flex
                 vertical
                 justify="space-between"
                 align="center"
                 className={imageSection}
             >
-                {imageData && (
-                    <div className={imageContainer}>
-                        <div className={mainImageContainer}>
-                            <GatsbyImage
-                                className={primaryImageClassName}
-                                image={imageData}
-                                alt="main image"
-                            ></GatsbyImage>
-                            {mainImage?.caption && (
-                                <p className={caption}>{mainImage.caption}</p>
-                            )}
-                        </div>
-                        {hasMultipleImages && (
-                            <div className={thumbnailContainer}>{thumbnails}</div>
+                <Flex className={imageContainer} align="center">
+                    <Flex className={mainImageContainer} align="center" vertical justify="space-between">
+                        <GatsbyImage
+                            className={primaryImageClassName}
+                            image={imageData}
+                            alt="main image"
+                        ></GatsbyImage>
+                        {mainImage.caption && (
+                            <p className={caption}>{mainImage.caption}</p>
                         )}
-                    </div>
-                )}
+                    </Flex>
+                    {hasMultipleImages && (
+                        <div className={thumbnailContainer}>{thumbnails}</div>
+                    )}
+                </Flex>
             </Flex>
         </Card>
     );
