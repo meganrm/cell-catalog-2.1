@@ -67,13 +67,39 @@
     cursor: pointer;
     display: flex;
     flex-direction: column;
-    overflow: auto;
+    overflow-y: auto; /* #2 */
+    overflow-x: hidden; /* #2 */
     max-height: 640px;
     max-width: 130px;
     margin-top: 31px;
     align-self: start;
     gap: 10px;
+    /* #6 TODO: didn't apply */
+    margin-bottom: 16px;
+    /* #2 */
+    padding-right: 10px;
 }
+
+/* #2 */
+.thumbnail-container::-webkit-scrollbar-thumb {
+    background-color: var(--OFF_WHITE);
+    border: 1px solid var(--SERIOUS_GRAY);
+    border-radius: 40px;
+}
+
+.thumbnail-container::-webkit-scrollbar {
+    width: 8px;
+
+}
+
+.thumbnail-container::-webkit-scrollbar-button:end {
+    height: 50px;
+}
+
+.thumbnail-container::-webkit-scrollbar-button:start {
+    height: 50px;
+}
+/* L95 & L99: optional settings, depend on feedback */
 
 .thumbnail {
     height: 100px;
@@ -99,4 +125,9 @@
     margin-bottom: 16px;
     flex: 1 1 0%;
     overflow: auto;
+    /* #5 */
+    max-width: 650px;
+    margin-right: 64px;
+    /* #7 */
+    line-height: 1.4;
 }
