@@ -41,10 +41,27 @@
 .image-container {
     display: flex;
     align-items: center;
+    cursor: pointer;
     height: 100%;
 }
 
 .caption {
     font-size: 12px;
     padding: 8px 80px;
+}
+
+.modal {
+    display: flex;
+    justify-content: center;
+    cursor: pointer;
+    align-items: center;
+    background-color: var(--WHITE);
+    border-radius: 10px;
+}
+
+.modal-content {
+    max-width: 100%;
+    max-height: 100%;
+    margin: auto;
+    object-fit: contain;
 }
