@@ -1,8 +1,10 @@
+import React, { useState } from "react";
 import { Card, Flex } from "antd";
 import { getImage, GatsbyImage } from "gatsby-plugin-image";
-import React, { useState } from "react";
 import { ParentalLineFrontmatter } from "../component-queries/types";
 import { formatCellLineId } from "../utils";
+import Thumbnail from "./Thumbnail";
+
 const {
     container,
     header,
@@ -10,14 +12,8 @@ const {
     mainTitle,
     subtitle,
     rightTitle,
-    imageSection,
     caption,
-    imageContainer,
-    mainImageContainer,
     thumbnailContainer,
-    thumbnail,
-    selectedThumbnail,
-    notSelectedThumbnail,
     primaryImageOnly,
     primaryImageWithThumbnail,
     primaryImageContainer,
@@ -47,21 +43,14 @@ const ImagesAndVideos: React.FC<ImagesAndVideosProps> = ({
     const hasMultipleImages = images.length > 1;
     const thumbnails = images.map((image) => {
         const renderImage = getImage(image.image);
-        const isSelected = mainImage === image;
-        const thumbnailClassName = isSelected
-            ? selectedThumbnail
-            : notSelectedThumbnail;
         if (renderImage) {
             return (
-                <div
+                <Thumbnail
+                    key={image.id}
+                    image={renderImage}
+                    isSelected={mainImage === image}
                     onClick={() => setMainImage(image)}
-                    className={`${thumbnail} ${thumbnailClassName}`}
-                >
-                    <GatsbyImage
-                        image={renderImage}
-                        alt="thumbnail image"
-                    ></GatsbyImage>
-                </div>
+                />
             );
         }
     });
@@ -96,31 +85,31 @@ const ImagesAndVideos: React.FC<ImagesAndVideosProps> = ({
     return (
         <Card className={container} title={title}>
             <Flex
-                vertical
-                justify="space-between"
+                className={primaryImageContainer}
                 align="center"
-                className={imageSection}
+                vertical
+                justify="center"
+                gap={8}
             >
-                <Flex className={imageContainer} align="center">
-                    <Flex className={mainImageContainer} align="center" vertical justify="space-between">
-                        <Flex className={primaryImageContainer} align="center" vertical justify="center">
-                            <GatsbyImage
-                                className={primaryImageClassName}
-                                image={imageData}
-                                alt="main image"
-                            ></GatsbyImage>
-                        </Flex>
-                        {mainImage.caption && (
-                            <p className={caption}>{mainImage.caption}</p>
-                        )}
-                    </Flex>
-                    {hasMultipleImages && (
-                        <div className={thumbnailContainer}>
-                            {thumbnails}
-                        </div>
-                    )}
-                </Flex>
+                <GatsbyImage
+                    className={primaryImageClassName}
+                    image={imageData}
+                    alt="main image"
+                    imgStyle={{ objectFit: "contain" }}
+                />
+                {mainImage.caption && (
+                    <p className={caption}>{mainImage.caption}</p>
+                )}
             </Flex>
+            {hasMultipleImages && (
+                <Flex
+                    vertical
+                    style={{ minHeight: 0 }}
+                    className={thumbnailContainer}
+                >
+                    {thumbnails}
+                </Flex>
+            )}
         </Card>
     );
 };

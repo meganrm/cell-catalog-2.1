@@ -1,15 +1,26 @@
 .container {
     border: 1px solid var(--primary-color);
     border-radius: 5px;
-    width: 100%;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    flex: 0 1 auto;
+    min-width: 800px;
 }
 
 .container :global(.ant-card-head) {
     border: none;
+    flex: 0 0 auto;
 }
 
 .container :global(.ant-card-body) {
-    height: 90%;
+    flex: 1 1 auto;
+    margin: 30px 40px 46px;
+    padding: 0;
+    display: flex;
+    overflow: hidden;
+    gap: 64px;
+    justify-content: flex-start;
 }
 
 .container :global(.ant-card-head-title) {
@@ -35,24 +46,6 @@
     margin-top: auto;
 }
 
-.image-section {
-    height: 100%;
-}
-
-.image-container {
-    height: 100%;
-    margin-left: 104px;
-    margin-right: 104px;
-}
-
-.main-image-container {
-    height: 100%;
-    flex-direction: column;
-}
-
-.primary-image-container {
-    flex: 9 1 0%;
-}
 
 .primary-image-only {
     width: 75%;
@@ -60,24 +53,24 @@
 
 .primary-image-with-thumbnail {
     width: 80%;
+    flex: 1 1 auto;
+}
+
+.caption {
+    flex: 0 0 auto;
+    max-height: 15%;
+    overflow-y: auto;
+    line-height: 1.4;
+    margin: 0;
+    font-size: 12px;
 }
 
 .thumbnail-container {
-    flex-shrink: 0;
-    cursor: pointer;
+    flex: 0 0 auto;
+    overflow-y: auto;
     display: flex;
     flex-direction: column;
-    overflow-y: auto; /* #2 */
-    overflow-x: hidden; /* #2 */
-    max-height: 640px;
-    max-width: 130px;
-    margin-top: 31px;
-    align-self: start;
-    gap: 10px;
-    /* #6 TODO: didn't apply */
-    margin-bottom: 16px;
-    /* #2 */
-    padding-right: 10px;
+    gap: 4px;
 }
 
 /* #2 */
@@ -89,45 +82,4 @@
 
 .thumbnail-container::-webkit-scrollbar {
     width: 8px;
-
-}
-
-.thumbnail-container::-webkit-scrollbar-button:end {
-    height: 50px;
-}
-
-.thumbnail-container::-webkit-scrollbar-button:start {
-    height: 50px;
-}
-/* L95 & L99: optional settings, depend on feedback */
-
-.thumbnail {
-    height: 100px;
-    width: 100px;
-    overflow: hidden;
-    display: flex;
-    flex-shrink: 0;
-    justify-content: center;
-    align-items: center;
-}
-
-.selected-thumbnail {
-    border: 4px solid var(--AQUA_BLUE);
-}
-
-.not-selected-thumbnail {
-    opacity: 0.5;
-    transition: opacity 0.3s ease;
-}
-
-.caption {
-    font-size: 12px;
-    margin-bottom: 16px;
-    flex: 1 1 0%;
-    overflow: auto;
-    /* #5 */
-    max-width: 650px;
-    margin-right: 64px;
-    /* #7 */
-    line-height: 1.4;
 }
