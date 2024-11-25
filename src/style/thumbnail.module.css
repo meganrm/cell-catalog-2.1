@@ -1,0 +1,19 @@
+
+.thumbnail {
+    align-items: center;
+    display: flex;
+    height: 100px;
+    flex-shrink: 0;
+    justify-content: center;
+    overflow: hidden;
+    width: 100px;
+}
+
+.selected-thumbnail {
+    border: 4px solid var(--AQUA_BLUE);
+}
+
+.not-selected-thumbnail {
+    opacity: 0.5;
+    transition: opacity 0.3s ease;
+}
