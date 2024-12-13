@@ -39,10 +39,10 @@ const ImagesAndVideos: React.FC<ImagesAndVideosProps> = ({
     alleleTag,
     geneSymbol,
 }) => {
-    const [mainImage, setMainImage] = useState(images[0]);
-    const hasMultipleImages = images.length > 1;
-    const thumbnails = images.map((image) => {
-        const renderImage = getImage(image.image);
+    const [mainImage, setMainImage] = useState(images?.[0] || null);
+    const hasMultipleImages = images?.length > 1;
+    const thumbnails = images?.map((image) => {
+        const renderImage = getImage(image?.image);
         if (renderImage) {
             return (
                 <Thumbnail

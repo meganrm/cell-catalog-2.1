@@ -53,7 +53,7 @@ export const DiseaseCellLineTemplate = ({
     imagesAndVideos,
 }: DiseaseCellLineTemplateProps) => {
     const hasImagesOrVideos =
-        imagesAndVideos.images.length || imagesAndVideos.videos.length;
+        (imagesAndVideos?.images?.length || 0) > 0 || (imagesAndVideos?.videos?.length || 0) > 0;
     return (
         <Flex className={container} gap={40} justify="space-between">
             <Flex
