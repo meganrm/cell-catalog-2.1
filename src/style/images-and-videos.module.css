@@ -73,7 +73,7 @@
     gap: 4px;
 }
 
-/* #2 */
+
 .thumbnail-container::-webkit-scrollbar-thumb {
     background-color: var(--OFF_WHITE);
     border: 1px solid var(--SERIOUS_GRAY);
