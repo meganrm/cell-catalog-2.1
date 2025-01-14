@@ -15,12 +15,12 @@ export const IndexPageTemplate = ({ mainPitch }: IndexPageTemplateProps) => {
         <div>
             <h1 className="title">{mainPitch.title}</h1>
             <div className="tile">
-                <h3 className="subtitle">{mainPitch.description}</h3>
+                <p className="subtitle">{mainPitch.description}</p>
             </div>
 
-            <h3 className="has-text-weight-semibold is-size-2">
-                Allen Cell Collection
-            </h3>
+            <h4 className="has-text-weight-semibold is-size-2">
+                Select collection:
+            </h4>
             <div className="column is-12 has-text-centered">
                 <Link className="btn" to="/cell-line">
                     Cell Collection
