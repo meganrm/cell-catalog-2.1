@@ -36,12 +36,12 @@
     background-color: var(--ALLEN_LIGHT_10);
     display: flex;
     flex-direction: column;
+    gap: 0; /* #11  in a separate pr? */
 }
 
 .extra-large-button h2 {
     font-size: 24px;
     font-weight: 600;
-    margin-top: 10.5px;
     margin-bottom: 0;
 }
 

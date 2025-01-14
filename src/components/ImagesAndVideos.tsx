@@ -1,8 +1,10 @@
+import React, { useState } from "react";
 import { Card, Flex } from "antd";
 import { getImage, GatsbyImage } from "gatsby-plugin-image";
-import React from "react";
 import { ParentalLineFrontmatter } from "../component-queries/types";
 import { formatCellLineId } from "../utils";
+import Thumbnail from "./Thumbnail";
+
 const {
     container,
     header,
@@ -10,9 +12,11 @@ const {
     mainTitle,
     subtitle,
     rightTitle,
-    imageSection,
     caption,
-    imageContainer,
+    thumbnailContainer,
+    primaryImageOnly,
+    primaryImageWithThumbnail,
+    primaryImageContainer,
 } = require("../style/images-and-videos.module.css");
 
 interface ImagesAndVideosProps {
@@ -22,19 +26,43 @@ interface ImagesAndVideosProps {
     videos?: any;
     geneSymbol: string;
     snp: string;
+    fluorescentTag: string;
+    parentalGeneSymbol: string;
+    alleleTag: string;
 }
 
 const ImagesAndVideos: React.FC<ImagesAndVideosProps> = ({
     images = [],
     cellLineId,
-    parentalLine,
+    fluorescentTag,
+    parentalGeneSymbol,
+    alleleTag,
     geneSymbol,
 }) => {
-    const mainImage = images.length > 0 ? images[0] : null;
-    const imageData = mainImage ? getImage(mainImage.image) : null;
-    const fluorescentTag = parentalLine.fluorescent_tag;
-    const parentalGeneSymbol = parentalLine.gene.frontmatter.symbol;
-    const alleleTag = parentalLine.allele_count;
+    const [mainImage, setMainImage] = useState(images?.[0] || null);
+    const hasMultipleImages = images?.length > 1;
+    const thumbnails = images?.map((image) => {
+        const renderImage = getImage(image?.image);
+        if (renderImage) {
+            return (
+                <Thumbnail
+                    key={image.id}
+                    image={renderImage}
+                    isSelected={mainImage === image}
+                    onClick={() => setMainImage(image)}
+                />
+            );
+        }
+    });
+    const primaryImageClassName = hasMultipleImages
+        ? primaryImageWithThumbnail
+        : primaryImageOnly;
+
+    const imageData = getImage(mainImage.image);
+    if (!imageData) {
+        return null;
+    }
+
     const title = (
         <Flex
             justify="space-between"
@@ -55,25 +83,33 @@ const ImagesAndVideos: React.FC<ImagesAndVideosProps> = ({
     );
 
     return (
-        <Card className={container} title={title} style={{ width: "100%" }}>
+        <Card className={container} title={title}>
             <Flex
-                vertical
-                justify="space-between"
+                className={primaryImageContainer}
                 align="center"
-                className={imageSection}
+                vertical
+                justify="center"
+                gap={8}
             >
-                {imageData && (
-                    <div className={imageContainer}>
-                        <GatsbyImage
-                            image={imageData}
-                            alt="main image"
-                        ></GatsbyImage>
-                    </div>
-                )}
-                {mainImage?.caption && (
+                <GatsbyImage
+                    className={primaryImageClassName}
+                    image={imageData}
+                    alt="main image"
+                    imgStyle={{ objectFit: "contain" }}
+                />
+                {mainImage.caption && (
                     <p className={caption}>{mainImage.caption}</p>
                 )}
             </Flex>
+            {hasMultipleImages && (
+                <Flex
+                    vertical
+                    style={{ minHeight: 0 }}
+                    className={thumbnailContainer}
+                >
+                    {thumbnails}
+                </Flex>
+            )}
         </Card>
     );
 };

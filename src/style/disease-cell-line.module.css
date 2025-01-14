@@ -1,0 +1,16 @@
+.container {
+    max-height: 850px;
+    height: 100%;
+    box-sizing: border-box;
+}
+
+.left-card {
+    max-width: 505px;
+    width: 40%;
+    min-width: 460px;
+    flex: 1;
+}
+
+.return-arrow {
+    margin-right: 8px;
+}
