@@ -24,10 +24,6 @@ const CellLineTableTemplate = (props: QueryResult) => {
                         if (cellLine.frontmatter.cell_line_id === 0) {
                             return null;
                         }
-                        if (cellLine.frontmatter.gene === null) {
-                            console.log(cellLine.frontmatter.cell_line_id);
-                            return null;
-                        }
                         return (
                             <tr className="" key={cellLine.id}>
                                 <td className="is-child">
