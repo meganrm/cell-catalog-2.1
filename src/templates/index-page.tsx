@@ -2,64 +2,35 @@ import React from "react";
 import { Link, graphql } from "gatsby";
 
 import Layout from "../components/Layout";
-import Features from "../components/Features";
 
 interface IndexPageTemplateProps {
     mainPitch: {
         title: string;
         description: string;
     };
-    products: {
-        text: string;
-        image: string;
-    }[];
 }
 
-export const IndexPageTemplate = ({
-    mainPitch,
-    products,
-}: IndexPageTemplateProps) => {
+export const IndexPageTemplate = ({ mainPitch }: IndexPageTemplateProps) => {
     return (
         <div>
-            <section className="section section--gradient">
-                <div className="container">
-                    <div className="section">
-                        <div className="columns">
-                            <div className="column is-10 is-offset-1">
-                                <div className="content">
-                                    <div className="content">
-                                        <div className="tile">
-                                            <h1 className="title">
-                                                {mainPitch.title}
-                                            </h1>
-                                        </div>
-                                        <div className="tile">
-                                            <h3 className="subtitle">
-                                                {mainPitch.description}
-                                            </h3>
-                                        </div>
-                                    </div>
+            <h1 className="title">{mainPitch.title}</h1>
+            <div className="tile">
+                <p className="subtitle">{mainPitch.description}</p>
+            </div>
 
-                                    <Features gridItems={products} />
-                                    <div className="column is-12">
-                                        <h3 className="has-text-weight-semibold is-size-2">
-                                            Cell Lines
-                                        </h3>
-                                        <div className="column is-12 has-text-centered">
-                                            <Link
-                                                className="btn"
-                                                to="/cell-line"
-                                            >
-                                                Read more
-                                            </Link>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
+            <h4 className="has-text-weight-semibold is-size-2">
+                Select collection:
+            </h4>
+            <div className="column is-12 has-text-centered">
+                <Link className="btn" to="/cell-line">
+                    Cell Collection
+                </Link>
+            </div>
+            <div className="column is-12 has-text-centered">
+                <Link className="btn" to="/disease-catalog">
+                    Disease Collection
+                </Link>
+            </div>
         </div>
     );
 };
@@ -69,10 +40,7 @@ const IndexPage = ({ data }: QueryResult) => {
 
     return (
         <Layout>
-            <IndexPageTemplate
-                mainPitch={frontmatter.main_pitch}
-                products={frontmatter.products}
-            />
+            <IndexPageTemplate mainPitch={frontmatter.main_pitch} />
         </Layout>
     );
 };
@@ -89,10 +57,6 @@ interface QueryResult {
                     title: string;
                     description: string;
                 };
-                products: {
-                    text: string;
-                    image: string;
-                }[];
             };
         };
     };
@@ -107,10 +71,6 @@ export const pageQuery = graphql`
                 main_pitch {
                     title
                     description
-                }
-                products {
-                    text
-                    image
                 }
             }
         }

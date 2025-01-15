@@ -1,8 +1,13 @@
+export interface Isoform {
+    name: string;
+    ids?: string[];
+}
 export interface GeneFrontMatter {
     name: string;
     symbol: string;
     structure?: string;
     protein?: string;
+    isoforms?: Isoform[];
 }
 
 export interface ParentalLineFrontmatter {
