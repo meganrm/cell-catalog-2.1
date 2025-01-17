@@ -42,7 +42,21 @@ collections:
                 label: "Status",
                 name: "status",
                 widget: "select",
-                options: ["in progress", "done"],
+                options:
+                    [
+                        {
+                            label: "Data is complete: will render on the table and the subpage",
+                            value: "data complete",
+                        },
+                        {
+                            label: "Released: renders only on the table",
+                            value: "released",
+                        },
+                        {
+                            label: "In progress: completely hidden",
+                            value: "in progress",
+                        },
+                    ],
                 default: "in progress",
                 required: true,
             }
@@ -304,8 +318,8 @@ collections:
                                         widget: "string",
                                     },
                                 ],
-                        }
-                    ]
+                        },
+                    ],
             }
           - {
                 label: "Editing Design",
@@ -393,7 +407,7 @@ collections:
                             name: "positive_cells",
                             widget: "number",
                             required: false,
-                        }
+                        },
                     ],
             }
           - {
@@ -404,9 +418,9 @@ collections:
                 collapsed: true,
                 fields:
                     [
-                        {   
+                        {
                             label: "File Upload",
-                            name: "file", 
+                            name: "file",
                             widget: "file",
                             required: false,
                         },
@@ -471,8 +485,8 @@ collections:
             widget: "list"
             required: false
             fields:
-                - { label: "Gene name", name: "gene_name", widget: "string" }
-                - { label: "Isoforms", name: "isoforms", widget: "list" }
+                - { label: "Gene name", name: "name", widget: "string" }
+                - { label: "Isoforms", name: "ids", widget: "list" }
     - name: "disease"
       label: "Modeled diseases"
       folder: "src/pages/diseases"
@@ -536,16 +550,6 @@ collections:
                                   name: description,
                                   widget: text,
                               },
-                          ],
-                  }
-                - {
-                      label: Products,
-                      name: products,
-                      widget: list,
-                      fields:
-                          [
-                              { label: Text, name: text, widget: text },
-                              { label: Image, name: image, widget: image },
                           ],
                   }
 

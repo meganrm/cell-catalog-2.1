@@ -116,9 +116,9 @@ export default function CellLineTable() {
                 query CellLineTableQuery {
                     allMarkdownRemark(
                         filter: {
-                            frontmatter: { 
-                                templateKey: { eq: "cell-line" } 
-                                status: { eq: "done" }
+                            frontmatter: {
+                                templateKey: { eq: "cell-line" }
+                                status: { eq: "released" }
                             }
                         }
                     ) {
