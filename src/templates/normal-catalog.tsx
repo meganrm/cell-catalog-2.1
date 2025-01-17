@@ -2,10 +2,10 @@ import React from "react";
 import { Card, Divider, Flex } from "antd";
 import { graphql } from "gatsby";
 import Layout from "../components/Layout";
-import Diseases from "../component-queries/Diseases";
 import Content, { HTMLContent } from "../components/shared/Content";
 import { GatsbyImage, getImage } from "gatsby-plugin-image";
 import { FileNode } from "gatsby-plugin-image/dist/src/components/hooks";
+import NormalCellLines from "../component-queries/NormalCellLines";
 
 const {
     coriellCard,
@@ -15,7 +15,7 @@ const {
     mainHeading,
     coriellWrapper,
 } = require("../style/catalog.module.css");
-interface DiseaseCatalogTemplateProps {
+interface NormalCatalogTemplateProps {
     title: string;
     content: string;
     contentComponent?: JSX.ElementType;
@@ -29,7 +29,7 @@ interface DiseaseCatalogTemplateProps {
     coriellLink: string;
 }
 // eslint-disable-next-line
-export const DiseaseCatalogTemplate = ({
+export const NormalCatalogTemplate = ({
     title,
     content,
     contentComponent,
@@ -37,7 +37,7 @@ export const DiseaseCatalogTemplate = ({
     main,
     coriellImage,
     coriellLink,
-}: DiseaseCatalogTemplateProps) => {
+}: NormalCatalogTemplateProps) => {
     const image = getImage(coriellImage);
     const PageContent = contentComponent || Content;
     return (
@@ -72,7 +72,7 @@ export const DiseaseCatalogTemplate = ({
                     content={main.description}
                 />
             </Card>
-            <Diseases />
+            <NormalCellLines />
             <HTMLContent className="footer" content={footerText} />
         </section>
     );
@@ -99,11 +99,11 @@ interface QueryResult {
     };
 }
 
-const DiseaseCatalog = ({ data }: QueryResult) => {
+const NormalCatalog = ({ data }: QueryResult) => {
     const { markdownRemark: post } = data;
     return (
         <Layout>
-            <DiseaseCatalogTemplate
+            <NormalCatalogTemplate
                 contentComponent={HTMLContent}
                 title={post.frontmatter.title}
                 content={post.html}
@@ -116,10 +116,10 @@ const DiseaseCatalog = ({ data }: QueryResult) => {
     );
 };
 
-export default DiseaseCatalog;
+export default NormalCatalog;
 
 export const aboutPageQuery = graphql`
-    query DiseaseCatalog($id: String!) {
+    query NormalCatalog($id: String!) {
         markdownRemark(id: { eq: $id }) {
             html
             frontmatter {

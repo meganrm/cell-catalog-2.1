@@ -1,75 +1,52 @@
 import React from "react";
-import { Link, graphql, StaticQuery } from "gatsby";
+import { graphql, StaticQuery } from "gatsby";
+
+import {
+    CellLineStatus,
+    NormalCellLineNode,
+    UnpackedNormalCellLine,
+} from "./types";
+import { convertFrontmatterToNormalCellLines } from "./convert-data";
+import CellLineTable from "../components/CellLineTable";
+import { getNormalTableColumns } from "../components/CellLineTable/NormalTableColumns";
+import { MOBILE_BREAKPOINT } from "../constants";
+import useWindowWidth from "../hooks/useWindowWidth";
+import { getNormalTableMobileConfig } from "../components/CellLineTable/MobileView";
 
 const CellLineTableTemplate = (props: QueryResult) => {
     const { edges: cellLines } = props.data.allMarkdownRemark;
+    const inProgressCellLines = [] as UnpackedNormalCellLine[];
+    const finishedCellLines = [] as UnpackedNormalCellLine[];
+    cellLines.forEach((cellLine) => {
+        const unPackedCellLine = convertFrontmatterToNormalCellLines(cellLine);
+        if (unPackedCellLine.status === CellLineStatus.InProgress) {
+            inProgressCellLines.push(unPackedCellLine);
+        } else {
+            finishedCellLines.push(unPackedCellLine);
+        }
+    });
+    const width = useWindowWidth();
+    const isMobile = width < MOBILE_BREAKPOINT;
+
     return (
-        <table className="">
-            <thead>
-                <tr>
-                    <th>Cell Line ID</th>
-                    <th>Protein</th>
-                    <th>Clone ID</th>
-                    <th>Gene Name (gene symbol)</th>
-                    <th>Tagged alleles</th>
-                    <th>Structure</th>
-                    <th>Fluorescent Tag</th>
-                    <th>Tag Location</th>
-                    <th>Parental Line</th>
-                </tr>
-            </thead>
-            <tbody>
-                {cellLines &&
-                    cellLines.map(({ node: cellLine }) => {
-                        if (cellLine.frontmatter.cell_line_id === 0) {
-                            return null;
-                        }
-                        return (
-                            <tr className="" key={cellLine.id}>
-                                <td className="is-child">
-                                    <Link to={cellLine.fields.slug}>
-                                        <h4>
-                                            AICS-
-                                            {cellLine.frontmatter.cell_line_id}
-                                        </h4>
-                                    </Link>
-                                </td>
-                                <td>
-                                    {
-                                        cellLine.frontmatter.gene.frontmatter
-                                            .protein
-                                    }
-                                </td>
-                                <td>{cellLine.frontmatter.clone_number}</td>
-                                <td>
-                                    {cellLine.frontmatter.gene.frontmatter.name}{" "}
-                                    (
-                                    {
-                                        cellLine.frontmatter.gene.frontmatter
-                                            .symbol
-                                    }
-                                    )
-                                </td>
-                                <td>{cellLine.frontmatter.allele_count}</td>
-                                <td>
-                                    {
-                                        cellLine.frontmatter.gene.frontmatter
-                                            .structure
-                                    }
-                                </td>
-                                <td>{cellLine.frontmatter.fluorescent_tag}</td>
-                                <td>{cellLine.frontmatter.tag_location}</td>
-                                <td>
-                                    {
-                                        cellLine.frontmatter.parental_line
-                                            .frontmatter.name
-                                    }
-                                </td>
-                            </tr>
-                        );
-                    })}
-            </tbody>
-        </table>
+        <>
+            <CellLineTable
+                tableName="Cell Line Catalog"
+                cellLines={finishedCellLines}
+                footerContents={""}
+                released={true}
+                columns={getNormalTableColumns(false)}
+                mobileConfig={getNormalTableMobileConfig(isMobile)}
+            />
+            <CellLineTable
+                tableName="Cell Line Catalog"
+                cellLines={inProgressCellLines}
+                footerContents={""}
+                released={false}
+                columns={getNormalTableColumns(true)}
+                mobileConfig={getNormalTableMobileConfig(isMobile)}
+            />
+        </>
     );
 };
 
@@ -77,38 +54,12 @@ interface QueryResult {
     data: {
         allMarkdownRemark: {
             edges: {
-                node: {
-                    id: string;
-                    fields: {
-                        slug: string;
-                    };
-                    frontmatter: {
-                        templateKey: string;
-                        cell_line_id: number;
-                        clone_number: string;
-                        tag_location: string;
-                        fluorescent_tag: string;
-                        allele_count: string;
-                        parental_line: {
-                            frontmatter: {
-                                name: string;
-                            };
-                        };
-                        gene: {
-                            frontmatter: {
-                                protein: string;
-                                name: string;
-                                symbol: string;
-                                structure: string;
-                            };
-                        };
-                    };
-                };
+                node: NormalCellLineNode;
             }[];
         };
     };
 }
-export default function CellLineTable() {
+export default function NormalCellLines() {
     return (
         <StaticQuery
             query={graphql`
@@ -118,7 +69,8 @@ export default function CellLineTable() {
                         filter: {
                             frontmatter: {
                                 templateKey: { eq: "cell-line" }
-                                status: { eq: "released" }
+                                cell_line_id: { ne: 0 }
+                                status: { ne: "hide" }
                             }
                         }
                     ) {
@@ -136,6 +88,8 @@ export default function CellLineTable() {
                                     tag_location
                                     fluorescent_tag
                                     allele_count
+                                    status
+                                    order_link
                                     gene {
                                         frontmatter {
                                             protein

@@ -1,50 +1,15 @@
 import React from "react";
 import { graphql, StaticQuery } from "gatsby";
-import { Flex, Tag } from "antd";
 
-import DiseaseTable from "../components/DiseaseTable";
 import { UnpackedDisease } from "./Diseases";
-import {
-    DiseaseCellLineEdge,
-    DiseaseCellLineFrontmatter,
-    ParentalLineFrontmatter,
-} from "./types";
-import ParentalLineModal from "../components/ParentalLineModal";
-import { formatCellLineId } from "../utils";
-
-export interface UnpackedDiseaseCellLine extends DiseaseCellLineFrontmatter {
-    diseaseGene: JSX.Element | null;
-    parentalLine: JSX.Element | null;
-    path: string;
-    key: string;
-}
-
-const getParentalLineItems = (parentalLine: ParentalLineFrontmatter) => {
-    const { symbol, name } = parentalLine.gene.frontmatter;
-    const { fluorescent_tag, tag_location } = parentalLine;
-    return [
-        {
-            key: "1",
-            label: "Gene Symbol",
-            children: symbol,
-        },
-        {
-            key: "2",
-            label: "Gene Name",
-            children: name,
-        },
-        {
-            key: "3",
-            label: "Fluorescent Tag",
-            children: fluorescent_tag,
-        },
-        {
-            key: "4",
-            label: "Tag Location",
-            children: tag_location,
-        },
-    ];
-};
+import { DiseaseCellLineEdge, UnpackedDiseaseCellLine } from "./types";
+import { convertFrontmatterToDiseaseCellLine } from "./convert-data";
+import CellLineTable from "../components/CellLineTable";
+import { getDiseaseTableColumns } from "../components/CellLineTable/DiseaseTableColumns";
+import { getDiseaseTableMobileConfig } from "../components/CellLineTable/MobileView";
+import { MOBILE_BREAKPOINT } from "../constants";
+import useWindowWidth from "../hooks/useWindowWidth";
+import { TableStatus } from "../components/CellLineTable/types";
 
 const groupLines = (
     diseases: UnpackedDisease[],
@@ -63,43 +28,8 @@ const groupLines = (
     return cellLines.reduce((acc, cellLine) => {
         const { disease } = cellLine.node.frontmatter;
         const diseaseName = disease.frontmatter.name;
-        const cellLineData: UnpackedDiseaseCellLine = {
-            ...cellLine.node.frontmatter,
-            path: cellLine.node.fields.slug,
-            diseaseGene: null,
-            parentalLine: null,
-            key: cellLine.node.id,
-        };
-        const diseaseData = diseases.find((d) => d.name === diseaseName);
-        if (!diseaseData) {
-            return acc;
-        }
-        cellLineData.diseaseGene = (
-            <Flex wrap="wrap">
-                <Tag bordered={false} color="#DFE5EA">
-                    {diseaseData.geneSymbol}
-                </Tag>
-                <div>{diseaseData.geneName}</div>
-            </Flex>
-        );
-        const parentalLine = cellLineData.parental_line.frontmatter;
-        const parentalLineItems = getParentalLineItems(parentalLine);
-        if (diseaseData.status?.toLowerCase() === "coming soon") {
-            cellLineData.parentalLine = (
-                <>{formatCellLineId(parentalLine.cell_line_id)}</>
-            );
-        } else {
-            cellLineData.parentalLine = (
-                <ParentalLineModal
-                    key={parentalLine.cell_line_id}
-                    cellLineId={formatCellLineId(parentalLine.cell_line_id)}
-                    cloneNumber={parentalLine.clone_number}
-                    displayItems={parentalLineItems}
-                    image={parentalLine.thumbnail_image}
-                />
-            );
-        }
-
+        const cellLineData: UnpackedDiseaseCellLine =
+            convertFrontmatterToDiseaseCellLine(cellLine.node);
         acc[diseaseName].push(cellLineData);
         return acc;
     }, diseaseObj);
@@ -125,13 +55,19 @@ const DiseaseCellLineTemplate = (props: DiseaseCellLineTemplateProps) => {
         if (!groupedCellLines[disease.name].length) {
             return null;
         }
+        const inProgress = disease.status === TableStatus.ComingSoon;
+        const width = useWindowWidth();
+        const isMobile = width < MOBILE_BREAKPOINT;
+
         return (
             <div key={disease.name}>
-                <DiseaseTable
-                    diseaseName={disease.name}
-                    diseaseCellLines={groupedCellLines[disease.name]}
-                    acknowledgements={disease.acknowledgements}
-                    status={disease.status}
+                <CellLineTable
+                    tableName={disease.name}
+                    cellLines={groupedCellLines[disease.name]}
+                    footerContents={disease.acknowledgements}
+                    released={disease.status === TableStatus.Available}
+                    columns={getDiseaseTableColumns(inProgress)}
+                    mobileConfig={getDiseaseTableMobileConfig(isMobile)}
                 />
             </div>
         );
@@ -189,6 +125,12 @@ export default function DiseaseCellLineQuery(props: {
                                     disease {
                                         frontmatter {
                                             name
+                                            gene {
+                                                frontmatter {
+                                                    symbol
+                                                    name
+                                                }
+                                            }
                                         }
                                     }
                                     clones {

@@ -53,11 +53,15 @@ collections:
                             value: "released",
                         },
                         {
-                            label: "In progress: completely hidden",
+                            label: "In progress: will show in the 'in progress' table",
                             value: "in progress",
                         },
+                        {
+                            label: "Hide: you can enter data but it won't show up on the site at all",
+                            value: "hide",
+                        },
                     ],
-                default: "in progress",
+                default: "hide",
                 required: true,
             }
           - { label: "Publish Date", name: "date", widget: "datetime" }
@@ -562,6 +566,54 @@ collections:
                       name: "templateKey",
                       widget: "hidden",
                       default: "disease-catalog",
+                  }
+                - { label: "Title", name: "title", widget: "string" }
+                - { label: "Body", name: "body", widget: "markdown" }
+                - {
+                      label: Main,
+                      name: main,
+                      widget: object,
+                      fields:
+                          [
+                              { label: Heading, name: heading, widget: string },
+                              {
+                                  label: Subheading,
+                                  name: subheading,
+                                  widget: string,
+                              },
+
+                              {
+                                  label: Description,
+                                  name: description,
+                                  widget: markdown,
+                              },
+                          ],
+                  }
+                - {
+                      label: "Coriell Image",
+                      name: "coriell_image",
+                      widget: "image",
+                  }
+                - {
+                      label: "Coriell Link",
+                      name: "coriell_link",
+                      widget: "string",
+                  }
+                - {
+                      label: "Footer text",
+                      name: "footer_text",
+                      widget: "markdown",
+                  }
+
+          - file: "src/pages/normal-catalog/index.md"
+            label: "Cell Line Catalog"
+            name: "normal-catalog"
+            fields:
+                - {
+                      label: "Template Key",
+                      name: "templateKey",
+                      widget: "hidden",
+                      default: "normal-catalog",
                   }
                 - { label: "Title", name: "title", widget: "string" }
                 - { label: "Body", name: "body", widget: "markdown" }

@@ -11,7 +11,7 @@ export interface GeneFrontMatter {
 }
 
 export interface ParentalLineFrontmatter {
-    cell_line_id: string;
+    cell_line_id: number;
     clone_number: number;
     allele_count: string;
     tag_location: string;
@@ -20,6 +20,38 @@ export interface ParentalLineFrontmatter {
     gene: {
         frontmatter: GeneFrontMatter;
     };
+}
+
+export interface NormalCellLineFrontmatter {
+    templateKey: string;
+    cell_line_id: number;
+    status: CellLineStatus;
+    clone_number: number;
+    tag_location: string;
+    fluorescent_tag: string;
+    allele_count: string;
+    order_link: string;
+    parental_line: {
+        frontmatter: {
+            name: string;
+        };
+    };
+    gene: {
+        frontmatter: {
+            protein: string;
+            name: string;
+            symbol: string;
+            structure: string;
+        };
+    };
+}
+
+export interface NormalCellLineNode {
+    id: string;
+    fields: {
+        slug: string;
+    };
+    frontmatter: NormalCellLineFrontmatter;
 }
 
 export enum CellLineStatus {
@@ -40,7 +72,7 @@ export interface Clone {
 
 export interface DiseaseCellLineFrontmatter {
     templateKey: string;
-    cell_line_id: string;
+    cell_line_id: number;
     parental_line: { frontmatter: ParentalLineFrontmatter };
     disease: {
         frontmatter: DiseaseFrontmatter;
@@ -63,14 +95,16 @@ export interface DiseaseCellLineFrontmatter {
     };
 }
 
-export interface DiseaseCellLineEdge {
-    node: {
-        id: string;
-        fields: {
-            slug: string;
-        };
-        frontmatter: DiseaseCellLineFrontmatter;
+export interface DiseaseCellLineNode {
+    id: string;
+    fields: {
+        slug: string;
     };
+    frontmatter: DiseaseCellLineFrontmatter;
+}
+
+export interface DiseaseCellLineEdge {
+    node: DiseaseCellLineNode;
 }
 
 export interface DiseaseFrontmatter {
@@ -80,4 +114,43 @@ export interface DiseaseFrontmatter {
     };
     status: string;
     acknowledgements: { html: string };
+}
+
+export interface UnpackedGene {
+    name: string;
+    symbol: string;
+    structure?: string;
+    protein?: string;
+}
+
+export interface UnpackedCellLineMainInfo {
+    path: string;
+    cellLineId: number;
+    status: CellLineStatus;
+    certificateOfAnalysis: string;
+    hPSCregCertificateLink: string;
+    orderLink: string;
+    thumbnailImage?: any;
+}
+export interface UnpackedNormalCellLine extends UnpackedCellLineMainInfo {
+    cloneNumber: number;
+    tagLocation: string;
+    fluorescentTag: string;
+    taggedGene: UnpackedGene;
+    alleleCount: string;
+    parentalLine: string;
+    structure: string;
+    protein: string;
+}
+
+export type ParentLine = Partial<UnpackedNormalCellLine>;
+
+export interface UnpackedDiseaseCellLine extends UnpackedCellLineMainInfo {
+    diseaseStatus: string;
+    path: string;
+    key: string;
+    snp: string;
+    clones: Clone[];
+    parentalLine: ParentLine;
+    mutatedGene: UnpackedGene;
 }

@@ -100,8 +100,11 @@
 
 .clones {
     text-wrap: balance;
-    border-right: 1px solid var(--border-color);
     min-width: 175px;
+}
+
+.last-column {
+    border-right: 1px solid var(--border-color);
 }
 
 .clone-number {

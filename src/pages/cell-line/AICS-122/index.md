@@ -1,7 +1,7 @@
 ---
 templateKey: cell-line
 cell_line_id: 122
-status: released
+status: in progress
 clone_number: 
 allele_count: 
 parental_line: 0
