@@ -5,12 +5,11 @@ import Icon from "@ant-design/icons";
 // TODO: debug gatsby navigate throwing errors when passed strings
 import { navigate } from "@reach/router";
 
-import { HTMLContent } from "./shared/Content";
 import {
     CellLineStatus,
     UnpackedDiseaseCellLine,
 } from "../component-queries/types";
-import { formatCellLineId, getCloneSummary } from "../utils";
+import { formatCellLineId } from "../utils";
 import { WHITE } from "../style/theme";
 import useWindowWidth from "../hooks/useWindowWidth";
 import { MOBILE_BREAKPOINT, TABLET_BREAKPOINT } from "../constants";
@@ -21,12 +20,9 @@ const CertificateIcon = require("../img/cert-icon.svg");
 const {
     tableTitle,
     container,
-    snpColumn,
     actionButton,
     comingSoon,
-    cloneNumber,
     actionColumn,
-    footer,
     clones,
     cellLineId,
     expandableContent,
@@ -34,45 +30,18 @@ const {
     dataComplete,
 } = require("../style/disease-table.module.css");
 
-interface DiseaseTableProps {
-    diseaseName: string;
-    diseaseCellLines: UnpackedDiseaseCellLine[];
-    acknowledgements: string;
-    status: string;
+interface NormalTableProps {
+    cellLines: any[];
 }
 
-const DiseaseTable = ({
-    diseaseName,
-    diseaseCellLines,
-    acknowledgements,
-    status,
-}: DiseaseTableProps) => {
+const NormalTable = ({ cellLines }: NormalTableProps) => {
     const [hoveredRowIndex, setHoveredRowIndex] = useState(-1);
     const inProgress = status?.toLowerCase() === "coming soon";
 
     const width = useWindowWidth();
     const isTablet = width < TABLET_BREAKPOINT;
     const isMobile = width < MOBILE_BREAKPOINT;
-    const renderCloneSummary = (
-        numMutants: number,
-        numIsogenics: number,
-        index: number
-    ) => (
-        <Flex vertical={true} key={index}>
-            <div>
-                <span className={cloneNumber} key={numMutants}>
-                    {numMutants}
-                </span>
-                <span> mutant clones</span>
-            </div>
-            <div>
-                <span className={cloneNumber} key={numIsogenics}>
-                    {numIsogenics}
-                </span>
-                <span> isogenic controls</span>
-            </div>
-        </Flex>
-    );
+
     const expandableConfig = {
         expandedRowRender: (record: UnpackedDiseaseCellLine, index: number) => (
             <Flex
@@ -97,16 +66,7 @@ const DiseaseTable = ({
                 )}
                 <div>
                     <label>Gene Symbol & Name:</label>
-                    <span>{record.diseaseGeneComponent}</span>
-                </div>
-                <div>
-                    <label>Clones:</label>
-
-                    {renderCloneSummary(
-                        getCloneSummary(record.clones).numMutants,
-                        getCloneSummary(record.clones).numIsogenics,
-                        index
-                    )}
+                    {/* <span>{record.gene}</span> */}
                 </div>
             </Flex>
         ),
@@ -134,7 +94,7 @@ const DiseaseTable = ({
     return (
         <>
             <Table
-                key={diseaseName}
+                key="cell-line-table"
                 className={[container, inProgress ? comingSoon : ""].join(" ")}
                 rowClassName={(record) =>
                     record.status === CellLineStatus.DataComplete
@@ -143,10 +103,7 @@ const DiseaseTable = ({
                 }
                 title={() => (
                     <Flex align="center">
-                        <h3 className={tableTitle}>{diseaseName}</h3>
-                        {inProgress ? (
-                            <Tag color="#00215F">{status}</Tag>
-                        ) : null}
+                        <h3 className={tableTitle}>Cell Line Catalog</h3>
                     </Flex>
                 )}
                 scroll={{ x: "max-content" }}
@@ -175,55 +132,44 @@ const DiseaseTable = ({
                         onCell: onCellInteraction,
                     },
                     {
-                        title: "SNP",
-                        key: "snp",
-                        dataIndex: "snp",
-                        className: snpColumn,
-                        responsive: ["sm"],
-                        render: (snp: string) => {
-                            const snps = snp.split(":");
-                            return (
-                                <Flex vertical={true} key={snp}>
-                                    <span key={"snp-0"}>{snps[0]}: </span>
-                                    <span key={"snp-1"}>{snps[1]}</span>
-                                </Flex>
-                            );
-                        },
-                        onCell: onCellInteraction,
-                    },
-                    {
                         title: "Gene Symbol & Name",
                         width: 280,
-                        key: "diseaseGeneComponent",
-                        dataIndex: "diseaseGeneComponent",
+                        key: "gene",
+                        dataIndex: "gene",
                         responsive: ["md"],
                         onCell: onCellInteraction,
                     },
                     {
-                        title: "Parental Line",
-                        key: "parentalLineComponent",
-                        dataIndex: "parentalLineComponent",
-                        responsive: ["md"],
-                        onCell: onCellInteraction,
-                    },
-                    {
-                        title: "Clones",
-                        key: "clones",
+                        title: "Clone Number",
+                        key: "cloneNumber",
                         dataIndex: "clones",
                         className: clones,
                         responsive: ["md"],
-                        render: (clones, _, index) => {
-                            const { numMutants, numIsogenics } =
-                                getCloneSummary(clones);
-
-                            return renderCloneSummary(
-                                numMutants,
-                                numIsogenics,
-                                index
-                            );
-                        },
                         onCell: onCellInteraction,
                     },
+                    {
+                        title: "Allele Count",
+                        key: "alleleCount",
+                        dataIndex: "alleleCount",
+                        // className: clones,
+                        responsive: ["md"],
+                        onCell: onCellInteraction,
+                    },
+                    {
+                        title: "Fluorescent Tag",
+                        key: "fluorescentTag",
+                        dataIndex: "fluorescentTag",
+                        responsive: ["md"],
+                        onCell: onCellInteraction,
+                    },
+                    {
+                        title: "Tag Location",
+                        key: "tagLocation",
+                        dataIndex: "tagLocation",
+                        responsive: ["md"],
+                        onCell: onCellInteraction,
+                    },
+
                     {
                         title: "",
                         key: "order_link",
@@ -259,18 +205,18 @@ const DiseaseTable = ({
                     },
                     {
                         title: "",
-                        key: "certificateOfAnalysis",
-                        dataIndex: "certificateOfAnalysis",
+                        key: "certificate_of_analysis",
+                        dataIndex: "certificate_of_analysis",
                         className: actionColumn,
                         fixed: "right",
                         responsive: ["md"],
-                        render: (certificateOfAnalysis) => {
+                        render: (certificate_of_analysis) => {
                             return (
-                                certificateOfAnalysis && (
+                                certificate_of_analysis && (
                                     <a
-                                        key={certificateOfAnalysis}
+                                        key={certificate_of_analysis}
                                         className={actionButton}
-                                        href={certificateOfAnalysis}
+                                        href={certificate_of_analysis}
                                         target="_blank"
                                         rel="noreferrer"
                                     >
@@ -290,13 +236,10 @@ const DiseaseTable = ({
                         },
                     },
                 ]}
-                dataSource={diseaseCellLines}
+                dataSource={cellLines}
             />
-            <div className={footer}>
-                <HTMLContent content={acknowledgements} />
-            </div>
         </>
     );
 };
 
-export default DiseaseTable;
+export default NormalTable;

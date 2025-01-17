@@ -48,7 +48,7 @@ export const IndexPageTemplate = ({
                                         <div className="column is-12 has-text-centered">
                                             <Link
                                                 className="btn"
-                                                to="/cell-line"
+                                                to="/normal-catalog"
                                             >
                                                 Read more
                                             </Link>

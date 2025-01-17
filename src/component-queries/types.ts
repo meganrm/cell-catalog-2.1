@@ -6,7 +6,7 @@ export interface GeneFrontMatter {
 }
 
 export interface ParentalLineFrontmatter {
-    cell_line_id: string;
+    cell_line_id: number;
     clone_number: number;
     allele_count: string;
     tag_location: string;
@@ -35,7 +35,7 @@ export interface Clone {
 
 export interface DiseaseCellLineFrontmatter {
     templateKey: string;
-    cell_line_id: string;
+    cell_line_id: number;
     parental_line: { frontmatter: ParentalLineFrontmatter };
     disease: {
         frontmatter: DiseaseFrontmatter;
@@ -58,14 +58,16 @@ export interface DiseaseCellLineFrontmatter {
     };
 }
 
-export interface DiseaseCellLineEdge {
-    node: {
-        id: string;
-        fields: {
-            slug: string;
-        };
-        frontmatter: DiseaseCellLineFrontmatter;
+export interface DiseaseCellLineNode {
+    id: string;
+    fields: {
+        slug: string;
     };
+    frontmatter: DiseaseCellLineFrontmatter;
+}
+
+export interface DiseaseCellLineEdge {
+    node: DiseaseCellLineNode;
 }
 
 export interface DiseaseFrontmatter {
@@ -75,4 +77,39 @@ export interface DiseaseFrontmatter {
     };
     status: string;
     acknowledgements: { html: string };
+}
+
+export interface UnpackedGene {
+    name: string;
+    symbol: string;
+    structure?: string;
+    protein?: string;
+}
+
+export interface UnpackedCellLineMainInfo {
+    path: string;
+    cellLineId: number;
+    status: CellLineStatus;
+    certificateOfAnalysis: string;
+    hPSCregCertificateLink: string;
+    orderLink: string;
+}
+export interface UnpackedNormalCellLine extends UnpackedCellLineMainInfo {
+    cloneNumber: number;
+    tagLocation: string;
+    fluorescentTag: string;
+    taggedGene: UnpackedGene;
+}
+
+export type ParentLine = Partial<UnpackedNormalCellLine>;
+
+export interface UnpackedDiseaseCellLine extends UnpackedCellLineMainInfo {
+    diseaseGeneComponent: JSX.Element | null;
+    parentalLineComponent: JSX.Element | null;
+    path: string;
+    key: string;
+    snp: string;
+    clones: Clone[];
+    parentalLine: ParentLine;
+    mutatedGene: UnpackedGene;
 }

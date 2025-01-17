@@ -1,12 +1,28 @@
 import React from "react";
 import { Link, graphql, StaticQuery } from "gatsby";
+import NormalTable from "../components/NormalTable";
 
 const CellLineTableTemplate = (props: QueryResult) => {
     const { edges: cellLines } = props.data.allMarkdownRemark;
+    const unpackedCellLines = cellLines.map(({ node: cellLine }) => {
+        console.log(cellLine.frontmatter.gene);
+        return {
+            cellLineId: cellLine.frontmatter.cell_line_id,
+            cloneNumber: cellLine.frontmatter.clone_number,
+            alleleCount: cellLine.frontmatter.allele_count,
+            fluorescentTag: cellLine.frontmatter.fluorescent_tag,
+            tagLocation: cellLine.frontmatter.tag_location,
+            parentalLine: cellLine.frontmatter.parental_line.frontmatter.name,
+            protein: cellLine.frontmatter.gene.frontmatter.protein,
+            geneName: cellLine.frontmatter.gene.frontmatter.name,
+            geneSymbol: cellLine.frontmatter.gene.frontmatter.symbol,
+            structure: cellLine.frontmatter.gene.frontmatter.structure,
+        };
+    });
 
-    return (
-        <table className="">
-            <thead>
+    return <NormalTable cellLines={unpackedCellLines} />;
+    // <table className="">
+    /* <thead>
                 <tr>
                     <th>Cell Line ID</th>
                     <th>Protein</th>
@@ -70,8 +86,7 @@ const CellLineTableTemplate = (props: QueryResult) => {
                         );
                     })}
             </tbody>
-        </table>
-    );
+        </table> */
 };
 
 interface QueryResult {
@@ -116,9 +131,10 @@ export default function CellLineTable() {
                 query CellLineTableQuery {
                     allMarkdownRemark(
                         filter: {
-                            frontmatter: { 
-                                templateKey: { eq: "cell-line" } 
+                            frontmatter: {
+                                templateKey: { eq: "cell-line" }
                                 status: { eq: "done" }
+                                cell_line_id: { ne: 0 }
                             }
                         }
                     ) {

@@ -304,8 +304,8 @@ collections:
                                         widget: "string",
                                     },
                                 ],
-                        }
-                    ]
+                        },
+                    ],
             }
           - {
                 label: "Editing Design",
@@ -393,7 +393,7 @@ collections:
                             name: "positive_cells",
                             widget: "number",
                             required: false,
-                        }
+                        },
                     ],
             }
           - {
@@ -404,9 +404,9 @@ collections:
                 collapsed: true,
                 fields:
                     [
-                        {   
+                        {
                             label: "File Upload",
-                            name: "file", 
+                            name: "file",
                             widget: "file",
                             required: false,
                         },
@@ -558,6 +558,54 @@ collections:
                       name: "templateKey",
                       widget: "hidden",
                       default: "disease-catalog",
+                  }
+                - { label: "Title", name: "title", widget: "string" }
+                - { label: "Body", name: "body", widget: "markdown" }
+                - {
+                      label: Main,
+                      name: main,
+                      widget: object,
+                      fields:
+                          [
+                              { label: Heading, name: heading, widget: string },
+                              {
+                                  label: Subheading,
+                                  name: subheading,
+                                  widget: string,
+                              },
+
+                              {
+                                  label: Description,
+                                  name: description,
+                                  widget: markdown,
+                              },
+                          ],
+                  }
+                - {
+                      label: "Coriell Image",
+                      name: "coriell_image",
+                      widget: "image",
+                  }
+                - {
+                      label: "Coriell Link",
+                      name: "coriell_link",
+                      widget: "string",
+                  }
+                - {
+                      label: "Footer text",
+                      name: "footer_text",
+                      widget: "markdown",
+                  }
+
+          - file: "src/pages/normal-catalog/index.md"
+            label: "Cell Line Catalog"
+            name: "normal-catalog"
+            fields:
+                - {
+                      label: "Template Key",
+                      name: "templateKey",
+                      widget: "hidden",
+                      default: "normal-catalog",
                   }
                 - { label: "Title", name: "title", widget: "string" }
                 - { label: "Body", name: "body", widget: "markdown" }

@@ -5,19 +5,18 @@ import { Flex, Tag } from "antd";
 import DiseaseTable from "../components/DiseaseTable";
 import { UnpackedDisease } from "./Diseases";
 import {
+    Clone,
     DiseaseCellLineEdge,
     DiseaseCellLineFrontmatter,
     ParentalLineFrontmatter,
+    ParentLine,
+    UnpackedCellLineMainInfo,
+    UnpackedDiseaseCellLine,
+    UnpackedNormalCellLine,
 } from "./types";
 import ParentalLineModal from "../components/ParentalLineModal";
 import { formatCellLineId } from "../utils";
-
-export interface UnpackedDiseaseCellLine extends DiseaseCellLineFrontmatter {
-    diseaseGene: JSX.Element | null;
-    parentalLine: JSX.Element | null;
-    path: string;
-    key: string;
-}
+import { convertFrontmatterToDiseaseCellLine } from "./convert-data";
 
 const getParentalLineItems = (parentalLine: ParentalLineFrontmatter) => {
     const { symbol, name } = parentalLine.gene.frontmatter;
@@ -63,18 +62,13 @@ const groupLines = (
     return cellLines.reduce((acc, cellLine) => {
         const { disease } = cellLine.node.frontmatter;
         const diseaseName = disease.frontmatter.name;
-        const cellLineData: UnpackedDiseaseCellLine = {
-            ...cellLine.node.frontmatter,
-            path: cellLine.node.fields.slug,
-            diseaseGene: null,
-            parentalLine: null,
-            key: cellLine.node.id,
-        };
         const diseaseData = diseases.find((d) => d.name === diseaseName);
         if (!diseaseData) {
             return acc;
         }
-        cellLineData.diseaseGene = (
+        const cellLineData: UnpackedDiseaseCellLine =
+            convertFrontmatterToDiseaseCellLine(cellLine.node);
+        cellLineData.diseaseGeneComponent = (
             <Flex wrap="wrap">
                 <Tag bordered={false} color="#DFE5EA">
                     {diseaseData.geneSymbol}
@@ -82,14 +76,15 @@ const groupLines = (
                 <div>{diseaseData.geneName}</div>
             </Flex>
         );
-        const parentalLine = cellLineData.parental_line.frontmatter;
+        const parentalLine =
+            cellLine.node.frontmatter.parental_line.frontmatter;
         const parentalLineItems = getParentalLineItems(parentalLine);
         if (diseaseData.status?.toLowerCase() === "coming soon") {
-            cellLineData.parentalLine = (
+            cellLineData.parentalLineComponent = (
                 <>{formatCellLineId(parentalLine.cell_line_id)}</>
             );
         } else {
-            cellLineData.parentalLine = (
+            cellLineData.parentalLineComponent = (
                 <ParentalLineModal
                     key={parentalLine.cell_line_id}
                     cellLineId={formatCellLineId(parentalLine.cell_line_id)}
@@ -189,6 +184,12 @@ export default function DiseaseCellLineQuery(props: {
                                     disease {
                                         frontmatter {
                                             name
+                                            gene {
+                                                frontmatter {
+                                                    symbol
+                                                    name
+                                                }
+                                            }
                                         }
                                     }
                                     clones {
