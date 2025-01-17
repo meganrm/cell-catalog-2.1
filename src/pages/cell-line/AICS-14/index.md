@@ -1,0 +1,14 @@
+---
+templateKey: cell-line
+cell_line_id: 14
+status: released
+clone_number: 6
+allele_count: mono
+parental_line: 0
+gene: FBL
+tag_location:
+  - C-terminus
+fluorescent_tag:
+  - mEGFP
+order_link: https://catalog.coriell.org/0/Sections/Search/Sample_Detail.aspx?Ref=AICS-0014&Product=iPSC
+---

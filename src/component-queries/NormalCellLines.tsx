@@ -37,11 +37,12 @@ export default function NormalCellLines() {
             query={graphql`
                 query CellLineTableQuery {
                     allMarkdownRemark(
+                        sort: { frontmatter: { cell_line_id: ASC } }
                         filter: {
                             frontmatter: {
                                 templateKey: { eq: "cell-line" }
-                                status: { eq: "done" }
                                 cell_line_id: { ne: 0 }
+                                status: { eq: "released" }
                             }
                         }
                     ) {
