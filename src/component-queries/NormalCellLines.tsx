@@ -3,7 +3,6 @@ import { Link, graphql, StaticQuery } from "gatsby";
 
 const CellLineTableTemplate = (props: QueryResult) => {
     const { edges: cellLines } = props.data.allMarkdownRemark;
-
     return (
         <table className="">
             <thead>
@@ -115,6 +114,7 @@ export default function CellLineTable() {
             query={graphql`
                 query CellLineTableQuery {
                     allMarkdownRemark(
+                        sort: { frontmatter: { cell_line_id: ASC } }
                         filter: {
                             frontmatter: {
                                 templateKey: { eq: "cell-line" }
