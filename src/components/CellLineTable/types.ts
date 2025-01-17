@@ -4,11 +4,6 @@ import {
     UnpackedDiseaseCellLine,
 } from "../../component-queries/types";
 
-export enum TableType {
-    Disease,
-    Normal,
-}
-
 export const mdBreakpoint = ["md" as const];
 export const smBreakPoint = ["sm" as const];
 

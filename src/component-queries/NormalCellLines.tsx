@@ -4,7 +4,6 @@ import { graphql, StaticQuery } from "gatsby";
 import { NormalCellLineNode } from "./types";
 import { convertFrontmatterToNormalCellLines } from "./convert-data";
 import CellLineTable from "../components/CellLineTable";
-import { TableType } from "../components/CellLineTable/types";
 import { getNormalTableColumns } from "../components/CellLineTable/NormalTableColumns";
 import { MOBILE_BREAKPOINT } from "../constants";
 import useWindowWidth from "../hooks/useWindowWidth";
@@ -23,7 +22,6 @@ const CellLineTableTemplate = (props: QueryResult) => {
             tableName="Cell Line Catalog"
             cellLines={unpackedCellLines}
             footerContents={""}
-            tableType={TableType.Normal}
             status={""}
             columns={getNormalTableColumns(false)}
             mobileConfig={getNormalTableMobileConfig(isMobile)}

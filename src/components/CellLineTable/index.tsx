@@ -8,7 +8,7 @@ import { CellLineStatus } from "../../component-queries/types";
 
 import useWindowWidth from "../../hooks/useWindowWidth";
 import { TABLET_BREAKPOINT } from "../../constants";
-import { TableType, UnpackedCellLine } from "./types";
+import { UnpackedCellLine } from "./types";
 
 const {
     tableTitle,
@@ -24,7 +24,6 @@ interface CellLineTableProps {
     cellLines: UnpackedCellLine[];
     footerContents: string;
     status: string;
-    tableType: TableType;
     columns: any;
     mobileConfig?: any;
 }
@@ -47,6 +46,11 @@ const CellLineTable = ({
         record: UnpackedCellLine,
         index: number | undefined
     ): {} => {
+        // creates a hover effect for the whole row, and takes the user to
+        // the sub-page for the cell line. The reason
+        // this couldn't be done at the row level, is that we have
+        // two columns that are independently clickable and therefore
+        // clicking on them shouldn't trigger the page change
         if (index === undefined) {
             return {};
         }
@@ -63,7 +67,6 @@ const CellLineTable = ({
     };
 
     const interactiveColumns = columns.map((column: any) => {
-        console.log(column.className);
         // the two clickable columns are the order cell line and
         // CoA column. They do not have the hover effect and
         // should not take you to the cell line page

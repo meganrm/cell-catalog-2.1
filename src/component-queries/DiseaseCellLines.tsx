@@ -5,7 +5,6 @@ import { UnpackedDisease } from "./Diseases";
 import { DiseaseCellLineEdge, UnpackedDiseaseCellLine } from "./types";
 import { convertFrontmatterToDiseaseCellLine } from "./convert-data";
 import CellLineTable from "../components/CellLineTable";
-import { TableType } from "../components/CellLineTable/types";
 import { getDiseaseTableColumns } from "../components/CellLineTable/DiseaseTableColumns";
 import { getDiseaseTableMobileConfig } from "../components/CellLineTable/MobileView";
 import { MOBILE_BREAKPOINT } from "../constants";
@@ -66,7 +65,6 @@ const DiseaseCellLineTemplate = (props: DiseaseCellLineTemplateProps) => {
                     cellLines={groupedCellLines[disease.name]}
                     footerContents={disease.acknowledgements}
                     status={disease.status}
-                    tableType={TableType.Disease}
                     columns={getDiseaseTableColumns(inProgress)}
                     mobileConfig={getDiseaseTableMobileConfig(isMobile)}
                 />
