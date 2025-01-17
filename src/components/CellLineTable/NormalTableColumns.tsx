@@ -67,7 +67,7 @@ export const getNormalTableColumns = (
             title: "Tag Location",
             key: "tagLocation",
             dataIndex: "tagLocation",
-            className: lastColumn,
+            className: inProgress ? "" : lastColumn,
             responsive: mdBreakpoint,
         },
     ];

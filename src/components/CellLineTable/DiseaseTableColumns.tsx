@@ -1,5 +1,6 @@
 import React from "react";
 import { Flex } from "antd";
+import classNames from "classnames";
 
 import {
     Clone,
@@ -83,7 +84,7 @@ export const getDiseaseTableColumns = (
             title: "Clones",
             key: "clones",
             dataIndex: "clones",
-            className: [clones, lastColumn].join(" "),
+            className: classNames(clones, { [lastColumn]: !inProgress }),
             responsive: mdBreakpoint,
             render: (clones: Clone[], _: any, index: number) => {
                 const { numMutants, numIsogenics } = getCloneSummary(clones);
