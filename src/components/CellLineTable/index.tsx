@@ -85,7 +85,7 @@ const CellLineTable = ({
     } = typedConfig;
     return (
         <>
-            <Table<>
+            <Table
                 key={tableName}
                 className={[container, inProgress ? comingSoon : ""].join(" ")}
                 rowClassName={(record) =>
