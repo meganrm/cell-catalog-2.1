@@ -1,20 +1,23 @@
 import React from "react";
+import { Flex, GetProp, Table } from "antd";
+
 import {
-    CellLineStatus,
     Clone,
     UnpackedDiseaseCellLine,
     UnpackedGene,
     UnpackedNormalCellLine,
 } from "../component-queries/types";
 import { formatCellLineId, getCloneSummary } from "../utils";
-import { Link } from "gatsby";
-import { Flex, GetProp, Table } from "antd";
 import GeneDisplay from "./GeneDisplay";
 import ParentalLineModal from "./ParentalLineModal";
 import CloneSummary from "./CloneSummary";
 import Icon from "@ant-design/icons";
 import { WHITE } from "../style/theme";
-import { cellLineIdColumn, mdBreakpoint, smBreakPoint } from "./TableConfig";
+import {
+    cellLineIdColumn,
+    mdBreakpoint,
+    smBreakPoint,
+} from "./CellLineTableConfig";
 
 const Tube = require("../img/tube.svg");
 const CertificateIcon = require("../img/cert-icon.svg");

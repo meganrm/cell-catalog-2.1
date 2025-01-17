@@ -14,7 +14,7 @@ import useWindowWidth from "../hooks/useWindowWidth";
 import { MOBILE_BREAKPOINT, TABLET_BREAKPOINT } from "../constants";
 import { getDiseaseTableColumns } from "./DiseaseTableColumns";
 import { getNormalTableColumns } from "./NormalTableColumns";
-import { getMobileConfig } from "./TableConfig";
+import { getMobileConfig } from "./CellLineTableConfig";
 
 const {
     tableTitle,

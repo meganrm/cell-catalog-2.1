@@ -1,5 +1,6 @@
 import { Flex } from "antd";
 import React from "react";
+import { Link } from "gatsby";
 
 import {
     CellLineStatus,
@@ -10,7 +11,6 @@ import { formatCellLineId, getCloneSummary } from "../utils";
 import CloneSummary from "./CloneSummary";
 import GeneDisplay from "./GeneDisplay";
 import { TableType } from "./CellLineTable";
-import { Link } from "gatsby";
 
 export const mdBreakpoint = ["md" as const];
 export const smBreakPoint = ["sm" as const];

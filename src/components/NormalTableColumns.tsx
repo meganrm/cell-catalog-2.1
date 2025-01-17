@@ -1,17 +1,14 @@
-import { Link } from "gatsby";
 import React from "react";
 import { Flex, GetProp, Table } from "antd";
 import Icon from "@ant-design/icons";
 
-import { formatCellLineId } from "../utils";
 import {
-    CellLineStatus,
     UnpackedGene,
     UnpackedNormalCellLine,
 } from "../component-queries/types";
 import GeneDisplay from "./GeneDisplay";
 import { WHITE } from "../style/theme";
-import { cellLineIdColumn, mdBreakpoint } from "./TableConfig";
+import { cellLineIdColumn, mdBreakpoint } from "./CellLineTableConfig";
 
 const Tube = require("../img/tube.svg");
 const CertificateIcon = require("../img/cert-icon.svg");
@@ -19,7 +16,6 @@ const CertificateIcon = require("../img/cert-icon.svg");
 const {
     actionButton,
     actionColumn,
-    cellLineId,
     lastColumn,
 } = require("../style/table.module.css");
 
@@ -86,7 +82,6 @@ export const getNormalTableColumns = (
         responsive: mdBreakpoint,
         onCell: onCellInteraction,
     },
-
     {
         title: "",
         key: "orderLink",
