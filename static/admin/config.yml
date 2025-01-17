@@ -53,11 +53,15 @@ collections:
                             value: "released",
                         },
                         {
-                            label: "In progress: completely hidden",
+                            label: "In progress: will show in the 'in progress' table",
                             value: "in progress",
                         },
+                        {
+                            label: "Hide: you can enter data but it won't show up on the site at all",
+                            value: "hide",
+                        },
                     ],
-                default: "in progress",
+                default: "hide",
                 required: true,
             }
           - { label: "Publish Date", name: "date", widget: "datetime" }

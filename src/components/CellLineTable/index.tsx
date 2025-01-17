@@ -8,7 +8,7 @@ import { CellLineStatus } from "../../component-queries/types";
 
 import useWindowWidth from "../../hooks/useWindowWidth";
 import { TABLET_BREAKPOINT } from "../../constants";
-import { UnpackedCellLine } from "./types";
+import { TableStatus, UnpackedCellLine } from "./types";
 
 const {
     tableTitle,
@@ -23,7 +23,7 @@ interface CellLineTableProps {
     tableName: string;
     cellLines: UnpackedCellLine[];
     footerContents: string;
-    status: string;
+    released: boolean;
     columns: any;
     mobileConfig?: any;
 }
@@ -32,13 +32,13 @@ const CellLineTable = ({
     tableName,
     cellLines,
     footerContents,
-    status,
+    released,
     columns,
     mobileConfig,
 }: CellLineTableProps) => {
     const [hoveredRowIndex, setHoveredRowIndex] = useState(-1);
-    const inProgress = status?.toLowerCase() === "coming soon";
-
+    const inProgress = !released;
+    console.log(tableName, inProgress, status);
     const width = useWindowWidth();
     const isTablet = width < TABLET_BREAKPOINT;
 
@@ -93,7 +93,9 @@ const CellLineTable = ({
                     <Flex align="center">
                         <h3 className={tableTitle}>{tableName}</h3>
                         {inProgress ? (
-                            <Tag color="#00215F">{status}</Tag>
+                            <Tag color="#00215F" style={{ color: "#fff" }}>
+                                {TableStatus.ComingSoon}
+                            </Tag>
                         ) : null}
                     </Flex>
                 )}

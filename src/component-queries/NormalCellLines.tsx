@@ -1,7 +1,11 @@
 import React from "react";
 import { graphql, StaticQuery } from "gatsby";
 
-import { NormalCellLineNode } from "./types";
+import {
+    CellLineStatus,
+    NormalCellLineNode,
+    UnpackedNormalCellLine,
+} from "./types";
 import { convertFrontmatterToNormalCellLines } from "./convert-data";
 import CellLineTable from "../components/CellLineTable";
 import { getNormalTableColumns } from "../components/CellLineTable/NormalTableColumns";
@@ -11,21 +15,38 @@ import { getNormalTableMobileConfig } from "../components/CellLineTable/MobileVi
 
 const CellLineTableTemplate = (props: QueryResult) => {
     const { edges: cellLines } = props.data.allMarkdownRemark;
-    const unpackedCellLines = cellLines.map(
-        convertFrontmatterToNormalCellLines
-    );
+    const inProgressCellLines = [] as UnpackedNormalCellLine[];
+    const finishedCellLines = [] as UnpackedNormalCellLine[];
+    cellLines.forEach((cellLine) => {
+        const unPackedCellLine = convertFrontmatterToNormalCellLines(cellLine);
+        if (unPackedCellLine.status === CellLineStatus.InProgress) {
+            inProgressCellLines.push(unPackedCellLine);
+        } else {
+            finishedCellLines.push(unPackedCellLine);
+        }
+    });
     const width = useWindowWidth();
     const isMobile = width < MOBILE_BREAKPOINT;
 
     return (
-        <CellLineTable
-            tableName="Cell Line Catalog"
-            cellLines={unpackedCellLines}
-            footerContents={""}
-            status={""}
-            columns={getNormalTableColumns(false)}
-            mobileConfig={getNormalTableMobileConfig(isMobile)}
-        />
+        <>
+            <CellLineTable
+                tableName="Cell Line Catalog"
+                cellLines={finishedCellLines}
+                footerContents={""}
+                released={true}
+                columns={getNormalTableColumns(false)}
+                mobileConfig={getNormalTableMobileConfig(isMobile)}
+            />
+            <CellLineTable
+                tableName="Cell Line Catalog"
+                cellLines={inProgressCellLines}
+                footerContents={""}
+                released={false}
+                columns={getNormalTableColumns(true)}
+                mobileConfig={getNormalTableMobileConfig(isMobile)}
+            />
+        </>
     );
 };
 
@@ -49,7 +70,7 @@ export default function NormalCellLines() {
                             frontmatter: {
                                 templateKey: { eq: "cell-line" }
                                 cell_line_id: { ne: 0 }
-                                status: { eq: "released" }
+                                status: { ne: "hide" }
                             }
                         }
                     ) {
@@ -67,6 +88,7 @@ export default function NormalCellLines() {
                                     tag_location
                                     fluorescent_tag
                                     allele_count
+                                    status
                                     gene {
                                         frontmatter {
                                             protein

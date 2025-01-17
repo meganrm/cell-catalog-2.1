@@ -15,7 +15,7 @@ import CloneSummary from "../CloneSummary";
 import {
     cellLineIdColumn,
     certificateOfAnalysisColumn,
-    getObtainLineColumn,
+    obtainLineColumn,
 } from "./SharedColumns";
 import { smBreakPoint, mdBreakpoint, CellLineColumns } from "./types";
 
@@ -27,74 +27,83 @@ const {
 
 export const getDiseaseTableColumns = (
     inProgress: boolean
-): CellLineColumns<UnpackedDiseaseCellLine> => [
-    { ...cellLineIdColumn },
-    {
-        title: "SNP",
-        key: "snp",
-        dataIndex: "snp",
-        className: snpColumn,
-        responsive: smBreakPoint,
-        render: (snp: string) => {
-            const snps = snp.split(":");
-            return (
-                <Flex vertical={true} key={snp}>
-                    <span key={"snp-0"}>{snps[0]}: </span>
-                    <span key={"snp-1"}>{snps[1]}</span>
-                </Flex>
-            );
+): CellLineColumns<UnpackedDiseaseCellLine> => {
+    const columns = [
+        { ...cellLineIdColumn },
+        {
+            title: "SNP",
+            key: "snp",
+            dataIndex: "snp",
+            className: snpColumn,
+            responsive: smBreakPoint,
+            render: (snp: string) => {
+                const snps = snp.split(":");
+                return (
+                    <Flex vertical={true} key={snp}>
+                        <span key={"snp-0"}>{snps[0]}: </span>
+                        <span key={"snp-1"}>{snps[1]}</span>
+                    </Flex>
+                );
+            },
         },
-    },
-    {
-        title: "Gene Symbol & Name",
-        width: 280,
-        key: "mutatedGene",
-        dataIndex: "mutatedGene",
-        responsive: mdBreakpoint,
-        render: (mutatedGene: UnpackedGene) => {
-            return <GeneDisplay gene={mutatedGene} />;
+        {
+            title: "Gene Symbol & Name",
+            width: 280,
+            key: "mutatedGene",
+            dataIndex: "mutatedGene",
+            responsive: mdBreakpoint,
+            render: (mutatedGene: UnpackedGene) => {
+                return <GeneDisplay gene={mutatedGene} />;
+            },
         },
-    },
-    {
-        title: "Parental Line",
-        key: "parentalLine",
-        dataIndex: "parentalLine",
-        responsive: mdBreakpoint,
-        render: (
-            parentalLine: UnpackedNormalCellLine,
-            record: UnpackedDiseaseCellLine
-        ) => {
-            return (
-                <ParentalLineModal
-                    key={parentalLine.cellLineId}
-                    formattedId={formatCellLineId(parentalLine.cellLineId)}
-                    cloneNumber={parentalLine.cloneNumber}
-                    image={parentalLine.thumbnailImage}
-                    taggedGene={parentalLine.taggedGene}
-                    status={record.diseaseStatus}
-                    tagLocation={parentalLine.tagLocation}
-                    fluorescentTag={parentalLine.fluorescentTag}
-                />
-            );
+        {
+            title: "Parental Line",
+            key: "parentalLine",
+            dataIndex: "parentalLine",
+            responsive: mdBreakpoint,
+            render: (
+                parentalLine: UnpackedNormalCellLine,
+                record: UnpackedDiseaseCellLine
+            ) => {
+                return (
+                    <ParentalLineModal
+                        key={parentalLine.cellLineId}
+                        formattedId={formatCellLineId(parentalLine.cellLineId)}
+                        cloneNumber={parentalLine.cloneNumber}
+                        image={parentalLine.thumbnailImage}
+                        taggedGene={parentalLine.taggedGene}
+                        status={record.diseaseStatus}
+                        tagLocation={parentalLine.tagLocation}
+                        fluorescentTag={parentalLine.fluorescentTag}
+                    />
+                );
+            },
         },
-    },
-    {
-        title: "Clones",
-        key: "clones",
-        dataIndex: "clones",
-        className: [clones, lastColumn].join(" "),
-        responsive: mdBreakpoint,
-        render: (clones: Clone[], _: any, index: number) => {
-            const { numMutants, numIsogenics } = getCloneSummary(clones);
-            return (
-                <CloneSummary
-                    numMutants={numMutants}
-                    numIsogenics={numIsogenics}
-                    index={index}
-                />
-            );
+        {
+            title: "Clones",
+            key: "clones",
+            dataIndex: "clones",
+            className: [clones, lastColumn].join(" "),
+            responsive: mdBreakpoint,
+            render: (clones: Clone[], _: any, index: number) => {
+                const { numMutants, numIsogenics } = getCloneSummary(clones);
+                return (
+                    <CloneSummary
+                        numMutants={numMutants}
+                        numIsogenics={numIsogenics}
+                        index={index}
+                    />
+                );
+            },
         },
-    },
-    { ...getObtainLineColumn(inProgress) },
-    { ...certificateOfAnalysisColumn },
-];
+    ];
+
+    if (!inProgress) {
+        return [
+            ...columns,
+            { ...obtainLineColumn },
+            { ...certificateOfAnalysisColumn },
+        ];
+    }
+    return columns;
+};

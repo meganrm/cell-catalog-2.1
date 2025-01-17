@@ -68,17 +68,15 @@ export const certificateOfAnalysisColumn = {
     },
 };
 
-export const getObtainLineColumn = (inProgress: boolean) => ({
+export const obtainLineColumn = {
     title: "",
     key: "orderLink",
     dataIndex: "orderLink",
     className: actionColumn,
     fixed: "right" as const,
     render: (orderLink: string) => {
-        if (inProgress) {
-            return <>{""}</>; // still want a blank column
-        } else {
-            return (
+        return (
+            orderLink && (
                 <a
                     key={orderLink}
                     className={actionButton}
@@ -97,7 +95,7 @@ export const getObtainLineColumn = (inProgress: boolean) => ({
                         Obtain Collection
                     </Flex>
                 </a>
-            );
-        }
+            )
+        );
     },
-});
+};
