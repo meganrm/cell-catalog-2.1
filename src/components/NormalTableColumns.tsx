@@ -27,11 +27,11 @@ export const getNormalTableColumns = (
     inProgress: boolean
 ): GetProp<typeof Table<UnpackedNormalCellLine>, "columns"> => [
     { ...cellLineIdColumn, onCell: onCellInteraction },
-
     {
         title: "Protein",
         key: "protein",
         dataIndex: "protein",
+        width: 200,
         responsive: mdBreakpoint,
         onCell: onCellInteraction,
     },

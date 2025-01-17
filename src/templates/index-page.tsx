@@ -22,7 +22,7 @@ export const IndexPageTemplate = ({ mainPitch }: IndexPageTemplateProps) => {
                 Select collection:
             </h4>
             <div className="column is-12 has-text-centered">
-                <Link className="btn" to="/cell-line">
+                <Link className="btn" to="/normal-catalog">
                     Cell Collection
                 </Link>
             </div>
