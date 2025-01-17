@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "gatsby";
-import { Table, Tag, Flex } from "antd";
+import { Table, Flex } from "antd";
 import Icon from "@ant-design/icons";
 // TODO: debug gatsby navigate throwing errors when passed strings
 import { navigate } from "@reach/router";
@@ -13,6 +13,7 @@ import { formatCellLineId } from "../utils";
 import { WHITE } from "../style/theme";
 import useWindowWidth from "../hooks/useWindowWidth";
 import { MOBILE_BREAKPOINT, TABLET_BREAKPOINT } from "../constants";
+import GeneDisplay from "./GeneDisplay";
 
 const Tube = require("../img/tube.svg");
 const CertificateIcon = require("../img/cert-icon.svg");
@@ -23,12 +24,12 @@ const {
     actionButton,
     comingSoon,
     actionColumn,
-    clones,
     cellLineId,
     expandableContent,
     hoveredRow,
     dataComplete,
-} = require("../style/disease-table.module.css");
+    lastColumn,
+} = require("../style/table.module.css");
 
 interface NormalTableProps {
     cellLines: any[];
@@ -132,26 +133,41 @@ const NormalTable = ({ cellLines }: NormalTableProps) => {
                         onCell: onCellInteraction,
                     },
                     {
+                        title: "Protein",
+                        key: "protein",
+                        dataIndex: "protein",
+                        responsive: ["md"],
+                        onCell: onCellInteraction,
+                    },
+                    {
                         title: "Gene Symbol & Name",
                         width: 280,
-                        key: "gene",
-                        dataIndex: "gene",
+                        key: "taggedGene",
+                        dataIndex: "taggedGene",
                         responsive: ["md"],
                         onCell: onCellInteraction,
+                        render: (taggedGene) => {
+                            return <GeneDisplay gene={taggedGene} />;
+                        },
                     },
                     {
-                        title: "Clone Number",
+                        title: "Clone",
                         key: "cloneNumber",
-                        dataIndex: "clones",
-                        className: clones,
+                        dataIndex: "cloneNumber",
                         responsive: ["md"],
                         onCell: onCellInteraction,
                     },
                     {
-                        title: "Allele Count",
+                        title: "Tagged Alleles",
                         key: "alleleCount",
                         dataIndex: "alleleCount",
-                        // className: clones,
+                        responsive: ["md"],
+                        onCell: onCellInteraction,
+                    },
+                    {
+                        title: "Structure",
+                        key: "structure",
+                        dataIndex: "structure",
                         responsive: ["md"],
                         onCell: onCellInteraction,
                     },
@@ -166,25 +182,26 @@ const NormalTable = ({ cellLines }: NormalTableProps) => {
                         title: "Tag Location",
                         key: "tagLocation",
                         dataIndex: "tagLocation",
+                        className: lastColumn,
                         responsive: ["md"],
                         onCell: onCellInteraction,
                     },
 
                     {
                         title: "",
-                        key: "order_link",
-                        dataIndex: "order_link",
+                        key: "orderLink",
+                        dataIndex: "orderLink",
                         className: actionColumn,
                         fixed: "right",
-                        render: (order_link) => {
+                        render: (orderLink) => {
                             if (inProgress) {
                                 return <>{""}</>; // still want a blank column
                             } else {
                                 return (
                                     <a
-                                        key={order_link}
+                                        key={orderLink}
                                         className={actionButton}
-                                        href={order_link}
+                                        href={orderLink}
                                         target="_blank"
                                         rel="noreferrer"
                                     >
@@ -205,18 +222,18 @@ const NormalTable = ({ cellLines }: NormalTableProps) => {
                     },
                     {
                         title: "",
-                        key: "certificate_of_analysis",
-                        dataIndex: "certificate_of_analysis",
+                        key: "certificateOfAnalysis",
+                        dataIndex: "certificateOfAnalysis",
                         className: actionColumn,
                         fixed: "right",
                         responsive: ["md"],
-                        render: (certificate_of_analysis) => {
+                        render: (certificateOfAnalysis) => {
                             return (
-                                certificate_of_analysis && (
+                                certificateOfAnalysis && (
                                     <a
-                                        key={certificate_of_analysis}
+                                        key={certificateOfAnalysis}
                                         className={actionButton}
-                                        href={certificate_of_analysis}
+                                        href={certificateOfAnalysis}
                                         target="_blank"
                                         rel="noreferrer"
                                     >

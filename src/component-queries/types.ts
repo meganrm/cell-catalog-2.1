@@ -100,6 +100,10 @@ export interface UnpackedNormalCellLine extends UnpackedCellLineMainInfo {
     tagLocation: string;
     fluorescentTag: string;
     taggedGene: UnpackedGene;
+    alleleCount: string;
+    parentalLine: string;
+    structure: string;
+    protein: string;
 }
 
 export type ParentLine = Partial<UnpackedNormalCellLine>;

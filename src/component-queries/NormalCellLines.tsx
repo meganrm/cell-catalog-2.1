@@ -2,23 +2,34 @@ import React from "react";
 import { graphql, StaticQuery } from "gatsby";
 
 import NormalTable from "../components/NormalTable";
+import { CellLineStatus, UnpackedNormalCellLine } from "./types";
 
 const CellLineTableTemplate = (props: QueryResult) => {
     const { edges: cellLines } = props.data.allMarkdownRemark;
-    const unpackedCellLines = cellLines.map(({ node: cellLine }) => {
-        return {
-            cellLineId: cellLine.frontmatter.cell_line_id,
-            cloneNumber: cellLine.frontmatter.clone_number,
-            alleleCount: cellLine.frontmatter.allele_count,
-            fluorescentTag: cellLine.frontmatter.fluorescent_tag,
-            tagLocation: cellLine.frontmatter.tag_location,
-            parentalLine: cellLine.frontmatter.parental_line.frontmatter.name,
-            protein: cellLine.frontmatter.gene.frontmatter.protein,
-            geneName: cellLine.frontmatter.gene.frontmatter.name,
-            geneSymbol: cellLine.frontmatter.gene.frontmatter.symbol,
-            structure: cellLine.frontmatter.gene.frontmatter.structure,
-        };
-    });
+    const unpackedCellLines = cellLines.map(
+        ({ node: cellLine }): UnpackedNormalCellLine => {
+            return {
+                path: cellLine.fields.slug,
+                cellLineId: cellLine.frontmatter.cell_line_id,
+                cloneNumber: cellLine.frontmatter.clone_number,
+                alleleCount: cellLine.frontmatter.allele_count,
+                fluorescentTag: cellLine.frontmatter.fluorescent_tag,
+                tagLocation: cellLine.frontmatter.tag_location,
+                parentalLine:
+                    cellLine.frontmatter.parental_line.frontmatter.name,
+                protein: cellLine.frontmatter.gene.frontmatter.protein,
+                taggedGene: {
+                    name: cellLine.frontmatter.gene.frontmatter.name,
+                    symbol: cellLine.frontmatter.gene.frontmatter.symbol,
+                },
+                structure: cellLine.frontmatter.gene.frontmatter.structure,
+                status: cellLine.frontmatter.status,
+                certificateOfAnalysis: "",
+                hPSCregCertificateLink: "",
+                orderLink: "",
+            };
+        }
+    );
 
     return <NormalTable cellLines={unpackedCellLines} />;
 };
@@ -35,7 +46,8 @@ interface QueryResult {
                     frontmatter: {
                         templateKey: string;
                         cell_line_id: number;
-                        clone_number: string;
+                        status: CellLineStatus;
+                        clone_number: number;
                         tag_location: string;
                         fluorescent_tag: string;
                         allele_count: string;

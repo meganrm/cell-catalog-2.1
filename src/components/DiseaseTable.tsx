@@ -34,7 +34,8 @@ const {
     expandableContent,
     hoveredRow,
     dataComplete,
-} = require("../style/disease-table.module.css");
+    lastColumn,
+} = require("../style/table.module.css");
 
 interface DiseaseTableProps {
     diseaseName: string;
@@ -233,7 +234,7 @@ const DiseaseTable = ({
                         title: "Clones",
                         key: "clones",
                         dataIndex: "clones",
-                        className: clones,
+                        className: [clones, lastColumn].join(" "),
                         responsive: ["md"],
                         render: (clones, _, index) => {
                             const { numMutants, numIsogenics } =
