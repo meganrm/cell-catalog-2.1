@@ -9,10 +9,9 @@ import {
 import GeneDisplay from "../GeneDisplay";
 import { WHITE } from "../../style/theme";
 import { CellLineColumns, mdBreakpoint } from "./types";
-import { cellLineIdColumn } from "./SharedColumns";
+import { cellLineIdColumn, certificateOfAnalysisColumn } from "./SharedColumns";
 
 const Tube = require("../../img/tube.svg");
-const CertificateIcon = require("../../img/cert-icon.svg");
 
 const {
     actionButton,
@@ -106,36 +105,5 @@ export const getNormalTableColumns = (
             }
         },
     },
-    {
-        title: "",
-        key: "certificateOfAnalysis",
-        dataIndex: "certificateOfAnalysis",
-        className: actionColumn,
-        fixed: "right" as const,
-        responsive: mdBreakpoint,
-        render: (certificateOfAnalysis: string) => {
-            return (
-                certificateOfAnalysis && (
-                    <a
-                        key={certificateOfAnalysis}
-                        className={actionButton}
-                        href={certificateOfAnalysis}
-                        target="_blank"
-                        rel="noreferrer"
-                    >
-                        <Flex>
-                            <Icon
-                                component={CertificateIcon}
-                                style={{
-                                    color: WHITE,
-                                    fontSize: "40px",
-                                }}
-                            />
-                            Cert. of Analysis
-                        </Flex>
-                    </a>
-                )
-            );
-        },
-    },
+    { ...certificateOfAnalysisColumn },
 ];
