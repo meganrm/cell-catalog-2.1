@@ -1,16 +1,22 @@
 import React from "react";
 import { graphql, StaticQuery } from "gatsby";
 
-import { NormalCellLineNode, UnpackedNormalCellLine } from "./types";
+import { NormalCellLineNode } from "./types";
 import { convertFrontmatterToNormalCellLines } from "./convert-data";
 import CellLineTable from "../components/CellLineTable";
 import { TableType } from "../components/CellLineTable/types";
+import { getNormalTableColumns } from "../components/CellLineTable/NormalTableColumns";
+import { MOBILE_BREAKPOINT } from "../constants";
+import useWindowWidth from "../hooks/useWindowWidth";
+import { getNormalTableMobileConfig } from "../components/CellLineTable/MobileView";
 
 const CellLineTableTemplate = (props: QueryResult) => {
     const { edges: cellLines } = props.data.allMarkdownRemark;
     const unpackedCellLines = cellLines.map(
         convertFrontmatterToNormalCellLines
     );
+    const width = useWindowWidth();
+    const isMobile = width < MOBILE_BREAKPOINT;
 
     return (
         <CellLineTable
@@ -19,6 +25,8 @@ const CellLineTableTemplate = (props: QueryResult) => {
             footerContents={""}
             tableType={TableType.Normal}
             status={""}
+            columns={getNormalTableColumns(false)}
+            mobileConfig={getNormalTableMobileConfig(isMobile)}
         />
     );
 };

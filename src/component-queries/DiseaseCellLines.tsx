@@ -6,6 +6,10 @@ import { DiseaseCellLineEdge, UnpackedDiseaseCellLine } from "./types";
 import { convertFrontmatterToDiseaseCellLine } from "./convert-data";
 import CellLineTable from "../components/CellLineTable";
 import { TableType } from "../components/CellLineTable/types";
+import { getDiseaseTableColumns } from "../components/CellLineTable/DiseaseTableColumns";
+import { getDiseaseTableMobileConfig } from "../components/CellLineTable/MobileView";
+import { MOBILE_BREAKPOINT } from "../constants";
+import useWindowWidth from "../hooks/useWindowWidth";
 
 const groupLines = (
     diseases: UnpackedDisease[],
@@ -51,6 +55,10 @@ const DiseaseCellLineTemplate = (props: DiseaseCellLineTemplateProps) => {
         if (!groupedCellLines[disease.name].length) {
             return null;
         }
+        const inProgress = disease.status?.toLowerCase() === "coming soon";
+        const width = useWindowWidth();
+        const isMobile = width < MOBILE_BREAKPOINT;
+
         return (
             <div key={disease.name}>
                 <CellLineTable
@@ -59,6 +67,8 @@ const DiseaseCellLineTemplate = (props: DiseaseCellLineTemplateProps) => {
                     footerContents={disease.acknowledgements}
                     status={disease.status}
                     tableType={TableType.Disease}
+                    columns={getDiseaseTableColumns(inProgress)}
+                    mobileConfig={getDiseaseTableMobileConfig(isMobile)}
                 />
             </div>
         );

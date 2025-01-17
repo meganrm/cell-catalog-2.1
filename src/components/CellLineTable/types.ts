@@ -20,6 +20,10 @@ export type DiseaseColumns = GetProp<
     typeof Table<UnpackedDiseaseCellLine>,
     "columns"
 >;
+
+export type CellLineColumns<T> = GetProp<typeof Table<T>, "columns">;
+
+export type UnpackedCellLine = UnpackedNormalCellLine | UnpackedDiseaseCellLine;
 export type NormalExpandableConfig = {
     expandedRowRender: (record: UnpackedNormalCellLine) => JSX.Element;
 };

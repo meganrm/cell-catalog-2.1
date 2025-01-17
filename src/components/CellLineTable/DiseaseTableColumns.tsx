@@ -14,7 +14,7 @@ import CloneSummary from "../CloneSummary";
 import Icon from "@ant-design/icons";
 import { WHITE } from "../../style/theme";
 import { cellLineIdColumn } from "./SharedColumns";
-import { smBreakPoint, mdBreakpoint } from "./types";
+import { smBreakPoint, mdBreakpoint, CellLineColumns } from "./types";
 
 const Tube = require("../../img/tube.svg");
 const CertificateIcon = require("../../img/cert-icon.svg");
@@ -28,13 +28,9 @@ const {
 } = require("../../style/table.module.css");
 
 export const getDiseaseTableColumns = (
-    onCellInteraction: (
-        record: UnpackedDiseaseCellLine,
-        index: number | undefined
-    ) => {},
     inProgress: boolean
-): GetProp<typeof Table<UnpackedDiseaseCellLine>, "columns"> => [
-    { ...cellLineIdColumn, onCell: onCellInteraction },
+): CellLineColumns<UnpackedDiseaseCellLine> => [
+    { ...cellLineIdColumn },
     {
         title: "SNP",
         key: "snp",
@@ -50,7 +46,7 @@ export const getDiseaseTableColumns = (
                 </Flex>
             );
         },
-        onCell: onCellInteraction,
+        // onCell: onCellInteraction,
     },
     {
         title: "Gene Symbol & Name",
@@ -58,7 +54,7 @@ export const getDiseaseTableColumns = (
         key: "mutatedGene",
         dataIndex: "mutatedGene",
         responsive: mdBreakpoint,
-        onCell: onCellInteraction,
+        // onCell: onCellInteraction,
         render: (mutatedGene: UnpackedGene) => {
             return <GeneDisplay gene={mutatedGene} />;
         },
@@ -68,7 +64,7 @@ export const getDiseaseTableColumns = (
         key: "parentalLine",
         dataIndex: "parentalLine",
         responsive: mdBreakpoint,
-        onCell: onCellInteraction,
+        // onCell: onCellInteraction,
         render: (
             parentalLine: UnpackedNormalCellLine,
             record: UnpackedDiseaseCellLine
@@ -103,7 +99,7 @@ export const getDiseaseTableColumns = (
                 />
             );
         },
-        onCell: onCellInteraction,
+        // onCell: onCellInteraction,
     },
     {
         title: "",

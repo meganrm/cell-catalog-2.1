@@ -8,7 +8,7 @@ import {
 } from "../../component-queries/types";
 import GeneDisplay from "../GeneDisplay";
 import { WHITE } from "../../style/theme";
-import { mdBreakpoint } from "./types";
+import { CellLineColumns, mdBreakpoint } from "./types";
 import { cellLineIdColumn } from "./SharedColumns";
 
 const Tube = require("../../img/tube.svg");
@@ -21,20 +21,15 @@ const {
 } = require("../../style/table.module.css");
 
 export const getNormalTableColumns = (
-    onCellInteraction: (
-        record: UnpackedNormalCellLine,
-        index: number | undefined
-    ) => {},
     inProgress: boolean
-): GetProp<typeof Table<UnpackedNormalCellLine>, "columns"> => [
-    { ...cellLineIdColumn, onCell: onCellInteraction },
+): CellLineColumns<UnpackedNormalCellLine> => [
+    { ...cellLineIdColumn },
     {
         title: "Protein",
         key: "protein",
         dataIndex: "protein",
         width: 200,
         responsive: mdBreakpoint,
-        onCell: onCellInteraction,
     },
     {
         title: "Gene Symbol & Name",
@@ -42,7 +37,6 @@ export const getNormalTableColumns = (
         key: "taggedGene",
         dataIndex: "taggedGene",
         responsive: mdBreakpoint,
-        onCell: onCellInteraction,
         render: (taggedGene: UnpackedGene) => {
             return <GeneDisplay gene={taggedGene} />;
         },
@@ -52,14 +46,12 @@ export const getNormalTableColumns = (
         key: "cloneNumber",
         dataIndex: "cloneNumber",
         responsive: mdBreakpoint,
-        onCell: onCellInteraction,
     },
     {
         title: "Tagged Alleles",
         key: "alleleCount",
         dataIndex: "alleleCount",
         responsive: mdBreakpoint,
-        onCell: onCellInteraction,
     },
     {
         title: "Structure",
@@ -67,14 +59,12 @@ export const getNormalTableColumns = (
         width: 280,
         dataIndex: "structure",
         responsive: mdBreakpoint,
-        onCell: onCellInteraction,
     },
     {
         title: "Fluorescent Tag",
         key: "fluorescentTag",
         dataIndex: "fluorescentTag",
         responsive: mdBreakpoint,
-        onCell: onCellInteraction,
     },
     {
         title: "Tag Location",
@@ -82,7 +72,6 @@ export const getNormalTableColumns = (
         dataIndex: "tagLocation",
         className: lastColumn,
         responsive: mdBreakpoint,
-        onCell: onCellInteraction,
     },
     {
         title: "",

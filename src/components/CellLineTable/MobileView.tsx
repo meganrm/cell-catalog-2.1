@@ -8,19 +8,10 @@ import {
 import { getCloneSummary } from "../../utils";
 import CloneSummary from "../CloneSummary";
 import GeneDisplay from "../GeneDisplay";
-import { getDiseaseTableColumns } from "./DiseaseTableColumns";
-import { getNormalTableColumns } from "./NormalTableColumns";
-import {
-    DiseaseColumns,
-    DiseaseTableConfig,
-    NormalColumns,
-    NormalTableConfig,
-    TableType,
-} from "./types";
 
 const { expandableContent } = require("../../style/table.module.css");
 
-const getDiseaseTableMobileConfig = (isMobile: boolean) => {
+export const getDiseaseTableMobileConfig = (isMobile: boolean) => {
     return {
         expandedRowRender: (record: UnpackedDiseaseCellLine, index: number) => (
             <Flex
@@ -64,7 +55,7 @@ const getDiseaseTableMobileConfig = (isMobile: boolean) => {
     };
 };
 
-const normalTableMobileConfig = (isMobile: boolean) => {
+export const getNormalTableMobileConfig = (isMobile: boolean) => {
     return {
         expandedRowRender: (record: UnpackedNormalCellLine) => (
             <Flex
@@ -91,44 +82,4 @@ const normalTableMobileConfig = (isMobile: boolean) => {
             </Flex>
         ),
     };
-};
-
-const getMobileConfig = (type: TableType, isMobile: boolean) => {
-    if (type === TableType.Normal) {
-        return normalTableMobileConfig(isMobile);
-    }
-    return getDiseaseTableMobileConfig(isMobile);
-};
-
-const getTableColumns = (
-    tableType: TableType,
-    onCellInteraction: any,
-    inProgress: boolean
-): NormalColumns | DiseaseColumns => {
-    return tableType === TableType.Disease
-        ? getDiseaseTableColumns(onCellInteraction, inProgress)
-        : getNormalTableColumns(onCellInteraction, inProgress);
-};
-
-export const getConfig = (
-    tableType: TableType,
-    isMobile: boolean,
-    onCellInteraction: any,
-    inProgress: boolean,
-    cellLines: UnpackedDiseaseCellLine[] | UnpackedNormalCellLine[]
-): NormalTableConfig | DiseaseTableConfig => {
-    const mobileConfig = getMobileConfig(tableType, isMobile);
-    const columns = getTableColumns(tableType, onCellInteraction, inProgress);
-    if (tableType === TableType.Disease) {
-        return {
-            columns,
-            expandableConfig: mobileConfig,
-            cellLines,
-        } as DiseaseTableConfig;
-    }
-    return {
-        columns,
-        expandableConfig: mobileConfig,
-        cellLines,
-    } as NormalTableConfig;
 };
