@@ -93,6 +93,7 @@ export interface UnpackedCellLineMainInfo {
     certificateOfAnalysis: string;
     hPSCregCertificateLink: string;
     orderLink: string;
+    thumbnailImage?: any;
 }
 export interface UnpackedNormalCellLine extends UnpackedCellLineMainInfo {
     cloneNumber: number;
@@ -104,7 +105,7 @@ export interface UnpackedNormalCellLine extends UnpackedCellLineMainInfo {
 export type ParentLine = Partial<UnpackedNormalCellLine>;
 
 export interface UnpackedDiseaseCellLine extends UnpackedCellLineMainInfo {
-    parentalLineComponent: JSX.Element | null;
+    diseaseStatus: string;
     path: string;
     key: string;
     snp: string;

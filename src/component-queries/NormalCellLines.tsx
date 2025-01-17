@@ -1,11 +1,11 @@
 import React from "react";
-import { Link, graphql, StaticQuery } from "gatsby";
+import { graphql, StaticQuery } from "gatsby";
+
 import NormalTable from "../components/NormalTable";
 
 const CellLineTableTemplate = (props: QueryResult) => {
     const { edges: cellLines } = props.data.allMarkdownRemark;
     const unpackedCellLines = cellLines.map(({ node: cellLine }) => {
-        console.log(cellLine.frontmatter.gene);
         return {
             cellLineId: cellLine.frontmatter.cell_line_id,
             cloneNumber: cellLine.frontmatter.clone_number,
@@ -21,72 +21,6 @@ const CellLineTableTemplate = (props: QueryResult) => {
     });
 
     return <NormalTable cellLines={unpackedCellLines} />;
-    // <table className="">
-    /* <thead>
-                <tr>
-                    <th>Cell Line ID</th>
-                    <th>Protein</th>
-                    <th>Clone ID</th>
-                    <th>Gene Name (gene symbol)</th>
-                    <th>Tagged alleles</th>
-                    <th>Structure</th>
-                    <th>Fluorescent Tag</th>
-                    <th>Tag Location</th>
-                    <th>Parental Line</th>
-                </tr>
-            </thead>
-            <tbody>
-                {cellLines &&
-                    cellLines.map(({ node: cellLine }) => {
-                        if (cellLine.frontmatter.cell_line_id === 0) {
-                            return null;
-                        }
-                        return (
-                            <tr className="" key={cellLine.id}>
-                                <td className="is-child">
-                                    <Link to={cellLine.fields.slug}>
-                                        <h4>
-                                            AICS-
-                                            {cellLine.frontmatter.cell_line_id}
-                                        </h4>
-                                    </Link>
-                                </td>
-                                <td>
-                                    {
-                                        cellLine.frontmatter.gene.frontmatter
-                                            .protein
-                                    }
-                                </td>
-                                <td>{cellLine.frontmatter.clone_number}</td>
-                                <td>
-                                    {cellLine.frontmatter.gene.frontmatter.name}{" "}
-                                    (
-                                    {
-                                        cellLine.frontmatter.gene.frontmatter
-                                            .symbol
-                                    }
-                                    )
-                                </td>
-                                <td>{cellLine.frontmatter.allele_count}</td>
-                                <td>
-                                    {
-                                        cellLine.frontmatter.gene.frontmatter
-                                            .structure
-                                    }
-                                </td>
-                                <td>{cellLine.frontmatter.fluorescent_tag}</td>
-                                <td>{cellLine.frontmatter.tag_location}</td>
-                                <td>
-                                    {
-                                        cellLine.frontmatter.parental_line
-                                            .frontmatter.name
-                                    }
-                                </td>
-                            </tr>
-                        );
-                    })}
-            </tbody>
-        </table> */
 };
 
 interface QueryResult {

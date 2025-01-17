@@ -1,13 +1,8 @@
-import {
-    DiseaseFrontmatter,
-    DiseaseCellLineNode,
-    UnpackedDiseaseCellLine,
-} from "./types";
+import { DiseaseCellLineNode, UnpackedDiseaseCellLine } from "./types";
 
 export const convertFrontmatterToDiseaseCellLine = (
     cellLineNode: DiseaseCellLineNode
 ): UnpackedDiseaseCellLine => {
-    console.log(cellLineNode.frontmatter.disease);
     const diseaseData = cellLineNode.frontmatter.disease.frontmatter;
     return {
         cellLineId: cellLineNode.frontmatter.cell_line_id,
@@ -18,12 +13,16 @@ export const convertFrontmatterToDiseaseCellLine = (
         status: cellLineNode.frontmatter.status,
         clones: cellLineNode.frontmatter.clones,
         orderLink: cellLineNode.frontmatter.order_link,
+        diseaseStatus: diseaseData.status,
         mutatedGene: {
             name: diseaseData.gene.frontmatter.name,
             symbol: diseaseData.gene.frontmatter.symbol,
         },
         path: cellLineNode.fields.slug,
         parentalLine: {
+            thumbnailImage:
+                cellLineNode.frontmatter.parental_line.frontmatter
+                    .thumbnail_image,
             cellLineId:
                 cellLineNode.frontmatter.parental_line.frontmatter.cell_line_id,
             cloneNumber:
@@ -40,7 +39,6 @@ export const convertFrontmatterToDiseaseCellLine = (
                     .frontmatter.symbol,
             },
         },
-        parentalLineComponent: null,
         key: cellLineNode.id,
     };
 };

@@ -3,9 +3,9 @@ import { Descriptions, Divider, Flex, Modal } from "antd";
 import Icon, { InfoCircleOutlined } from "@ant-design/icons";
 import { GatsbyImage, getImage } from "gatsby-plugin-image";
 import { FileNode } from "gatsby-plugin-image/dist/src/components/hooks";
-import { DescriptionsItemType } from "antd/es/descriptions";
 
 import { DarkBlueHoverButton } from "./shared/Buttons";
+import { UnpackedGene } from "../component-queries/types";
 
 const {
     modal,
@@ -18,10 +18,13 @@ const {
 const LinkOut = require("../img/external-link.svg");
 
 interface ParentalLineModalProps {
-    displayItems: DescriptionsItemType[];
     image: FileNode;
-    cellLineId: string;
+    formattedId: string;
     cloneNumber: number;
+    status: string;
+    taggedGene: UnpackedGene;
+    tagLocation: string;
+    fluorescentTag: string;
 }
 const ParentalLineModal = (props: ParentalLineModalProps) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -39,14 +42,43 @@ const ParentalLineModal = (props: ParentalLineModalProps) => {
         <div className={header}>
             <div className={title}>Parental Line </div>
             <Divider type="vertical" />
-            <div className={subTitle}>{props.cellLineId} </div>
+            <div className={subTitle}>{props.formattedId} </div>
             <div className={clone}> cl. {props.cloneNumber}</div>
         </div>
     );
+
+    if (props.status === "coming soon") {
+        return <>{props.formattedId}</>;
+    }
+    const { symbol, name } = props.taggedGene;
+    const { fluorescentTag, tagLocation } = props;
+    const parentalLineItems = [
+        {
+            key: "1",
+            label: "Gene Symbol",
+            children: symbol,
+        },
+        {
+            key: "2",
+            label: "Gene Name",
+            children: name,
+        },
+        {
+            key: "3",
+            label: "Fluorescent Tag",
+            children: fluorescentTag,
+        },
+        {
+            key: "4",
+            label: "Tag Location",
+            children: tagLocation,
+        },
+    ];
+
     return (
         <>
             <DarkBlueHoverButton onClick={(e) => showModal(e)}>
-                {props.cellLineId} {<InfoCircleOutlined />}
+                {props.formattedId} {<InfoCircleOutlined />}
             </DarkBlueHoverButton>
             <Modal
                 title={headerElement}
@@ -86,14 +118,14 @@ const ParentalLineModal = (props: ParentalLineModalProps) => {
                     <div style={{ width: "192px", display: "block" }}>
                         {image && (
                             <GatsbyImage
-                                alt={`${props.cellLineId} thumbnail image`}
+                                alt={`${props.formattedId} thumbnail image`}
                                 image={image}
                             />
                         )}
                     </div>
                     <Descriptions
                         column={1}
-                        items={props.displayItems}
+                        items={parentalLineItems}
                         layout="horizontal"
                         colon={false}
                         labelStyle={{

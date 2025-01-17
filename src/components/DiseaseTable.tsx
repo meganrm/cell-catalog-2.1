@@ -15,6 +15,7 @@ import { WHITE } from "../style/theme";
 import useWindowWidth from "../hooks/useWindowWidth";
 import { MOBILE_BREAKPOINT, TABLET_BREAKPOINT } from "../constants";
 import GeneDisplay from "./GeneDisplay";
+import ParentalLineModal from "./ParentalLineModal";
 
 const Tube = require("../img/tube.svg");
 const CertificateIcon = require("../img/cert-icon.svg");
@@ -207,10 +208,26 @@ const DiseaseTable = ({
                     },
                     {
                         title: "Parental Line",
-                        key: "parentalLineComponent",
-                        dataIndex: "parentalLineComponent",
+                        key: "parentalLine",
+                        dataIndex: "parentalLine",
                         responsive: ["md"],
                         onCell: onCellInteraction,
+                        render: (parentalLine, record) => {
+                            return (
+                                <ParentalLineModal
+                                    key={parentalLine.cellLineId}
+                                    formattedId={formatCellLineId(
+                                        parentalLine.cellLineId
+                                    )}
+                                    cloneNumber={parentalLine.cloneNumber}
+                                    image={parentalLine.thumbnailImage}
+                                    taggedGene={parentalLine.taggedGene}
+                                    status={record.diseaseStatus}
+                                    tagLocation={parentalLine.tagLocation}
+                                    fluorescentTag={parentalLine.fluorescentTag}
+                                />
+                            );
+                        },
                     },
                     {
                         title: "Clones",

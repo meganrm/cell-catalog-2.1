@@ -3,41 +3,8 @@ import { graphql, StaticQuery } from "gatsby";
 
 import DiseaseTable from "../components/DiseaseTable";
 import { UnpackedDisease } from "./Diseases";
-import {
-    DiseaseCellLineEdge,
-    ParentalLineFrontmatter,
-    UnpackedDiseaseCellLine,
-} from "./types";
-import ParentalLineModal from "../components/ParentalLineModal";
-import { formatCellLineId } from "../utils";
+import { DiseaseCellLineEdge, UnpackedDiseaseCellLine } from "./types";
 import { convertFrontmatterToDiseaseCellLine } from "./convert-data";
-
-const getParentalLineItems = (parentalLine: ParentalLineFrontmatter) => {
-    const { symbol, name } = parentalLine.gene.frontmatter;
-    const { fluorescent_tag, tag_location } = parentalLine;
-    return [
-        {
-            key: "1",
-            label: "Gene Symbol",
-            children: symbol,
-        },
-        {
-            key: "2",
-            label: "Gene Name",
-            children: name,
-        },
-        {
-            key: "3",
-            label: "Fluorescent Tag",
-            children: fluorescent_tag,
-        },
-        {
-            key: "4",
-            label: "Tag Location",
-            children: tag_location,
-        },
-    ];
-};
 
 const groupLines = (
     diseases: UnpackedDisease[],
@@ -56,32 +23,8 @@ const groupLines = (
     return cellLines.reduce((acc, cellLine) => {
         const { disease } = cellLine.node.frontmatter;
         const diseaseName = disease.frontmatter.name;
-        const diseaseData = diseases.find((d) => d.name === diseaseName);
-        if (!diseaseData) {
-            return acc;
-        }
         const cellLineData: UnpackedDiseaseCellLine =
             convertFrontmatterToDiseaseCellLine(cellLine.node);
-
-        const parentalLine =
-            cellLine.node.frontmatter.parental_line.frontmatter;
-        const parentalLineItems = getParentalLineItems(parentalLine);
-        if (diseaseData.status?.toLowerCase() === "coming soon") {
-            cellLineData.parentalLineComponent = (
-                <>{formatCellLineId(parentalLine.cell_line_id)}</>
-            );
-        } else {
-            cellLineData.parentalLineComponent = (
-                <ParentalLineModal
-                    key={parentalLine.cell_line_id}
-                    cellLineId={formatCellLineId(parentalLine.cell_line_id)}
-                    cloneNumber={parentalLine.clone_number}
-                    displayItems={parentalLineItems}
-                    image={parentalLine.thumbnail_image}
-                />
-            );
-        }
-
         acc[diseaseName].push(cellLineData);
         return acc;
     }, diseaseObj);
