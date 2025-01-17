@@ -1,10 +1,10 @@
 import React from "react";
 import { graphql, StaticQuery } from "gatsby";
 
-import DiseaseTable from "../components/DiseaseTable";
 import { UnpackedDisease } from "./Diseases";
 import { DiseaseCellLineEdge, UnpackedDiseaseCellLine } from "./types";
 import { convertFrontmatterToDiseaseCellLine } from "./convert-data";
+import CellLineTable, { TableType } from "../components/CellLineTable";
 
 const groupLines = (
     diseases: UnpackedDisease[],
@@ -52,11 +52,12 @@ const DiseaseCellLineTemplate = (props: DiseaseCellLineTemplateProps) => {
         }
         return (
             <div key={disease.name}>
-                <DiseaseTable
-                    diseaseName={disease.name}
-                    diseaseCellLines={groupedCellLines[disease.name]}
-                    acknowledgements={disease.acknowledgements}
+                <CellLineTable
+                    tableName={disease.name}
+                    cellLines={groupedCellLines[disease.name]}
+                    footerContents={disease.acknowledgements}
                     status={disease.status}
+                    tableType={TableType.Disease}
                 />
             </div>
         );

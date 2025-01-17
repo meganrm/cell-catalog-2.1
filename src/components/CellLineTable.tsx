@@ -1,33 +1,50 @@
 import React, { useState } from "react";
-import { Table, Flex } from "antd";
+import { Table, Tag, Flex } from "antd";
 // TODO: debug gatsby navigate throwing errors when passed strings
 import { navigate } from "@reach/router";
 
+import { HTMLContent } from "./shared/Content";
 import {
     CellLineStatus,
+    UnpackedDiseaseCellLine,
     UnpackedNormalCellLine,
 } from "../component-queries/types";
 
 import useWindowWidth from "../hooks/useWindowWidth";
 import { MOBILE_BREAKPOINT, TABLET_BREAKPOINT } from "../constants";
-import GeneDisplay from "./GeneDisplay";
+import { getDiseaseTableColumns } from "./DiseaseTableColumns";
 import { getNormalTableColumns } from "./NormalTableColumns";
+import { getMobileConfig } from "./TableConfig";
 
 const {
     tableTitle,
     container,
     comingSoon,
-    expandableContent,
+    footer,
     hoveredRow,
     dataComplete,
 } = require("../style/table.module.css");
 
-interface NormalTableProps {
-    cellLines: any[];
-    status: string;
+export enum TableType {
+    Disease,
+    Normal,
 }
 
-const NormalTable = ({ cellLines, status }: NormalTableProps) => {
+interface CellLineTableProps {
+    tableName: string;
+    cellLines: UnpackedDiseaseCellLine[] | UnpackedNormalCellLine[];
+    footerContents: string;
+    status: string;
+    tableType: TableType;
+}
+
+const CellLineTable = ({
+    tableName,
+    cellLines,
+    footerContents,
+    status,
+    tableType,
+}: CellLineTableProps) => {
     const [hoveredRowIndex, setHoveredRowIndex] = useState(-1);
     const inProgress = status?.toLowerCase() === "coming soon";
 
@@ -35,35 +52,10 @@ const NormalTable = ({ cellLines, status }: NormalTableProps) => {
     const isTablet = width < TABLET_BREAKPOINT;
     const isMobile = width < MOBILE_BREAKPOINT;
 
-    const expandableConfig = {
-        expandedRowRender: (record: UnpackedNormalCellLine) => (
-            <Flex
-                key={record.cellLineId}
-                gap={16}
-                justify="flex-start"
-                className={expandableContent}
-                wrap={"wrap"}
-            >
-                {isMobile && (
-                    <div>
-                        <label>Tagged Protein:</label>
-                        <Flex vertical={true} key={record.protein}>
-                            <span key={record.protein}>{record.protein}</span>
-                        </Flex>
-                    </div>
-                )}
-                <div>
-                    <label>Gene Symbol & Name:</label>
-                    <span>
-                        <GeneDisplay gene={record.taggedGene} />
-                    </span>
-                </div>
-            </Flex>
-        ),
-    };
+    const expandableConfig = getMobileConfig(tableType, isMobile);
 
     const onCellInteraction = (
-        record: UnpackedNormalCellLine,
+        record: UnpackedDiseaseCellLine | UnpackedNormalCellLine,
         index: number | undefined
     ) => {
         if (index === undefined) {
@@ -81,10 +73,19 @@ const NormalTable = ({ cellLines, status }: NormalTableProps) => {
         };
     };
 
+    const columns =
+        tableType === TableType.Disease
+            ? getDiseaseTableColumns(onCellInteraction, inProgress)
+            : getNormalTableColumns(onCellInteraction, inProgress);
+
+    const typedCellLines =
+        tableType === TableType.Disease
+            ? (cellLines as UnpackedDiseaseCellLine[])
+            : (cellLines as UnpackedNormalCellLine[]);
     return (
         <>
             <Table
-                key="cell-line-table"
+                key={tableName}
                 className={[container, inProgress ? comingSoon : ""].join(" ")}
                 rowClassName={(record) =>
                     record.status === CellLineStatus.DataComplete
@@ -93,17 +94,23 @@ const NormalTable = ({ cellLines, status }: NormalTableProps) => {
                 }
                 title={() => (
                     <Flex align="center">
-                        <h3 className={tableTitle}>Cell Line Catalog</h3>
+                        <h3 className={tableTitle}>{tableName}</h3>
+                        {inProgress ? (
+                            <Tag color="#00215F">{status}</Tag>
+                        ) : null}
                     </Flex>
                 )}
                 scroll={{ x: "max-content" }}
                 pagination={false}
-                expandable={isTablet ? expandableConfig : undefined}
-                columns={getNormalTableColumns(onCellInteraction, inProgress)}
-                dataSource={cellLines}
+                expandable={isTablet ? (expandableConfig as any) : undefined}
+                columns={columns as any}
+                dataSource={typedCellLines as any}
             />
+            <div className={footer}>
+                <HTMLContent content={footerContents} />
+            </div>
         </>
     );
 };
 
-export default NormalTable;
+export default CellLineTable;

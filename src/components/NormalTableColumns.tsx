@@ -1,5 +1,8 @@
 import { Link } from "gatsby";
 import React from "react";
+import { Flex, GetProp, Table } from "antd";
+import Icon from "@ant-design/icons";
+
 import { formatCellLineId } from "../utils";
 import {
     CellLineStatus,
@@ -7,10 +10,9 @@ import {
     UnpackedNormalCellLine,
 } from "../component-queries/types";
 import GeneDisplay from "./GeneDisplay";
-import { Flex } from "antd";
-import Icon from "@ant-design/icons";
 import { WHITE } from "../style/theme";
-import { mdBreakpoint } from "./TableColumns";
+import { cellLineIdColumn, mdBreakpoint } from "./TableConfig";
+
 const Tube = require("../img/tube.svg");
 const CertificateIcon = require("../img/cert-icon.svg");
 
@@ -27,25 +29,9 @@ export const getNormalTableColumns = (
         index: number | undefined
     ) => {},
     inProgress: boolean
-) => [
-    {
-        title: "Cell Collection ID",
-        key: "cellLineId",
-        className: cellLineId,
-        dataIndex: "cellLineId",
-        fixed: "left" as const,
-        render: (cellLineId: number, record: UnpackedNormalCellLine) => {
-            const cellLine = (
-                <h4 key={cellLineId}>{formatCellLineId(cellLineId)}</h4>
-            );
-            return record.status === CellLineStatus.DataComplete ? (
-                <Link to={record.path}>{cellLine}</Link>
-            ) : (
-                cellLine
-            );
-        },
-        onCell: onCellInteraction,
-    },
+): GetProp<typeof Table<UnpackedNormalCellLine>, "columns"> => [
+    { ...cellLineIdColumn, onCell: onCellInteraction },
+
     {
         title: "Protein",
         key: "protein",

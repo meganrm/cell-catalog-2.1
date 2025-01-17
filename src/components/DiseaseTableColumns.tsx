@@ -8,13 +8,13 @@ import {
 } from "../component-queries/types";
 import { formatCellLineId, getCloneSummary } from "../utils";
 import { Link } from "gatsby";
-import { Flex } from "antd";
+import { Flex, GetProp, Table } from "antd";
 import GeneDisplay from "./GeneDisplay";
 import ParentalLineModal from "./ParentalLineModal";
 import CloneSummary from "./CloneSummary";
 import Icon from "@ant-design/icons";
 import { WHITE } from "../style/theme";
-import { mdBreakpoint, smBreakPoint } from "./TableColumns";
+import { cellLineIdColumn, mdBreakpoint, smBreakPoint } from "./TableConfig";
 
 const Tube = require("../img/tube.svg");
 const CertificateIcon = require("../img/cert-icon.svg");
@@ -34,25 +34,8 @@ export const getDiseaseTableColumns = (
         index: number | undefined
     ) => {},
     inProgress: boolean
-) => [
-    {
-        title: "Cell Collection ID",
-        key: "cellLineId",
-        className: cellLineId,
-        dataIndex: "cellLineId",
-        fixed: "left" as const,
-        render: (cellLineId: number, record: UnpackedDiseaseCellLine) => {
-            const cellLine = (
-                <h4 key={cellLineId}>{formatCellLineId(cellLineId)}</h4>
-            );
-            return record.status === CellLineStatus.DataComplete ? (
-                <Link to={record.path}>{cellLine}</Link>
-            ) : (
-                cellLine
-            );
-        },
-        onCell: onCellInteraction,
-    },
+): GetProp<typeof Table<UnpackedDiseaseCellLine>, "columns"> => [
+    { ...cellLineIdColumn, onCell: onCellInteraction },
     {
         title: "SNP",
         key: "snp",

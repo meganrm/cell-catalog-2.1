@@ -1,9 +1,9 @@
 import React from "react";
 import { graphql, StaticQuery } from "gatsby";
 
-import NormalTable from "../components/NormalTable";
-import { NormalCellLineNode } from "./types";
+import { NormalCellLineNode, UnpackedNormalCellLine } from "./types";
 import { convertFrontmatterToNormalCellLines } from "./convert-data";
+import CellLineTable, { TableType } from "../components/CellLineTable";
 
 const CellLineTableTemplate = (props: QueryResult) => {
     const { edges: cellLines } = props.data.allMarkdownRemark;
@@ -11,7 +11,15 @@ const CellLineTableTemplate = (props: QueryResult) => {
         convertFrontmatterToNormalCellLines
     );
 
-    return <NormalTable cellLines={unpackedCellLines} status={""} />;
+    return (
+        <CellLineTable
+            tableName="Cell Line Catalog"
+            cellLines={unpackedCellLines}
+            footerContents={""}
+            tableType={TableType.Normal}
+            status={""}
+        />
+    );
 };
 
 interface QueryResult {
@@ -23,7 +31,7 @@ interface QueryResult {
         };
     };
 }
-export default function CellLineTable() {
+export default function NormalCellLines() {
     return (
         <StaticQuery
             query={graphql`
