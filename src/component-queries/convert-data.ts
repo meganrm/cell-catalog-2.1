@@ -49,27 +49,27 @@ export const convertFrontmatterToDiseaseCellLine = (
 };
 
 export const convertFrontmatterToNormalCellLines = ({
-    node: cellLine,
+    node: cellLineNode,
 }: {
     node: NormalCellLineNode;
 }): UnpackedNormalCellLine => {
     return {
-        path: cellLine.fields.slug,
-        cellLineId: cellLine.frontmatter.cell_line_id,
-        cloneNumber: cellLine.frontmatter.clone_number,
-        alleleCount: cellLine.frontmatter.allele_count,
-        fluorescentTag: cellLine.frontmatter.fluorescent_tag,
-        tagLocation: cellLine.frontmatter.tag_location,
-        parentalLine: cellLine.frontmatter.parental_line.frontmatter.name,
-        protein: cellLine.frontmatter.gene.frontmatter.protein,
+        path: cellLineNode.fields.slug,
+        cellLineId: cellLineNode.frontmatter.cell_line_id,
+        cloneNumber: cellLineNode.frontmatter.clone_number,
+        alleleCount: cellLineNode.frontmatter.allele_count,
+        fluorescentTag: cellLineNode.frontmatter.fluorescent_tag,
+        tagLocation: cellLineNode.frontmatter.tag_location,
+        parentalLine: cellLineNode.frontmatter.parental_line.frontmatter.name,
+        protein: cellLineNode.frontmatter.gene.frontmatter.protein,
         taggedGene: {
-            name: cellLine.frontmatter.gene.frontmatter.name,
-            symbol: cellLine.frontmatter.gene.frontmatter.symbol,
+            name: cellLineNode.frontmatter.gene.frontmatter.name,
+            symbol: cellLineNode.frontmatter.gene.frontmatter.symbol,
         },
-        structure: cellLine.frontmatter.gene.frontmatter.structure,
-        status: cellLine.frontmatter.status,
+        structure: cellLineNode.frontmatter.gene.frontmatter.structure,
+        status: cellLineNode.frontmatter.status,
         certificateOfAnalysis: "",
         hPSCregCertificateLink: "",
-        orderLink: "",
+        orderLink: cellLineNode.frontmatter.order_link,
     };
 };

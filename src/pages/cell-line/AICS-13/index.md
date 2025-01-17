@@ -12,4 +12,5 @@ tag_location:
   - N-terminus
 fluorescent_tag:
   - mEGFP
+order_link: https://catalog.coriell.org/0/Sections/Search/Sample_Detail.aspx?Ref=AICS-0013&Product=iPSC
 ---

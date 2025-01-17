@@ -89,6 +89,7 @@ export default function NormalCellLines() {
                                     fluorescent_tag
                                     allele_count
                                     status
+                                    order_link
                                     gene {
                                         frontmatter {
                                             protein

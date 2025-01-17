@@ -30,6 +30,7 @@ export interface NormalCellLineFrontmatter {
     tag_location: string;
     fluorescent_tag: string;
     allele_count: string;
+    order_link: string;
     parental_line: {
         frontmatter: {
             name: string;
