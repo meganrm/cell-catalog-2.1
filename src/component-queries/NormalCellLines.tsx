@@ -11,7 +11,7 @@ const CellLineTableTemplate = (props: QueryResult) => {
         convertFrontmatterToNormalCellLines
     );
 
-    return <NormalTable cellLines={unpackedCellLines} />;
+    return <NormalTable cellLines={unpackedCellLines} status={""} />;
 };
 
 interface QueryResult {

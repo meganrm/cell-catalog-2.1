@@ -17,7 +17,6 @@ const {
     tableTitle,
     container,
     comingSoon,
-
     expandableContent,
     hoveredRow,
     dataComplete,
@@ -25,9 +24,10 @@ const {
 
 interface NormalTableProps {
     cellLines: any[];
+    status: string;
 }
 
-const NormalTable = ({ cellLines }: NormalTableProps) => {
+const NormalTable = ({ cellLines, status }: NormalTableProps) => {
     const [hoveredRowIndex, setHoveredRowIndex] = useState(-1);
     const inProgress = status?.toLowerCase() === "coming soon";
 
@@ -36,7 +36,7 @@ const NormalTable = ({ cellLines }: NormalTableProps) => {
     const isMobile = width < MOBILE_BREAKPOINT;
 
     const expandableConfig = {
-        expandedRowRender: (record: UnpackedNormalCellLine, index: number) => (
+        expandedRowRender: (record: UnpackedNormalCellLine) => (
             <Flex
                 key={record.cellLineId}
                 gap={16}
