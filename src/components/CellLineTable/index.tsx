@@ -38,7 +38,6 @@ const CellLineTable = ({
 }: CellLineTableProps) => {
     const [hoveredRowIndex, setHoveredRowIndex] = useState(-1);
     const inProgress = !released;
-    console.log(tableName, inProgress, status);
     const width = useWindowWidth();
     const isTablet = width < TABLET_BREAKPOINT;
 
