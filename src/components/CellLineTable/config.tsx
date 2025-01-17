@@ -1,23 +1,26 @@
 import { Flex } from "antd";
 import React from "react";
-import { Link } from "gatsby";
 
 import {
-    CellLineStatus,
     UnpackedDiseaseCellLine,
     UnpackedNormalCellLine,
-} from "../component-queries/types";
-import { formatCellLineId, getCloneSummary } from "../utils";
-import CloneSummary from "./CloneSummary";
-import GeneDisplay from "./GeneDisplay";
-import { TableType } from "./CellLineTable";
+} from "../../component-queries/types";
+import { getCloneSummary } from "../../utils";
+import CloneSummary from "../CloneSummary";
+import GeneDisplay from "../GeneDisplay";
+import { getDiseaseTableColumns } from "./DiseaseTableColumns";
+import { getNormalTableColumns } from "./NormalTableColumns";
+import {
+    DiseaseColumns,
+    DiseaseTableConfig,
+    NormalColumns,
+    NormalTableConfig,
+    TableType,
+} from "./types";
 
-export const mdBreakpoint = ["md" as const];
-export const smBreakPoint = ["sm" as const];
+const { expandableContent } = require("../../style/table.module.css");
 
-const { expandableContent, cellLineId } = require("../style/table.module.css");
-
-export const getDiseaseTableMobileConfig = (isMobile: boolean) => {
+const getDiseaseTableMobileConfig = (isMobile: boolean) => {
     return {
         expandedRowRender: (record: UnpackedDiseaseCellLine, index: number) => (
             <Flex
@@ -61,7 +64,7 @@ export const getDiseaseTableMobileConfig = (isMobile: boolean) => {
     };
 };
 
-export const normalTableMobileConfig = (isMobile: boolean) => {
+const normalTableMobileConfig = (isMobile: boolean) => {
     return {
         expandedRowRender: (record: UnpackedNormalCellLine) => (
             <Flex
@@ -90,30 +93,42 @@ export const normalTableMobileConfig = (isMobile: boolean) => {
     };
 };
 
-export const cellLineIdColumn = {
-    title: "Cell Collection ID",
-    key: "cellLineId",
-    className: cellLineId,
-    dataIndex: "cellLineId",
-    fixed: "left" as const,
-    render: (
-        cellLineId: number,
-        record: UnpackedDiseaseCellLine | UnpackedNormalCellLine
-    ) => {
-        const cellLine = (
-            <h4 key={cellLineId}>{formatCellLineId(cellLineId)}</h4>
-        );
-        return record.status === CellLineStatus.DataComplete ? (
-            <Link to={record.path}>{cellLine}</Link>
-        ) : (
-            cellLine
-        );
-    },
-};
-
-export const getMobileConfig = (type: TableType, isMobile: boolean) => {
+const getMobileConfig = (type: TableType, isMobile: boolean) => {
     if (type === TableType.Normal) {
         return normalTableMobileConfig(isMobile);
     }
     return getDiseaseTableMobileConfig(isMobile);
+};
+
+const getTableColumns = (
+    tableType: TableType,
+    onCellInteraction: any,
+    inProgress: boolean
+): NormalColumns | DiseaseColumns => {
+    return tableType === TableType.Disease
+        ? getDiseaseTableColumns(onCellInteraction, inProgress)
+        : getNormalTableColumns(onCellInteraction, inProgress);
+};
+
+export const getConfig = (
+    tableType: TableType,
+    isMobile: boolean,
+    onCellInteraction: any,
+    inProgress: boolean,
+    cellLines: UnpackedDiseaseCellLine[] | UnpackedNormalCellLine[]
+): NormalTableConfig | DiseaseTableConfig => {
+    const mobileConfig = getMobileConfig(tableType, isMobile);
+    const columns = getTableColumns(tableType, onCellInteraction, inProgress);
+    if (tableType === TableType.Disease) {
+        return {
+            columns,
+            expandableConfig: mobileConfig,
+            cellLines,
+        } as DiseaseTableConfig;
+    }
+    return {
+        columns,
+        expandableConfig: mobileConfig,
+        cellLines,
+    } as NormalTableConfig;
 };

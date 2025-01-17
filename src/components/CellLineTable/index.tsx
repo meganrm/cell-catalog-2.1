@@ -3,18 +3,17 @@ import { Table, Tag, Flex } from "antd";
 // TODO: debug gatsby navigate throwing errors when passed strings
 import { navigate } from "@reach/router";
 
-import { HTMLContent } from "./shared/Content";
+import { HTMLContent } from "../shared/Content";
 import {
     CellLineStatus,
     UnpackedDiseaseCellLine,
     UnpackedNormalCellLine,
-} from "../component-queries/types";
+} from "../../component-queries/types";
 
-import useWindowWidth from "../hooks/useWindowWidth";
-import { MOBILE_BREAKPOINT, TABLET_BREAKPOINT } from "../constants";
-import { getDiseaseTableColumns } from "./DiseaseTableColumns";
-import { getNormalTableColumns } from "./NormalTableColumns";
-import { getMobileConfig } from "./CellLineTableConfig";
+import useWindowWidth from "../../hooks/useWindowWidth";
+import { MOBILE_BREAKPOINT, TABLET_BREAKPOINT } from "../../constants";
+import { getConfig } from "./config";
+import { NormalTableConfig, TableType } from "./types";
 
 const {
     tableTitle,
@@ -23,12 +22,7 @@ const {
     footer,
     hoveredRow,
     dataComplete,
-} = require("../style/table.module.css");
-
-export enum TableType {
-    Disease,
-    Normal,
-}
+} = require("../../style/table.module.css");
 
 interface CellLineTableProps {
     tableName: string;
@@ -52,12 +46,10 @@ const CellLineTable = ({
     const isTablet = width < TABLET_BREAKPOINT;
     const isMobile = width < MOBILE_BREAKPOINT;
 
-    const expandableConfig = getMobileConfig(tableType, isMobile);
-
     const onCellInteraction = (
         record: UnpackedDiseaseCellLine | UnpackedNormalCellLine,
         index: number | undefined
-    ) => {
+    ): {} => {
         if (index === undefined) {
             return {};
         }
@@ -73,18 +65,27 @@ const CellLineTable = ({
         };
     };
 
-    const columns =
-        tableType === TableType.Disease
-            ? getDiseaseTableColumns(onCellInteraction, inProgress)
-            : getNormalTableColumns(onCellInteraction, inProgress);
+    const config = getConfig(
+        tableType,
+        isMobile,
+        onCellInteraction,
+        inProgress,
+        cellLines
+    );
+    const isNormalConfig = (config): config is NormalTableConfig => {
+        return tableType === TableType.Normal;
+    };
 
-    const typedCellLines =
-        tableType === TableType.Disease
-            ? (cellLines as UnpackedDiseaseCellLine[])
-            : (cellLines as UnpackedNormalCellLine[]);
+    const typedConfig = isNormalConfig(config) ? config : config;
+
+    const {
+        columns,
+        expandableConfig,
+        cellLines: typedCellLines,
+    } = typedConfig;
     return (
         <>
-            <Table
+            <Table<>
                 key={tableName}
                 className={[container, inProgress ? comingSoon : ""].join(" ")}
                 rowClassName={(record) =>
@@ -102,9 +103,9 @@ const CellLineTable = ({
                 )}
                 scroll={{ x: "max-content" }}
                 pagination={false}
-                expandable={isTablet ? (expandableConfig as any) : undefined}
-                columns={columns as any}
-                dataSource={typedCellLines as any}
+                expandable={isTablet ? expandableConfig : undefined}
+                columns={columns}
+                dataSource={typedCellLines}
             />
             <div className={footer}>
                 <HTMLContent content={footerContents} />

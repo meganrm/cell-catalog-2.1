@@ -3,7 +3,8 @@ import { graphql, StaticQuery } from "gatsby";
 
 import { NormalCellLineNode, UnpackedNormalCellLine } from "./types";
 import { convertFrontmatterToNormalCellLines } from "./convert-data";
-import CellLineTable, { TableType } from "../components/CellLineTable";
+import CellLineTable from "../components/CellLineTable";
+import { TableType } from "../components/CellLineTable/types";
 
 const CellLineTableTemplate = (props: QueryResult) => {
     const { edges: cellLines } = props.data.allMarkdownRemark;

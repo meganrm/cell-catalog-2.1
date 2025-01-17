@@ -1,85 +1,108 @@
 import React from "react";
 import { Flex, GetProp, Table } from "antd";
-import Icon from "@ant-design/icons";
 
 import {
+    Clone,
+    UnpackedDiseaseCellLine,
     UnpackedGene,
     UnpackedNormalCellLine,
-} from "../component-queries/types";
-import GeneDisplay from "./GeneDisplay";
-import { WHITE } from "../style/theme";
-import { cellLineIdColumn, mdBreakpoint } from "./CellLineTableConfig";
+} from "../../component-queries/types";
+import { formatCellLineId, getCloneSummary } from "../../utils";
+import GeneDisplay from "../GeneDisplay";
+import ParentalLineModal from "../ParentalLineModal";
+import CloneSummary from "../CloneSummary";
+import Icon from "@ant-design/icons";
+import { WHITE } from "../../style/theme";
+import { cellLineIdColumn } from "./SharedColumns";
+import { smBreakPoint, mdBreakpoint } from "./types";
 
-const Tube = require("../img/tube.svg");
-const CertificateIcon = require("../img/cert-icon.svg");
+const Tube = require("../../img/tube.svg");
+const CertificateIcon = require("../../img/cert-icon.svg");
 
 const {
     actionButton,
     actionColumn,
+    clones,
     lastColumn,
-} = require("../style/table.module.css");
+    snpColumn,
+} = require("../../style/table.module.css");
 
-export const getNormalTableColumns = (
+export const getDiseaseTableColumns = (
     onCellInteraction: (
-        record: UnpackedNormalCellLine,
+        record: UnpackedDiseaseCellLine,
         index: number | undefined
     ) => {},
     inProgress: boolean
-): GetProp<typeof Table<UnpackedNormalCellLine>, "columns"> => [
+): GetProp<typeof Table<UnpackedDiseaseCellLine>, "columns"> => [
     { ...cellLineIdColumn, onCell: onCellInteraction },
     {
-        title: "Protein",
-        key: "protein",
-        dataIndex: "protein",
-        width: 200,
-        responsive: mdBreakpoint,
+        title: "SNP",
+        key: "snp",
+        dataIndex: "snp",
+        className: snpColumn,
+        responsive: smBreakPoint,
+        render: (snp: string) => {
+            const snps = snp.split(":");
+            return (
+                <Flex vertical={true} key={snp}>
+                    <span key={"snp-0"}>{snps[0]}: </span>
+                    <span key={"snp-1"}>{snps[1]}</span>
+                </Flex>
+            );
+        },
         onCell: onCellInteraction,
     },
     {
         title: "Gene Symbol & Name",
         width: 280,
-        key: "taggedGene",
-        dataIndex: "taggedGene",
+        key: "mutatedGene",
+        dataIndex: "mutatedGene",
         responsive: mdBreakpoint,
         onCell: onCellInteraction,
-        render: (taggedGene: UnpackedGene) => {
-            return <GeneDisplay gene={taggedGene} />;
+        render: (mutatedGene: UnpackedGene) => {
+            return <GeneDisplay gene={mutatedGene} />;
         },
     },
     {
-        title: "Clone",
-        key: "cloneNumber",
-        dataIndex: "cloneNumber",
+        title: "Parental Line",
+        key: "parentalLine",
+        dataIndex: "parentalLine",
         responsive: mdBreakpoint,
         onCell: onCellInteraction,
+        render: (
+            parentalLine: UnpackedNormalCellLine,
+            record: UnpackedDiseaseCellLine
+        ) => {
+            return (
+                <ParentalLineModal
+                    key={parentalLine.cellLineId}
+                    formattedId={formatCellLineId(parentalLine.cellLineId)}
+                    cloneNumber={parentalLine.cloneNumber}
+                    image={parentalLine.thumbnailImage}
+                    taggedGene={parentalLine.taggedGene}
+                    status={record.diseaseStatus}
+                    tagLocation={parentalLine.tagLocation}
+                    fluorescentTag={parentalLine.fluorescentTag}
+                />
+            );
+        },
     },
     {
-        title: "Tagged Alleles",
-        key: "alleleCount",
-        dataIndex: "alleleCount",
+        title: "Clones",
+        key: "clones",
+        dataIndex: "clones",
+        className: [clones, lastColumn].join(" "),
         responsive: mdBreakpoint,
-        onCell: onCellInteraction,
-    },
-    {
-        title: "Structure",
-        key: "structure",
-        dataIndex: "structure",
-        responsive: mdBreakpoint,
-        onCell: onCellInteraction,
-    },
-    {
-        title: "Fluorescent Tag",
-        key: "fluorescentTag",
-        dataIndex: "fluorescentTag",
-        responsive: mdBreakpoint,
-        onCell: onCellInteraction,
-    },
-    {
-        title: "Tag Location",
-        key: "tagLocation",
-        dataIndex: "tagLocation",
-        className: lastColumn,
-        responsive: mdBreakpoint,
+        render: (clones: Clone[], _: any, index: number) => {
+            const { numMutants, numIsogenics } = getCloneSummary(clones);
+            return (
+                <CloneSummary
+                    numMutants={numMutants}
+                    numIsogenics={numIsogenics}
+                    index={index}
+                />
+            );
+        },
         onCell: onCellInteraction,
     },
     {

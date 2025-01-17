@@ -4,7 +4,8 @@ import { graphql, StaticQuery } from "gatsby";
 import { UnpackedDisease } from "./Diseases";
 import { DiseaseCellLineEdge, UnpackedDiseaseCellLine } from "./types";
 import { convertFrontmatterToDiseaseCellLine } from "./convert-data";
-import CellLineTable, { TableType } from "../components/CellLineTable";
+import CellLineTable from "../components/CellLineTable";
+import { TableType } from "../components/CellLineTable/types";
 
 const groupLines = (
     diseases: UnpackedDisease[],
