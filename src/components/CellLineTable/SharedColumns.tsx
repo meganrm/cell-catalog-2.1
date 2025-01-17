@@ -6,8 +6,18 @@ import {
     CellLineStatus,
 } from "../../component-queries/types";
 import { formatCellLineId } from "../../utils";
+import Icon from "@ant-design/icons";
+import { Flex } from "antd";
+import { WHITE } from "../../style/theme";
+import { mdBreakpoint } from "./types";
 
-const { cellLineId } = require("../../style/table.module.css");
+const CertificateIcon = require("../../img/cert-icon.svg");
+
+const {
+    cellLineId,
+    actionColumn,
+    actionButton,
+} = require("../../style/table.module.css");
 
 export const cellLineIdColumn = {
     title: "Cell Collection ID",
@@ -26,6 +36,39 @@ export const cellLineIdColumn = {
             <Link to={record.path}>{cellLine}</Link>
         ) : (
             cellLine
+        );
+    },
+};
+
+export const certificateOfAnalysisColumn = {
+    title: "",
+    key: "certificateOfAnalysis",
+    dataIndex: "certificateOfAnalysis",
+    className: actionColumn,
+    fixed: "right" as const,
+    responsive: mdBreakpoint,
+    render: (certificateOfAnalysis: string) => {
+        return (
+            certificateOfAnalysis && (
+                <a
+                    key={certificateOfAnalysis}
+                    className={actionButton}
+                    href={certificateOfAnalysis}
+                    target="_blank"
+                    rel="noreferrer"
+                >
+                    <Flex>
+                        <Icon
+                            component={CertificateIcon}
+                            style={{
+                                color: WHITE,
+                                fontSize: "40px",
+                            }}
+                        />
+                        Cert. of Analysis
+                    </Flex>
+                </a>
+            )
         );
     },
 };

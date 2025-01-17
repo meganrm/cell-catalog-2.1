@@ -13,11 +13,10 @@ import ParentalLineModal from "../ParentalLineModal";
 import CloneSummary from "../CloneSummary";
 import Icon from "@ant-design/icons";
 import { WHITE } from "../../style/theme";
-import { cellLineIdColumn } from "./SharedColumns";
+import { cellLineIdColumn, certificateOfAnalysisColumn } from "./SharedColumns";
 import { smBreakPoint, mdBreakpoint, CellLineColumns } from "./types";
 
 const Tube = require("../../img/tube.svg");
-const CertificateIcon = require("../../img/cert-icon.svg");
 
 const {
     actionButton,
@@ -46,7 +45,6 @@ export const getDiseaseTableColumns = (
                 </Flex>
             );
         },
-        // onCell: onCellInteraction,
     },
     {
         title: "Gene Symbol & Name",
@@ -54,7 +52,6 @@ export const getDiseaseTableColumns = (
         key: "mutatedGene",
         dataIndex: "mutatedGene",
         responsive: mdBreakpoint,
-        // onCell: onCellInteraction,
         render: (mutatedGene: UnpackedGene) => {
             return <GeneDisplay gene={mutatedGene} />;
         },
@@ -64,7 +61,6 @@ export const getDiseaseTableColumns = (
         key: "parentalLine",
         dataIndex: "parentalLine",
         responsive: mdBreakpoint,
-        // onCell: onCellInteraction,
         render: (
             parentalLine: UnpackedNormalCellLine,
             record: UnpackedDiseaseCellLine
@@ -99,7 +95,6 @@ export const getDiseaseTableColumns = (
                 />
             );
         },
-        // onCell: onCellInteraction,
     },
     {
         title: "",
@@ -134,36 +129,5 @@ export const getDiseaseTableColumns = (
             }
         },
     },
-    {
-        title: "",
-        key: "certificateOfAnalysis",
-        dataIndex: "certificateOfAnalysis",
-        className: actionColumn,
-        fixed: "right" as const,
-        responsive: mdBreakpoint,
-        render: (certificateOfAnalysis: string) => {
-            return (
-                certificateOfAnalysis && (
-                    <a
-                        key={certificateOfAnalysis}
-                        className={actionButton}
-                        href={certificateOfAnalysis}
-                        target="_blank"
-                        rel="noreferrer"
-                    >
-                        <Flex>
-                            <Icon
-                                component={CertificateIcon}
-                                style={{
-                                    color: WHITE,
-                                    fontSize: "40px",
-                                }}
-                            />
-                            Cert. of Analysis
-                        </Flex>
-                    </a>
-                )
-            );
-        },
-    },
+    { ...certificateOfAnalysisColumn },
 ];
