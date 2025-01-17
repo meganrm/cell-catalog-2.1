@@ -1,5 +1,5 @@
 import React from "react";
-import { Flex, GetProp, Table } from "antd";
+import { Flex } from "antd";
 
 import {
     Clone,
@@ -11,16 +11,15 @@ import { formatCellLineId, getCloneSummary } from "../../utils";
 import GeneDisplay from "../GeneDisplay";
 import ParentalLineModal from "../ParentalLineModal";
 import CloneSummary from "../CloneSummary";
-import Icon from "@ant-design/icons";
-import { WHITE } from "../../style/theme";
-import { cellLineIdColumn, certificateOfAnalysisColumn } from "./SharedColumns";
+
+import {
+    cellLineIdColumn,
+    certificateOfAnalysisColumn,
+    getObtainLineColumn,
+} from "./SharedColumns";
 import { smBreakPoint, mdBreakpoint, CellLineColumns } from "./types";
 
-const Tube = require("../../img/tube.svg");
-
 const {
-    actionButton,
-    actionColumn,
     clones,
     lastColumn,
     snpColumn,
@@ -96,38 +95,6 @@ export const getDiseaseTableColumns = (
             );
         },
     },
-    {
-        title: "",
-        key: "orderLink",
-        dataIndex: "orderLink",
-        className: actionColumn,
-        fixed: "right" as const,
-        render: (orderLink: string) => {
-            if (inProgress) {
-                return <>{""}</>; // still want a blank column
-            } else {
-                return (
-                    <a
-                        key={orderLink}
-                        className={actionButton}
-                        href={orderLink}
-                        target="_blank"
-                        rel="noreferrer"
-                    >
-                        <Flex>
-                            <Icon
-                                component={Tube}
-                                style={{
-                                    color: WHITE,
-                                    fontSize: "40px",
-                                }}
-                            />
-                            Obtain Collection
-                        </Flex>
-                    </a>
-                );
-            }
-        },
-    },
+    { ...getObtainLineColumn(inProgress) },
     { ...certificateOfAnalysisColumn },
 ];

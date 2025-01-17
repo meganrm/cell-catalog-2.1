@@ -1,17 +1,15 @@
 import { Link } from "gatsby";
 import React from "react";
-import {
-    UnpackedDiseaseCellLine,
-    UnpackedNormalCellLine,
-    CellLineStatus,
-} from "../../component-queries/types";
-import { formatCellLineId } from "../../utils";
-import Icon from "@ant-design/icons";
 import { Flex } from "antd";
+import Icon from "@ant-design/icons";
+
+import { CellLineStatus } from "../../component-queries/types";
+import { formatCellLineId } from "../../utils";
 import { WHITE } from "../../style/theme";
-import { mdBreakpoint } from "./types";
+import { mdBreakpoint, UnpackedCellLine } from "./types";
 
 const CertificateIcon = require("../../img/cert-icon.svg");
+const Tube = require("../../img/tube.svg");
 
 const {
     cellLineId,
@@ -25,10 +23,7 @@ export const cellLineIdColumn = {
     className: cellLineId,
     dataIndex: "cellLineId",
     fixed: "left" as const,
-    render: (
-        cellLineId: number,
-        record: UnpackedDiseaseCellLine | UnpackedNormalCellLine
-    ) => {
+    render: (cellLineId: number, record: UnpackedCellLine) => {
         const cellLine = (
             <h4 key={cellLineId}>{formatCellLineId(cellLineId)}</h4>
         );
@@ -72,3 +67,37 @@ export const certificateOfAnalysisColumn = {
         );
     },
 };
+
+export const getObtainLineColumn = (inProgress: boolean) => ({
+    title: "",
+    key: "orderLink",
+    dataIndex: "orderLink",
+    className: actionColumn,
+    fixed: "right" as const,
+    render: (orderLink: string) => {
+        if (inProgress) {
+            return <>{""}</>; // still want a blank column
+        } else {
+            return (
+                <a
+                    key={orderLink}
+                    className={actionButton}
+                    href={orderLink}
+                    target="_blank"
+                    rel="noreferrer"
+                >
+                    <Flex>
+                        <Icon
+                            component={Tube}
+                            style={{
+                                color: WHITE,
+                                fontSize: "40px",
+                            }}
+                        />
+                        Obtain Collection
+                    </Flex>
+                </a>
+            );
+        }
+    },
+});

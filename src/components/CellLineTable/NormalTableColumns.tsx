@@ -9,9 +9,11 @@ import {
 import GeneDisplay from "../GeneDisplay";
 import { WHITE } from "../../style/theme";
 import { CellLineColumns, mdBreakpoint } from "./types";
-import { cellLineIdColumn, certificateOfAnalysisColumn } from "./SharedColumns";
-
-const Tube = require("../../img/tube.svg");
+import {
+    cellLineIdColumn,
+    certificateOfAnalysisColumn,
+    getObtainLineColumn,
+} from "./SharedColumns";
 
 const {
     actionButton,
@@ -72,38 +74,6 @@ export const getNormalTableColumns = (
         className: lastColumn,
         responsive: mdBreakpoint,
     },
-    {
-        title: "",
-        key: "orderLink",
-        dataIndex: "orderLink",
-        className: actionColumn,
-        fixed: "right" as const,
-        render: (orderLink: string) => {
-            if (inProgress) {
-                return <>{""}</>; // still want a blank column
-            } else {
-                return (
-                    <a
-                        key={orderLink}
-                        className={actionButton}
-                        href={orderLink}
-                        target="_blank"
-                        rel="noreferrer"
-                    >
-                        <Flex>
-                            <Icon
-                                component={Tube}
-                                style={{
-                                    color: WHITE,
-                                    fontSize: "40px",
-                                }}
-                            />
-                            Obtain Collection
-                        </Flex>
-                    </a>
-                );
-            }
-        },
-    },
+    { ...getObtainLineColumn(inProgress) },
     { ...certificateOfAnalysisColumn },
 ];

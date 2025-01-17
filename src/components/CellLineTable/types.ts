@@ -7,33 +7,5 @@ import {
 export const mdBreakpoint = ["md" as const];
 export const smBreakPoint = ["sm" as const];
 
-export type NormalColumns = GetProp<
-    typeof Table<UnpackedNormalCellLine>,
-    "columns"
->;
-export type DiseaseColumns = GetProp<
-    typeof Table<UnpackedDiseaseCellLine>,
-    "columns"
->;
-
 export type CellLineColumns<T> = GetProp<typeof Table<T>, "columns">;
-
 export type UnpackedCellLine = UnpackedNormalCellLine | UnpackedDiseaseCellLine;
-export type NormalExpandableConfig = {
-    expandedRowRender: (record: UnpackedNormalCellLine) => JSX.Element;
-};
-export type DiseaseExpandableConfig = {
-    expandedRowRender: (record: UnpackedDiseaseCellLine) => JSX.Element;
-};
-
-export interface NormalTableConfig {
-    columns: NormalColumns;
-    expandableConfig: NormalExpandableConfig;
-    cellLines: UnpackedNormalCellLine[];
-}
-
-export interface DiseaseTableConfig {
-    columns: DiseaseColumns;
-    expandableConfig: DiseaseExpandableConfig;
-    cellLines: UnpackedDiseaseCellLine[];
-}
