@@ -1,18 +1,12 @@
 import React from "react";
 import { graphql, StaticQuery } from "gatsby";
-import { Flex, Tag } from "antd";
 
 import DiseaseTable from "../components/DiseaseTable";
 import { UnpackedDisease } from "./Diseases";
 import {
-    Clone,
     DiseaseCellLineEdge,
-    DiseaseCellLineFrontmatter,
     ParentalLineFrontmatter,
-    ParentLine,
-    UnpackedCellLineMainInfo,
     UnpackedDiseaseCellLine,
-    UnpackedNormalCellLine,
 } from "./types";
 import ParentalLineModal from "../components/ParentalLineModal";
 import { formatCellLineId } from "../utils";
@@ -68,14 +62,7 @@ const groupLines = (
         }
         const cellLineData: UnpackedDiseaseCellLine =
             convertFrontmatterToDiseaseCellLine(cellLine.node);
-        cellLineData.diseaseGeneComponent = (
-            <Flex wrap="wrap">
-                <Tag bordered={false} color="#DFE5EA">
-                    {diseaseData.geneSymbol}
-                </Tag>
-                <div>{diseaseData.geneName}</div>
-            </Flex>
-        );
+
         const parentalLine =
             cellLine.node.frontmatter.parental_line.frontmatter;
         const parentalLineItems = getParentalLineItems(parentalLine);

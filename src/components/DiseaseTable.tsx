@@ -14,6 +14,7 @@ import { formatCellLineId, getCloneSummary } from "../utils";
 import { WHITE } from "../style/theme";
 import useWindowWidth from "../hooks/useWindowWidth";
 import { MOBILE_BREAKPOINT, TABLET_BREAKPOINT } from "../constants";
+import GeneDisplay from "./GeneDisplay";
 
 const Tube = require("../img/tube.svg");
 const CertificateIcon = require("../img/cert-icon.svg");
@@ -97,7 +98,9 @@ const DiseaseTable = ({
                 )}
                 <div>
                     <label>Gene Symbol & Name:</label>
-                    <span>{record.diseaseGeneComponent}</span>
+                    <span>
+                        <GeneDisplay gene={record.mutatedGene} />
+                    </span>
                 </div>
                 <div>
                     <label>Clones:</label>
@@ -194,10 +197,13 @@ const DiseaseTable = ({
                     {
                         title: "Gene Symbol & Name",
                         width: 280,
-                        key: "diseaseGeneComponent",
-                        dataIndex: "diseaseGeneComponent",
+                        key: "mutatedGene",
+                        dataIndex: "mutatedGene",
                         responsive: ["md"],
                         onCell: onCellInteraction,
+                        render: (mutatedGene) => {
+                            return <GeneDisplay gene={mutatedGene} />;
+                        },
                     },
                     {
                         title: "Parental Line",

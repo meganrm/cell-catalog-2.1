@@ -104,7 +104,6 @@ export interface UnpackedNormalCellLine extends UnpackedCellLineMainInfo {
 export type ParentLine = Partial<UnpackedNormalCellLine>;
 
 export interface UnpackedDiseaseCellLine extends UnpackedCellLineMainInfo {
-    diseaseGeneComponent: JSX.Element | null;
     parentalLineComponent: JSX.Element | null;
     path: string;
     key: string;

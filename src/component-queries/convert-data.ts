@@ -40,7 +40,6 @@ export const convertFrontmatterToDiseaseCellLine = (
                     .frontmatter.symbol,
             },
         },
-        diseaseGeneComponent: null,
         parentalLineComponent: null,
         key: cellLineNode.id,
     };
