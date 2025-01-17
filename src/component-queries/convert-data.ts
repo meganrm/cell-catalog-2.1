@@ -1,4 +1,9 @@
-import { DiseaseCellLineNode, UnpackedDiseaseCellLine } from "./types";
+import {
+    DiseaseCellLineNode,
+    NormalCellLineNode,
+    UnpackedDiseaseCellLine,
+    UnpackedNormalCellLine,
+} from "./types";
 
 export const convertFrontmatterToDiseaseCellLine = (
     cellLineNode: DiseaseCellLineNode
@@ -40,5 +45,31 @@ export const convertFrontmatterToDiseaseCellLine = (
             },
         },
         key: cellLineNode.id,
+    };
+};
+
+export const convertFrontmatterToNormalCellLines = ({
+    node: cellLine,
+}: {
+    node: NormalCellLineNode;
+}): UnpackedNormalCellLine => {
+    return {
+        path: cellLine.fields.slug,
+        cellLineId: cellLine.frontmatter.cell_line_id,
+        cloneNumber: cellLine.frontmatter.clone_number,
+        alleleCount: cellLine.frontmatter.allele_count,
+        fluorescentTag: cellLine.frontmatter.fluorescent_tag,
+        tagLocation: cellLine.frontmatter.tag_location,
+        parentalLine: cellLine.frontmatter.parental_line.frontmatter.name,
+        protein: cellLine.frontmatter.gene.frontmatter.protein,
+        taggedGene: {
+            name: cellLine.frontmatter.gene.frontmatter.name,
+            symbol: cellLine.frontmatter.gene.frontmatter.symbol,
+        },
+        structure: cellLine.frontmatter.gene.frontmatter.structure,
+        status: cellLine.frontmatter.status,
+        certificateOfAnalysis: "",
+        hPSCregCertificateLink: "",
+        orderLink: "",
     };
 };

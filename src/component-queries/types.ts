@@ -17,6 +17,37 @@ export interface ParentalLineFrontmatter {
     };
 }
 
+export interface NormalCellLineFrontmatter {
+    templateKey: string;
+    cell_line_id: number;
+    status: CellLineStatus;
+    clone_number: number;
+    tag_location: string;
+    fluorescent_tag: string;
+    allele_count: string;
+    parental_line: {
+        frontmatter: {
+            name: string;
+        };
+    };
+    gene: {
+        frontmatter: {
+            protein: string;
+            name: string;
+            symbol: string;
+            structure: string;
+        };
+    };
+}
+
+export interface NormalCellLineNode {
+    id: string;
+    fields: {
+        slug: string;
+    };
+    frontmatter: NormalCellLineFrontmatter;
+}
+
 export enum CellLineStatus {
     DataComplete = "data complete",
     Released = "released",
