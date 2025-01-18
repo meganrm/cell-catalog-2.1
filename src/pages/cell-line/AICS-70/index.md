@@ -11,4 +11,10 @@ tag_location:
 fluorescent_tag:
   - mEGFP
 order_link: 
+cofa: 
+donor_plasmid: 
+eu_hpsc_reg: 
+images_and_videos:
+  images:
+  videos:
 ---
